@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 #include <Hedgehog/Base/hhRefCountObject.h>
 
 namespace Hedgehog::Mirage

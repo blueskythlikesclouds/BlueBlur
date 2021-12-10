@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 #include <Hedgehog/Base/Container/hhVector.h>
 #include <Sonic/FxPipeline/Jobs/FxJob.h>
 

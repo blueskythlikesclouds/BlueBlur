@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 
 #include <Hedgehog/Yggdrasill/hhYggScheduler.h>
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 
 namespace Hedgehog::FxRenderFramework
 {

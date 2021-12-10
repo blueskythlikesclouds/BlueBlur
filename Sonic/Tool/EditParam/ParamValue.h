@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 #include <Sonic/Tool/EditParam/ParamBase.h>
 
 namespace Sonic

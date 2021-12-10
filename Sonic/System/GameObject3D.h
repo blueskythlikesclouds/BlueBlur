@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
 #include <Sonic/System/GameObject.h>

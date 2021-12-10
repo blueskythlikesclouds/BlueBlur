@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>

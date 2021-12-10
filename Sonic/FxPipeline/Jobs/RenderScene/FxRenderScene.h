@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 
 #include <Hedgehog/Yggdrasill/hhYggMisc.h>
 #include <Hedgehog/Yggdrasill/hhYggSceneRenderer.h>

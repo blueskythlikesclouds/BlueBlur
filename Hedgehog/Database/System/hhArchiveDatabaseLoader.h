@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 #include <Hedgehog/Database/System/hhDatabaseLoader.h>
 
 namespace Hedgehog::Database

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 #include <Hedgehog/Universe/Engine/hhParallelJob.h>
 
 namespace Hedgehog::Universe

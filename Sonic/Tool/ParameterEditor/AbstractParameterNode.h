@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 #include <Sonic/Tool/ParameterEditor/AbstractParameter.h>
 
 namespace Sonic
