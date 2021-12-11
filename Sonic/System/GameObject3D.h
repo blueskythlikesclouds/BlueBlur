@@ -5,14 +5,10 @@
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
 #include <Sonic/System/GameObject.h>
 
-namespace Hedgehog::Mirage
-{
-    class CMatrixNodeTransform;
-}
-
 namespace Sonic
 {
     class CGameObject3D;
+    class CMatrixNodeTransform;
 
     static FUNCTION_PTR(CGameObject3D*, __stdcall, fpCGameObject3DCtor, 0xD5DAC0, CGameObject3D* This);
 
@@ -26,7 +22,7 @@ namespace Sonic
     {
     public:
         INSERT_PADDING(0x8);
-        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeTransform> m_spMatrixNodeTransform;
+        boost::shared_ptr<CMatrixNodeTransform> m_spMatrixNodeTransform;
         INSERT_PADDING(0x34);
 
         CGameObject3D(const null_ctor&) : CGameObject(null_ctor{}), CMatrixNodeListener(null_ctor{}) {}

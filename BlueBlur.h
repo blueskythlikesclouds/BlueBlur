@@ -24,13 +24,13 @@
 #include <Hedgehog/MirageCore/Camera/hhCamera.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
-#include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeTransform.h>
 #include <Hedgehog/MirageCore/Misc/hhDirector.h>
 #include <Hedgehog/MirageCore/Misc/hhInstanceInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingDevice.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingInfrastructure.h>
 #include <Hedgehog/MirageCore/Misc/hhStaticLightContext.h>
+#include <Hedgehog/MirageCore/Misc/hhTransform.h>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
@@ -85,6 +85,7 @@
 #include <Sonic/System/GameObjectModel.h>
 #include <Sonic/System/GameObjectRigidBody.h>
 #include <Sonic/System/InputState.h>
+#include <Sonic/System/MatrixNodeTransform.h>
 #include <Sonic/System/PadState.h>
 #include <Sonic/System/World.h>
 #include <Sonic/System/LightManager/LightManager.h>
