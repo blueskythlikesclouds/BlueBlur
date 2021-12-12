@@ -15,6 +15,6 @@ namespace Hedgehog::Mirage
         vector<boost::shared_ptr<CLightData>> m_Lights;
     };
 
-    ASSERT_OFFSETOF(CLightListData, m_Lights, 0xC);
-    ASSERT_SIZEOF(CLightListData, 0x1C);
+    BB_ASSERT_OFFSETOF(CLightListData, m_Lights, 0xC);
+    BB_ASSERT_SIZEOF(CLightListData, 0x1C);
 }

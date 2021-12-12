@@ -49,11 +49,11 @@ namespace Sonic
             {
             public:
                 Hedgehog::map<uint32_t, Hedgehog::Base::CSharedString> m_ValueMap;
-                INSERT_PADDING(0x44);
+                BB_INSERT_PADDING(0x44);
                 uint32_t* m_pValue;
                 uint32_t m_DefaultValue;
                 Hedgehog::Base::CSharedString m_Description;
-                INSERT_PADDING(0xC);
+                BB_INSERT_PADDING(0xC);
             };
 
             FuncData* m_pFuncData;
@@ -80,18 +80,18 @@ namespace Sonic
         }
     };
 
-    ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ValueMap, 0x8);
-    ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_pValue, 0x58);
-    ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_DefaultValue, 0x5C);
-    ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_Description, 0x60);
-    ASSERT_SIZEOF(CParamTypeList::CMember::FuncData, 0x70);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ValueMap, 0x8);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_pValue, 0x58);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_DefaultValue, 0x5C);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_Description, 0x60);
+    BB_ASSERT_SIZEOF(CParamTypeList::CMember::FuncData, 0x70);
 
-    ASSERT_OFFSETOF(CParamTypeList::CMember, m_pFuncData, 0x0);
-    ASSERT_OFFSETOF(CParamTypeList::CMember, m_Value, 0x4);
-    ASSERT_OFFSETOF(CParamTypeList::CMember, m_DefaultValue, 0x8);
-    ASSERT_OFFSETOF(CParamTypeList::CMember, m_DefaultValueName, 0xC);
-    ASSERT_SIZEOF(CParamTypeList::CMember, 0x10);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember, m_pFuncData, 0x0);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember, m_Value, 0x4);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember, m_DefaultValue, 0x8);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember, m_DefaultValueName, 0xC);
+    BB_ASSERT_SIZEOF(CParamTypeList::CMember, 0x10);
 
-    ASSERT_OFFSETOF(CParamTypeList, m_pMember, 0x14);
-    ASSERT_SIZEOF(CParamTypeList, 0x18);
+    BB_ASSERT_OFFSETOF(CParamTypeList, m_pMember, 0x14);
+    BB_ASSERT_SIZEOF(CParamTypeList, 0x18);
 }

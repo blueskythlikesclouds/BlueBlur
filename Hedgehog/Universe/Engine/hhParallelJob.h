@@ -9,12 +9,12 @@ namespace Hedgehog::Universe
     {
     public:
         IParallelJob() {}
-        IParallelJob(const null_ctor&) {}
+        IParallelJob(const bb_null_ctor&) {}
 
         virtual ~IParallelJob() = default;
 
         virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) = 0;
     };
 
-    ASSERT_SIZEOF(IParallelJob, 0x4);
+    BB_ASSERT_SIZEOF(IParallelJob, 0x4);
 }

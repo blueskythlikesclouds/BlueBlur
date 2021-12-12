@@ -19,12 +19,12 @@ namespace Hedgehog::Mirage
         float m_Far;
     };
 
-    ASSERT_OFFSETOF(CCamera, m_View, 0x10);
-    ASSERT_OFFSETOF(CCamera, m_Projection, 0x50);
-    ASSERT_OFFSETOF(CCamera, m_Position, 0x90);
-    ASSERT_OFFSETOF(CCamera, m_Direction, 0xA0);
-    ASSERT_OFFSETOF(CCamera, m_AspectRatio, 0xB0);
-    ASSERT_OFFSETOF(CCamera, m_Near, 0xB4);
-    ASSERT_OFFSETOF(CCamera, m_Far, 0xB8);
-    ASSERT_SIZEOF(CCamera, 0xC0);
+    BB_ASSERT_OFFSETOF(CCamera, m_View, 0x10);
+    BB_ASSERT_OFFSETOF(CCamera, m_Projection, 0x50);
+    BB_ASSERT_OFFSETOF(CCamera, m_Position, 0x90);
+    BB_ASSERT_OFFSETOF(CCamera, m_Direction, 0xA0);
+    BB_ASSERT_OFFSETOF(CCamera, m_AspectRatio, 0xB0);
+    BB_ASSERT_OFFSETOF(CCamera, m_Near, 0xB4);
+    BB_ASSERT_OFFSETOF(CCamera, m_Far, 0xB8);
+    BB_ASSERT_SIZEOF(CCamera, 0xC0);
 }

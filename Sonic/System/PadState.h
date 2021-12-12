@@ -38,17 +38,17 @@ namespace Sonic
         EKeyState TappedState;
         EKeyState ReleasedState;
 
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
 
         float LeftStickHorizontal;
         float LeftStickVertical;
 
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
 
         float RightStickHorizontal;
         float RightStickVertical;
 
-        INSERT_PADDING(0x2C);
+        BB_INSERT_PADDING(0x2C);
 
         bool IsDown(const EKeyState keys) const
         {
@@ -71,5 +71,5 @@ namespace Sonic
         }
     };
 
-    ASSERT_SIZEOF(SPadState, 0x54);
+    BB_ASSERT_SIZEOF(SPadState, 0x54);
 }

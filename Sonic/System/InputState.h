@@ -15,9 +15,9 @@ namespace Sonic
         static constexpr CInputState* ms_pInstance = (CInputState*)0x1E76160;
 
         SPadState m_PadStates[40];
-        INSERT_PADDING(0x50);
+        BB_INSERT_PADDING(0x50);
         uint32_t m_CurrentPadStateIndex;
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
 
         static SPadState* GetPadState()
         {
@@ -26,7 +26,7 @@ namespace Sonic
         }
     };
 
-    ASSERT_OFFSETOF(CInputState, m_PadStates, 0x4);
-    ASSERT_OFFSETOF(CInputState, m_CurrentPadStateIndex, 0xD74);
-    ASSERT_SIZEOF(CInputState, 0xD7C);
+    BB_ASSERT_OFFSETOF(CInputState, m_PadStates, 0x4);
+    BB_ASSERT_OFFSETOF(CInputState, m_CurrentPadStateIndex, 0xD74);
+    BB_ASSERT_SIZEOF(CInputState, 0xD7C);
 }

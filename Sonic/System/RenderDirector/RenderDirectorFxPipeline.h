@@ -15,6 +15,6 @@ namespace Sonic
         CFxScheduler* m_pScheduler;
     };
 
-    ASSERT_OFFSETOF(CRenderDirectorFxPipeline, m_pScheduler, 0xC4);
-    ASSERT_SIZEOF(CRenderDirectorFxPipeline, 0xC8);
+    BB_ASSERT_OFFSETOF(CRenderDirectorFxPipeline, m_pScheduler, 0xC4);
+    BB_ASSERT_SIZEOF(CRenderDirectorFxPipeline, 0xC8);
 }

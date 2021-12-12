@@ -15,7 +15,7 @@ namespace Sonic
     public:
         Hedgehog::Yggdrasill::ERenderCategory m_RenderCategories;
         Hedgehog::Yggdrasill::ERenderLevel m_RenderLevels;
-        INSERT_PADDING(0x20);
+        BB_INSERT_PADDING(0x20);
 
         void RenderScene(Hedgehog::Yggdrasill::ERenderCategory category, Hedgehog::Yggdrasill::ERenderLevel level)
         {
@@ -28,7 +28,7 @@ namespace Sonic
         }
     };
 
-    ASSERT_OFFSETOF(CFxRenderScene, m_RenderCategories, 0x48);
-    ASSERT_OFFSETOF(CFxRenderScene, m_RenderLevels, 0x4C);
-    ASSERT_SIZEOF(CFxRenderScene, 0x70);
+    BB_ASSERT_OFFSETOF(CFxRenderScene, m_RenderCategories, 0x48);
+    BB_ASSERT_OFFSETOF(CFxRenderScene, m_RenderLevels, 0x4C);
+    BB_ASSERT_SIZEOF(CFxRenderScene, 0x70);
 }

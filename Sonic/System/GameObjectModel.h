@@ -34,16 +34,16 @@ namespace Sonic
     class CGameObjectModel : public CGameObject3D
     {
     public:
-        INSERT_PADDING(0x14);
+        BB_INSERT_PADDING(0x14);
 
-        CGameObjectModel(const null_ctor&) : CGameObject3D(null_ctor{}) {}
+        CGameObjectModel(const bb_null_ctor&) : CGameObject3D(bb_null_ctor{}) {}
 
         CGameObjectModel(const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase, 
-            const Hedgehog::Base::CStringSymbol category, const Hedgehog::Base::CSharedString& modelName) : CGameObjectModel(null_ctor{})
+            const Hedgehog::Base::CStringSymbol category, const Hedgehog::Base::CSharedString& modelName) : CGameObjectModel(bb_null_ctor{})
         {
             fCGameObjectModelCtor(this, &spDatabase, category, &modelName);
         }
     };
 
-    ASSERT_SIZEOF(CGameObjectModel, 0x108);
+    BB_ASSERT_SIZEOF(CGameObjectModel, 0x108);
 }

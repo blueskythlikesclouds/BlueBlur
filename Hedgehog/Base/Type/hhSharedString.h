@@ -61,5 +61,5 @@ namespace Hedgehog::Base
         }
     };
 
-    ASSERT_SIZEOF(CSharedString, 0x4);
+    BB_ASSERT_SIZEOF(CSharedString, 0x4);
 }

@@ -8,10 +8,10 @@ namespace Hedgehog::Mirage
     class CMatrixNode : public Base::CObject
     {
     public:
-        INSERT_PADDING(0x5C);
+        BB_INSERT_PADDING(0x5C);
 
         virtual ~CMatrixNode() = default;
     };
 
-    ASSERT_SIZEOF(CMatrixNode, 0x60);
+    BB_ASSERT_SIZEOF(CMatrixNode, 0x60);
 }

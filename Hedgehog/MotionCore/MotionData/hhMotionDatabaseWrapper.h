@@ -13,7 +13,7 @@ namespace Hedgehog::Motion
     class CLightMotionData;
     class CMotionDatabaseWrapper;
 
-    static FUNCTION_PTR(void, __thiscall, fpCDatabaseGetLightMotionData, 0x7599C0,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetLightMotionData, 0x7599C0,
         CMotionDatabaseWrapper* This, boost::shared_ptr<CLightMotionData>& spLightMotionData, const Hedgehog::Base::CSharedString& name, uint32_t unknown);
 
     class CMotionDatabaseWrapper
@@ -31,6 +31,6 @@ namespace Hedgehog::Motion
         }
     };
 
-    ASSERT_OFFSETOF(CMotionDatabaseWrapper, m_pDatabase, 0x0);
-    ASSERT_SIZEOF(CMotionDatabaseWrapper, 0x4);
+    BB_ASSERT_OFFSETOF(CMotionDatabaseWrapper, m_pDatabase, 0x0);
+    BB_ASSERT_SIZEOF(CMotionDatabaseWrapper, 0x4);
 }

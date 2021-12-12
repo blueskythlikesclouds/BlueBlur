@@ -12,5 +12,5 @@ namespace Hedgehog::Universe
         virtual bool ReceiveMessage(const Message& message, bool flag) = 0;
     };
 
-    ASSERT_SIZEOF(IStateMachineMessageReceiver, 4);
+    BB_ASSERT_SIZEOF(IStateMachineMessageReceiver, 4);
 }

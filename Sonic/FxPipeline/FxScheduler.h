@@ -8,10 +8,10 @@ namespace Sonic
     class CFxScheduler : public Hedgehog::Yggdrasill::CYggScheduler
     {
     public:
-        INSERT_PADDING(0x88);
+        BB_INSERT_PADDING(0x88);
         float m_ElapsedTime;
     };
 
-    ASSERT_OFFSETOF(CFxScheduler, m_ElapsedTime, 0x94);
-    ASSERT_SIZEOF(CFxScheduler, 0x98);
+    BB_ASSERT_OFFSETOF(CFxScheduler, m_ElapsedTime, 0x94);
+    BB_ASSERT_SIZEOF(CFxScheduler, 0x98);
 }

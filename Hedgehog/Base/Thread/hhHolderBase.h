@@ -7,8 +7,8 @@ namespace Hedgehog::Base
     class CHolderBase;
     class CSynchronizedObject;
 
-    static FUNCTION_PTR(void, __thiscall, fpCHolderBaseCtor, 0x65FBE0, CHolderBase* This, CSynchronizedObject* pSynchronizedObject, bool forceSync);
-    static FUNCTION_PTR(void, __thiscall, fpCHolderBaseDtor, 0x65FC40, CHolderBase* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCHolderBaseCtor, 0x65FBE0, CHolderBase* This, CSynchronizedObject* pSynchronizedObject, bool forceSync);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCHolderBaseDtor, 0x65FC40, CHolderBase* This);
 
     class CHolderBase
     {
@@ -43,7 +43,7 @@ namespace Hedgehog::Base
         }
     };
 
-    ASSERT_OFFSETOF(CHolderBase, m_pSynchronizedObject, 0x0);
-    ASSERT_OFFSETOF(CHolderBase, m_Locked, 0x4);
-    ASSERT_SIZEOF(CHolderBase, 0x8);
+    BB_ASSERT_OFFSETOF(CHolderBase, m_pSynchronizedObject, 0x0);
+    BB_ASSERT_OFFSETOF(CHolderBase, m_Locked, 0x4);
+    BB_ASSERT_SIZEOF(CHolderBase, 0x8);
 }

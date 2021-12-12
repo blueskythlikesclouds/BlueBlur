@@ -17,7 +17,7 @@ namespace Hedgehog::FxRenderFramework
         void* m_ChildParams;
         uint32_t m_ChildParamCount;
 
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
 
         uint8_t m_DepthStencilSurface;
         uint8_t m_RenderTargetSurface;
@@ -53,5 +53,5 @@ namespace Hedgehog::FxRenderFramework
         uint32_t m_Unk5;
     };
 
-    ASSERT_SIZEOF(SDrawInstanceParam, 0x40);
+    BB_ASSERT_SIZEOF(SDrawInstanceParam, 0x40);
 }

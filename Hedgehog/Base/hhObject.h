@@ -9,7 +9,7 @@ namespace Hedgehog::Base
     {
     public:
         CObject() {}
-        CObject(const null_ctor&) {}
+        CObject(const bb_null_ctor&) {}
 
         void* operator new(const size_t size)
         {

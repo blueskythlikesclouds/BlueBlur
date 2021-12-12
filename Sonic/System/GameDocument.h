@@ -23,7 +23,7 @@ namespace Sonic
     class CRenderDirector;
     class CWorld;
 
-    static FUNCTION_PTR(void, __stdcall, fpAddGameObject, 0xD631A0,
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpAddGameObject, 0xD631A0,
         CGameDocument* pGameDocument, const Hedgehog::Base::THolder<CWorld>& worldHolder,
         const boost::shared_ptr<CGameObject>& spGameObject, boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase,
         CGameObject* pParentGameObject);
@@ -39,11 +39,11 @@ namespace Sonic
             Hedgehog::map<Hedgehog::Base::CSharedString, boost::shared_ptr<CWorld>> m_Worlds;
             boost::shared_ptr<Hedgehog::Database::CDatabase> m_spDatabase;
             Hedgehog::list<boost::shared_ptr<CGameObject>> m_GameObjects;
-            INSERT_PADDING(0x18);
+            BB_INSERT_PADDING(0x18);
             Hedgehog::vector<size_t> m_PlayerIDs;
-            INSERT_PADDING(0x28);
+            BB_INSERT_PADDING(0x28);
             boost::shared_ptr<CLightManager> m_spLightManager;
-            INSERT_PADDING(0x128);
+            BB_INSERT_PADDING(0x128);
         };
 
         static constexpr CGameDocument** ms_pInstance = (CGameDocument**)0x1E0BE5C;
@@ -54,7 +54,7 @@ namespace Sonic
         }
 
         CMember* m_pMember;
-        INSERT_PADDING(0x14);
+        BB_INSERT_PADDING(0x14);
 
         virtual ~CGameDocument() = default;
         virtual void _4() = 0;
@@ -85,16 +85,16 @@ namespace Sonic
         }
     };
 
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_spUpdateManager, 0x0);
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_spRenderDirector, 0x8);
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_Worlds, 0x10);
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_spDatabase, 0x1C);
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_GameObjects, 0x24);
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_PlayerIDs, 0x48);
-    ASSERT_OFFSETOF(CGameDocument::CMember, m_spLightManager, 0x80);
-    ASSERT_SIZEOF(CGameDocument::CMember, 0x1B0);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spUpdateManager, 0x0);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spRenderDirector, 0x8);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_Worlds, 0x10);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spDatabase, 0x1C);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_GameObjects, 0x24);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_PlayerIDs, 0x48);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spLightManager, 0x80);
+    BB_ASSERT_SIZEOF(CGameDocument::CMember, 0x1B0);
 
-    ASSERT_OFFSETOF(CGameDocument, m_pCriticalSection, 0x4);
-    ASSERT_OFFSETOF(CGameDocument, m_pMember, 0x8);
-    ASSERT_SIZEOF(CGameDocument, 0x20);
+    BB_ASSERT_OFFSETOF(CGameDocument, m_pCriticalSection, 0x4);
+    BB_ASSERT_OFFSETOF(CGameDocument, m_pMember, 0x8);
+    BB_ASSERT_SIZEOF(CGameDocument, 0x20);
 }

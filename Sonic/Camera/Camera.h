@@ -17,13 +17,13 @@ namespace Sonic
             Hedgehog::Math::CMatrix m_InputView;
         } m_MyCamera;
 
-        INSERT_PADDING(0x228);
+        BB_INSERT_PADDING(0x228);
         float m_FieldOfView;
-        INSERT_PADDING(0x54);
+        BB_INSERT_PADDING(0x54);
     };
 
-    ASSERT_OFFSETOF(CCamera::CMyCamera, m_InputView, 0xC0);
-    ASSERT_OFFSETOF(CCamera, m_MyCamera, 0x110);
-    ASSERT_OFFSETOF(CCamera, m_FieldOfView, 0x438);
-    ASSERT_SIZEOF(CCamera, 0x490);
+    BB_ASSERT_OFFSETOF(CCamera::CMyCamera, m_InputView, 0xC0);
+    BB_ASSERT_OFFSETOF(CCamera, m_MyCamera, 0x110);
+    BB_ASSERT_OFFSETOF(CCamera, m_FieldOfView, 0x438);
+    BB_ASSERT_SIZEOF(CCamera, 0x490);
 }

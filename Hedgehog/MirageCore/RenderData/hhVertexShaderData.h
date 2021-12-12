@@ -8,8 +8,8 @@ namespace Hedgehog::Mirage
     class CVertexShaderData : public Database::CDatabaseData
     {
     public:
-        INSERT_PADDING(0x18);
+        BB_INSERT_PADDING(0x18);
     };
 
-    ASSERT_SIZEOF(CVertexShaderData, 0x24);
+    BB_ASSERT_SIZEOF(CVertexShaderData, 0x24);
 }

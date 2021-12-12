@@ -8,7 +8,7 @@ namespace Hedgehog::Mirage
     class CMatrixNodeListener : public Base::CObject
     {
     public:
-        CMatrixNodeListener(const null_ctor&) {}
+        CMatrixNodeListener(const bb_null_ctor&) {}
         CMatrixNodeListener() {}
 
         virtual ~CMatrixNodeListener() = default;

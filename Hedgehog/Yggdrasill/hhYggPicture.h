@@ -14,9 +14,9 @@ namespace Hedgehog::Yggdrasill
     {
     public:
         boost::shared_ptr<Mirage::CPictureData> m_spPictureData;
-        INSERT_PADDING(0x8);
+        BB_INSERT_PADDING(0x8);
     };
 
-    ASSERT_OFFSETOF(CYggPicture, m_spPictureData, 0xC0);
-    ASSERT_SIZEOF(CYggPicture, 0xD0);
+    BB_ASSERT_OFFSETOF(CYggPicture, m_spPictureData, 0xC0);
+    BB_ASSERT_SIZEOF(CYggPicture, 0xD0);
 }

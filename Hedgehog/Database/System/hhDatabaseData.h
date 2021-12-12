@@ -9,7 +9,7 @@ namespace Hedgehog::Database
 {
     class CDatabaseData;
 
-    static inline FUNCTION_PTR(bool, __thiscall, fpCDatabaseDataIsMadeAllInternal, 0x6993E0, CDatabaseData* This);
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCDatabaseDataIsMadeAllInternal, 0x6993E0, CDatabaseData* This);
 
     enum EDatabaseDataFlags : uint8_t
     {
@@ -48,7 +48,7 @@ namespace Hedgehog::Database
         }
     };
 
-    ASSERT_OFFSETOF(CDatabaseData, m_Flags, 0x4);
-    ASSERT_OFFSETOF(CDatabaseData, m_TypeAndName, 0x8);
-    ASSERT_SIZEOF(CDatabaseData, 0xC);
+    BB_ASSERT_OFFSETOF(CDatabaseData, m_Flags, 0x4);
+    BB_ASSERT_OFFSETOF(CDatabaseData, m_TypeAndName, 0x8);
+    BB_ASSERT_SIZEOF(CDatabaseData, 0xC);
 }

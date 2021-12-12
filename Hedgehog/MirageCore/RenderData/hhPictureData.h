@@ -18,10 +18,10 @@ namespace Hedgehog::Mirage
     public:
         DX_PATCH::IDirect3DBaseTexture9* m_pD3DTexture;
         EPictureType m_Type;
-        INSERT_PADDING(0x8);
+        BB_INSERT_PADDING(0x8);
     };
 
-    ASSERT_OFFSETOF(CPictureData, m_pD3DTexture, 0xC);
-    ASSERT_OFFSETOF(CPictureData, m_Type, 0x10);
-    ASSERT_SIZEOF(CPictureData, 0x1C);
+    BB_ASSERT_OFFSETOF(CPictureData, m_pD3DTexture, 0xC);
+    BB_ASSERT_OFFSETOF(CPictureData, m_Type, 0x10);
+    BB_ASSERT_SIZEOF(CPictureData, 0x1C);
 }

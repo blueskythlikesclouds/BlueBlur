@@ -29,8 +29,8 @@ namespace Hedgehog::Mirage
         }
     };
 
-    ASSERT_OFFSETOF(CTransform, m_Rotation, 0x0);
-    ASSERT_OFFSETOF(CTransform, m_Position, 0x10);
-    ASSERT_OFFSETOF(CTransform, m_Matrix, 0x20);
-    ASSERT_SIZEOF(CTransform, 0x60);
+    BB_ASSERT_OFFSETOF(CTransform, m_Rotation, 0x0);
+    BB_ASSERT_OFFSETOF(CTransform, m_Position, 0x10);
+    BB_ASSERT_OFFSETOF(CTransform, m_Matrix, 0x20);
+    BB_ASSERT_SIZEOF(CTransform, 0x60);
 }

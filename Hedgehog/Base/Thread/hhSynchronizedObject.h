@@ -7,8 +7,8 @@ namespace Hedgehog::Base
     class CCriticalSectionD3D9;
     class CSynchronizedObject;
 
-    static FUNCTION_PTR(void, __thiscall, fpCSynchronizedObjectEnterCriticalSection, 0x6652B0, CSynchronizedObject* This);
-    static FUNCTION_PTR(void, __thiscall, fpCSynchronizedObjectLeaveCriticalSection, 0x6651C0, CSynchronizedObject* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSynchronizedObjectEnterCriticalSection, 0x6652B0, CSynchronizedObject* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSynchronizedObjectLeaveCriticalSection, 0x6651C0, CSynchronizedObject* This);
 
     class CSynchronizedObject
     {
@@ -26,6 +26,6 @@ namespace Hedgehog::Base
         }
     };
 
-    ASSERT_OFFSETOF(CSynchronizedObject, m_pCriticalSection, 0x0);
-    ASSERT_SIZEOF(CSynchronizedObject, 0x4);
+    BB_ASSERT_OFFSETOF(CSynchronizedObject, m_pCriticalSection, 0x0);
+    BB_ASSERT_SIZEOF(CSynchronizedObject, 0x4);
 }

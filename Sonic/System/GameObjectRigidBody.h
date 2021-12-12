@@ -27,19 +27,19 @@ namespace Sonic
         }
     }
 
-    static FUNCTION_PTR(void, __thiscall, fpCGameObjectRigidBodyAddCallback, 0x1106F30,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectRigidBodyAddCallback, 0x1106F30,
         CGameObjectRigidBody* This, const Hedgehog::Base::THolder<CWorld>& worldHolder,
         Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase);
 
     class alignas(16) CGameObjectRigidBody : public CGameObject
     {
     public:
-        INSERT_PADDING(0x98);
+        BB_INSERT_PADDING(0x98);
 
-        CGameObjectRigidBody(const null_ctor&) : CGameObject(null_ctor{}) {}
+        CGameObjectRigidBody(const bb_null_ctor&) : CGameObject(bb_null_ctor{}) {}
 
         CGameObjectRigidBody(const Hedgehog::Base::CStringSymbol category, const Hedgehog::Base::CSharedString& modelName,
-            const Hedgehog::Base::CSharedString& rigidBodyContainerName, const Hedgehog::Base::CSharedString& rigidBodyName) : CGameObjectRigidBody(null_ctor{})
+            const Hedgehog::Base::CSharedString& rigidBodyContainerName, const Hedgehog::Base::CSharedString& rigidBodyName) : CGameObjectRigidBody(bb_null_ctor{})
         {
             fCGameObjectRigidBodyCtor(this, category, &modelName, &rigidBodyContainerName, &rigidBodyName);
         }
@@ -51,5 +51,5 @@ namespace Sonic
         }
     };
 
-    ASSERT_SIZEOF(CGameObjectRigidBody, 0x140);
+    BB_ASSERT_SIZEOF(CGameObjectRigidBody, 0x140);
 }

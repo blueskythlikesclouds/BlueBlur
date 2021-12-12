@@ -10,7 +10,7 @@ namespace Sonic
     class CParameterFile;
     class CParameterGroup;
 
-    static FUNCTION_PTR(void, __stdcall, fpCParameterFileCreateParameterGroup, 0x1257EF0,
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpCParameterFileCreateParameterGroup, 0x1257EF0,
         CParameterFile* pParameterFile, boost::shared_ptr<CParameterGroup>& spParameterGroup, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description);
 
     class CParameterFile : public CAbstractParameter
@@ -24,5 +24,5 @@ namespace Sonic
         }
     };
 
-    ASSERT_SIZEOF(CParameterFile, 0x34);
+    BB_ASSERT_SIZEOF(CParameterFile, 0x34);
 }

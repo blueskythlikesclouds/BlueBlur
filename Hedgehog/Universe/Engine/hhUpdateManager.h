@@ -12,7 +12,7 @@ namespace Hedgehog::Universe
     class CUpdateUnit;
     class CUpdateManager;
 
-    static FUNCTION_PTR(void, __thiscall, fpCUpdateManagerAdd, 0x77AF20,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCUpdateManagerAdd, 0x77AF20,
         CUpdateManager* This, const Hedgehog::Base::CSharedString& category, CUpdateUnit* pUpdateUnit);
 
     class CUpdateManager

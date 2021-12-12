@@ -12,8 +12,8 @@ namespace Hedgehog::Universe
         Base::CSharedString Category;
     };
 
-    ASSERT_OFFSETOF(SUpdateInfo, ElapsedTime, 0x0);
-    ASSERT_OFFSETOF(SUpdateInfo, Frame, 0x4);
-    ASSERT_OFFSETOF(SUpdateInfo, Category, 0x8);
-    ASSERT_SIZEOF(SUpdateInfo, 0xC);
+    BB_ASSERT_OFFSETOF(SUpdateInfo, ElapsedTime, 0x0);
+    BB_ASSERT_OFFSETOF(SUpdateInfo, Frame, 0x4);
+    BB_ASSERT_OFFSETOF(SUpdateInfo, Category, 0x8);
+    BB_ASSERT_SIZEOF(SUpdateInfo, 0xC);
 }

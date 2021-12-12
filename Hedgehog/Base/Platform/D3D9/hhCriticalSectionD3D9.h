@@ -30,6 +30,6 @@ namespace Hedgehog::Base
         }
     };
 
-    ASSERT_OFFSETOF(CCriticalSectionD3D9, m_CriticalSection, 0);
-    ASSERT_SIZEOF(CCriticalSectionD3D9, 24);
+    BB_ASSERT_OFFSETOF(CCriticalSectionD3D9, m_CriticalSection, 0);
+    BB_ASSERT_SIZEOF(CCriticalSectionD3D9, 24);
 }

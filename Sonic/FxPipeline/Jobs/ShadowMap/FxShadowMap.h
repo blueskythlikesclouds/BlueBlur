@@ -20,9 +20,9 @@ namespace Sonic
 {
     class CFxShadowMap;
 
-    static FUNCTION_PTR(void, __thiscall, fpCFxShadowMapInitialize, 0x10C6CE0, CFxShadowMap* This);
-    static FUNCTION_PTR(void, __thiscall, fpCFxShadowMapExecute, 0x10C68D0, CFxShadowMap* This);
-    static FUNCTION_PTR(void, __stdcall, fpCFxShadowMapInitializeCameras, 0x10C6A10, CFxShadowMap* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxShadowMapInitialize, 0x10C6CE0, CFxShadowMap* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxShadowMapExecute, 0x10C68D0, CFxShadowMap* This);
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpCFxShadowMapInitializeCameras, 0x10C6A10, CFxShadowMap* This);
 
     static void* const pCFxShadowMapSetRenderStates = (void*)0x10C61D0;
     static void* const pCFxShadowMapUnsetRenderStates = (void*)0x10C6160;
@@ -62,7 +62,7 @@ namespace Sonic
         boost::shared_ptr<Hedgehog::Mirage::CCamera> m_spDirectionalShadowMapCamera;
         boost::shared_ptr<Hedgehog::Mirage::CCamera> m_spVerticalShadowMapCamera;
         uint32_t m_ShadowMapSize;
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
 
         void InitializeCameras()
         {
@@ -80,15 +80,15 @@ namespace Sonic
         }
     };
 
-    ASSERT_OFFSETOF(CFxShadowMap, m_spColorSurface, 0x48);
-    ASSERT_OFFSETOF(CFxShadowMap, m_spShadowMapTex, 0x50);
-    ASSERT_OFFSETOF(CFxShadowMap, m_spShadowMapNoTerrainTex, 0x58);
-    ASSERT_OFFSETOF(CFxShadowMap, m_MakeShadowMapShader, 0x60);
-    ASSERT_OFFSETOF(CFxShadowMap, m_MakeShadowMapTransparentShader, 0x70);
-    ASSERT_OFFSETOF(CFxShadowMap, m_pCurrentShadowMapCamera, 0x80);
-    ASSERT_OFFSETOF(CFxShadowMap, m_ShadowMapCameras, 0x84);
-    ASSERT_OFFSETOF(CFxShadowMap, m_spDirectionalShadowMapCamera, 0x94);
-    ASSERT_OFFSETOF(CFxShadowMap, m_spVerticalShadowMapCamera, 0x9C);
-    ASSERT_OFFSETOF(CFxShadowMap, m_ShadowMapSize, 0xA4);
-    ASSERT_SIZEOF(CFxShadowMap, 0xAC);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_spColorSurface, 0x48);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_spShadowMapTex, 0x50);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_spShadowMapNoTerrainTex, 0x58);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_MakeShadowMapShader, 0x60);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_MakeShadowMapTransparentShader, 0x70);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_pCurrentShadowMapCamera, 0x80);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_ShadowMapCameras, 0x84);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_spDirectionalShadowMapCamera, 0x94);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_spVerticalShadowMapCamera, 0x9C);
+    BB_ASSERT_OFFSETOF(CFxShadowMap, m_ShadowMapSize, 0xA4);
+    BB_ASSERT_SIZEOF(CFxShadowMap, 0xAC);
 }

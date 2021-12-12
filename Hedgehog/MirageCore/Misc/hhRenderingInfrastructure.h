@@ -12,10 +12,10 @@ namespace Hedgehog::Mirage
     public:
         virtual ~CRenderingInfrastructure() = default;
 
-        INSERT_PADDING(0x5C);
+        BB_INSERT_PADDING(0x5C);
         CRenderingDevice m_RenderingDevice;
     };
 
-    ASSERT_OFFSETOF(CRenderingInfrastructure, m_RenderingDevice, 0x60);
-    ASSERT_SIZEOF(CRenderingInfrastructure, 0x7650);
+    BB_ASSERT_OFFSETOF(CRenderingInfrastructure, m_RenderingDevice, 0x60);
+    BB_ASSERT_SIZEOF(CRenderingInfrastructure, 0x7650);
 }

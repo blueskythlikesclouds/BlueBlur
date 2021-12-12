@@ -14,7 +14,7 @@ namespace Sonic
         Hedgehog::Math::CMatrix m_PrevTransform;
     };
 
-    ASSERT_OFFSETOF(CMatrixNodeTransform, m_Transform, 0x60);
-    ASSERT_OFFSETOF(CMatrixNodeTransform, m_PrevTransform, 0xC0);
-    ASSERT_SIZEOF(CMatrixNodeTransform, 0x100);
+    BB_ASSERT_OFFSETOF(CMatrixNodeTransform, m_Transform, 0x60);
+    BB_ASSERT_OFFSETOF(CMatrixNodeTransform, m_PrevTransform, 0xC0);
+    BB_ASSERT_SIZEOF(CMatrixNodeTransform, 0x100);
 }

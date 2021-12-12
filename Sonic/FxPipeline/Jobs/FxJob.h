@@ -9,5 +9,5 @@ namespace Sonic
     {
     };
 
-    ASSERT_SIZEOF(CFxJob, 0x48);
+    BB_ASSERT_SIZEOF(CFxJob, 0x48);
 }

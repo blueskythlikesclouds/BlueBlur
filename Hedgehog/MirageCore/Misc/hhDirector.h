@@ -11,5 +11,5 @@ namespace Hedgehog::Mirage
         virtual ~CDirector() = default;
     };
 
-    ASSERT_SIZEOF(CDirector, 0x4);
+    BB_ASSERT_SIZEOF(CDirector, 0x4);
 }

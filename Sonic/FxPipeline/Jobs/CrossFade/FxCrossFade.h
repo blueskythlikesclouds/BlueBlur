@@ -7,14 +7,14 @@ namespace Sonic
 {
     class CFxCrossFade;
 
-    static FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeInitialize, 0x10C21A0, CFxCrossFade* This);
-    static FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeExecute, 0x10C22D0, CFxCrossFade* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeInitialize, 0x10C21A0, CFxCrossFade* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeExecute, 0x10C22D0, CFxCrossFade* This);
 
     class CFxCrossFade : public CFxJob
     {
     public:
-        INSERT_PADDING(0x20);
+        BB_INSERT_PADDING(0x20);
     };
 
-    ASSERT_SIZEOF(CFxCrossFade, 0x68);
+    BB_ASSERT_SIZEOF(CFxCrossFade, 0x68);
 }

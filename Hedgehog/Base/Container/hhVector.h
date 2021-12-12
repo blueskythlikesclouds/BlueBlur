@@ -8,7 +8,7 @@ namespace Hedgehog
     class vector
     {
     public:
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
         T* m_pBegin;
         T* m_pEnd;
         T* m_pCapacityEnd;

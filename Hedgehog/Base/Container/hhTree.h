@@ -41,7 +41,7 @@ namespace Hedgehog
             }
         };
 
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
         node* m_pHead;
         size_t m_Count;
 

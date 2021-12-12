@@ -12,10 +12,10 @@ namespace Hedgehog::Universe
     class Message;
     class CStateMachineBase;
 
-    static FUNCTION_PTR(bool, __thiscall, fpCStateMachineBaseReceiveMessage, 0x76B640,
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCStateMachineBaseReceiveMessage, 0x76B640,
         CStateMachineBase* This, const Message& message, bool flag);
 
-    static FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseUpdate, 0x76DF00,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseUpdate, 0x76DF00,
         CStateMachineBase* This, const SUpdateInfo& updateInfo);
 
     class CStateMachineBase : public IStateMachineMessageReceiver, public Base::CObject
@@ -27,9 +27,9 @@ namespace Hedgehog::Universe
             void* m_pOwner;
             CStateMachineBase* m_pStateMachine;
             float m_TotalTime;
-            INSERT_PADDING(0x4);
+            BB_INSERT_PADDING(0x4);
             Base::CSharedString m_Name;
-            INSERT_PADDING(0x44);
+            BB_INSERT_PADDING(0x44);
 
             virtual bool ProcessMessage(const Message& message, bool flag)
             {
@@ -54,11 +54,11 @@ namespace Hedgehog::Universe
             }
         };
 
-        INSERT_PADDING(0x18);
+        BB_INSERT_PADDING(0x18);
         void* m_pOwner;
         float m_TotalTime;
         SUpdateInfo m_UpdateInfo;
-        INSERT_PADDING(0x34);
+        BB_INSERT_PADDING(0x34);
 
         virtual bool ReceiveMessage(const Message& message, bool flag) override
         {
@@ -73,13 +73,13 @@ namespace Hedgehog::Universe
         }
     };
 
-    ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pOwner, 0x8);
-    ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pStateMachine, 0xC);
-    ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_TotalTime, 0x10);
-    ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_Name, 0x18);
-    ASSERT_SIZEOF(CStateMachineBase::CStateBase, 0x60);
-    ASSERT_OFFSETOF(CStateMachineBase, m_pOwner, 0x1C);
-    ASSERT_OFFSETOF(CStateMachineBase, m_TotalTime, 0x20);
-    ASSERT_OFFSETOF(CStateMachineBase, m_UpdateInfo, 0x24);
-    ASSERT_SIZEOF(CStateMachineBase, 0x64);
+    BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pOwner, 0x8);
+    BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pStateMachine, 0xC);
+    BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_TotalTime, 0x10);
+    BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_Name, 0x18);
+    BB_ASSERT_SIZEOF(CStateMachineBase::CStateBase, 0x60);
+    BB_ASSERT_OFFSETOF(CStateMachineBase, m_pOwner, 0x1C);
+    BB_ASSERT_OFFSETOF(CStateMachineBase, m_TotalTime, 0x20);
+    BB_ASSERT_OFFSETOF(CStateMachineBase, m_UpdateInfo, 0x24);
+    BB_ASSERT_SIZEOF(CStateMachineBase, 0x64);
 }

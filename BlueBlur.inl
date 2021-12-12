@@ -2,18 +2,18 @@
 
 #define bb_offsetof(s, m) ((size_t)&(((s*)0)->m))
 
-#define _CONCAT2(x, y) x##y
-#define CONCAT2(x, y) _CONCAT(x, y)
-#define INSERT_PADDING(length) \
-    uint8_t CONCAT2(pad, __LINE__)[length]
+#define _BB_CONCAT(x, y) x##y
+#define BB_CONCAT2(x, y) _BB_CONCAT(x, y)
+#define BB_INSERT_PADDING(length) \
+    uint8_t BB_CONCAT2(pad, __LINE__)[length]
 
-#define ASSERT_OFFSETOF(type, field, offset) \
+#define BB_ASSERT_OFFSETOF(type, field, offset) \
     static_assert(bb_offsetof(type, field) == offset, "offsetof assertion failed")
 
-#define ASSERT_SIZEOF(type, size) \
+#define BB_ASSERT_SIZEOF(type, size) \
     static_assert(sizeof(type) == size, "sizeof assertion failed")
 	
-#define FUNCTION_PTR(returnType, callingConvention, function, location, ...) \
+#define BB_FUNCTION_PTR(returnType, callingConvention, function, location, ...) \
     returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)
 
 // boost
@@ -48,9 +48,4 @@ namespace Hedgehog::Math
     using CVector4 = Sonicteam::System::Vector4;
 }
 
-template<int n> struct InsertPadding
-{
-    INSERT_PADDING(n);
-};
-
-struct null_ctor{};
+struct bb_null_ctor{};

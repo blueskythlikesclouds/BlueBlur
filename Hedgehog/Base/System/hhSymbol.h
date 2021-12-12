@@ -6,7 +6,7 @@ namespace Hedgehog::Base
 {
     struct SSymbolNode;
 
-    static FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* pName);
+    static inline BB_FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* pName);
 
     class CStringSymbol
     {
@@ -19,6 +19,6 @@ namespace Hedgehog::Base
         }
     };
 
-    ASSERT_OFFSETOF(CStringSymbol, m_pSymbolNode, 0);
-    ASSERT_SIZEOF(CStringSymbol, 4);
+    BB_ASSERT_OFFSETOF(CStringSymbol, m_pSymbolNode, 0);
+    BB_ASSERT_SIZEOF(CStringSymbol, 4);
 }

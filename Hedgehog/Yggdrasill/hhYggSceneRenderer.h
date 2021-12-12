@@ -59,27 +59,27 @@ namespace Hedgehog::Yggdrasill
     class CYggSceneRenderer;
     class CYggScheduler;
 
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererRender, 0x789890, CYggSceneRenderer* This, ERenderCategory type, ERenderLevel slot);
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererResetMaterialColor, 0x10D4EB0, CYggSceneRenderer* This);
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetLightViewProjection, 0x789360, CYggSceneRenderer* This, const Math::CMatrix& view, const Math::CMatrix44& projection);
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererLockShader, 0x789BE0, CYggSceneRenderer* This, const Hedgehog::Mirage::SShaderPair& shaderPair, size_t flags);
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnlockShader, 0x789860, CYggSceneRenderer* This);
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetCamera, 0x7890F0, CYggSceneRenderer* This, Hedgehog::Mirage::CCamera* pCamera, size_t flags);
-    static FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnsetCamera, 0x789110, CYggSceneRenderer* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererRender, 0x789890, CYggSceneRenderer* This, ERenderCategory type, ERenderLevel slot);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererResetMaterialColor, 0x10D4EB0, CYggSceneRenderer* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetLightViewProjection, 0x789360, CYggSceneRenderer* This, const Math::CMatrix& view, const Math::CMatrix44& projection);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererLockShader, 0x789BE0, CYggSceneRenderer* This, const Hedgehog::Mirage::SShaderPair& shaderPair, size_t flags);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnlockShader, 0x789860, CYggSceneRenderer* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetCamera, 0x7890F0, CYggSceneRenderer* This, Hedgehog::Mirage::CCamera* pCamera, size_t flags);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnsetCamera, 0x789110, CYggSceneRenderer* This);
 
     class CYggSceneRenderer : public Base::CObject
     {
     public:
-        INSERT_PADDING(0xC);
+        BB_INSERT_PADDING(0xC);
         CYggScheduler* m_pScheduler;
         Mirage::CRenderingDevice* m_pRenderingDevice;
         Mirage::CRenderingInfrastructure* m_pRenderingInfrastructure;
         Mirage::CCamera* m_pCamera;
         Base::CStringSymbol m_SymbolDefault;
-        INSERT_PADDING(0xC);
+        BB_INSERT_PADDING(0xC);
         Mirage::CLightManager* m_pLightManager;
         
-        INSERT_PADDING(0x7C);
+        BB_INSERT_PADDING(0x7C);
 
         virtual ~CYggSceneRenderer() = default;
         virtual void _4() = 0;
@@ -126,11 +126,11 @@ namespace Hedgehog::Yggdrasill
         }
     };
 
-    ASSERT_OFFSETOF(CYggSceneRenderer, m_pScheduler, 0x10);
-    ASSERT_OFFSETOF(CYggSceneRenderer, m_pRenderingDevice, 0x14);
-    ASSERT_OFFSETOF(CYggSceneRenderer, m_pRenderingInfrastructure, 0x18);
-    ASSERT_OFFSETOF(CYggSceneRenderer, m_pCamera, 0x1C);
-    ASSERT_OFFSETOF(CYggSceneRenderer, m_SymbolDefault, 0x20);
-    ASSERT_OFFSETOF(CYggSceneRenderer, m_pLightManager, 0x30);
-    ASSERT_SIZEOF(CYggSceneRenderer, 0xB0);
+    BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pScheduler, 0x10);
+    BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pRenderingDevice, 0x14);
+    BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pRenderingInfrastructure, 0x18);
+    BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pCamera, 0x1C);
+    BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_SymbolDefault, 0x20);
+    BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pLightManager, 0x30);
+    BB_ASSERT_SIZEOF(CYggSceneRenderer, 0xB0);
 }

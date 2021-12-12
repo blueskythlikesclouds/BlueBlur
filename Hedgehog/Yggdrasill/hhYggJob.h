@@ -16,19 +16,19 @@ namespace Hedgehog::Yggdrasill
     class CYggSurface;
     class CYggTexture;
 
-    static FUNCTION_PTR(void, __thiscall, fpCYggJobGetDefaultTexture, 0x784A60, CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture);
-    static FUNCTION_PTR(void, __thiscall, fpCYggJobGetTexture, 0x7848D0, CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture, const Hedgehog::Base::CStringSymbol& symbol);
-    static FUNCTION_PTR(void, __thiscall, fpCYggJobGetSurface, 0x7847B0, CYggJob* This, boost::shared_ptr<CYggSurface>& spSurface, const Hedgehog::Base::CStringSymbol& symbol);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetDefaultTexture, 0x784A60, CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetTexture, 0x7848D0, CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture, const Hedgehog::Base::CStringSymbol& symbol);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetSurface, 0x7847B0, CYggJob* This, boost::shared_ptr<CYggSurface>& spSurface, const Hedgehog::Base::CStringSymbol& symbol);
 
-    static FUNCTION_PTR(void, __thiscall, fpCYggJobSetDefaultTexture, 0x784D00, CYggJob* This, const boost::shared_ptr<CYggTexture>& spTexture);
-    static FUNCTION_PTR(void, __thiscall, fpCYggJobSetBuffer, 0x784BF0, CYggJob* This, const Hedgehog::Base::CStringSymbol& symbol, const boost::shared_ptr<CYggAbstractBuffer>& spBuffer);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobSetDefaultTexture, 0x784D00, CYggJob* This, const boost::shared_ptr<CYggTexture>& spTexture);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobSetBuffer, 0x784BF0, CYggJob* This, const Hedgehog::Base::CStringSymbol& symbol, const boost::shared_ptr<CYggAbstractBuffer>& spBuffer);
 
     class CYggJob : public Base::CObject
     {
     public:
-        INSERT_PADDING(0x8);
+        BB_INSERT_PADDING(0x8);
         CYggScheduler* m_pScheduler;
-        INSERT_PADDING(0x30);
+        BB_INSERT_PADDING(0x30);
 
         virtual ~CYggJob() = default;
         virtual void Initialize() = 0;
@@ -60,6 +60,6 @@ namespace Hedgehog::Yggdrasill
         }      
     };
 
-    ASSERT_OFFSETOF(CYggJob, m_pScheduler, 0xC);
-    ASSERT_SIZEOF(CYggJob, 0x40);
+    BB_ASSERT_OFFSETOF(CYggJob, m_pScheduler, 0xC);
+    BB_ASSERT_SIZEOF(CYggJob, 0x40);
 }

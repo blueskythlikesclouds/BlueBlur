@@ -13,9 +13,9 @@ namespace Sonic
     {
     public:
         Hedgehog::vector<CParamBase*> m_Parameters;
-        INSERT_PADDING(0x20);
+        BB_INSERT_PADDING(0x20);
     };
 
-    ASSERT_OFFSETOF(CEditParam, m_Parameters, 0x8);
-    ASSERT_SIZEOF(CEditParam, 0x38);
+    BB_ASSERT_OFFSETOF(CEditParam, m_Parameters, 0x8);
+    BB_ASSERT_SIZEOF(CEditParam, 0x38);
 }

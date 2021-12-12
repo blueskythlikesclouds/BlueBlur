@@ -7,8 +7,8 @@ namespace Hedgehog::Base
 {
     class CRefCountObject;
 
-    static inline FUNCTION_PTR(LONG, __thiscall, fpCRefCountObjectAddRef, 0x660180, CRefCountObject* This);
-    static inline FUNCTION_PTR(LONG, __thiscall, fpCRefCountObjectRelease, 0x660190, CRefCountObject* This);
+    static inline BB_FUNCTION_PTR(LONG, __thiscall, fpCRefCountObjectAddRef, 0x660180, CRefCountObject* This);
+    static inline BB_FUNCTION_PTR(LONG, __thiscall, fpCRefCountObjectRelease, 0x660190, CRefCountObject* This);
 
     class CRefCountObject
     {
@@ -28,6 +28,6 @@ namespace Hedgehog::Base
         }
     };
 
-    ASSERT_OFFSETOF(CRefCountObject, m_RefCount, 0x4);
-    ASSERT_SIZEOF(CRefCountObject, 0x8);
+    BB_ASSERT_OFFSETOF(CRefCountObject, m_RefCount, 0x4);
+    BB_ASSERT_SIZEOF(CRefCountObject, 0x8);
 }

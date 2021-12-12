@@ -16,7 +16,7 @@ namespace Hedgehog::Universe
         virtual const char* GetType() = 0;
     };
 
-    ASSERT_OFFSETOF(Message, m_SenderActorID, 0x4);
-    ASSERT_OFFSETOF(Message, m_spUnk0, 0x8);
-    ASSERT_SIZEOF(Message, 0x10);
+    BB_ASSERT_OFFSETOF(Message, m_SenderActorID, 0x4);
+    BB_ASSERT_OFFSETOF(Message, m_spUnk0, 0x8);
+    BB_ASSERT_SIZEOF(Message, 0x10);
 }

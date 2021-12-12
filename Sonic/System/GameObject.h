@@ -34,10 +34,10 @@ namespace Sonic
         }
     }
 
-    static FUNCTION_PTR(void, __thiscall, fpCGameObjectUpdateParallel, 0xD5F2A0,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectUpdateParallel, 0xD5F2A0,
         CGameObject* This, const Hedgehog::Universe::SUpdateInfo& updateInfo);
 
-    static FUNCTION_PTR(void, __thiscall, fpCGameObjectAddRenderable, 0xD5F620,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectAddRenderable, 0xD5F620,
         CGameObject* This, const Hedgehog::Base::CStringSymbol category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& spRenderable, const bool castShadow);
 
     class CGameObject : public Hedgehog::Universe::CUpdateUnit, public Hedgehog::Universe::CMessageActor
@@ -47,14 +47,14 @@ namespace Sonic
         {
         public:
             CGameDocument* m_pGameDocument;
-            INSERT_PADDING(0x7C);
+            BB_INSERT_PADDING(0x7C);
         };
 
         CMember* m_pMember;
 
-        CGameObject(const null_ctor&) : CUpdateUnit(null_ctor{}), CMessageActor(null_ctor{}) {}
+        CGameObject(const bb_null_ctor&) : CUpdateUnit(bb_null_ctor{}), CMessageActor(bb_null_ctor{}) {}
 
-        CGameObject() : CGameObject(null_ctor{})
+        CGameObject() : CGameObject(bb_null_ctor{})
         {
             fCGameObjectCtor(this);
         }
@@ -92,9 +92,9 @@ namespace Sonic
         }
     };
 
-    ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
-    ASSERT_SIZEOF(CGameObject::CMember, 0x80);
+    BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
+    BB_ASSERT_SIZEOF(CGameObject::CMember, 0x80);
 
-    ASSERT_OFFSETOF(CGameObject, m_pMember, 0xA4);
-    ASSERT_SIZEOF(CGameObject, 0xA8);
+    BB_ASSERT_OFFSETOF(CGameObject, m_pMember, 0xA4);
+    BB_ASSERT_SIZEOF(CGameObject, 0xA8);
 }

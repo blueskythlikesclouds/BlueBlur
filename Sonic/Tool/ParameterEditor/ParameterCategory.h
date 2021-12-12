@@ -19,7 +19,7 @@ namespace Sonic
     {
         T* m_pValue;
         T m_DefaultValue;
-        alignas(4) INSERT_PADDING(0x24);
+        alignas(4) BB_INSERT_PADDING(0x24);
     };
 
     static void* const pCParameterCategoryCreateParamBool = (void*)0xCEF4F0;
@@ -105,7 +105,7 @@ namespace Sonic
     public:
         static constexpr void* ms_pVfTable = (void*)0x16E5FFC;
 
-        INSERT_PADDING(0xC);
+        BB_INSERT_PADDING(0xC);
 
         CParamBool* CreateParamBool(const SParamValueCreationParams<bool>& creationParams, const Hedgehog::Base::CSharedString& name)
         {
@@ -172,5 +172,5 @@ namespace Sonic
         }
     };
 
-    ASSERT_SIZEOF(CParameterCategory, 0x48);
+    BB_ASSERT_SIZEOF(CParameterCategory, 0x48);
 }

@@ -8,8 +8,8 @@ namespace Sonic
     class CAbstractParameterNode : public CAbstractParameter
     {
     public:
-        INSERT_PADDING(0x8);
+        BB_INSERT_PADDING(0x8);
     };
 
-    ASSERT_SIZEOF(CAbstractParameterNode, 0x3C);
+    BB_ASSERT_SIZEOF(CAbstractParameterNode, 0x3C);
 }
