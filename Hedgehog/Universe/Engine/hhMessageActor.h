@@ -22,11 +22,8 @@ namespace Hedgehog::Universe
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageByCategory, 0x7684E0,
         CMessageActor* This, const char* path, size_t line, const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage, float time);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageImmByID, 0x768810,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageImmByID, 0x767EE0,
         CMessageActor* This, const char* path, size_t line, size_t actorID, const boost::shared_ptr<Message>& spMessage);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageImmByCategory, 0x768770,
-        CMessageActor* This, const char* path, size_t line, const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage);
 
     class CMessageActor : public IMessageProcess, public Base::CObject, public IParallelJob
     {
@@ -73,11 +70,6 @@ namespace Hedgehog::Universe
         {
             fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
         }      
-        
-        void SendMessageImm(const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage)
-        {
-            fpCMessageActorSendMessageImmByCategory(this, nullptr, 0, actorCategory, spMessage);
-        }
     };
 
     //BB_ASSERT_OFFSETOF(CMessageActor, m_Category, 0x14);
