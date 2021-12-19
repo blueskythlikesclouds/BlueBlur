@@ -57,11 +57,6 @@ namespace Sonic
         BB_INSERT_PADDING(0x14);
 
         virtual ~CGameDocument() = default;
-        virtual void _4() = 0;
-        virtual void _8() = 0;
-        virtual void _C() = 0;
-        virtual void _10() = 0;
-        virtual void _14() = 0;
 
         Hedgehog::Base::THolder<CWorld> GetWorld(const char* name = "main") const
         {

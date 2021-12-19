@@ -64,8 +64,8 @@ namespace Sonic
             fpCGameObjectUpdateParallel(this, updateInfo);
         }
 
-        virtual bool _CGameObjectVTable10() { return true; }
-        virtual void* _CGameObjectVTable14() { return 0; }
+        virtual bool CGameObject10() { return true; }
+        virtual void* CGameObject14() { return 0; }
 
         virtual void Initialize(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
             Sonic::CGameDocument* pGameDocument) {}
@@ -75,10 +75,10 @@ namespace Sonic
 
         virtual void RemoveCallback(Sonic::CGameDocument* pGameDocument) {}
 
-        virtual void _CGameObjectVTable24(void*) {}
-        virtual void _CGameObjectVTable28() {}
-        virtual void _CGameObjectVTable2C(void*) {}
-        virtual void _CGameObjectVTable30(void*) {}
+        virtual void CGameObject24(void*) {}
+        virtual void CGameObject28() {}
+        virtual void CGameObject2C(void*) {}
+        virtual void CGameObject30(void*) {}
 
         Hedgehog::Base::THolder<CGameDocument> GetGameDocument() const
         {

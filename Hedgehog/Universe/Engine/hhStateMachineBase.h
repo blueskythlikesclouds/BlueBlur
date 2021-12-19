@@ -41,12 +41,12 @@ namespace Hedgehog::Universe
             virtual void Enter() {}
             virtual void Update() {}
 
-            virtual void _CStateBase10() {}
+            virtual void CStateBase10() {}
 
             virtual void Leave() {}
 
-            virtual void _CStateBase18() {}
-            virtual void _CStateBase1C() {}
+            virtual void CStateBase18() {}
+            virtual void CStateBase1C() {}
 
             virtual const Base::CSharedString& GetName() 
             {

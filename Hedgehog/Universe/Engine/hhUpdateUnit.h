@@ -27,7 +27,7 @@ namespace Hedgehog::Universe
         }
 
         virtual void UpdateParallel(const SUpdateInfo& updateInfo) {}
-        virtual void _CUpdateUnitVTable0C(void*) {}
+        virtual void CUpdateUnit0C(void*) {}
     };
 
     BB_ASSERT_SIZEOF(CUpdateUnit, 0x28);

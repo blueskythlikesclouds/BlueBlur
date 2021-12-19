@@ -20,9 +20,6 @@ namespace Hedgehog::Yggdrasill
         BB_INSERT_PADDING(0x6);
 
         virtual ~CYggAbstractBuffer() = default;
-        virtual void _4() = 0;
-        virtual void _8() = 0;
-        virtual void _C() = 0;
     };
 
     BB_ASSERT_OFFSETOF(CYggAbstractBuffer, m_pScheduler, 0xC);
