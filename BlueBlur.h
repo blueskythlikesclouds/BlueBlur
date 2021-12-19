@@ -80,6 +80,14 @@
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>
 #include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.h>
 #include <Sonic/FxPipeline/Jobs/ToneMapping/FxToneMapping.h>
+#include <Sonic/Message/MsgAddImpulse.h>
+#include <Sonic/Message/MsgAddVelocity.h>
+#include <Sonic/Message/MsgDead.h>
+#include <Sonic/Message/MsgGetPosition.h>
+#include <Sonic/Message/MsgGetRotation.h>
+#include <Sonic/Message/MsgKill.h>
+#include <Sonic/Message/MsgSetPosition.h>
+#include <Sonic/Message/MsgSetRotation.h>
 #include <Sonic/Player/Character/Base/Player.h>
 #include <Sonic/Player/Character/Base/PlayerContext.h>
 #include <Sonic/Player/Character/Sonic/Sonic.h>
