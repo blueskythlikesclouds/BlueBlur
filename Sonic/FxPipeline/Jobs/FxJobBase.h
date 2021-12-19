@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Yggdrasill/hhYggJob.h>
 
 namespace Sonic

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
 
 namespace Hedgehog::Mirage

@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/Base/System/hhSymbol.h>
 #include <Hedgehog/Base/Thread/hhHolder.h>
 #include <Hedgehog/Universe/Engine/hhMessageActor.h>

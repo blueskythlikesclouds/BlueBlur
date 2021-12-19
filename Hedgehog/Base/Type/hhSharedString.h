@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Base/Type/hhCowData.h>
 
 namespace Hedgehog::Base

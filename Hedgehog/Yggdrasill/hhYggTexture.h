@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Yggdrasill/hhYggAbstractBuffer.h>
 
 namespace Hedgehog::Yggdrasill

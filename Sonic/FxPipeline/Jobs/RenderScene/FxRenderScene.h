@@ -1,7 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/Yggdrasill/hhYggMisc.h>
 #include <Hedgehog/Yggdrasill/hhYggSceneRenderer.h>
 #include <Hedgehog/Yggdrasill/hhYggScheduler.h>

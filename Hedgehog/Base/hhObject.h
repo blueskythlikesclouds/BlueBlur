@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Base/System/hhAllocator.h>
 
 namespace Hedgehog::Base

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
 #include <Hedgehog/MirageCore/Misc/hhTransform.h>
 

@@ -1,9 +1,8 @@
 #pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/MirageCore/Camera/hhCamera.h>
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
+
 #include <Sonic/System/GameObject.h>
 
 namespace Sonic

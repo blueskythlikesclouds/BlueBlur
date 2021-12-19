@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Sonic/FxPipeline/Jobs/FxJob.h>
 
 namespace Sonic

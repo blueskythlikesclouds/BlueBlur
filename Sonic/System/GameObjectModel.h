@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Sonic/System/GameObject3D.h>
 
 namespace Hedgehog::Database

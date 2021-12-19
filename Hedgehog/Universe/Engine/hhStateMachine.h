@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Universe/Engine/hhStateMachineBase.h>
 
 namespace Hedgehog::Universe

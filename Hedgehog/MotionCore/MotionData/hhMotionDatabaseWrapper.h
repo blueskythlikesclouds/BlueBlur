@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 
 namespace Hedgehog::Database

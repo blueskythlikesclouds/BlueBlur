@@ -1,7 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
-
 #include <Sonic/Animation/AnimationContext.h>
 #include <Sonic/System/GameObject.h>
 

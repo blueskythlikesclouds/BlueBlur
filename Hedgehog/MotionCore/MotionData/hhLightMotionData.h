@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Database/System/hhDatabaseData.h>
 
 namespace Hedgehog::Motion

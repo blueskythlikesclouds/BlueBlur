@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Base/hhObject.h>
 
 namespace Hedgehog::Mirage

@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
 #include <Hedgehog/Universe/Engine/hhParallelJob.h>

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>
 #include <Sonic/System/GameObject.h>
 

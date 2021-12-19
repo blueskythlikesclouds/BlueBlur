@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#pragma once
-
 #include <BlueBlur.inl>
 
 namespace Hedgehog::FxRenderFramework

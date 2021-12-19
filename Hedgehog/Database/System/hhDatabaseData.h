@@ -1,7 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Base/hhObject.h>
 

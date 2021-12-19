@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.inl>
 #include <Hedgehog/Base/Thread/hhHolderBase.h>
 
 #define HH_BASE_HOLDER(x) \

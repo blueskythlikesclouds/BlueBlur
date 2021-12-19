@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/Base/Container/hhMap.h>
 #include <Hedgehog/Base/System/hhAllocator.h>
 #include <Sonic/Tool/EditParam/ParamBase.h>

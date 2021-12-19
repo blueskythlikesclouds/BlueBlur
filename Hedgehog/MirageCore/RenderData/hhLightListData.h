@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.inl>
-
 #include <Hedgehog/Base/Container/hhVector.h>
 #include <Hedgehog/Database/System/hhDatabaseData.h>
 
