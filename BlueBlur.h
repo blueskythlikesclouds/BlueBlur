@@ -65,6 +65,7 @@
 #include <Hedgehog/Yggdrasill/hhYggTexture.h>
 
 #include <Sonic/DX_PATCH.h>
+#include <Sonic/Animation/AnimationContext.h>
 #include <Sonic/Camera/Camera.h>
 #include <Sonic/FxPipeline/FxSceneRenderer.h>
 #include <Sonic/FxPipeline/FxScheduler.h>
@@ -78,6 +79,16 @@
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>
 #include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.h>
 #include <Sonic/FxPipeline/Jobs/ToneMapping/FxToneMapping.h>
+#include <Sonic/Player/Character/Base/Player.h>
+#include <Sonic/Player/Character/Base/PlayerContext.h>
+#include <Sonic/Player/Character/Sonic/Sonic.h>
+#include <Sonic/Player/Character/Sonic/SonicContext.h>
+#include <Sonic/Player/Character/SonicClassic/SonicClassic.h>
+#include <Sonic/Player/Character/SonicClassic/SonicClassicContext.h>
+#include <Sonic/Player/Character/SonicSp/SonicSp.h>
+#include <Sonic/Player/Character/SonicSp/SonicSpContext.h>
+#include <Sonic/Player/Character/Speed/PlayerSpeed.h>
+#include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
 #include <Sonic/System/ApplicationDocument.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>
