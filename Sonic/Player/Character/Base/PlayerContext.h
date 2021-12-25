@@ -2,6 +2,7 @@
 
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
+#include <Hedgehog/Universe/Engine/hhStateMachine.h>
 
 #undef PlaySound
 
@@ -31,6 +32,24 @@ namespace Sonic::Player
 
     static inline BB_FUNCTION_PTR(const Hedgehog::Base::CSharedString&, __stdcall,
         fpCPlayerContextGetAnimationName, 0xE72CB0, CPlayerContext* This);
+
+    static uint32_t pCPlayerContextSetState = 0xE4FF30;
+
+    static Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextSetState(
+        CPlayerContext* This, const Hedgehog::Base::CSharedString* pType)
+    {
+        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* pResult;
+
+        __asm
+        {
+            mov eax, pType
+            mov ecx, This
+            call[pCPlayerContextSetState]
+            mov pResult, eax
+        }
+
+        return pResult;
+    }
 
     class CPlayerContext : public Hedgehog::Base::CObject
     {
@@ -112,11 +131,6 @@ namespace Sonic::Player
         virtual void CPlayerContext54() {}
         virtual void CPlayerContext58() {}
 
-        const Hedgehog::Base::CSharedString& GetAnimationName()
-        {
-            return fpCPlayerContextGetAnimationName(this);
-        }
-
         virtual void SetAnimation(const Hedgehog::Base::CSharedString& name) = 0;
 
         virtual void CPlayerContext60() {}
@@ -134,6 +148,22 @@ namespace Sonic::Player
         virtual void CPlayerContext88() {}
         virtual void CPlayerContext8C() {}
         virtual void CPlayerContext90() {}
+
+        const Hedgehog::Base::CSharedString& GetAnimationName()
+        {
+            return fpCPlayerContextGetAnimationName(this);
+        }
+
+        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* SetState(const Hedgehog::Base::CSharedString& type)
+        {
+            return fCPlayerContextSetState(this, &type);
+        }
+
+        template<typename T>
+        T* SetState()
+        {
+            return static_cast<T*>(SetState(T::ms_Type));
+        }
     };
 
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spMatrixNodeTransform, 0x10);

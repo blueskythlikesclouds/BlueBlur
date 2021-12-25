@@ -87,6 +87,7 @@
 #include <Sonic/Message/MsgDead.h>
 #include <Sonic/Message/MsgGetPosition.h>
 #include <Sonic/Message/MsgGetRotation.h>
+#include <Sonic/Message/MsgHitReactionPlate.h>
 #include <Sonic/Message/MsgKill.h>
 #include <Sonic/Message/MsgSetPosition.h>
 #include <Sonic/Message/MsgSetRotation.h>
@@ -100,6 +101,8 @@
 #include <Sonic/Player/Character/SonicSp/SonicSpContext.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeed.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
+#include <Sonic/Player/Character/Speed/State/PlayerSpeedStateBase.h>
+#include <Sonic/Player/Character/Speed/State/PlayerSpeedStateReactionLand.h>
 #include <Sonic/System/ApplicationDocument.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>

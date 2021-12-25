@@ -14,8 +14,16 @@ namespace Sonic::Player
             return *ms_pInstance;
         }
 
-        BB_INSERT_PADDING(0xFA0);
+        class CStateSpeedBase;
+
+        BB_INSERT_PADDING(0x230);
+        Hedgehog::Math::CQuaternion m_VerticalRotation;
+        BB_INSERT_PADDING(0x10);
+        Hedgehog::Math::CQuaternion m_HorizontalRotation;
+        BB_INSERT_PADDING(0xD40);
     };
 
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_VerticalRotation, 0x4C0);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_HorizontalRotation, 0x4E0);
     BB_ASSERT_SIZEOF(CPlayerSpeedContext, 0x1230);
 }
