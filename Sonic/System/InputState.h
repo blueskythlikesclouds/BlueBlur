@@ -10,17 +10,21 @@ namespace Sonic
     class CInputState : public Hedgehog::Base::CSynchronizedObject
     {
     public:
-        static constexpr CInputState* ms_pInstance = (CInputState*)0x1E76160;
+        static constexpr Hedgehog::Base::TSynchronizedPtr<CInputState>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CInputState>*)0x1E79048;
+
+        static Hedgehog::Base::TSynchronizedPtr<CInputState> GetInstance()
+        {
+            return *ms_pInstance;
+        }
 
         SPadState m_PadStates[40];
         BB_INSERT_PADDING(0x50);
         uint32_t m_CurrentPadStateIndex;
         BB_INSERT_PADDING(0x4);
 
-        static SPadState* GetPadState()
+        SPadState* GetPadState()
         {
-            const Hedgehog::Base::CHolderBase holder(ms_pInstance, true);
-            return &ms_pInstance->m_PadStates[ms_pInstance->m_CurrentPadStateIndex];
+            return &m_PadStates[m_CurrentPadStateIndex];
         }
     };
 

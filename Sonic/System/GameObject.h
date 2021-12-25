@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <Hedgehog/Base/System/hhSymbol.h>
-#include <Hedgehog/Base/Thread/hhHolder.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Universe/Engine/hhMessageActor.h>
 #include <Hedgehog/Universe/Engine/hhUpdateUnit.h>
 
@@ -35,6 +35,9 @@ namespace Sonic
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectUpdateParallel, 0xD5F2A0,
         CGameObject* This, const Hedgehog::Universe::SUpdateInfo& updateInfo);
 
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCGameObjectProcessMessage, 0xD60590,
+        Hedgehog::Universe::CMessageActor* This, Hedgehog::Universe::Message& message, bool flag);
+
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectAddRenderable, 0xD5F620,
         CGameObject* This, const Hedgehog::Base::CStringSymbol category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& spRenderable, const bool castShadow);
 
@@ -44,7 +47,7 @@ namespace Sonic
         class CMember
         {
         public:
-            CGameDocument* m_pGameDocument;
+            Hedgehog::Base::TSynchronizedPtr<CGameDocument> m_pGameDocument;
             BB_INSERT_PADDING(0x7C);
         };
 
@@ -57,9 +60,14 @@ namespace Sonic
             fCGameObjectCtor(this);
         }
 
-        virtual void UpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo)
+        void UpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) override
         {
             fpCGameObjectUpdateParallel(this, updateInfo);
+        }
+
+        bool ProcessMessage(Hedgehog::Universe::Message& message, bool flag) override
+        {
+            return fpCGameObjectProcessMessage(this, message, flag);
         }
 
         virtual bool CGameObject10() { return true; }
@@ -78,7 +86,7 @@ namespace Sonic
         virtual void CGameObject2C(void*) {}
         virtual void CGameObject30(void*) {}
 
-        Hedgehog::Base::THolder<CGameDocument> GetGameDocument() const
+        Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetGameDocument() const
         {
             return m_pMember->m_pGameDocument;
         }

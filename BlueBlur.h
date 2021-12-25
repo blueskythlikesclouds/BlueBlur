@@ -12,6 +12,8 @@
 #include <Hedgehog/Base/Thread/hhHolder.h>
 #include <Hedgehog/Base/Thread/hhHolderBase.h>
 #include <Hedgehog/Base/Thread/hhSynchronizedObject.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtrBase.h>
 #include <Hedgehog/Base/Type/hhCowData.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Database/System/hhArchiveDatabaseLoader.h>

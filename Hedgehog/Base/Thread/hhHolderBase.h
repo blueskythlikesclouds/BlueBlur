@@ -12,10 +12,11 @@ namespace Hedgehog::Base
 
     class CHolderBase
     {
-    public:
+    protected:
         CSynchronizedObject* m_pSynchronizedObject;
         bool m_Locked;
 
+    public:
         CHolderBase() : m_pSynchronizedObject(nullptr), m_Locked(false)
         {
             
@@ -41,9 +42,22 @@ namespace Hedgehog::Base
         {
             fpCHolderBaseDtor(this);
         }
+
+        CSynchronizedObject* get() const
+        {
+            return m_pSynchronizedObject;
+        }
+
+        CSynchronizedObject* operator->() const
+        {
+            return get();
+        }
+
+        CSynchronizedObject* operator*() const
+        {
+            return get();
+        }
     };
 
-    BB_ASSERT_OFFSETOF(CHolderBase, m_pSynchronizedObject, 0x0);
-    BB_ASSERT_OFFSETOF(CHolderBase, m_Locked, 0x4);
     BB_ASSERT_SIZEOF(CHolderBase, 0x8);
 }

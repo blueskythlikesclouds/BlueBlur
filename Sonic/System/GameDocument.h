@@ -3,8 +3,9 @@
 #include <Hedgehog/Base/Container/hhList.h>
 #include <Hedgehog/Base/Container/hhMap.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
-#include <Hedgehog/Base/Thread/hhHolder.h>
 #include <Hedgehog/Base/Thread/hhSynchronizedObject.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
+
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Universe/Engine/hhUpdateManager.h>
 
@@ -44,9 +45,9 @@ namespace Sonic
             BB_INSERT_PADDING(0x128);
         };
 
-        static constexpr CGameDocument** ms_pInstance = (CGameDocument**)0x1E0BE5C;
+        static constexpr Hedgehog::Base::TSynchronizedPtr<CGameDocument>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CGameDocument>*)0x1E0BE5C;
 
-        static Hedgehog::Base::THolder<CGameDocument> GetInstance()
+        static Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetInstance()
         {
             return *ms_pInstance;
         }
@@ -56,7 +57,7 @@ namespace Sonic
 
         virtual ~CGameDocument() = default;
 
-        Hedgehog::Base::THolder<CWorld> GetWorld(const char* name = "main") const
+        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const char* name = "main") const
         {
             for (auto it = m_pMember->m_Worlds.begin(); it != m_pMember->m_Worlds.end(); it = it->next())
             {
@@ -69,7 +70,7 @@ namespace Sonic
 
         void AddGameObject(const boost::shared_ptr<CGameObject>& spGameObject, const char* worldName = "main", CGameObject* pParentGameObject = nullptr)
         {
-            fpAddGameObject(this, GetWorld(worldName), spGameObject, m_pMember->m_spDatabase, pParentGameObject);
+            fpAddGameObject(this, *GetWorld(worldName), spGameObject, m_pMember->m_spDatabase, pParentGameObject);
         }
 
         void AddUpdateUnit(const Hedgehog::Base::CSharedString& category, Hedgehog::Universe::CUpdateUnit* pUpdateUnit)

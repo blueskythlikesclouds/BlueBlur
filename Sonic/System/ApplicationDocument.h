@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Hedgehog/Base/Thread/hhHolder.h>
 #include <Hedgehog/Base/Thread/hhSynchronizedObject.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Universe/Engine/hhMessageManager.h>
 
 namespace Sonic
@@ -17,9 +17,9 @@ namespace Sonic
             BB_INSERT_PADDING(0x20C);
         };
 
-        static constexpr CApplicationDocument** ms_pInstance = (CApplicationDocument**)0x1E66B34;
+        static constexpr Hedgehog::Base::TSynchronizedPtr<CApplicationDocument>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CApplicationDocument>*)0x1E66B34;
 
-        static Hedgehog::Base::THolder<CApplicationDocument> GetInstance()
+        static Hedgehog::Base::TSynchronizedPtr<CApplicationDocument> GetInstance()
         {
             return *ms_pInstance;
         }
