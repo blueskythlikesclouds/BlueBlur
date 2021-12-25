@@ -1,0 +1,8 @@
+.vs
+bin
+obj
+BlueBlur.cpp
+BlueBlur.sln
+BlueBlur.vcxproj
+BlueBlur.vcxproj.filters
+BlueBlur.vcxproj.user
