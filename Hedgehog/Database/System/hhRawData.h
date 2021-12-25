@@ -8,8 +8,8 @@ namespace Hedgehog::Database
     {
     public:
         uint32_t m_DataSize;
-        BB_INSERT_PADDING(0x4);
-        boost::shared_ptr<uint8_t> m_spData;
+        BB_INSERT_PADDING(0x4){};
+        boost::shared_ptr<char[]> m_spData;
     };
 
     BB_ASSERT_OFFSETOF(CRawData, m_DataSize, 0xC);
