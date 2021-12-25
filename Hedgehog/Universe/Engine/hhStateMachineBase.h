@@ -11,7 +11,7 @@ namespace Hedgehog::Universe
     class CStateMachineBase;
 
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCStateMachineBaseReceiveMessage, 0x76B640,
-        CStateMachineBase* This, const Message& message, bool flag);
+        CStateMachineBase* This, Message& message, bool flag);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseUpdate, 0x76DF00,
         CStateMachineBase* This, const SUpdateInfo& updateInfo);
@@ -29,7 +29,7 @@ namespace Hedgehog::Universe
             Base::CSharedString m_Name;
             BB_INSERT_PADDING(0x44);
 
-            virtual bool ProcessMessage(const Message& message, bool flag)
+            virtual bool ProcessMessage(Message& message, bool flag)
             {
                 return false;
             }
@@ -58,7 +58,7 @@ namespace Hedgehog::Universe
         SUpdateInfo m_UpdateInfo;
         BB_INSERT_PADDING(0x34);
 
-        virtual bool ReceiveMessage(const Message& message, bool flag) override
+        virtual bool ReceiveMessage(Message& message, bool flag) override
         {
             return fpCStateMachineBaseReceiveMessage(this, message, flag);
         }

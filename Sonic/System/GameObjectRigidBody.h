@@ -43,7 +43,7 @@ namespace Sonic
             fCGameObjectRigidBodyCtor(this, category, &modelName, &rigidBodyContainerName, &rigidBodyName);
         }
 
-        virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder,
+        void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder,
             Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) override
         {
             fpCGameObjectRigidBodyAddCallback(this, worldHolder, pGameDocument, spDatabase);

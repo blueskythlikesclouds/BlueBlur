@@ -42,7 +42,7 @@ namespace Hedgehog::Universe
             fpCMessageActorExecuteParallelJob(this, updateInfo);
         }
 
-        virtual bool ProcessMessage(const Message& message, bool flag)
+        virtual bool ProcessMessage(Message& message, bool flag)
         {
             return false;
         }
@@ -67,7 +67,7 @@ namespace Hedgehog::Universe
         void SendMessageImm(const size_t actorID, const boost::shared_ptr<Message>& spMessage)
         {
             fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
-        }      
+        }
     };
 
     //BB_ASSERT_OFFSETOF(CMessageActor, m_Category, 0x14);

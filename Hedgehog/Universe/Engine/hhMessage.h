@@ -3,16 +3,16 @@
 #include <Hedgehog/Base/hhObject.h>
 
 #define HH_FND_MSG_MAKE_TYPE(name) \
-    static constexpr const char* Type = (const char*)(name); \
+    static constexpr const char* ms_Type = (const char*)(name); \
     \
     bool IsOfType(const char* pType) const override \
     { \
-        return pType == Type; \
+        return pType == ms_Type; \
     } \
     \
     const char* GetType() const override \
     { \
-        return Type; \
+        return ms_Type; \
     }
 
 namespace Hedgehog::Universe
@@ -31,7 +31,7 @@ namespace Hedgehog::Universe
         template<typename T>
         bool Is() const
         {
-            return IsOfType(T::Type);
+            return IsOfType(T::ms_Type);
         }
     };
 
