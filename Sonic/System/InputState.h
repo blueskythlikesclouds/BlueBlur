@@ -22,9 +22,9 @@ namespace Sonic
         uint32_t m_CurrentPadStateIndex;
         BB_INSERT_PADDING(0x4);
 
-        SPadState* GetPadState()
+        const SPadState& GetPadState() const
         {
-            return &m_PadStates[m_CurrentPadStateIndex];
+            return m_PadStates[m_CurrentPadStateIndex];
         }
     };
 
