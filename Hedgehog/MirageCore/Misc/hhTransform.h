@@ -27,6 +27,13 @@ namespace Hedgehog::Mirage
             m_Position = position;
             UpdateMatrix();
         }
+
+        void SetRotationAndPosition(const Math::CQuaternion& rotation, const Math::CVector& position)
+        {
+            m_Rotation = rotation;
+            m_Position = position;
+            UpdateMatrix();
+        }
     };
 
     BB_ASSERT_OFFSETOF(CTransform, m_Rotation, 0x0);

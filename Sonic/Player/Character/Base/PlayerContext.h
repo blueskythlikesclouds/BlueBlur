@@ -54,8 +54,8 @@ namespace Sonic::Player
     class CPlayerContext : public Hedgehog::Base::CObject
     {
     public:
-        boost::shared_ptr<CMatrixNodeTransform> m_spMatrixNodeTransform; // 0x10
-        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_Field18;
+        boost::shared_ptr<CMatrixNodeTransform> m_spMatrixNode; // 0x10
+        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_spModelMatrixNode;
         boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_Field20;
         boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_Field28;
         boost::shared_ptr<CMatrixNodeTransform> m_Field30;
@@ -166,8 +166,8 @@ namespace Sonic::Player
         }
     };
 
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_spMatrixNodeTransform, 0x10);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field18, 0x18);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spMatrixNode, 0x10);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spModelMatrixNode, 0x18);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field20, 0x20);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field28, 0x28);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field30, 0x30);

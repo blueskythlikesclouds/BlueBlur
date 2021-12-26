@@ -20,10 +20,12 @@ namespace Sonic::Player
         Hedgehog::Math::CQuaternion m_VerticalRotation;
         BB_INSERT_PADDING(0x10);
         Hedgehog::Math::CQuaternion m_HorizontalRotation;
-        BB_INSERT_PADDING(0xD40);
+        Hedgehog::Math::CVector m_ModelUpDirection;
+        BB_INSERT_PADDING(0xD30);
     };
 
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_VerticalRotation, 0x4C0);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_HorizontalRotation, 0x4E0);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ModelUpDirection, 0x4F0);
     BB_ASSERT_SIZEOF(CPlayerSpeedContext, 0x1230);
 }
