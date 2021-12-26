@@ -22,6 +22,14 @@ namespace Hedgehog::Universe
             }
         };
 
+        boost::shared_ptr<TState> GetCurrentState()
+        {
+            boost::shared_ptr<CStateBase> spState;
+            fpGetCurrentState(this, spState);
+
+            return boost::static_pointer_cast<TState>(spState);
+        }
+
         T* GetOwner() const
         {
             return static_cast<T*>(m_pOwner);

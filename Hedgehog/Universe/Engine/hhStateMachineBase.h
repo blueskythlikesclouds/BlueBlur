@@ -56,7 +56,7 @@ namespace Hedgehog::Universe
         void* m_pOwner;
         float m_TotalTime;
         SUpdateInfo m_UpdateInfo;
-        BB_INSERT_PADDING(0x34);
+        BB_INSERT_PADDING(0x30);
 
         virtual bool ReceiveMessage(Message& message, bool flag) override
         {
@@ -69,6 +69,17 @@ namespace Hedgehog::Universe
         {
             fpCStateMachineBaseUpdate(this, updateInfo);
         }
+
+        static inline BB_FUNCTION_PTR(void, __thiscall, fpGetCurrentState, 0x76B5C0,
+            CStateMachineBase* This, boost::shared_ptr<CStateBase>& spState);
+
+        boost::shared_ptr<CStateBase> GetCurrentState()
+        {
+            boost::shared_ptr<CStateBase> spState;
+            fpGetCurrentState(this, spState);
+
+            return spState;
+        }
     };
 
     BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pOwner, 0x8);
@@ -76,8 +87,9 @@ namespace Hedgehog::Universe
     BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_TotalTime, 0x10);
     BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_Name, 0x18);
     BB_ASSERT_SIZEOF(CStateMachineBase::CStateBase, 0x60);
+
     BB_ASSERT_OFFSETOF(CStateMachineBase, m_pOwner, 0x1C);
     BB_ASSERT_OFFSETOF(CStateMachineBase, m_TotalTime, 0x20);
     BB_ASSERT_OFFSETOF(CStateMachineBase, m_UpdateInfo, 0x24);
-    BB_ASSERT_SIZEOF(CStateMachineBase, 0x64);
+    BB_ASSERT_SIZEOF(CStateMachineBase, 0x60);
 }
