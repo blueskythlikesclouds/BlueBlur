@@ -42,7 +42,8 @@ namespace Sonic
             Hedgehog::vector<size_t> m_PlayerIDs;
             BB_INSERT_PADDING(0x28);
             boost::shared_ptr<CLightManager> m_spLightManager;
-            BB_INSERT_PADDING(0x128);
+            Hedgehog::Base::CSharedString m_StageName;
+            BB_INSERT_PADDING(0x124);
         };
 
         static constexpr Hedgehog::Base::TSynchronizedPtr<CGameDocument>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CGameDocument>*)0x1E0BE5C;
@@ -86,6 +87,7 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_GameObjects, 0x24);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_PlayerIDs, 0x48);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spLightManager, 0x80);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_StageName, 0x88);
     BB_ASSERT_SIZEOF(CGameDocument::CMember, 0x1B0);
 
     BB_ASSERT_OFFSETOF(CGameDocument, m_pCriticalSection, 0x4);
