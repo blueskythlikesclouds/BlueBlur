@@ -31,11 +31,11 @@ namespace Sonic::Player
     class CInputPad;
 
     static inline BB_FUNCTION_PTR(const Hedgehog::Base::CSharedString&, __stdcall,
-        fpCPlayerContextGetAnimationName, 0xE72CB0, CPlayerContext* This);
+        fpCPlayerContextGetCurrentAnimationName, 0xE72CB0, CPlayerContext* This);
 
-    static uint32_t pCPlayerContextSetState = 0xE4FF30;
+    static uint32_t pCPlayerContextChangeState = 0xE4FF30;
 
-    static Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextSetState(
+    static Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextChangeState(
         CPlayerContext* This, const Hedgehog::Base::CSharedString* pType)
     {
         Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* pResult;
@@ -44,7 +44,7 @@ namespace Sonic::Player
         {
             mov eax, pType
             mov ecx, This
-            call[pCPlayerContextSetState]
+            call[pCPlayerContextChangeState]
             mov pResult, eax
         }
 
@@ -131,7 +131,7 @@ namespace Sonic::Player
         virtual void CPlayerContext54() {}
         virtual void CPlayerContext58() {}
 
-        virtual void SetAnimation(const Hedgehog::Base::CSharedString& name) = 0;
+        virtual void ChangeAnimation(const Hedgehog::Base::CSharedString& name) = 0;
 
         virtual void CPlayerContext60() {}
         virtual void CPlayerContext64() {}
@@ -149,20 +149,20 @@ namespace Sonic::Player
         virtual void CPlayerContext8C() {}
         virtual void CPlayerContext90() {}
 
-        const Hedgehog::Base::CSharedString& GetAnimationName()
+        const Hedgehog::Base::CSharedString& GetCurrentAnimationName()
         {
-            return fpCPlayerContextGetAnimationName(this);
+            return fpCPlayerContextGetCurrentAnimationName(this);
         }
 
-        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* SetState(const Hedgehog::Base::CSharedString& type)
+        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(const Hedgehog::Base::CSharedString& type)
         {
-            return fCPlayerContextSetState(this, &type);
+            return fCPlayerContextChangeState(this, &type);
         }
 
         template<typename T>
-        T* SetState()
+        T* ChangeState()
         {
-            return static_cast<T*>(SetState(T::ms_Type));
+            return static_cast<T*>(ChangeState(T::ms_Type));
         }
     };
 

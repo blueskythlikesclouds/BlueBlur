@@ -11,9 +11,9 @@ namespace Hedgehog::Universe
         class TState : public CStateBase
         {
         public:
-            T* GetOwner() const
+            T* GetContext() const
             {
-                return static_cast<T*>(m_pOwner);
+                return static_cast<T*>(m_pContext);
             }
 
             TStateMachine<T>* GetStateMachine() const
@@ -30,14 +30,14 @@ namespace Hedgehog::Universe
             return boost::static_pointer_cast<TState>(spState);
         }
 
-        T* GetOwner() const
+        T* GetContext() const
         {
-            return static_cast<T*>(m_pOwner);
+            return static_cast<T*>(m_pContext);
         }
 
-        virtual void SetOwner(T* pOwner)
+        virtual void SetContext(T* pContext)
         {
-            m_pOwner = static_cast<void*>(pOwner);
+            m_pContext = static_cast<void*>(pContext);
         }
     };
 }

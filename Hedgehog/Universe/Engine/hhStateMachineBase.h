@@ -22,7 +22,7 @@ namespace Hedgehog::Universe
         class CStateBase : public IMessageProcess, public Base::CObject
         {
         public:
-            void* m_pOwner;
+            void* m_pContext;
             CStateMachineBase* m_pStateMachine;
             float m_TotalTime;
             BB_INSERT_PADDING(0x4);
@@ -46,14 +46,14 @@ namespace Hedgehog::Universe
             virtual void CStateBase18() {}
             virtual void CStateBase1C() {}
 
-            virtual const Base::CSharedString& GetName() 
+            virtual const Base::CSharedString& GetStateName() 
             {
                 return m_Name;
             }
         };
 
         BB_INSERT_PADDING(0x18);
-        void* m_pOwner;
+        void* m_pContext;
         float m_TotalTime;
         SUpdateInfo m_UpdateInfo;
         BB_INSERT_PADDING(0x30);
@@ -82,13 +82,13 @@ namespace Hedgehog::Universe
         }
     };
 
-    BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pOwner, 0x8);
+    BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pContext, 0x8);
     BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_pStateMachine, 0xC);
     BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_TotalTime, 0x10);
     BB_ASSERT_OFFSETOF(CStateMachineBase::CStateBase, m_Name, 0x18);
     BB_ASSERT_SIZEOF(CStateMachineBase::CStateBase, 0x60);
 
-    BB_ASSERT_OFFSETOF(CStateMachineBase, m_pOwner, 0x1C);
+    BB_ASSERT_OFFSETOF(CStateMachineBase, m_pContext, 0x1C);
     BB_ASSERT_OFFSETOF(CStateMachineBase, m_TotalTime, 0x20);
     BB_ASSERT_OFFSETOF(CStateMachineBase, m_UpdateInfo, 0x24);
     BB_ASSERT_SIZEOF(CStateMachineBase, 0x60);

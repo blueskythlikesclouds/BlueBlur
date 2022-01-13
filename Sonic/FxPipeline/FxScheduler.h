@@ -8,9 +8,9 @@ namespace Sonic
     {
     public:
         BB_INSERT_PADDING(0x88);
-        float m_ElapsedTime;
+        float m_DeltaTime;
     };
 
-    BB_ASSERT_OFFSETOF(CFxScheduler, m_ElapsedTime, 0x94);
+    BB_ASSERT_OFFSETOF(CFxScheduler, m_DeltaTime, 0x94);
     BB_ASSERT_SIZEOF(CFxScheduler, 0x98);
 }
