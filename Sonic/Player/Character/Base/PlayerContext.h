@@ -21,6 +21,7 @@ namespace Sonic
     class CMatrixNodeTransform;
     class CRayCastCollision;
     class CShapeCastCollision;
+    class CCharacterProxy;
 }
 
 namespace Sonic::Player
@@ -55,10 +56,10 @@ namespace Sonic::Player
     {
     public:
         boost::shared_ptr<CMatrixNodeTransform> m_spMatrixNode; // 0x10
-        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_spModelMatrixNode;
-        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_Field20;
-        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_Field28;
-        boost::shared_ptr<CMatrixNodeTransform> m_Field30;
+        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_spModelMatrixNode; // 0x18
+        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_spField20; // 0x20
+        boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_spField28; // 0x28
+        boost::shared_ptr<CMatrixNodeTransform> m_spField30; // 0x30
 
         boost::shared_ptr<CRayCastCollision> m_spRayCastCollision; // 0x38
         boost::shared_ptr<CRayCastCollision> m_spShapeCastCollision; // 0x40
@@ -66,15 +67,16 @@ namespace Sonic::Player
         Hedgehog::Mirage::CTransform m_Field50;
         Hedgehog::Mirage::CTransform m_FieldB0;
 
-        CPlayer* m_pPlayer;
+        CPlayer* m_pPlayer; // 0x110
 
-        boost::shared_ptr<CInputPad> m_spInputPad;
-        size_t m_Field11C;
-        size_t m_Field120;
+        boost::shared_ptr<CCharacterProxy> m_spCharacterProxy; //0x114
+        boost::shared_ptr<CInputPad> m_spInputPad; //0x11C
 
-        Hedgehog::Math::CVector m_Field130;
-        Hedgehog::Math::CVector m_Field140;
-        Hedgehog::Math::CVector m_Field150;
+        BB_INSERT_PADDING(0x0C);
+
+        Hedgehog::Math::CVector m_WorldInput; //0x130
+        Hedgehog::Math::CVector m_Field140; //0x140
+        Hedgehog::Math::CVector m_PathInput2D; //0x150
 
         uint8_t m_Field160;
         size_t m_Field164;
@@ -83,7 +85,7 @@ namespace Sonic::Player
 
         uint8_t m_Field170;
         uint8_t m_Field171;
-        uint8_t m_Field172;
+        bool m_Is2DMode;
         uint8_t m_Field173;
 
         size_t m_Field174;
@@ -93,7 +95,8 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_Field190;
 
         size_t m_Field1A0;
-        size_t m_Field1A4[2];
+        size_t m_Field1A4;
+        void* m_pSkills; //0x1A8
         uint8_t m_Field1AC[172];
 
         float m_Field258;
@@ -168,27 +171,26 @@ namespace Sonic::Player
 
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spMatrixNode, 0x10);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spModelMatrixNode, 0x18);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field20, 0x20);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field28, 0x28);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field30, 0x30);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spField20, 0x20);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spField28, 0x28);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spField30, 0x30);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spRayCastCollision, 0x38);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spShapeCastCollision, 0x40);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field50, 0x50);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_FieldB0, 0xB0);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_pPlayer, 0x110);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_spInputPad, 0x114);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field11C, 0x11C);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field120, 0x120);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field130, 0x130);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spCharacterProxy, 0x114);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spInputPad, 0x11C);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_WorldInput, 0x130);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field140, 0x140);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field150, 0x150);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_PathInput2D, 0x150);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field160, 0x160);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field164, 0x164);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field168, 0x168);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field16C, 0x16C);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field170, 0x170);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field171, 0x171);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field172, 0x172);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_Is2DMode, 0x172);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field173, 0x173);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field174, 0x174);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field178, 0x178);
@@ -196,6 +198,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field190, 0x190);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1A0, 0x1A0);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1A4, 0x1A4);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_pSkills,  0x1A8);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1AC, 0x1AC);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field258, 0x258);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field25C, 0x25C);
