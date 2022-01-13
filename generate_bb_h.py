@@ -4,6 +4,9 @@ def generateIncludes(f, x):
     for (directoryPath, dirNames, fileNames) in os.walk(x):
         prefix = directoryPath[directoryPath.index(x):].replace("\\", "/")
     
+        if "detail" in prefix:
+            continue
+    
         for fileName in fileNames:
             f.write("#include <{}/{}>\n".format(prefix, fileName))
      

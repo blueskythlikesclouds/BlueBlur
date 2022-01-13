@@ -21,31 +21,21 @@
 #include <boost/make_shared.hpp>
 
 // Eigen
-#include <Eigen/Eigen>
-#include <unsupported/Eigen/AlignedVector3>
+#include <Hedgehog/Math/detail/Eigen/Eigen>
+#include <Hedgehog/Math/detail/unsupported/Eigen/AlignedVector3>
 
 // Devil's Details' bullshit
 #include <Sonic/DX_PATCH.h>
-
-// Sonicteam::System
-namespace Sonicteam::System
-{
-    using Matrix = Eigen::Affine3f;
-    using Matrix44 = Eigen::Matrix4f;
-    using Quaternion = Eigen::Quaternionf;
-    using Vector3 = Eigen::AlignedVector3<float>;
-    using Vector4 = Eigen::Vector4f;
-}
 
 // Hedgehog::Math
 namespace Hedgehog::Math
 {
     using CAabb = Eigen::AlignedBox3f;
-    using CMatrix = Sonicteam::System::Matrix;
-    using CMatrix44 = Sonicteam::System::Matrix44;
-    using CQuaternion = Sonicteam::System::Quaternion;
-    using CVector = Sonicteam::System::Vector3;
-    using CVector4 = Sonicteam::System::Vector4;
+    using CMatrix = Eigen::Affine3f;
+    using CMatrix44 = Eigen::Matrix4f;
+    using CQuaternion = Eigen::Quaternionf;
+    using CVector = Eigen::AlignedVector3<float>;
+    using CVector4 = Eigen::Vector4f;
 }
 
 struct bb_null_ctor{};
