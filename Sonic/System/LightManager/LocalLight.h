@@ -23,7 +23,7 @@ namespace Sonic
     {
     public:
         BB_INSERT_PADDING(0x8);
-        Hedgehog::vector<CLocalLight*> m_LocalLights;
+        hh::vector<CLocalLight*> m_LocalLights;
     };
 
     BB_ASSERT_OFFSETOF(CLocalLightContext, m_LocalLights, 0x8);

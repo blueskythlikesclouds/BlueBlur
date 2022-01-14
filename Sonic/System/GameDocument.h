@@ -35,11 +35,11 @@ namespace Sonic
         public:
             boost::shared_ptr<Hedgehog::Universe::CUpdateManager> m_spUpdateManager;
             boost::shared_ptr<CRenderDirector> m_spRenderDirector;
-            Hedgehog::map<Hedgehog::Base::CSharedString, boost::shared_ptr<CWorld>> m_Worlds;
+            hh::map<Hedgehog::Base::CSharedString, boost::shared_ptr<CWorld>> m_Worlds;
             boost::shared_ptr<Hedgehog::Database::CDatabase> m_spDatabase;
-            Hedgehog::list<boost::shared_ptr<CGameObject>> m_GameObjects;
+            hh::list<boost::shared_ptr<CGameObject>> m_GameObjects;
             BB_INSERT_PADDING(0x18);
-            Hedgehog::vector<size_t> m_PlayerIDs;
+            hh::vector<size_t> m_PlayerIDs;
             BB_INSERT_PADDING(0x28);
             boost::shared_ptr<CLightManager> m_spLightManager;
             Hedgehog::Base::CSharedString m_StageName;

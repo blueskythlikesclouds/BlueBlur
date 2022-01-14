@@ -10,7 +10,7 @@ namespace Sonic
     class CEditParam : public Hedgehog::Base::CRefCountObject
     {
     public:
-        Hedgehog::vector<CParamBase*> m_Parameters;
+        hh::vector<CParamBase*> m_Parameters;
         BB_INSERT_PADDING(0x20);
     };
 

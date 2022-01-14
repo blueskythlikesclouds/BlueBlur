@@ -56,3 +56,5 @@ namespace Hedgehog
         }
     };
 }
+
+namespace hh = Hedgehog;

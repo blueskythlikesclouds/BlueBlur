@@ -101,8 +101,8 @@ namespace Sonic::Player
 
         float m_Field258;
 
-        Hedgehog::map<void*, void*> m_Field25C;
-        Hedgehog::map<void*, void*> m_Field268;
+        hh::map<void*, void*> m_Field25C;
+        hh::map<void*, void*> m_Field268;
 
         boost::shared_ptr<CParameter> m_spPlayerCommonParameter; // 0x274
         boost::shared_ptr<CParameter> m_spRootParameter; // 0x27C

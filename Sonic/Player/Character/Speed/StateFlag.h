@@ -180,7 +180,7 @@ namespace Sonic::Player
     class CPlayerSpeedContext::CStateFlag
     {
     public:
-        Hedgehog::vector<uint8_t> m_Flags;
+        hh::vector<uint8_t> m_Flags;
     };
 
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext::CStateFlag, m_Flags, 0x0);
