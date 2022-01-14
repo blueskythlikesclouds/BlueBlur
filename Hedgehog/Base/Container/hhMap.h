@@ -1,22 +1,27 @@
 ﻿#pragma once
 
-#include <Hedgehog/Base/Container/hhTree.h>
+#include "detail/xtree"
+#include <map>
+
+#include <Hedgehog/Base/System/hhAllocator.h>
 
 namespace Hedgehog
 {
-    template<typename TKey, typename TValue>
-    class pair
+    template<class TKey, class TValue, class TComparer = std::less<TKey>,
+        class TAllocator = Base::TAllocator<std::pair<const TKey, TValue>>>
+    class map :
+
+#if _ITERATOR_DEBUG_LEVEL == 0
+        bb_insert_padding<4>,
+#endif
+
+        public std::map<TKey, TValue, TComparer, TAllocator>
     {
     public:
-        TKey m_Key;
-        TValue m_Value;
+        using std::map<TKey, TValue, TComparer, TAllocator>::map;
     };
 
-    template<typename TKey, typename TValue>
-    class map : public tree<pair<TKey, TValue>>
-    {
-        
-    };
+    BB_ASSERT_SIZEOF((map<void*, void*>), 0xC);
 }
 
 namespace hh = Hedgehog;

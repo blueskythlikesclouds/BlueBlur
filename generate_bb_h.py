@@ -13,14 +13,17 @@ def generateIncludes(f, x):
         for fileName in fileNames:
             line = "#include <{}/{}>\n".format(prefix, fileName)
             if "Container" in prefix:
-                first.append(line)
+                if "hhMap" in fileName:
+                    first.insert(0, line)
+                else:
+                    first.append(line)
             else:
                 second.append(line)
 
 
     if first:
-        f.write("#if _ITERATOR_DEBUG_LEVEL != 0\n"\
-"#ifdef _VECTOR_ || _LIST_\n"\
+        f.write("#if _ITERATOR_DEBUG_LEVEL != 0 || _MAP_ || _XTREE_\n"\
+"#if _VECTOR_ || _LIST_ || _MAP_ || _XTREE_\n"\
 "#error \"BlueBlur must be included before STL\"\n"\
 "#endif\n"\
 "#endif\n"\

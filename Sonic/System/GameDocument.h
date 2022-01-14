@@ -58,15 +58,10 @@ namespace Sonic
 
         virtual ~CGameDocument() = default;
 
-        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const char* name = "main") const
+        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const Hedgehog::Base::CSharedString& name = "main") const
         {
-            for (auto it = m_pMember->m_Worlds.begin(); it != m_pMember->m_Worlds.end(); it = it->next())
-            {
-                if (it->m_Value.m_Key == name)
-                    return it->m_Value.m_Value.get();
-            }
-
-            return nullptr;
+            const auto pair = m_pMember->m_Worlds.find(name);
+            return pair != m_pMember->m_Worlds.end() ? pair->second.get() : nullptr;
         }
 
         void AddGameObject(const boost::shared_ptr<CGameObject>& spGameObject, const char* worldName = "main", CGameObject* pParentGameObject = nullptr)

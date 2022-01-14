@@ -11,7 +11,7 @@
     static_assert(bb_offsetof(type, field) == offset, "offsetof assertion failed")
 
 #define BB_ASSERT_SIZEOF(type, size) \
-    static_assert(sizeof(type) == size, "sizeof assertion failed")
+    static_assert(sizeof type == size, "sizeof assertion failed")
 	
 #define BB_FUNCTION_PTR(returnType, callingConvention, function, location, ...) \
     returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)

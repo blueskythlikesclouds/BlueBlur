@@ -1,7 +1,7 @@
 #pragma once
 
-#if _ITERATOR_DEBUG_LEVEL != 0
-#ifdef _VECTOR_ || _LIST_
+#if _ITERATOR_DEBUG_LEVEL != 0 || _MAP_ || _XTREE_
+#if _VECTOR_ || _LIST_ || _MAP_ || _XTREE_
 #error "BlueBlur must be included before STL"
 #endif
 #endif
@@ -10,9 +10,8 @@
 #undef _ITERATOR_DEBUG_LEVEL
 #define _ITERATOR_DEBUG_LEVEL 0
 
-#include <Hedgehog/Base/Container/hhList.h>
 #include <Hedgehog/Base/Container/hhMap.h>
-#include <Hedgehog/Base/Container/hhTree.h>
+#include <Hedgehog/Base/Container/hhList.h>
 #include <Hedgehog/Base/Container/hhVector.h>
 
 #undef _ITERATOR_DEBUG_LEVEL
