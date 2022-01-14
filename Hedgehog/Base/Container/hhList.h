@@ -1,43 +1,24 @@
 ﻿#pragma once
 
+#include <list>
+#include <Hedgehog/Base/System/hhAllocator.h>
+
 namespace Hedgehog
 {
-    template<typename T>
-    class list
+    template<typename T, typename TAllocator = Base::TAllocator<T>>
+    class list :
+
+#if _ITERATOR_DEBUG_LEVEL == 0
+        bb_insert_padding<4>,
+#endif
+
+        public std::list<T, TAllocator>
     {
     public:
-        struct node
-        {
-            node* m_pNext;
-            node* m_pPrevious;
-            T m_Value;
-        };
-
-        BB_INSERT_PADDING(0x4);
-        node* m_pHead;
-        size_t m_Count;
-
-        node* begin() const
-        {
-            return m_Count ? m_pHead->m_pNext : m_pHead;
-        }
-
-        node* end() const
-        {
-            return m_pHead;
-        }
-
-        node* find(const T& value) const
-        {
-            for (auto it = begin(); it != end(); it = it->m_pNext)
-            {
-                if (it->m_Value == value)
-                    return it;
-            }
-
-            return m_pHead;
-        }
+        using std::list<T, TAllocator>::list;
     };
+
+    BB_ASSERT_SIZEOF(list<void*>, 0xC);
 }
 
 namespace hh = Hedgehog;

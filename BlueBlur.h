@@ -1,11 +1,25 @@
 #pragma once
 
-#include <Hedgehog/Base/hhObject.h>
-#include <Hedgehog/Base/hhRefCountObject.h>
+#if _ITERATOR_DEBUG_LEVEL != 0
+#ifdef _VECTOR_ || _LIST_
+#error "BlueBlur must be included before STL"
+#endif
+#endif
+
+#pragma push_macro("_ITERATOR_DEBUG_LEVEL")
+#undef _ITERATOR_DEBUG_LEVEL
+#define _ITERATOR_DEBUG_LEVEL 0
+
 #include <Hedgehog/Base/Container/hhList.h>
 #include <Hedgehog/Base/Container/hhMap.h>
 #include <Hedgehog/Base/Container/hhTree.h>
 #include <Hedgehog/Base/Container/hhVector.h>
+
+#undef _ITERATOR_DEBUG_LEVEL
+#pragma pop_macro("_ITERATOR_DEBUG_LEVEL")
+
+#include <Hedgehog/Base/hhObject.h>
+#include <Hedgehog/Base/hhRefCountObject.h>
 #include <Hedgehog/Base/Platform/D3D9/hhCriticalSectionD3D9.h>
 #include <Hedgehog/Base/System/hhAllocator.h>
 #include <Hedgehog/Base/System/hhSymbol.h>
@@ -142,4 +156,5 @@ namespace Hedgehog
     namespace fnd = Universe;
     namespace ygg = Yggdrasill;
 }
+
 namespace app = Sonic;

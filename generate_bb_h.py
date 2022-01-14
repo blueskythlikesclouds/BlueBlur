@@ -1,6 +1,9 @@
 import os
 
 def generateIncludes(f, x):
+    first = []
+    second = []
+
     for (directoryPath, dirNames, fileNames) in os.walk(x):
         prefix = directoryPath[directoryPath.index(x):].replace("\\", "/")
     
@@ -8,9 +11,35 @@ def generateIncludes(f, x):
             continue
     
         for fileName in fileNames:
-            f.write("#include <{}/{}>\n".format(prefix, fileName))
-     
-    f.write("\n")
+            line = "#include <{}/{}>\n".format(prefix, fileName)
+            if "Container" in prefix:
+                first.append(line)
+            else:
+                second.append(line)
+
+
+    if first:
+        f.write("#if _ITERATOR_DEBUG_LEVEL != 0\n"\
+"#ifdef _VECTOR_ || _LIST_\n"\
+"#error \"BlueBlur must be included before STL\"\n"\
+"#endif\n"\
+"#endif\n"\
+"\n"\
+"#pragma push_macro(\"_ITERATOR_DEBUG_LEVEL\")\n"\
+"#undef _ITERATOR_DEBUG_LEVEL\n"\
+"#define _ITERATOR_DEBUG_LEVEL 0\n\n")
+
+        for line in first:
+            f.write(line)
+
+        f.write("\n#undef _ITERATOR_DEBUG_LEVEL\n")
+        f.write("#pragma pop_macro(\"_ITERATOR_DEBUG_LEVEL\")\n\n")
+
+    if second:
+        for line in second:
+            f.write(line)
+
+        f.write("\n")
     
 with open("BlueBlur.h", "w") as f:
     f.write("#pragma once\n\n")
@@ -31,5 +60,5 @@ with open("BlueBlur.h", "w") as f:
 "    namespace mot = Motion;\n"\
 "    namespace fnd = Universe;\n"\
 "    namespace ygg = Yggdrasill;\n"\
-"}\n"\
-"namespace app = Sonic;\n");
+"}\n\n"\
+"namespace app = Sonic;\n")

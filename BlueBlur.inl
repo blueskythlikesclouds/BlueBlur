@@ -39,3 +39,6 @@ namespace Hedgehog::Math
 }
 
 struct bb_null_ctor{};
+
+template<int n>
+struct bb_insert_padding { BB_INSERT_PADDING(n); };

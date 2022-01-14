@@ -1,43 +1,24 @@
 #pragma once
 
-#include <BlueBlur.inl>
+#include <vector>
+#include <Hedgehog/Base/System/hhAllocator.h>
 
 namespace Hedgehog
 {
-    template<typename T>
-    class vector
+    template<typename T, typename TAllocator = Base::TAllocator<T>>
+    class vector : 
+
+#if !_HAS_ITERATOR_DEBUGGING
+        bb_insert_padding<4>, 
+#endif
+
+        public std::vector<T, TAllocator>
     {
     public:
-        BB_INSERT_PADDING(0x4);
-        T* m_pBegin;
-        T* m_pEnd;
-        T* m_pCapacityEnd;
-
-        T* begin() const
-        {
-            return m_pBegin;
-        }
-
-        T* end() const
-        {
-            return m_pEnd;
-        }
-
-        size_t size() const
-        {
-            return ((size_t)m_pEnd - (size_t)m_pBegin) / sizeof(T);
-        }
-
-        size_t capacity() const
-        {
-            return ((size_t)m_pCapacityEnd - (size_t)m_pBegin) / sizeof(T);
-        }
-
-        T& operator[](const size_t index) const
-        {
-            return m_pBegin[index];
-        }
+        using std::vector<T, TAllocator>::vector;
     };
+
+    BB_ASSERT_SIZEOF(vector<void*>, 0x10);
 }
 
 namespace hh = Hedgehog;
