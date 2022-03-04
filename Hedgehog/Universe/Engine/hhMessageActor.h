@@ -2,7 +2,7 @@
 
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
-#include <Hedgehog/Universe/Engine/hhParallelJob.h>
+#include <Hedgehog/Universe/Thread/hhParallelJob.h>
 
 namespace Hedgehog::Universe
 {

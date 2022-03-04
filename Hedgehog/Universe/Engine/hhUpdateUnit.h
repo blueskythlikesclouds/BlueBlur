@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <Hedgehog/Universe/Engine/hhParallelJob.h>
+#include <Hedgehog/Universe/Thread/hhParallelJob.h>
 
 namespace Hedgehog::Universe
 {

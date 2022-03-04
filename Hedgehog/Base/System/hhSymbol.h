@@ -13,9 +13,13 @@ namespace Hedgehog::Base
     public:
         SSymbolNode* m_pSymbolNode;
 
-        CStringSymbol(const char* pName)
+        CStringSymbol(const char* pName) : m_pSymbolNode(MakeStringSymbol(pName))
         {
-            m_pSymbolNode = MakeStringSymbol(pName);
+        }
+
+        bool operator<(const CStringSymbol& other) const
+        {
+            return m_pSymbolNode < other.m_pSymbolNode;
         }
     };
 

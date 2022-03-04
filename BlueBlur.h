@@ -1,7 +1,7 @@
 #pragma once
 
-#if _ITERATOR_DEBUG_LEVEL != 0 || _MAP_ || _XTREE_
-#if _VECTOR_ || _LIST_ || _MAP_ || _XTREE_
+#if _ITERATOR_DEBUG_LEVEL != 0 || defined(_MAP_) || defined(_XTREE_)
+#if defined(_VECTOR_) || defined(_LIST_) || defined(_MAP_) || defined(_XTREE_)
 #error "BlueBlur must be included before STL"
 #endif
 #endif
@@ -52,9 +52,11 @@
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightData.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightListData.h>
+#include <Hedgehog/MirageCore/RenderData/hhMaterialData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMirageDatabaseWrapper.h>
 #include <Hedgehog/MirageCore/RenderData/hhPictureData.h>
 #include <Hedgehog/MirageCore/RenderData/hhPixelShaderData.h>
+#include <Hedgehog/MirageCore/RenderData/hhShaderListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderData.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
@@ -62,13 +64,13 @@
 #include <Hedgehog/Universe/Engine/hhMessageActor.h>
 #include <Hedgehog/Universe/Engine/hhMessageManager.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
-#include <Hedgehog/Universe/Engine/hhParallelJob.h>
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineBase.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineMessageReceiver.h>
 #include <Hedgehog/Universe/Engine/hhUpdateInfo.h>
 #include <Hedgehog/Universe/Engine/hhUpdateManager.h>
 #include <Hedgehog/Universe/Engine/hhUpdateUnit.h>
+#include <Hedgehog/Universe/Thread/hhParallelJob.h>
 #include <Hedgehog/Yggdrasill/hhYggAbstractBuffer.h>
 #include <Hedgehog/Yggdrasill/hhYggAllocator.h>
 #include <Hedgehog/Yggdrasill/hhYggDevice.h>

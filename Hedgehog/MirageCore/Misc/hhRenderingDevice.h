@@ -49,7 +49,9 @@ namespace Hedgehog::Mirage
 
         BB_INSERT_PADDING(0x4);
         uint32_t m_Field14;
-        BB_INSERT_PADDING(0x75D8);
+        BB_INSERT_PADDING(0x7598);
+        const Base::CStringSymbol* m_pPixelShaderPermutation;
+        BB_INSERT_PADDING(0x3C);
 
         void SetRenderState(D3DRENDERSTATETYPE type, uint32_t value)
         {
@@ -97,5 +99,6 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_pGlobalParametersData, 0x8);
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_GlobalParameterIndex, 0xC);
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_Field14, 0x14);
+    BB_ASSERT_OFFSETOF(CRenderingDevice, m_pPixelShaderPermutation, 0x75B0);
     BB_ASSERT_SIZEOF(CRenderingDevice, 0x75F0);
 }
