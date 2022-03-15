@@ -7,7 +7,7 @@ namespace Sonic::Player
     class CPlayerSpeedStateReactionLand : public CPlayerSpeedContext::CStateSpeedBase
     {
     public:
-        static inline const char* ms_pStateName = (const char*)0x15F5094;
+        static inline const char* ms_StateName = (const char*)0x15F5094;
 
         enum EAnimationType : uint32_t
         {

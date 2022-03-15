@@ -2,6 +2,7 @@
 bin
 obj
 BlueBlur.cpp
+BlueBlur.obj
 BlueBlur.sln
 BlueBlur.vcxproj
 BlueBlur.vcxproj.filters

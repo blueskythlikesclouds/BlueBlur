@@ -42,6 +42,8 @@ namespace Sonic
         {
             fCGameObjectModelCtor(this, &spDatabase, category, &modelName);
         }
+
+        virtual ~CGameObjectModel();
     };
 
     BB_ASSERT_SIZEOF(CGameObjectModel, 0x108);

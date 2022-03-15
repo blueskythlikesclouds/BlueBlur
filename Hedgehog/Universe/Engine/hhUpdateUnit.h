@@ -20,6 +20,8 @@ namespace Hedgehog::Universe
             fpCUpdateUnitCtor(this);
         }
 
+        virtual ~CUpdateUnit();
+
         virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) override
         {
             UpdateParallel(updateInfo);

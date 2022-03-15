@@ -60,6 +60,8 @@ namespace Sonic
             fCGameObjectCtor(this);
         }
 
+        virtual ~CGameObject();
+
         void UpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) override
         {
             fpCGameObjectUpdateParallel(this, updateInfo);

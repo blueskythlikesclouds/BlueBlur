@@ -1,6 +1,8 @@
 #pragma once
 
-#if _ITERATOR_DEBUG_LEVEL != 0 || defined(_MAP_) || defined(_XTREE_)
+#pragma comment(lib, "BlueBlur.lib")
+
+#if (defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL != 0) || defined(_MAP_) || defined(_XTREE_)
 #if defined(_VECTOR_) || defined(_LIST_) || defined(_MAP_) || defined(_XTREE_)
 #error "BlueBlur must be included before STL"
 #endif

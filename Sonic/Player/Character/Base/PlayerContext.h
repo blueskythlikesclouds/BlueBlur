@@ -165,7 +165,7 @@ namespace Sonic::Player
         template<typename T>
         T* ChangeState()
         {
-            return static_cast<T*>(ChangeState(T::ms_pStateName));
+            return static_cast<T*>(ChangeState(T::ms_StateName));
         }
     };
 

@@ -30,6 +30,8 @@ namespace Sonic
             fpCGameObject3DCtor(this);
         }
 
+        virtual ~CGameObject3D();
+
         virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder,
             Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) override {}
 

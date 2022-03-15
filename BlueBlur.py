@@ -1,10 +1,21 @@
+# This script must be run through Visual Studio or Developer Command Prompt.
+
 import os
+
+srcDirectoryPath = os.path.dirname(os.path.realpath(__file__))
+
+asmFilePath = "\"" + srcDirectoryPath + "/BlueBlur.asm\""
+objFilePath = "\"" + srcDirectoryPath + "/BlueBlur.obj\""
+libFilePath = "\"" + srcDirectoryPath + "/BlueBlur.lib\""
+
+os.system("ml /c /nologo /safeseh /Fo \"{}\" \"{}\"".format(objFilePath, asmFilePath))
+os.system("lib /nologo /OUT:{} {}".format(libFilePath, objFilePath))
 
 def generateIncludes(f, x):
     first = []
     second = []
 
-    for (directoryPath, dirNames, fileNames) in os.walk(x):
+    for (directoryPath, dirNames, fileNames) in os.walk(srcDirectoryPath + "/" + x):
         prefix = directoryPath[directoryPath.index(x):].replace("\\", "/")
     
         if "detail" in prefix:
@@ -22,8 +33,8 @@ def generateIncludes(f, x):
 
 
     if first:
-        f.write("#if _ITERATOR_DEBUG_LEVEL != 0 || _MAP_ || _XTREE_\n"\
-"#if _VECTOR_ || _LIST_ || _MAP_ || _XTREE_\n"\
+        f.write("#if (defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL != 0) || defined(_MAP_) || defined(_XTREE_)\n"\
+"#if defined(_VECTOR_) || defined(_LIST_) || defined(_MAP_) || defined(_XTREE_)\n"\
 "#error \"BlueBlur must be included before STL\"\n"\
 "#endif\n"\
 "#endif\n"\
@@ -44,8 +55,9 @@ def generateIncludes(f, x):
 
         f.write("\n")
     
-with open("BlueBlur.h", "w") as f:
+with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
     f.write("#pragma once\n\n")
+    f.write("#pragma comment(lib, \"BlueBlur.lib\")\n\n")
 
     generateIncludes(f, "Hedgehog")
     generateIncludes(f, "Sonic")

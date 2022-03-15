@@ -37,6 +37,8 @@ namespace Hedgehog::Universe
             fpCMessageActorCtor(this);
         }
 
+        virtual ~CMessageActor();
+
         virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) override
         {
             fpCMessageActorExecuteParallelJob(this, updateInfo);
