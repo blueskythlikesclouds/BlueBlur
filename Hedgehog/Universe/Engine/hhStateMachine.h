@@ -4,38 +4,33 @@
 
 namespace Hedgehog::Universe
 {
-    template<typename T>
+    template<typename TContext>
     class TStateMachine : public CStateMachineBase
     {
     public:
         class TState : public CStateBase
         {
         public:
-            T* GetContext() const
+            TState(const bb_null_ctor&) : CStateBase(bb_null_ctor{}) {}
+            TState() : CStateBase() {}
+
+            TContext* GetContext() const
             {
-                return static_cast<T*>(m_pContext);
+                return static_cast<TContext*>(m_pContext);
             }
 
-            TStateMachine<T>* GetStateMachine() const
+            TStateMachine<TContext>* GetStateMachine() const
             {
-                return static_cast<TStateMachine<T*>>(m_pStateMachine);
+                return static_cast<TStateMachine<TContext*>>(m_pStateMachine);
             }
         };
 
-        boost::shared_ptr<TState> GetCurrentState()
+        TContext* GetContext() const
         {
-            boost::shared_ptr<CStateBase> spState;
-            fpGetCurrentState(this, spState);
-
-            return boost::static_pointer_cast<TState>(spState);
+            return static_cast<TContext*>(m_pContext);
         }
 
-        T* GetContext() const
-        {
-            return static_cast<T*>(m_pContext);
-        }
-
-        virtual void SetContext(T* pContext)
+        virtual void SetContext(TContext* pContext)
         {
             m_pContext = static_cast<void*>(pContext);
         }

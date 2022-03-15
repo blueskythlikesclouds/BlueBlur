@@ -17,8 +17,10 @@
     returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)
 
 // boost
-#include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 // Eigen
 #include <Hedgehog/Math/detail/Eigen/Eigen>

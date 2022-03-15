@@ -9,7 +9,9 @@ namespace Hedgehog::Universe
     class IStateMachineMessageReceiver
     {
     public:
-        virtual bool ReceiveMessage(Message& message, bool flag) = 0;
+        IStateMachineMessageReceiver(const bb_null_ctor&) {}
+
+        virtual bool ProcessMessageInStateMachine(Message& message, bool flag) = 0;
     };
 
     BB_ASSERT_SIZEOF(IStateMachineMessageReceiver, 4);
