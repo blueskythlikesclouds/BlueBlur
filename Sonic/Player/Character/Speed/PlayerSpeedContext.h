@@ -210,6 +210,9 @@ namespace Sonic::Player
         BB_INSERT_PADDING(0x28);
         boost::shared_ptr<CWaitHandle>     m_spWaitHandle;     // 0x1220
         BB_INSERT_PADDING(0x08);
+
+        uint8_t GetStateFlag(const EStateFlag in_stateFlag) const;
+        void SetStateFlag(const EStateFlag in_stateFlag, const uint8_t in_flag) const;
     };
 
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_VerticalRotation, 0x4C0);

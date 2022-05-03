@@ -185,4 +185,14 @@ namespace Sonic::Player
 
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext::CStateFlag, m_Flags, 0x0);
     BB_ASSERT_SIZEOF(CPlayerSpeedContext::CStateFlag, 0x10);
+
+    uint8_t CPlayerSpeedContext::GetStateFlag(const CPlayerSpeedContext::EStateFlag in_stateFlag) const
+    {
+        return m_pStateFlag->m_Flags[(size_t)in_stateFlag];
+    }
+
+    void CPlayerSpeedContext::SetStateFlag(const CPlayerSpeedContext::EStateFlag in_stateFlag, const uint8_t in_flag) const
+    {
+        m_pStateFlag->m_Flags[(size_t)in_stateFlag] = in_flag;
+    }
 }
