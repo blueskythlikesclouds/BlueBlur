@@ -14,7 +14,7 @@ namespace Chao::CSD
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneGetNode, 0x67AFE0,
         const CScene* This, RCPtr<CNode>& out_rcNode, const char* in_pName);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetMotion, 0x679710,
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCSceneSetMotionContext, 0x679710,
         CScene* This, const char* in_pName);
 
     enum EMotionPlaybackType : size_t
@@ -32,11 +32,28 @@ namespace Chao::CSD
         float m_PrevMotionTime;
         float m_MotionTime;
         float m_MotionSpeed;
-        BB_INSERT_PADDING(0x28);
+        float m_MotionBeginTime;
+        float m_MotionEndTime;
+        BB_INSERT_PADDING(0xC);
+        size_t m_MotionIsPaused;
+        BB_INSERT_PADDING(0x10);
         EMotionPlaybackType m_MotionPlaybackType;
         BB_INSERT_PADDING(0x2C);
 
         ~CScene() override = default;
+
+        // Update should be called with a delta time of zero
+        // after making changes to a motion context.
+        // All motions execute at the same time.
+
+        // Example:
+        // SetMotionContext("Intro_Anim");
+        // SetMotionTime(0.0);
+        // m_MotionSpeed = 2.0f;
+        // Update(0.0f);
+
+        // Changes are not going to be recognized if
+        // update is not called.
 
         virtual void Update(float in_DeltaTime);
         virtual void Draw(void*);
@@ -48,9 +65,9 @@ namespace Chao::CSD
             return rcNode;
         }
 
-        void SetMotion(const char* in_pName)
+        bool SetMotionContext(const char* in_pName)
         {
-            fpCSceneSetMotion(this, in_pName);
+            return fpCSceneSetMotionContext(this, in_pName);
         }
 
         void SetMotionTime(float in_MotionTime)
@@ -63,6 +80,9 @@ namespace Chao::CSD
     BB_ASSERT_OFFSETOF(CScene, m_PrevMotionTime, 0x7C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionTime, 0x80);
     BB_ASSERT_OFFSETOF(CScene, m_MotionSpeed, 0x84);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionBeginTime, 0x88);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionEndTime, 0x8C);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionIsPaused, 0x9C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionPlaybackType, 0xB0);
     BB_ASSERT_SIZEOF(CScene, 0xE0);
 }
