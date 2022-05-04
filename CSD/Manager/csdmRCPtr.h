@@ -11,6 +11,7 @@ namespace Chao::CSD
         class RCObjectImp;
 
         RCPtr() : RCPtrAbs() {}
+        RCPtr(T* in_pMemory) : RCPtrAbs(in_pMemory) {}
         RCPtr(const RCPtr& in_rOther) : RCPtrAbs(in_rOther) {}
         RCPtr(RCPtr&& in_rOther) : RCPtrAbs(std::move(in_rOther)) {}
 
@@ -45,6 +46,11 @@ namespace Chao::CSD
         {
             Set(in_rOther);
             return *this;
+        }
+
+        operator bool() const
+        {
+            return m_pObject != nullptr;
         }
     };
 }

@@ -21,6 +21,11 @@ namespace Chao::CSD
             AttachAbs(nullptr);
         }
 
+        RCPtrAbs(void* in_pMemory)
+        {
+            AttachAbs(in_pMemory);
+        }
+
         RCPtrAbs(const RCPtrAbs& in_rOther)
         {
             SetAbs(in_rOther);
@@ -60,6 +65,11 @@ namespace Chao::CSD
         {
             SetAbs(in_rPtr);
             return *this;
+        }
+
+        operator bool() const
+        {
+            return m_pObject != nullptr;
         }
     };
 }
