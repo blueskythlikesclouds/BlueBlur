@@ -60,6 +60,7 @@ with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
     f.write("#pragma comment(lib, \"BlueBlur.lib\")\n\n")
 
     generateIncludes(f, "Hedgehog")
+    generateIncludes(f, "CSD")
     generateIncludes(f, "Sonic")
     
     f.write(

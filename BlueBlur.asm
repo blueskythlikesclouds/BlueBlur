@@ -53,6 +53,24 @@
     mov eax, 0D60110h
     jmp eax
 
+??0CGameObjectCSD@Sonic@@QAE@MVCStringSymbol@Base@Hedgehog@@@Z:
+    mov eax, ecx
+    mov ecx, 10DBBC0h
+    jmp ecx
+
+??0CGameObjectCSD@Sonic@@QAE@V?$RCPtr@VCProject@CSD@Chao@@@CSD@Chao@@MVCStringSymbol@Base@Hedgehog@@_N@Z:
+    mov eax, ecx
+    mov ecx, 10DBB20h
+    jmp ecx
+
+??1CGameObjectCSD@Sonic@@UAE@XZ:
+    mov eax, 10DBA90h
+    jmp eax
+
+??1RCObject@RCPtrAbs@CSD@Chao@@UAE@XZ:
+    mov eax, 41C1F0h
+    jmp eax
+
 public ??1CMessageActor@Universe@Hedgehog@@UAE@XZ
 public ??1CUpdateUnit@Universe@Hedgehog@@UAE@XZ
 public ??1CStateBase@CStateMachineBase@Universe@Hedgehog@@UAE@XZ
@@ -61,5 +79,9 @@ public ??1CGameObjectModel@Sonic@@UAE@XZ
 public ??1CGameObjectRigidBody@Sonic@@UAE@XZ
 public ??1CGameObject3D@Sonic@@UAE@XZ
 public ??1CGameObject@Sonic@@UAE@XZ
+public ??0CGameObjectCSD@Sonic@@QAE@MVCStringSymbol@Base@Hedgehog@@@Z
+public ??0CGameObjectCSD@Sonic@@QAE@V?$RCPtr@VCProject@CSD@Chao@@@CSD@Chao@@MVCStringSymbol@Base@Hedgehog@@_N@Z
+public ??1CGameObjectCSD@Sonic@@UAE@XZ
+public ??1RCObject@RCPtrAbs@CSD@Chao@@UAE@XZ
 
 end

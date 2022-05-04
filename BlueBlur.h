@@ -84,9 +84,26 @@
 #include <Hedgehog/Yggdrasill/hhYggSurface.h>
 #include <Hedgehog/Yggdrasill/hhYggTexture.h>
 
+#include <CSD/Manager/csdmBase.h>
+#include <CSD/Manager/csdmNode.h>
+#include <CSD/Manager/csdmNodeObserver.h>
+#include <CSD/Manager/csdmObserverBase.h>
+#include <CSD/Manager/csdmProject.h>
+#include <CSD/Manager/csdmRCObject.h>
+#include <CSD/Manager/csdmRCObjectImp.h>
+#include <CSD/Manager/csdmRCPtr.h>
+#include <CSD/Manager/csdmRCPtrAbs.h>
+#include <CSD/Manager/csdmResourceBase.h>
+#include <CSD/Manager/csdmScene.h>
+#include <CSD/Manager/csdmSceneObserver.h>
+#include <CSD/Manager/csdmSubjectBase.h>
+
 #include <Sonic/DX_PATCH.h>
 #include <Sonic/Animation/AnimationContext.h>
 #include <Sonic/Camera/Camera.h>
+#include <Sonic/CSD/CsdDatabaseWrapper.h>
+#include <Sonic/CSD/CsdProject.h>
+#include <Sonic/CSD/GameObjectCSD.h>
 #include <Sonic/FxPipeline/FxSceneRenderer.h>
 #include <Sonic/FxPipeline/FxScheduler.h>
 #include <Sonic/FxPipeline/Jobs/FxJob.h>

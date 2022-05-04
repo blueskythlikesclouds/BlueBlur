@@ -1,0 +1,40 @@
+﻿#pragma once
+
+#include <Hedgehog/Base/Type/hhSharedString.h>
+
+namespace Hedgehog::Database
+{
+    class CDatabase;
+}
+
+namespace Sonic
+{
+    class CCsdProject;
+    class CCsdDatabaseWrapper;
+
+    static uint32_t pCCsdDatabaseWrapperGetCsdProject = 0x10DD920;
+
+    static void fCCsdDatabaseWrapperGetCsdProject(const Hedgehog::Base::CSharedString* in_pName, CCsdDatabaseWrapper* This, boost::shared_ptr<CCsdProject>* out_spCsdProject)
+    {
+        __asm
+        {
+            push out_spCsdProject
+            push This
+            mov edi, in_pName
+            call [pCCsdDatabaseWrapperGetCsdProject]
+        }
+    }
+
+    class CCsdDatabaseWrapper
+    {
+    public:
+        Hedgehog::Database::CDatabase* m_pDatabase;
+
+        CCsdDatabaseWrapper(Hedgehog::Database::CDatabase* pDatabase) : m_pDatabase(pDatabase) {}
+        
+        void GetCsdProject(boost::shared_ptr<CCsdProject>& out_spCsdProject, const Hedgehog::Base::CSharedString& in_rName)
+        {
+            fCCsdDatabaseWrapperGetCsdProject(&in_rName, this, &out_spCsdProject);
+        }
+    };
+}
