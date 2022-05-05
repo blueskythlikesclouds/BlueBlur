@@ -17,6 +17,9 @@ namespace Chao::CSD
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCSceneSetMotionContext, 0x679710,
         CScene* This, const char* in_pName);
 
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetPosition, 0x679B50,
+        CScene* This, float in_X, float in_Y);
+
     enum EMotionPlaybackType : size_t
     {
         eMotionPlaybackType_PlayOnce = 0,
@@ -74,6 +77,11 @@ namespace Chao::CSD
         {
             m_PrevMotionTime = in_MotionTime;
             m_MotionTime = in_MotionTime;
+        }
+
+        void SetPosition(float in_X, float in_Y)
+        {
+            fpCSceneSetPosition(this, in_X, in_Y);
         }
     };
 
