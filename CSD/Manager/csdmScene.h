@@ -11,14 +11,12 @@ namespace Chao::CSD
     class CScene;
     class CNode;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneGetNode, 0x67AFE0,
-        const CScene* This, RCPtr<CNode>& out_rcNode, const char* in_pName);
-
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCSceneSetMotionContext, 0x679710,
-        CScene* This, const char* in_pName);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetPosition, 0x679B50,
-        CScene* This, float in_X, float in_Y);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneGetNode, 0x67AFE0, const CScene* This, RCPtr<CNode>& out_rcNode, const char* in_pName);
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCSceneSetMotionContext, 0x679710, CScene* This, const char* in_pName);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetPosition, 0x679B50, CScene* This, float in_X, float in_Y);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetHideFlag, 0x679B20, CScene* This, bool in_Hidden);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetRotation, 0x679D50, CScene* This, float in_Rotation);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetScale, 0x679DD0, CScene* This, float in_X, float in_Y);
 
     enum EMotionPlaybackType : size_t
     {
@@ -38,7 +36,7 @@ namespace Chao::CSD
         float m_MotionBeginTime;
         float m_MotionEndTime;
         BB_INSERT_PADDING(0xC);
-        size_t m_MotionDisabled;
+        size_t m_MotionDisableFlag;
         BB_INSERT_PADDING(0x10);
         EMotionPlaybackType m_MotionPlaybackType;
         BB_INSERT_PADDING(0x2C);
@@ -83,6 +81,21 @@ namespace Chao::CSD
         {
             fpCSceneSetPosition(this, in_X, in_Y);
         }
+
+        void SetHideFlag(bool in_HideFlag)
+        {
+            fpCSceneSetHideFlag(this, in_HideFlag);
+        }
+
+        void SetRotation(float in_Angle)
+        {
+            fpCSceneSetRotation(this, in_Angle);
+        }
+
+        void SetScale(float in_X, float in_Y)
+        {
+            fpCSceneSetScale(this, in_X, in_Y);
+        }
     };
 
     BB_ASSERT_OFFSETOF(CScene, m_PrevMotionTime, 0x7C);
@@ -90,7 +103,7 @@ namespace Chao::CSD
     BB_ASSERT_OFFSETOF(CScene, m_MotionSpeed, 0x84);
     BB_ASSERT_OFFSETOF(CScene, m_MotionBeginTime, 0x88);
     BB_ASSERT_OFFSETOF(CScene, m_MotionEndTime, 0x8C);
-    BB_ASSERT_OFFSETOF(CScene, m_MotionDisabled, 0x9C);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionDisableFlag, 0x9C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionPlaybackType, 0xB0);
     BB_ASSERT_SIZEOF(CScene, 0xE0);
 }
