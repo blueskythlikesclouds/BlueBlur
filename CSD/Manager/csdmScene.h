@@ -35,7 +35,7 @@ namespace Chao::CSD
         float m_MotionBeginTime;
         float m_MotionEndTime;
         BB_INSERT_PADDING(0xC);
-        size_t m_MotionIsPaused;
+        size_t m_MotionDisabled;
         BB_INSERT_PADDING(0x10);
         EMotionPlaybackType m_MotionPlaybackType;
         BB_INSERT_PADDING(0x2C);
@@ -82,7 +82,7 @@ namespace Chao::CSD
     BB_ASSERT_OFFSETOF(CScene, m_MotionSpeed, 0x84);
     BB_ASSERT_OFFSETOF(CScene, m_MotionBeginTime, 0x88);
     BB_ASSERT_OFFSETOF(CScene, m_MotionEndTime, 0x8C);
-    BB_ASSERT_OFFSETOF(CScene, m_MotionIsPaused, 0x9C);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionDisabled, 0x9C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionPlaybackType, 0xB0);
     BB_ASSERT_SIZEOF(CScene, 0xE0);
 }
