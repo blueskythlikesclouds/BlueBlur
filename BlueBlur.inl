@@ -37,6 +37,7 @@ namespace Hedgehog::Math
     using CMatrix44 = Eigen::Matrix4f;
     using CQuaternion = Eigen::Quaternionf;
     using CVector = Eigen::AlignedVector3<float>;
+    using CVector2 = Eigen::Vector2f;
     using CVector4 = Eigen::Vector4f;
 }
 

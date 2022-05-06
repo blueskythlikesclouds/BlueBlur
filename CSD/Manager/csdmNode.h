@@ -12,6 +12,7 @@ namespace Chao::CSD
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetText0, 0x67E290, CNode* This, const char* in_pText);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetText1, 0x67E290, CNode* This, const wchar_t* in_pText);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeGetPosition, 0x67CC80, const CNode* This, Hedgehog::Math::CVector2& out_Position);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetPosition, 0x67D550, CNode* This, float in_X, float in_Y);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetHideFlag, 0x67D690, CNode* This, bool in_HideFlag);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetRotation, 0x67D6D0, CNode* This, float in_Rotation);
@@ -33,6 +34,13 @@ namespace Chao::CSD
         void SetText(const wchar_t* in_pText)
         {
             fpCNodeSetText1(this, in_pText);
+        }
+
+        Hedgehog::Math::CVector2 GetPosition() const
+        {
+            Hedgehog::Math::CVector2 position;
+            fpCNodeGetPosition(this, position);
+            return position;
         }
 
         void SetPosition(float in_X, float in_Y)
