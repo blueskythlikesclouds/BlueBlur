@@ -142,7 +142,7 @@ namespace Sonic::Player
         virtual void CPlayerContext6C() {}
         virtual void CPlayerContext70() {}
 
-        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t cueId, bool loop) = 0;
+        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t cueId, size_t flags) = 0;
 
         virtual void CPlayerContext78() {}
         virtual void CPlayerContext7C() {}
