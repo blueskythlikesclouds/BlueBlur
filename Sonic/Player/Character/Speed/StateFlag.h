@@ -3,14 +3,6 @@
 #include <Hedgehog/Base/Container/hhVector.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
 
-// Helper macro for accessing state flags.
-// Example usage:
-//   const bool boosting = pContext->StateFlag(eStateFlag_Boost);
-//   pContext->StateFlag(eStateFlag_Boost) = false;
-
-#define StateFlag(x) \
-    m_pStateFlag->m_Flags[Sonic::Player::CPlayerSpeedContext::x]
-
 namespace Sonic::Player
 {
     enum CPlayerSpeedContext::EStateFlag

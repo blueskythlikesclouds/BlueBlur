@@ -2,6 +2,14 @@
 
 #include <Sonic/Player/Character/Base/PlayerContext.h>
 
+// Helper macro for accessing state flags.
+// Example usage:
+//   const bool boosting = pContext->StateFlag(eStateFlag_Boost);
+//   pContext->StateFlag(eStateFlag_Boost) = false;
+
+#define StateFlag(x) \
+    m_pStateFlag->m_Flags[Sonic::Player::CPlayerSpeedContext::x]
+
 namespace Sonic
 {
     class CMatrixNodeWorldOffset;
@@ -213,6 +221,13 @@ namespace Sonic::Player
 
         uint8_t GetStateFlag(const EStateFlag in_stateFlag) const;
         void SetStateFlag(const EStateFlag in_stateFlag, const uint8_t in_flag) const;
+
+        // Trick IntelliSense to suggest this macro.
+#pragma push_macro("StateFlag")
+#undef StateFlag
+        void StateFlag(const EStateFlag in_stateFlag) const;
+#pragma pop_macro("StateFlag")
+
     };
 
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_VerticalRotation, 0x4C0);
