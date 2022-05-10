@@ -139,7 +139,10 @@ namespace Sonic::Player
         boost::shared_ptr<Hedgehog::Mirage::CMatrixNodeNormal> m_spMatrixNodeNormal_05; // 0x62C
 
         boost::shared_ptr<CMatrixNodeWorldOffset> m_spMatrixNodeWorldOffset; // 0x634
-        BB_INSERT_PADDING(0xA4);
+
+        BB_INSERT_PADDING(0x48);
+        float m_ChaosEnergyMax; // 0x684
+        BB_INSERT_PADDING(0x58);
 
         Hedgehog::Math::CVector m_FloorNormal; //0x6E0
         BB_INSERT_PADDING(0xA0);
@@ -244,6 +247,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spMatrixNodeNormal_04, 0x624);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spMatrixNodeNormal_05, 0x62C);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spMatrixNodeWorldOffset, 0x634);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ChaosEnergyMax, 0x684);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_FloorNormal, 0x6E0);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spReactionJumpQTE_HUDPtr, 0x7F4);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spTrickJumpSequence, 0x800);
