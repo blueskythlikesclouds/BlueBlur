@@ -42,21 +42,7 @@ namespace Hedgehog::Database
 
 namespace Sonic::Player
 {
-    class CPlayerSpeedContext;
     class CPlayerSpeedProxyListener;
-
-    static uint32_t pCPlayerSpeedContextGetBoostGaugeRatio = 0xE4CEF0;
-    static float fCPlayerSpeedContextGetBoostGaugeRatio(const CPlayerSpeedContext* pPlayerContext)
-    {
-        volatile float result;
-        __asm
-        {
-            mov ecx, pPlayerContext
-            call[pCPlayerSpeedContextGetBoostGaugeRatio]
-            movss result, xmm0
-        }
-        return result;
-    }
 
     class CPlayerSpeedContext : public CPlayerContext
     {
@@ -154,8 +140,9 @@ namespace Sonic::Player
 
         boost::shared_ptr<CMatrixNodeWorldOffset> m_spMatrixNodeWorldOffset; // 0x634
 
-        BB_INSERT_PADDING(0x48);
-        float m_ChaosEnergySetting; // Max chaos energy. This is valid only if eStateFlag_EnableChaosEnergySetting is set to true.
+        BB_INSERT_PADDING(0x44);
+        size_t m_ChaosEnergyGaugeSize;
+        float m_ChaosEnergySetting;
         BB_INSERT_PADDING(0x58);
 
         Hedgehog::Math::CVector m_FloorNormal; //0x6E0
@@ -236,11 +223,6 @@ namespace Sonic::Player
         boost::shared_ptr<CWaitHandle>     m_spWaitHandle;     // 0x1220
         BB_INSERT_PADDING(0x08);
 
-        float GetBoostGaugeRatio() const
-        {
-            return fCPlayerSpeedContextGetBoostGaugeRatio(this);
-        }
-
         uint8_t GetStateFlag(const EStateFlag in_stateFlag) const;
         void SetStateFlag(const EStateFlag in_stateFlag, const uint8_t in_flag) const;
 
@@ -249,6 +231,8 @@ namespace Sonic::Player
 #undef StateFlag
         void StateFlag(const EStateFlag in_stateFlag) const;
 #pragma pop_macro("StateFlag")
+
+        float GetMaxChaosEnergy() const;
     };
 
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_VerticalRotation, 0x4C0);
@@ -265,6 +249,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spMatrixNodeNormal_04, 0x624);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spMatrixNodeNormal_05, 0x62C);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spMatrixNodeWorldOffset, 0x634);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ChaosEnergyGaugeSize, 0x680);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ChaosEnergySetting, 0x684);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_FloorNormal, 0x6E0);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spReactionJumpQTE_HUDPtr, 0x7F4);
