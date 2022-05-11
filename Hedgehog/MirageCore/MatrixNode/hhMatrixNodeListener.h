@@ -11,6 +11,6 @@ namespace Hedgehog::Mirage
         CMatrixNodeListener() {}
 
         virtual ~CMatrixNodeListener() = default;
-        virtual bool MatrixNodeUpdatedCallback(const Hedgehog::Math::CMatrix& matrix, size_t flags) = 0;
+        virtual bool MatrixNodeChangedCallback(const Hedgehog::Math::CMatrix& matrix, size_t flags) = 0;
     };
 }

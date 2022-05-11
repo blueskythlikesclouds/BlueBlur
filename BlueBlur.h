@@ -42,6 +42,7 @@
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeNormal.h>
+#include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeSingleElementNode.h>
 #include <Hedgehog/MirageCore/Misc/hhDirector.h>
 #include <Hedgehog/MirageCore/Misc/hhInstanceInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>

@@ -14,6 +14,9 @@ namespace Hedgehog::Mirage
         BB_INSERT_PADDING(0x5C);
 
         virtual ~CMatrixNode() = default;
+        virtual void UpdateMatrix(CMatrixNode* pParentMatrixNode) = 0;
+        virtual Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
+        virtual Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
 
         void NotifyChanged()
         {

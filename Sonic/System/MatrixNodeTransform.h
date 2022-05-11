@@ -9,10 +9,10 @@ namespace Sonic
     {
     public:
         Hedgehog::Mirage::CTransform m_Transform;
-        Hedgehog::Math::CMatrix m_PrevTransform;
+        Hedgehog::Math::CMatrix m_WorldMatrix;
     };
 
     BB_ASSERT_OFFSETOF(CMatrixNodeTransform, m_Transform, 0x60);
-    BB_ASSERT_OFFSETOF(CMatrixNodeTransform, m_PrevTransform, 0xC0);
+    BB_ASSERT_OFFSETOF(CMatrixNodeTransform, m_WorldMatrix, 0xC0);
     BB_ASSERT_SIZEOF(CMatrixNodeTransform, 0x100);
 }

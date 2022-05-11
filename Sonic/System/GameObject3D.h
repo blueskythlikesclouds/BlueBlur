@@ -10,7 +10,7 @@ namespace Sonic
 
     static inline BB_FUNCTION_PTR(CGameObject3D*, __stdcall, fpCGameObject3DCtor, 0xD5DAC0, CGameObject3D* This);
 
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCGameObject3DMatrixNodeUpdatedCallback, 0xD5C780,
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCGameObject3DMatrixNodeChangedCallback, 0xD5C780,
         CGameObject3D* This, const Hedgehog::Math::CMatrix& matrix, size_t flags);
 
     static inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObject3DSetPosition, 0xD5CE10,
@@ -35,9 +35,9 @@ namespace Sonic
         virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder,
             Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) override {}
 
-        virtual bool MatrixNodeUpdatedCallback(const Hedgehog::Math::CMatrix& matrix, size_t flags) override
+        virtual bool MatrixNodeChangedCallback(const Hedgehog::Math::CMatrix& matrix, size_t flags) override
         {
-            return fpCGameObject3DMatrixNodeUpdatedCallback(this, matrix, flags);
+            return fpCGameObject3DMatrixNodeChangedCallback(this, matrix, flags);
         }
 
         void SetPosition(const Hedgehog::Math::CVector& position)
