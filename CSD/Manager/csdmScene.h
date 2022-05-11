@@ -30,11 +30,11 @@ namespace Chao::CSD
     {
     public:
         BB_INSERT_PADDING(0x5C);
-        float m_PrevMotionTime;
-        float m_MotionTime;
+        float m_PrevMotionFrame;
+        float m_MotionFrame;
         float m_MotionSpeed;
-        float m_MotionBeginTime;
-        float m_MotionEndTime;
+        float m_MotionStartFrame;
+        float m_MotionEndFrame;
         BB_INSERT_PADDING(0xC);
         size_t m_MotionDisableFlag;
         BB_INSERT_PADDING(0x10);
@@ -48,7 +48,7 @@ namespace Chao::CSD
 
         // Example:
         // SetMotion("Intro_Anim");
-        // SetMotionTime(0.0);
+        // SetMotionFrame(0.0);
         // m_MotionSpeed = 2.0f;
         // Update(0.0f);
 
@@ -70,10 +70,10 @@ namespace Chao::CSD
             return fpCSceneSetMotion(this, in_pName);
         }
 
-        void SetMotionTime(float in_MotionTime)
+        void SetMotionFrame(float in_MotionFrame)
         {
-            m_PrevMotionTime = in_MotionTime;
-            m_MotionTime = in_MotionTime;
+            m_PrevMotionFrame = in_MotionFrame;
+            m_MotionFrame = in_MotionFrame;
         }
 
         void SetPosition(float in_X, float in_Y)
@@ -97,11 +97,11 @@ namespace Chao::CSD
         }
     };
 
-    BB_ASSERT_OFFSETOF(CScene, m_PrevMotionTime, 0x7C);
-    BB_ASSERT_OFFSETOF(CScene, m_MotionTime, 0x80);
+    BB_ASSERT_OFFSETOF(CScene, m_PrevMotionFrame, 0x7C);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionFrame, 0x80);
     BB_ASSERT_OFFSETOF(CScene, m_MotionSpeed, 0x84);
-    BB_ASSERT_OFFSETOF(CScene, m_MotionBeginTime, 0x88);
-    BB_ASSERT_OFFSETOF(CScene, m_MotionEndTime, 0x8C);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionStartFrame, 0x88);
+    BB_ASSERT_OFFSETOF(CScene, m_MotionEndFrame, 0x8C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionDisableFlag, 0x9C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionRepeatType, 0xB0);
     BB_ASSERT_SIZEOF(CScene, 0xE0);
