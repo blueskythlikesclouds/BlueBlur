@@ -24,9 +24,11 @@ namespace Hedgehog::Motion
         {
         }
 
-        void GetLightMotionData(boost::shared_ptr<CLightMotionData>& spLightMotionData, const Base::CSharedString& name, uint32_t unknown)
+        boost::shared_ptr<CLightMotionData> GetLightMotionData(const Base::CSharedString& name, uint32_t unknown = 0)
         {
+            boost::shared_ptr<CLightMotionData> spLightMotionData;
             fpCDatabaseGetLightMotionData(this, spLightMotionData, name, unknown);
+            return spLightMotionData;
         }
     };
 

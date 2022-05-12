@@ -32,9 +32,11 @@ namespace Sonic
 
         CCsdDatabaseWrapper(Hedgehog::Database::CDatabase* pDatabase) : m_pDatabase(pDatabase) {}
         
-        void GetCsdProject(boost::shared_ptr<CCsdProject>& out_spCsdProject, const Hedgehog::Base::CSharedString& in_rName)
+        boost::shared_ptr<CCsdProject> GetCsdProject(const Hedgehog::Base::CSharedString& in_rName)
         {
-            fCCsdDatabaseWrapperGetCsdProject(&in_rName, this, &out_spCsdProject);
+            boost::shared_ptr<CCsdProject> spCsdProject;
+            fCCsdDatabaseWrapperGetCsdProject(&in_rName, this, &spCsdProject);
+            return spCsdProject;
         }
     };
 }

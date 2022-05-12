@@ -22,9 +22,11 @@ namespace Hedgehog::Database
 
         virtual ~CDatabase() = default;
 
-        void GetRawData(boost::shared_ptr<CRawData>& spRawData, const Base::CSharedString& name, uint32_t unknown)
+        boost::shared_ptr<CRawData> GetRawData(const Base::CSharedString& name, uint32_t unknown = 0)
         {
+            boost::shared_ptr<CRawData> spRawData;
             fpCDatabaseGetRawData(this, spRawData, name, unknown);
+            return spRawData;
         }
     };
 
