@@ -64,8 +64,8 @@ namespace Sonic::Player
         boost::shared_ptr<CRayCastCollision> m_spRayCastCollision; // 0x38
         boost::shared_ptr<CRayCastCollision> m_spShapeCastCollision; // 0x40
 
-        Hedgehog::Mirage::CTransform m_Field50;
-        Hedgehog::Mirage::CTransform m_FieldB0;
+        Hedgehog::Mirage::CTransform m_StartTransform; // 0x50
+        Hedgehog::Mirage::CTransform m_RestartPosition; // 0xB0
 
         CPlayer* m_pPlayer; // 0x110
 
@@ -81,7 +81,7 @@ namespace Sonic::Player
         uint8_t m_Field160;
         size_t m_Field164;
         uint8_t m_Field168;
-        size_t m_Field16C;
+        size_t m_RestartCount; // 0x16C
 
         uint8_t m_Field170;
         uint8_t m_Field171;
@@ -176,8 +176,8 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spField30, 0x30);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spRayCastCollision, 0x38);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spShapeCastCollision, 0x40);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field50, 0x50);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_FieldB0, 0xB0);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_StartTransform, 0x50);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_RestartPosition, 0xB0);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_pPlayer, 0x110);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spCharacterProxy, 0x114);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spInputPad, 0x11C);
@@ -187,7 +187,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field160, 0x160);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field164, 0x164);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field168, 0x168);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field16C, 0x16C);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_RestartCount, 0x16C);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field170, 0x170);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field171, 0x171);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Is2DMode, 0x172);
