@@ -41,88 +41,88 @@ namespace Hedgehog::Mirage
     class CVisibilityTreeData;
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperCtor, 0x72EE30,
-                                  CMirageDatabaseWrapper* This, Hedgehog::Database::CDatabase* pDatabase);
+        CMirageDatabaseWrapper* This, Hedgehog::Database::CDatabase* pDatabase);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetGIMipLevelLimitationData, 0x72EEC0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CGIMipLevelLimitationData >& out_spGIMipLevelLimitationData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CGIMipLevelLimitationData>& out_spGIMipLevelLimitationData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetGITextureGroupInfoData, 0x72EE60, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CGITextureGroupInfoData >& out_spGITextureGroupInfoData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CGITextureGroupInfoData>& out_spGITextureGroupInfoData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetLightData, 0x72EF20, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CLightData >& out_spLightData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CLightData>& out_spLightData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetLightFieldTreeData, 0x72F2F0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CLightFieldTreeData >& out_spLightFieldTreeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CLightFieldTreeData>& out_spLightFieldTreeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetLightListData, 0x72F6F0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CLightListData >& out_spLightListData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CLightListData>& out_spLightListData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetLodModelData, 0x72F290,
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CLodModelData >& out_spLodModelData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CLodModelData>& out_spLodModelData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetMaterialData, 0x72EF80,
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CMaterialData >& out_spMaterialData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CMaterialData>& out_spMaterialData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetModelData, 0x72F810, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CModelData >& out_spModelData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CModelData>& out_spModelData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetPictureData, 0x72EFE0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CPictureData >& out_spPictureData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CPictureData>& out_spPictureData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetPixelShaderCodeData, 0x72F350, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CPixelShaderCodeData >& out_spPixelShaderCodeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CPixelShaderCodeData>& out_spPixelShaderCodeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetPixelShaderData, 0x72F4F0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CPixelShaderData >& out_spPixelShaderData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CPixelShaderData>& out_spPixelShaderData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetPixelShaderParameterData, 0x72F8E0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CPixelShaderParameterData >& out_spPixelShaderParameterData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CPixelShaderParameterData>& out_spPixelShaderParameterData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetSceneData, 0x72F750, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CSceneData >& out_spSceneData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CSceneData>& out_spSceneData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetShaderListData, 0x72F040, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CShaderListData >& out_spShaderListData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CShaderListData>& out_spShaderListData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTerrainBlockSphereTreeData, 0x72F3C0,
         CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainBlockSphereTreeData>& out_spTerrainBlockSphereTreeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTerrainData, 0x72F7B0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainData >& out_spTerrainData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainData>& out_spTerrainData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTerrainGroupData, 0x72F0B0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainGroupData >& out_spTerrainGroupData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainGroupData>& out_spTerrainGroupData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTerrainInstanceInfoData, 0x72F110,
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainInstanceInfoData >& out_spTerrainInstanceInfoData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainInstanceInfoData>& out_spTerrainInstanceInfoData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTerrainModelData, 0x72F170, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainModelData >& out_spTerrainModelData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CTerrainModelData>& out_spTerrainModelData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTexsetData, 0x72F1D0, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CTexsetData >& out_spTexsetData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CTexsetData>& out_spTexsetData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetTextureData, 0x72F230,
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CTextureData >& out_spTextureData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CTextureData>& out_spTextureData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetVertexShaderCodeData, 0x72F420, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CVertexShaderCodeData >& out_spVertexShaderCodeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CVertexShaderCodeData>& out_spVertexShaderCodeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetVertexShaderData, 0x72F560,
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CVertexShaderData >& out_spVertexShaderData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CVertexShaderData>& out_spVertexShaderData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetVertexShaderParameterData, 0x72F870, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CVertexShaderParameterData >& out_spVertexShaderParameterData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CVertexShaderParameterData>& out_spVertexShaderParameterData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetVisibilityGridData, 0x72F630, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CVisibilityGridData >& out_spVisibilityGridData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CVisibilityGridData>& out_spVisibilityGridData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetVisibilityGridInfoData, 0x72F690, 
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CVisibilityGridInfoData >& out_spVisibilityGridInfoData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CVisibilityGridInfoData>& out_spVisibilityGridInfoData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMirageDatabaseWrapperGetVisibilityTreeData, 0x72F490,
-        CMirageDatabaseWrapper* This, boost::shared_ptr<CVisibilityTreeData >& out_spVisibilityTreeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
+        CMirageDatabaseWrapper* This, boost::shared_ptr<CVisibilityTreeData>& out_spVisibilityTreeData, const Hedgehog::Base::CSharedString& in_rName, size_t in_Unknown);
 
     class CMirageDatabaseWrapper : public Hedgehog::Base::CObject
     {
