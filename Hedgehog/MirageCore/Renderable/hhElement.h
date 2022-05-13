@@ -5,13 +5,15 @@
 namespace Hedgehog::Mirage
 {
     class CElement;
+    class CModelData;
 
     static inline BB_FUNCTION_PTR(CElement*, __thiscall, fpCElementCtor, 0x702050, CElement* This);
 
     class CElement : public CRenderable
     {
     public:
-        BB_INSERT_PADDING(0x80);
+        boost::shared_ptr<CModelData> m_spModel;
+        BB_INSERT_PADDING(0x78);
 
         CElement(const bb_null_ctor&) : CRenderable(bb_null_ctor{}) {}
 
@@ -21,5 +23,6 @@ namespace Hedgehog::Mirage
         }
     };
 
+    BB_ASSERT_OFFSETOF(CElement, m_spModel, 0xC);
     BB_ASSERT_SIZEOF(CElement, 0x8C);
 }
