@@ -126,6 +126,7 @@
 #include <Sonic/Message/MsgAddVelocity.h>
 #include <Sonic/Message/MsgDead.h>
 #include <Sonic/Message/MsgGetAnimationInfo.h>
+#include <Sonic/Message/MsgGetHomingAttackPosition.h>
 #include <Sonic/Message/MsgGetPosition.h>
 #include <Sonic/Message/MsgGetRotation.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
