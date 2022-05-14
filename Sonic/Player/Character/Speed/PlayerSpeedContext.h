@@ -198,9 +198,10 @@ namespace Sonic::Player
         boost::shared_ptr<CConvexShape> m_spConvexShape_02; // 0xE80
         boost::shared_ptr<CConvexShape> m_spConvexShape_03; // 0xE88
         boost::shared_ptr<CConvexShape> m_spConvexShape_04; // 0xE90
-        BB_INSERT_PADDING(0x08);
+        size_t m_HomingAttackTargetActorID;
+        BB_INSERT_PADDING(0x04);
 
-        Hedgehog::Math::CVector m_FieldEA0;
+        Hedgehog::Math::CVector m_HomingAttackPosition;
         BB_INSERT_PADDING(636);
 
         bool m_SetModelVisibleAfterRefresh;   //0x112C
@@ -343,7 +344,8 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spConvexShape_02, 0xE80);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spConvexShape_03, 0xE88);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spConvexShape_04, 0xE90);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_FieldEA0, 0xEA0);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_HomingAttackTargetActorID, 0xE98);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_HomingAttackPosition, 0xEA0);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pSparkEffectManager, 0x1138);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_TurningLeanAmount, 0x1150);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_Field1188, 0x1188);
