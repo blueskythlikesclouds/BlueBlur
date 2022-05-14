@@ -133,6 +133,7 @@
 #include <Sonic/Message/MsgSetPosition.h>
 #include <Sonic/Message/MsgSetRotation.h>
 #include <Sonic/Message/MsgSetVisible.h>
+#include <Sonic/Message/MsgStartHomingChase.h>
 #include <Sonic/Player/Character/Base/Player.h>
 #include <Sonic/Player/Character/Base/PlayerContext.h>
 #include <Sonic/Player/Character/Sonic/Sonic.h>
