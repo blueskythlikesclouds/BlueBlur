@@ -150,6 +150,12 @@
 #include <Sonic/Player/Character/Speed/StateFlag.h>
 #include <Sonic/Player/Character/Speed/State/PlayerSpeedStateBase.h>
 #include <Sonic/Player/Character/Speed/State/PlayerSpeedStateReactionLand.h>
+#include <Sonic/Player/Parameter/PlayerCommonParameter.h>
+#include <Sonic/Player/Parameter/PlayerParameter.h>
+#include <Sonic/Player/Parameter/PlayerSpeedParameter.h>
+#include <Sonic/Player/Parameter/SonicClassicParameter.h>
+#include <Sonic/Player/Parameter/SonicParameter.h>
+#include <Sonic/Player/Parameter/SonicSpParameter.h>
 #include <Sonic/System/ApplicationDocument.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>

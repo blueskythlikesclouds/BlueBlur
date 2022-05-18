@@ -17,6 +17,7 @@
     returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)
 
 // boost
+#include <boost/any.hpp>
 #include <boost/function.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/scoped_ptr.hpp>

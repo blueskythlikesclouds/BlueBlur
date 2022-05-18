@@ -104,8 +104,8 @@ namespace Sonic::Player
         hh::map<void*, void*> m_Field25C;
         hh::map<void*, void*> m_Field268;
 
-        boost::shared_ptr<CParameter> m_spPlayerCommonParameter; // 0x274
-        boost::shared_ptr<CParameter> m_spRootParameter; // 0x27C
+        boost::shared_ptr<CParameter> m_spParentParameter; // 0x274
+        boost::shared_ptr<CParameter> m_spParameter; // 0x27C
 
         BB_INSERT_PADDING(0xC);
 
@@ -203,7 +203,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field258, 0x258);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field25C, 0x25C);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field268, 0x268);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_spPlayerCommonParameter, 0x274);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_spRootParameter, 0x27C);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spParentParameter, 0x274);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_spParameter, 0x27C);
     BB_ASSERT_SIZEOF(CPlayerContext, 0x290);
 }
