@@ -84,7 +84,7 @@ namespace Sonic
         virtual void RemoveCallback(Sonic::CGameDocument* pGameDocument) {}
 
         virtual void CGameObject24(void*) {}
-        virtual void CGameObject28() {}
+        virtual void KillCallback() {}
         virtual void CGameObject2C(void*) {}
         virtual void CGameObject30(void*) {}
 
