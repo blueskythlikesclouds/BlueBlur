@@ -14,7 +14,7 @@ namespace Chao::CSD
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetText1, 0x67E290, CNode* This, const wchar_t* in_pText);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeGetPosition, 0x67CC80, const CNode* This, Hedgehog::Math::CVector2& out_Position);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetPosition, 0x67D550, CNode* This, float in_X, float in_Y);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetHideFlag, 0x67D690, CNode* This, bool in_HideFlag);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetHideFlag, 0x67D690, CNode* This, size_t in_HideFlag);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetRotation, 0x67D6D0, CNode* This, float in_Rotation);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetScale, 0x67D710, CNode* This, float in_X, float in_Y);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetPatternIndex, 0x67D760, CNode* This, size_t in_PatternIndex);
@@ -48,7 +48,7 @@ namespace Chao::CSD
             fpCNodeSetPosition(this, in_X, in_Y);
         }
 
-        void SetHideFlag(bool in_HideFlag)
+        void SetHideFlag(size_t in_HideFlag)
         {
             fpCNodeSetHideFlag(this, in_HideFlag);
         }

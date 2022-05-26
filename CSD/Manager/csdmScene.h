@@ -14,7 +14,7 @@ namespace Chao::CSD
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneGetNode, 0x67AFE0, const CScene* This, RCPtr<CNode>& out_rcNode, const char* in_pName);
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCSceneSetMotion, 0x679710, CScene* This, const char* in_pName);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetPosition, 0x679B50, CScene* This, float in_X, float in_Y);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetHideFlag, 0x679B20, CScene* This, bool in_Hidden);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetHideFlag, 0x679B20, CScene* This, size_t in_Hidden);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetRotation, 0x679D50, CScene* This, float in_Rotation);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetScale, 0x679DD0, CScene* This, float in_X, float in_Y);
 
@@ -81,7 +81,7 @@ namespace Chao::CSD
             fpCSceneSetPosition(this, in_X, in_Y);
         }
 
-        void SetHideFlag(bool in_HideFlag)
+        void SetHideFlag(size_t in_HideFlag)
         {
             fpCSceneSetHideFlag(this, in_HideFlag);
         }
