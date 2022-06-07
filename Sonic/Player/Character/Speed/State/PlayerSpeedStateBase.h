@@ -28,7 +28,12 @@ namespace Sonic::Player
             fCtor(this);
         }
 
-        virtual void CStateSpeedBase24() {}
+        CPlayerSpeedContext* GetContext() const
+        {
+            return static_cast<CPlayerSpeedContext*>(m_pContext);
+        }
+
+        virtual void ProcMsgOnGround() {}
     };
 
     BB_ASSERT_SIZEOF(CPlayerSpeedContext::CStateSpeedBase, 0x68);
