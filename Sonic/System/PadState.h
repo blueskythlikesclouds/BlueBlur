@@ -28,7 +28,17 @@ namespace Sonic
         eKeyState_RightTrigger = 0x8000,
 
         eKeyState_LeftStick    = 0x10000,
-        eKeyState_RightStick   = 0x20000
+        eKeyState_RightStick   = 0x20000,
+
+        eKeyState_LeftStickUp       = 0x40000,
+        eKeyState_LeftStickDown     = 0x80000,
+        eKeyState_LeftStickLeft     = 0x100000,
+        eKeyState_LeftStickRight    = 0x200000,
+
+        eKeyState_RightStickUp      = 0x400000,
+        eKeyState_RightStickDown    = 0x800000,
+        eKeyState_RightStickLeft    = 0x1000000,
+        eKeyState_RightStickRight   = 0x2000000
     };
 
     struct SPadState
