@@ -19,7 +19,11 @@ namespace Hedgehog::Mirage
         Math::CVector m_Direction;
         ELightType m_Type;
         uint32_t m_Attribute;
-        BB_INSERT_PADDING(0x8);
+        size_t m_Field58;
+
+        CLightData() : m_Type(eLightType_Directional), m_Attribute(0), m_Field58(1)
+        {
+        }
     };
 
     BB_ASSERT_OFFSETOF(CLightData, m_Position, 0x10);
@@ -28,5 +32,6 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CLightData, m_Direction, 0x40);
     BB_ASSERT_OFFSETOF(CLightData, m_Type, 0x50);
     BB_ASSERT_OFFSETOF(CLightData, m_Attribute, 0x54);
+    BB_ASSERT_OFFSETOF(CLightData, m_Field58, 0x58);
     BB_ASSERT_SIZEOF(CLightData, 0x60);
 }

@@ -4,7 +4,12 @@
 
 namespace Hedgehog::Mirage
 {
+    class CLightData;
+    class CLightManager;
     class CStaticLightContext;
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCLightManagerAddPointLight, 0x71EF20, 
+        CLightManager* This, boost::shared_ptr<CLightData> in_spLightData);
 
     class CLightManager : public Base::CObject
     {
@@ -18,6 +23,11 @@ namespace Hedgehog::Mirage
         BB_INSERT_PADDING(0x54);
         CStaticLightContext* m_pStaticLightContext;
         BB_INSERT_PADDING(0x28);
+
+        void AddPointLight(const boost::shared_ptr<CLightData>& in_spLightData)
+        {
+            fpCLightManagerAddPointLight(this, in_spLightData);
+        }
     };
 
     BB_ASSERT_OFFSETOF(CLightManager, m_GlobalLightDiffuse, 0xC0);
