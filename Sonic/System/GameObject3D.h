@@ -10,9 +10,6 @@ namespace Sonic
 
     static inline BB_FUNCTION_PTR(CGameObject3D*, __stdcall, fpCGameObject3DCtor, 0xD5DAC0, CGameObject3D* This);
 
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCGameObject3DMatrixNodeChangedCallback, 0xD5C780,
-        CGameObject3D* This, const Hedgehog::Math::CMatrix& matrix, size_t flags);
-
     static inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObject3DSetPosition, 0xD5CE10,
         CGameObject3D* This, const Hedgehog::Math::CVector& position);
 
@@ -32,13 +29,26 @@ namespace Sonic
 
         virtual ~CGameObject3D();
 
-        virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder,
-            Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) override {}
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0xD5CB80, (const Hedgehog::Base::THolder<CWorld>&, worldHolder),
+            (Sonic::CGameDocument*, pGameDocument), (const boost::shared_ptr<Hedgehog::Database::CDatabase>&, spDatabase))
 
-        virtual bool MatrixNodeChangedCallback(const Hedgehog::Math::CMatrix& matrix, size_t flags) override
-        {
-            return fpCGameObject3DMatrixNodeChangedCallback(this, matrix, flags);
-        }
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, RemoveCallback, 0xD5C770, (Sonic::CGameDocument*, pGameDocument))
+
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, CGameObject24, 0xD5D540, (void*, a1))
+
+        BB_OVERRIDE_FUNCTION_PTR(bool, CMatrixNodeListener, MatrixNodeChangedCallback, 0xD5C780, 
+            (const Hedgehog::Math::CMatrix&, matrix), (size_t, flags))
+
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable34, 0xD5D6D0, (void*, A1))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable38, 0xD5D200, (void*, A1), (void*, A2), (void*, A3), (void*, A4))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable3C, 0xD5CCB0, (void*, A1), (void*, A2), (void*, A3))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable40, 0xD5CCE0, (void*, A1), (void*, A2))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable44, 0xD5D3A0, (void*, A1), (void*, A2), (void*, A3))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable48, 0xD5CD10, (void*, A1), (void*, A2))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable4C, 0xD5CBF0, (void*, A1), (void*, A2), (void*, A3))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable50, 0xD5CC20, (void*, A1), (void*, A2))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable54, 0xD5CC50, (void*, A1), (void*, A2), (void*, A3))
+        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable58, 0xD5CC80, (void*, A1), (void*, A2))
 
         void SetPosition(const Hedgehog::Math::CVector& position)
         {
