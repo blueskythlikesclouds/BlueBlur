@@ -136,6 +136,10 @@
 #include <Sonic/Message/MsgSetRotation.h>
 #include <Sonic/Message/MsgSetVisible.h>
 #include <Sonic/Message/MsgStartHomingChase.h>
+#include <Sonic/Object/ObjectBase.h>
+#include <Sonic/ObjectSystem/SetObjectEntry.h>
+#include <Sonic/ObjectSystem/SetObjectInfo.h>
+#include <Sonic/ObjectSystem/SetObjectListener.h>
 #include <Sonic/Player/Character/Base/Player.h>
 #include <Sonic/Player/Character/Base/PlayerContext.h>
 #include <Sonic/Player/Character/Sonic/Sonic.h>
