@@ -138,6 +138,7 @@
 #include <Sonic/Message/MsgStartHomingChase.h>
 #include <Sonic/Object/ObjectBase.h>
 #include <Sonic/ObjectSystem/SetObjectEntry.h>
+#include <Sonic/ObjectSystem/SetObjectFactory.h>
 #include <Sonic/ObjectSystem/SetObjectInfo.h>
 #include <Sonic/ObjectSystem/SetObjectListener.h>
 #include <Sonic/Player/Character/Base/Player.h>
