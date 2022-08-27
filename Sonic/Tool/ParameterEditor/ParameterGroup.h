@@ -5,12 +5,11 @@
 
 namespace Sonic
 {
-    class CParameterCategory;
     class CParameterGroup;
 
     static void* const pCParameterGroupCreateParameterCategory = (void*)0xCE90B0;
 
-    static CParameterCategory* fCParameterGroupCreateParameterCategory(
+    static CEditParam* fCParameterGroupCreateParameterCategory(
         const Hedgehog::Base::CSharedString* pName, CParameterGroup* pParameterGroup, const Hedgehog::Base::CSharedString* pDescription, uint32_t unknown)
     {
         __asm
@@ -30,7 +29,7 @@ namespace Sonic
     public:
         static constexpr void* ms_pVfTable = (void*)0x16E5FA4;
 
-        CParameterCategory* CreateParameterCategory(
+        CEditParam* CreateParameterCategory(
             const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description)
         {
             return fCParameterGroupCreateParameterCategory(&name, this, &description, 0xFF);
