@@ -18,17 +18,17 @@ namespace Hedgehog::Mirage
     public:
         size_t m_NodeGroupModelNum;
         size_t m_MorphModelNum;
-        vector<boost::shared_ptr<CNodeGroupModelData>> m_NodeGroupModels;
-        vector<boost::shared_ptr<CMeshData>> m_OpaqueMeshes;
-        vector<boost::shared_ptr<CMeshData>> m_PunchThroughMeshes;
-        vector<boost::shared_ptr<CMeshData>> m_TransparentMeshes;
+        hh::vector<boost::shared_ptr<CNodeGroupModelData>> m_NodeGroupModels;
+        hh::vector<boost::shared_ptr<CMeshData>> m_OpaqueMeshes;
+        hh::vector<boost::shared_ptr<CMeshData>> m_PunchThroughMeshes;
+        hh::vector<boost::shared_ptr<CMeshData>> m_TransparentMeshes;
         size_t m_NodeNum;
         boost::shared_ptr<uint8_t[]> m_spNodeParentIndices;
         boost::shared_ptr<CModelNodeData[]> m_spNodes;
         boost::shared_ptr<CMatrixData[]> m_spNodeMatrices;
         boost::shared_ptr<CAabbData> m_spAabb;
         boost::shared_ptr<CSphereData> m_spSphere;
-        vector<boost::shared_ptr<CMorphModelData>> m_MorphModels;
+        hh::vector<boost::shared_ptr<CMorphModelData>> m_MorphModels;
     };
 
     BB_ASSERT_OFFSETOF(CModelData, m_NodeGroupModelNum, 0xC);
