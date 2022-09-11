@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <Hedgehog/Base/Type/hhSharedString.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
 #include <Hedgehog/Universe/Thread/hhParallelJob.h>
 
@@ -8,6 +9,7 @@ namespace Hedgehog::Universe
 {
     class Message;
     class CMessageActor;
+    class CMessageManager;
     class IStateMachineMessageReceiver;
 
     static inline BB_FUNCTION_PTR(CMessageActor*, __thiscall, fpCMessageActorCtor, 0x768A00, CMessageActor* This);
@@ -28,7 +30,9 @@ namespace Hedgehog::Universe
     public:
         BB_INSERT_PADDING(0x24);
         uint32_t m_ActorID;
-        BB_INSERT_PADDING(0x4C);
+        BB_INSERT_PADDING(0x30);
+        CMessageManager* m_pMessageManager;
+        BB_INSERT_PADDING(0x18);
 
         CMessageActor(const bb_null_ctor&) : IMessageProcess(bb_null_ctor{}), CObject(bb_null_ctor{}), IParallelJob(bb_null_ctor{}) {}
 
@@ -72,8 +76,8 @@ namespace Hedgehog::Universe
         }
     };
 
-    //BB_ASSERT_OFFSETOF(CMessageActor, m_Category, 0x14);
     BB_ASSERT_OFFSETOF(CMessageActor, m_ActorID, 0x2C);
+    BB_ASSERT_OFFSETOF(CMessageActor, m_pMessageManager, 0x60);
     BB_ASSERT_SIZEOF(CMessageActor, 0x7C);
 }
 
