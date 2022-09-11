@@ -20,8 +20,8 @@ namespace Hedgehog::Mirage
         size_t m_MorphModelNum;
         hh::vector<boost::shared_ptr<CNodeGroupModelData>> m_NodeGroupModels;
         hh::vector<boost::shared_ptr<CMeshData>> m_OpaqueMeshes;
-        hh::vector<boost::shared_ptr<CMeshData>> m_PunchThroughMeshes;
         hh::vector<boost::shared_ptr<CMeshData>> m_TransparentMeshes;
+        hh::vector<boost::shared_ptr<CMeshData>> m_PunchThroughMeshes;
         size_t m_NodeNum;
         boost::shared_ptr<uint8_t[]> m_spNodeParentIndices;
         boost::shared_ptr<CModelNodeData[]> m_spNodes;
@@ -35,8 +35,8 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CModelData, m_MorphModelNum, 0x10);
     BB_ASSERT_OFFSETOF(CModelData, m_NodeGroupModels, 0x14);
     BB_ASSERT_OFFSETOF(CModelData, m_OpaqueMeshes, 0x24);
-    BB_ASSERT_OFFSETOF(CModelData, m_PunchThroughMeshes, 0x34);
-    BB_ASSERT_OFFSETOF(CModelData, m_TransparentMeshes, 0x44);
+    BB_ASSERT_OFFSETOF(CModelData, m_TransparentMeshes, 0x34);
+    BB_ASSERT_OFFSETOF(CModelData, m_PunchThroughMeshes, 0x44);
     BB_ASSERT_OFFSETOF(CModelData, m_NodeNum, 0x54);
     BB_ASSERT_OFFSETOF(CModelData, m_spNodeParentIndices, 0x58);
     BB_ASSERT_OFFSETOF(CModelData, m_spNodes, 0x60);

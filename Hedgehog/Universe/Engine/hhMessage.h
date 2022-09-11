@@ -21,7 +21,7 @@ namespace Hedgehog::Universe
     {
     public:
         uint32_t m_SenderActorID;
-        boost::shared_ptr<const Message> m_spSelf;
+        boost::shared_ptr<Message> m_spSelf;
 
         virtual ~Message() = default;
 
