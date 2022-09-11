@@ -15,17 +15,17 @@
 // Devil's Details
 #include <Sonic/DX_PATCH.h>
 
-#define BB_OFFSETOF(s, m) ((size_t)&(((s*)0)->m))
+#define BB_OFFSETOF(type, member) ((size_t)&(((type*)0)->member))
 
 #define BB_INSERT_PADDING(length) \
     uint8_t BOOST_PP_CAT(pad, __LINE__)[length]
 
 #define BB_ASSERT_OFFSETOF(type, field, offset) \
-    static_assert(BB_OFFSETOF(type, field) == offset, "offsetof assertion failed")
+    static inline bb_assert_offsetof<BB_OFFSETOF(type, field), offset> BOOST_PP_CAT(_, __COUNTER__)
 
 #define BB_ASSERT_SIZEOF(type, size) \
-    static_assert(sizeof type == size, "sizeof assertion failed")
-	
+    static inline bb_assert_sizeof<sizeof type, size> BOOST_PP_CAT(_, __COUNTER__)
+
 #define BB_FUNCTION_PTR(returnType, callingConvention, function, location, ...) \
     returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)
 
@@ -50,6 +50,18 @@
 
 #define BB_OVERRIDE_FUNCTION_PTR(returnType, baseType, function, location, ...) \
     BB_VTABLE_FUNCTION_PTR(, returnType, baseType*, function, location, override, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))
+
+template<int TActual, int TExpected>
+struct bb_assert_offsetof
+{
+    static_assert(TActual == TExpected, "offsetof assertion failed");
+};
+
+template<int TActual, int TExpected>
+struct bb_assert_sizeof
+{
+    static_assert(TActual == TExpected, "sizeof assertion failed");
+};
 
 // Hedgehog::Math
 namespace Hedgehog::Math
