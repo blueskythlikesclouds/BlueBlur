@@ -32,10 +32,10 @@ namespace Hedgehog::Yggdrasill
         CYggDevice* This, const boost::shared_ptr<Hedgehog::Mirage::CVertexShaderData>& spVertexShaderData, const boost::shared_ptr<Hedgehog::Mirage::CPixelShaderData>& spPixelShaderData);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceCreateTexture0, 0x7884C0, 
-        CYggDevice* This, boost::shared_ptr<CYggTexture>& spTexture, float widthRatio, float heightRatio, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle);
+        const CYggDevice* This, boost::shared_ptr<CYggTexture>& spTexture, float widthRatio, float heightRatio, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceCreateTexture1, 0x788450, 
-        CYggDevice* This, boost::shared_ptr<CYggTexture>& spTexture, uint32_t width, uint32_t height, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle);
+        const CYggDevice* This, boost::shared_ptr<CYggTexture>& spTexture, uint32_t width, uint32_t height, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceDrawQuad2D, 0x786620, 
         CYggDevice* This, float* bounds, float x, float y);
@@ -47,7 +47,7 @@ namespace Hedgehog::Yggdrasill
         CYggDevice* This, const boost::shared_ptr<CYggSurface>& spSurface);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceGetRenderTarget, 0x786030,
-        CYggDevice* This, boost::shared_ptr<CYggSurface>& spSurface, uint32_t index);
+        const CYggDevice* This, boost::shared_ptr<CYggSurface>& spSurface, uint32_t index);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetRenderTarget, 0x785D00, 
         CYggDevice* This, uint32_t index, const boost::shared_ptr<CYggSurface>& spSurface);
@@ -96,14 +96,18 @@ namespace Hedgehog::Yggdrasill
             SetShader(shader.m_spVertexShader, shader.m_spPixelShader);
         }
 
-        void CreateTexture(boost::shared_ptr<CYggTexture>& spTexture, float widthRatio, float heightRatio, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle)
+        boost::shared_ptr<CYggTexture> CreateTexture(float widthRatio, float heightRatio, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle) const
         {
+            boost::shared_ptr<CYggTexture> spTexture;
             fpCYggDeviceCreateTexture0(this, spTexture, widthRatio, heightRatio, levels, usage, format, pool, pSharedHandle);
+            return spTexture;
         }
 
-        void CreateTexture(boost::shared_ptr<CYggTexture>& spTexture, uint32_t width, uint32_t height, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle)
+        boost::shared_ptr<CYggTexture> CreateTexture(uint32_t width, uint32_t height, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle) const
         {
+            boost::shared_ptr<CYggTexture> spTexture;
             fpCYggDeviceCreateTexture1(this, spTexture, width, height, levels, usage, format, pool, pSharedHandle);
+            return spTexture;
         }
 
         void DrawQuad2D(float* bounds, float x, float y)
@@ -126,9 +130,11 @@ namespace Hedgehog::Yggdrasill
             SetDepthStencil(boost::shared_ptr<CYggSurface>());
         }
 
-        void GetRenderTarget(boost::shared_ptr<CYggSurface>& spSurface, uint32_t index)
+        boost::shared_ptr<CYggSurface> GetRenderTarget(uint32_t index) const
         {
+            boost::shared_ptr<CYggSurface> spSurface;
             fpCYggDeviceGetRenderTarget(this, spSurface, index);
+            return spSurface;
         }
 
         void SetRenderTarget(uint32_t index, const boost::shared_ptr<CYggSurface>& spSurface)

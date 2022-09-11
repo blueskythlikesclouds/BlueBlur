@@ -21,7 +21,7 @@ namespace Hedgehog::Yggdrasill
     class CYggTexture;
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggTextureGetSurface, 0x78AE30,
-        CYggTexture* This, boost::shared_ptr<CYggSurface>& spSurface, uint32_t mipIndex, uint32_t levelIndex);
+        const CYggTexture* This, boost::shared_ptr<CYggSurface>& spSurface, uint32_t mipIndex, uint32_t levelIndex);
 
     class CYggTexture : public CYggAbstractBuffer
     {
@@ -31,9 +31,11 @@ namespace Hedgehog::Yggdrasill
         SYggTextureCreationParams m_CreationParams;
         BB_INSERT_PADDING(0x68);
 
-        void GetSurface(boost::shared_ptr<CYggSurface>& spSurface, uint32_t mipIndex, uint32_t levelIndex)
+        boost::shared_ptr<CYggSurface> GetSurface(uint32_t mipIndex, uint32_t levelIndex) const
         {
+            boost::shared_ptr<CYggSurface> spSurface;
             fpCYggTextureGetSurface(this, spSurface, mipIndex, levelIndex);
+            return spSurface;
         }
     };
 

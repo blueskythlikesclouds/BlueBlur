@@ -15,9 +15,9 @@ namespace Hedgehog::Yggdrasill
     class CYggSurface;
     class CYggTexture;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetDefaultTexture, 0x784A60, CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetTexture, 0x7848D0, CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture, const Hedgehog::Base::CStringSymbol& symbol);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetSurface, 0x7847B0, CYggJob* This, boost::shared_ptr<CYggSurface>& spSurface, const Hedgehog::Base::CStringSymbol& symbol);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetDefaultTexture, 0x784A60, const CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetTexture, 0x7848D0, const CYggJob* This, boost::shared_ptr<CYggTexture>& spTexture, const Hedgehog::Base::CStringSymbol& symbol);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobGetSurface, 0x7847B0, const CYggJob* This, boost::shared_ptr<CYggSurface>& spSurface, const Hedgehog::Base::CStringSymbol& symbol);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobSetDefaultTexture, 0x784D00, CYggJob* This, const boost::shared_ptr<CYggTexture>& spTexture);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggJobSetBuffer, 0x784BF0, CYggJob* This, const Hedgehog::Base::CStringSymbol& symbol, const boost::shared_ptr<CYggAbstractBuffer>& spBuffer);
@@ -33,19 +33,25 @@ namespace Hedgehog::Yggdrasill
         virtual void Initialize() = 0;
         virtual void Execute() = 0;
 
-        void GetDefaultTexture(boost::shared_ptr<CYggTexture>& spTexture)
+        boost::shared_ptr<CYggTexture> GetDefaultTexture() const
         {
+            boost::shared_ptr<CYggTexture> spTexture;
             fpCYggJobGetDefaultTexture(this, spTexture);
+            return spTexture;
         }
 
-        void GetTexture(boost::shared_ptr<CYggTexture>& spTexture, const Base::CStringSymbol& symbol)
+        boost::shared_ptr<CYggTexture> GetTexture(const Base::CStringSymbol& symbol) const
         {
+            boost::shared_ptr<CYggTexture> spTexture;
             fpCYggJobGetTexture(this, spTexture, symbol);
+            return spTexture;
         }      
 
-        void GetSurface(boost::shared_ptr<CYggSurface>& spSurface, const Base::CStringSymbol& symbol)
+        boost::shared_ptr<CYggSurface> GetSurface(const Base::CStringSymbol& symbol) const
         {
+            boost::shared_ptr<CYggSurface> spSurface;
             fpCYggJobGetSurface(this, spSurface, symbol);
+            return spSurface;
         }
 
         void SetDefaultTexture(const boost::shared_ptr<CYggTexture>& spTexture)

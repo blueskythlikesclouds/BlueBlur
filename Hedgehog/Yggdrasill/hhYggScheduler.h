@@ -21,10 +21,10 @@ namespace Hedgehog::Yggdrasill
     class CYggScheduler;
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCYggSchedulerGetShader, 0x789DB0,
-        CYggScheduler* This, Hedgehog::Mirage::SShaderPair& pair, const char* pVertexShaderName, const char* pPixelShaderName);
+        const CYggScheduler* This, Hedgehog::Mirage::SShaderPair& pair, const char* pVertexShaderName, const char* pPixelShaderName);
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCYggSchedulerGetPicture, 0x789DD0,
-        CYggScheduler* This, boost::shared_ptr<CYggPicture>& spPicture, const char* name);
+        const CYggScheduler* This, boost::shared_ptr<CYggPicture>& spPicture, const char* name);
 
 
     class CYggScheduler : public Base::CObject
@@ -35,14 +35,18 @@ namespace Hedgehog::Yggdrasill
 
         virtual ~CYggScheduler() = default;
 
-        void GetShader(Mirage::SShaderPair& pair, const char* pVertexShaderName, const char* pPixelShaderName)
+        Mirage::SShaderPair GetShader(const char* pVertexShaderName, const char* pPixelShaderName) const
         {
+            Mirage::SShaderPair pair;
             fpCYggSchedulerGetShader(this, pair, pVertexShaderName, pPixelShaderName);
+            return pair;
         }
 
-        void GetPicture(boost::shared_ptr<CYggPicture>& spPicture, const char* name)
+        boost::shared_ptr<CYggPicture> GetPicture(const char* name) const
         {
+            boost::shared_ptr<CYggPicture> spPicture;
             fpCYggSchedulerGetPicture(this, spPicture, name);
+            return spPicture;
         }
     };
 
