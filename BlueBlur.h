@@ -114,6 +114,7 @@
 #include <Sonic/CSD/CsdDatabaseWrapper.h>
 #include <Sonic/CSD/CsdProject.h>
 #include <Sonic/CSD/GameObjectCSD.h>
+#include <Sonic/Debug/DebugStageSelectMenu.h>
 #include <Sonic/FxPipeline/FxSceneRenderer.h>
 #include <Sonic/FxPipeline/FxScheduler.h>
 #include <Sonic/FxPipeline/Jobs/FxJob.h>
