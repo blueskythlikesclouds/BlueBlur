@@ -4,7 +4,17 @@
 
 namespace Hedgehog::Base
 {
-    struct SSymbolNode;
+    struct SSymbolNode
+    {
+        SSymbolNode* pPrev;
+        SSymbolNode* pNext;
+        size_t Hash;
+
+        const char* GetValue() const
+        {
+            return reinterpret_cast<const char*>(this) + sizeof(SSymbolNode);
+        }
+    };
 
     static inline BB_FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* pName);
 
@@ -13,8 +23,17 @@ namespace Hedgehog::Base
     public:
         SSymbolNode* m_pSymbolNode;
 
+        CStringSymbol() : m_pSymbolNode(MakeStringSymbol(""))
+        {
+        }
+
         CStringSymbol(const char* pName) : m_pSymbolNode(MakeStringSymbol(pName))
         {
+        }
+
+        const char* GetValue() const
+        {
+            return m_pSymbolNode->GetValue();
         }
 
         bool operator<(const CStringSymbol& other) const
