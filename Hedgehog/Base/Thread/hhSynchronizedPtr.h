@@ -38,5 +38,10 @@ namespace Hedgehog::Base
         {
             return get();
         }
+
+        explicit operator bool() const
+        {
+            return m_pObject != nullptr;
+        }
     };
 }

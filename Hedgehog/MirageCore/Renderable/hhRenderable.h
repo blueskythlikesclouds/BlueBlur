@@ -11,7 +11,8 @@ namespace Hedgehog::Mirage
     class CRenderable : public Base::CObject
     {
     public:
-        BB_INSERT_PADDING(0x8);
+        bool m_Enabled;
+        float m_Field8;
 
         CRenderable(const bb_null_ctor&) : CObject(bb_null_ctor{}) {}
 
@@ -23,5 +24,7 @@ namespace Hedgehog::Mirage
         virtual ~CRenderable() = default;
     };
 
+    BB_ASSERT_OFFSETOF(CRenderable, m_Enabled, 0x4);
+    BB_ASSERT_OFFSETOF(CRenderable, m_Field8, 0x8);
     BB_ASSERT_SIZEOF(CRenderable, 0xC);
 }

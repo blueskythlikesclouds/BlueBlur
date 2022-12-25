@@ -57,6 +57,11 @@ namespace Hedgehog::Base
         {
             return get();
         }
+
+        explicit operator bool() const
+        {
+            return m_pSynchronizedObject != nullptr;
+        }
     };
 
     BB_ASSERT_SIZEOF(CHolderBase, 0x8);

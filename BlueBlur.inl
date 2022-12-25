@@ -79,3 +79,8 @@ struct bb_null_ctor{};
 
 template<int n>
 struct bb_insert_padding { BB_INSERT_PADDING(n); };
+
+namespace boost
+{
+    typedef boost::shared_ptr<void> anonymous_shared_ptr;
+}

@@ -49,13 +49,17 @@
 #include <Hedgehog/MirageCore/Misc/hhPrimitive.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingDevice.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingInfrastructure.h>
+#include <Hedgehog/MirageCore/Misc/hhRenderScene.h>
 #include <Hedgehog/MirageCore/Misc/hhSamplerState.h>
 #include <Hedgehog/MirageCore/Misc/hhStaticLightContext.h>
 #include <Hedgehog/MirageCore/Misc/hhTransform.h>
 #include <Hedgehog/MirageCore/Misc/hhVertexDeclarationPtr.h>
+#include <Hedgehog/MirageCore/Renderable/hhBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
+#include <Hedgehog/MirageCore/Renderable/hhOptimalBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
+#include <Hedgehog/MirageCore/Renderable/hhTerrainRenderable.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightData.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMaterialData.h>
@@ -67,6 +71,8 @@
 #include <Hedgehog/MirageCore/RenderData/hhPictureData.h>
 #include <Hedgehog/MirageCore/RenderData/hhPixelShaderData.h>
 #include <Hedgehog/MirageCore/RenderData/hhShaderListData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainInstanceInfoData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainModelData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTexsetData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTextureData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderData.h>
@@ -83,6 +89,7 @@
 #include <Hedgehog/Universe/Engine/hhUpdateManager.h>
 #include <Hedgehog/Universe/Engine/hhUpdateUnit.h>
 #include <Hedgehog/Universe/Thread/hhParallelJob.h>
+#include <Hedgehog/Utility/hhScopedPointerVector.h>
 #include <Hedgehog/Yggdrasill/hhYggAbstractBuffer.h>
 #include <Hedgehog/Yggdrasill/hhYggAllocator.h>
 #include <Hedgehog/Yggdrasill/hhYggDevice.h>
