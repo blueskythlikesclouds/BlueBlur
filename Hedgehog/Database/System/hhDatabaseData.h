@@ -30,6 +30,11 @@ namespace Hedgehog::Database
             return true;
         }
 
+        bool IsMadeOne() const
+        {
+            return (m_Flags & eDatabaseDataFlags_IsMadeOne) != 0;
+        }
+
         bool IsMadeAllInternal()
         {
             // Alternatively can call fpCDatabaseDataIsMadeAllInternal

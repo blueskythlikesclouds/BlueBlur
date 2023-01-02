@@ -19,6 +19,8 @@
 #undef _ITERATOR_DEBUG_LEVEL
 #pragma pop_macro("_ITERATOR_DEBUG_LEVEL")
 
+#include <Hedgehog/Animation/hhAnimationPose.h>
+#include <Hedgehog/Animation/hhPose.h>
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/hhRefCountObject.h>
 #include <Hedgehog/Base/Platform/D3D9/hhCriticalSectionD3D9.h>
