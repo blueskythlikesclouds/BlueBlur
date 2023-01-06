@@ -12,6 +12,8 @@ namespace Hedgehog::Database
     class CDatabase;
     class CRawData;
 
+    static inline BB_FUNCTION_PTR(void, __cdecl, fpCDatabaseCreateDatabase, 0x696C30, boost::shared_ptr<CDatabase>& out_spDatabase, size_t in_Unknown);
+    
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetRawData, 0x40F010,
         CDatabase* This, boost::shared_ptr<CRawData>& spRawData, const Hedgehog::Base::CSharedString& name, uint32_t unknown);
 
@@ -24,6 +26,13 @@ namespace Hedgehog::Database
         BB_INSERT_PADDING(0xEC);
 
         virtual ~CDatabase() = default;
+
+        static boost::shared_ptr<CDatabase> CreateDatabase(size_t in_Unknown = 0)
+        {
+            boost::shared_ptr<CDatabase> spDatabase;
+            fpCDatabaseCreateDatabase(spDatabase, in_Unknown);
+            return spDatabase;
+        }
 
         boost::shared_ptr<CRawData> GetRawData(const Base::CSharedString& name, uint32_t unknown = 0)
         {

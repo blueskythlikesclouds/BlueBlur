@@ -3,14 +3,30 @@
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 
+#include "hhArchiveParam.h"
+
 namespace Hedgehog::Database
 {
+    struct SArchiveParam;
+    class CArchiveList;
+
     class CDatabase;
     class CDatabaseLoader;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadData, 0x6999C0,
-        CDatabaseLoader* This, const boost::shared_ptr<CDatabase>& spDatabase, const Base::CSharedString& name, 
-        uint8_t* data, uint32_t dataSize, boost::shared_ptr<uint8_t[]> spDatabaseData, void* pFileReader);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderCreateArchiveList, 0x69C270,
+        CDatabaseLoader* This, boost::shared_ptr<CArchiveList>& out_spArchiveList,
+        const Hedgehog::Base::CSharedString& in_rArchiveName, const Hedgehog::Base::CSharedString& in_rArchiveListName, const SArchiveParam& in_rArchiveParam);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadArchiveList, 0x69AFF0,
+        CDatabaseLoader* This, boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveListName);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadArchive, 0x69AB10,
+        CDatabaseLoader* This, boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveListName, 
+        const SArchiveParam& in_rArchiveParam, bool in_Unknown0, bool in_Unknown1);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadFile, 0x6999C0,
+        CDatabaseLoader* This, const boost::shared_ptr<CDatabase>& in_spDatabase, const Base::CSharedString& in_rName, 
+        uint8_t* in_pData, uint32_t in_DataSize, boost::shared_ptr<uint8_t[]> in_spDatabaseData, void* in_pFileReader);
 
     class CDatabaseLoader : public Base::CObject
     {
@@ -19,12 +35,29 @@ namespace Hedgehog::Database
 
         virtual ~CDatabaseLoader() = default;
 
-        virtual void Load(const boost::shared_ptr<CDatabase>& spDatabase, boost::shared_ptr<uint8_t[]> spData, uint32_t dataSize, uint32_t _dataSize, void* pFileReader) = 0;
+        virtual void LoadArchive(const boost::shared_ptr<CDatabase>& in_spDatabase, boost::shared_ptr<uint8_t[]> in_spData, uint32_t in_DataSize, uint32_t in_DataSize1, void* in_pFileReader) = 0;
 
-        void LoadData(const boost::shared_ptr<CDatabase>& spDatabase, const Base::CSharedString& name,
-            uint8_t* data, uint32_t dataSize, boost::shared_ptr<uint8_t[]> spDatabaseData, void* pFileReader)
+        boost::shared_ptr<CArchiveList> CreateArchiveList(const Hedgehog::Base::CSharedString& in_rArchiveName, const Hedgehog::Base::CSharedString& in_rArchiveListName, const SArchiveParam& in_rArchiveParam)
         {
-            fpCDatabaseLoaderLoadData(this, spDatabase, name, data, dataSize, std::move(spDatabaseData), pFileReader);
+            boost::shared_ptr<CArchiveList> spArchiveList;
+            fpCDatabaseLoaderCreateArchiveList(this, spArchiveList, in_rArchiveName, in_rArchiveListName, in_rArchiveParam);
+            return spArchiveList;
+        }
+
+        void LoadArchiveList(boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveListName)
+        {
+            fpCDatabaseLoaderLoadArchiveList(this, in_spDatabase, in_rArchiveListName);
+        }
+
+        void LoadArchive(boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveListName, const SArchiveParam& in_rArchiveParam, bool in_Unknown0, bool in_Unknown1)
+        {
+            fpCDatabaseLoaderLoadArchive(this, in_spDatabase, in_rArchiveListName, in_rArchiveParam, in_Unknown0, in_Unknown1);
+        }
+
+        void LoadFile(const boost::shared_ptr<CDatabase>& in_spDatabase, const Base::CSharedString& in_rName,
+            uint8_t* in_pData, uint32_t in_DataSize, boost::shared_ptr<uint8_t[]> in_spDatabaseData, void* in_pFileReader)
+        {
+            fpCDatabaseLoaderLoadFile(this, in_spDatabase, in_rName, in_pData, in_DataSize, std::move(in_spDatabaseData), in_pFileReader);
         }
     };
 

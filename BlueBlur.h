@@ -34,6 +34,7 @@
 #include <Hedgehog/Base/Type/hhCowData.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Database/System/hhArchiveDatabaseLoader.h>
+#include <Hedgehog/Database/System/hhArchiveParam.h>
 #include <Hedgehog/Database/System/hhDatabase.h>
 #include <Hedgehog/Database/System/hhDatabaseData.h>
 #include <Hedgehog/Database/System/hhDatabaseLoader.h>

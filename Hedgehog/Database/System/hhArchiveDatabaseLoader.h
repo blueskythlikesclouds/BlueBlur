@@ -6,8 +6,8 @@ namespace Hedgehog::Database
 {
     class CArchiveDatabaseLoader;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCArchiveDatabaseLoaderLoad, 0x6A1A80,
-        CArchiveDatabaseLoader* This, const boost::shared_ptr<CDatabase>& spDatabase, boost::shared_ptr<uint8_t[]> spData, uint32_t dataSize, uint32_t _dataSize, void* pFileReader);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCArchiveDatabaseLoaderLoadArchive, 0x6A1A80, CArchiveDatabaseLoader* This,
+        const boost::shared_ptr<CDatabase>& in_spDatabase, boost::shared_ptr<uint8_t[]> in_spData, uint32_t in_DataSize, uint32_t in_DataSize1, void* in_pFileReader);
 
     class CArchiveDatabaseLoader : public CDatabaseLoader
     {
