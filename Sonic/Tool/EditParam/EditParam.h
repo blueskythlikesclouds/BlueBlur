@@ -19,6 +19,12 @@ namespace Sonic
         alignas(4) BB_INSERT_PADDING(0x24);
     };
 
+    struct SParamEnumValue
+    {
+        const char* Name;
+        uint32_t Value;
+    };
+
     static void* const pCEditParamCreateParamBool = (void*)0xCEF4F0;
     static void* const pCEditParamCreateParamUnsignedLong = (void*)0x591300;
     static void* const pCEditParamCreateParamLong = (void*)0x590FB0;
@@ -153,18 +159,31 @@ namespace Sonic
             return CreateParamFloat({ pValue, *pValue }, name);
         }
 
+        template<typename T>
         CParamTypeList* CreateParamTypeList(
-            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const std::initializer_list<std::pair<const char*, uint32_t>>& values)
+            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const T& values)
         {
             CParamTypeList* pParamTypeList = CParamTypeList::Create(pValue, description);
 
             for (auto& value : values)
-                pParamTypeList->AddValue(value.first, value.second);
+                pParamTypeList->AddValue(value.Name, value.Value);
 
             pParamTypeList->AddRef();
             fCEditParamAddParamTypeList(&name, this, pParamTypeList);
 
             return pParamTypeList;
+        }
+
+        CParamTypeList* CreateParamTypeList(
+            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const std::initializer_list<SParamEnumValue>& values)
+        {
+            return CreateParamTypeList<std::initializer_list<SParamEnumValue>>(pValue, name, description, values);
+        }
+
+        CParamTypeList* CreateParamTypeList(
+            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const std::vector<SParamEnumValue>& values)
+        {
+            return CreateParamTypeList<std::vector<SParamEnumValue>>(pValue, name, description, values);
         }
     };
 
