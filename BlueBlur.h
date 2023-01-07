@@ -72,12 +72,14 @@
 #include <Hedgehog/MirageCore/RenderData/hhNodeGroupModelData.h>
 #include <Hedgehog/MirageCore/RenderData/hhParameterElement.h>
 #include <Hedgehog/MirageCore/RenderData/hhPictureData.h>
+#include <Hedgehog/MirageCore/RenderData/hhPixelShaderCodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhPixelShaderData.h>
 #include <Hedgehog/MirageCore/RenderData/hhShaderListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTerrainInstanceInfoData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTerrainModelData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTexsetData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTextureData.h>
+#include <Hedgehog/MirageCore/RenderData/hhVertexShaderCodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderData.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
