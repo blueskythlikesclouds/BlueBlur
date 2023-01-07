@@ -20,6 +20,13 @@ namespace Sonic
         {
             fpCParameterFileCreateParameterGroup(this, spParameterGroup, name, description);
         }
+
+        boost::shared_ptr<CParameterGroup> CreateParameterGroup(const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description)
+        {
+            boost::shared_ptr<CParameterGroup> spParameterGroup;
+            fpCParameterFileCreateParameterGroup(this, spParameterGroup, name, description);
+            return spParameterGroup;
+        }
     };
 
     BB_ASSERT_SIZEOF(CParameterFile, 0x34);

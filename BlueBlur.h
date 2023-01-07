@@ -199,7 +199,9 @@
 #include <Sonic/Tool/EditParam/ParamValue.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameter.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameterNode.h>
+#include <Sonic/Tool/ParameterEditor/GlobalParameterManager.h>
 #include <Sonic/Tool/ParameterEditor/ParameterCategory.h>
+#include <Sonic/Tool/ParameterEditor/ParameterEditor.h>
 #include <Sonic/Tool/ParameterEditor/ParameterFile.h>
 #include <Sonic/Tool/ParameterEditor/ParameterGroup.h>
 
