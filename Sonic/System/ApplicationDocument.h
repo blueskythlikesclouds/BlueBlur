@@ -6,6 +6,7 @@
 
 namespace Hedgehog::Database
 {
+    class CDatabase;
     class CDatabaseLoader;
 }
 
@@ -28,7 +29,9 @@ namespace Sonic
             Hedgehog::Universe::CMessageManager* m_pMessageManager;
             BB_INSERT_PADDING(0x18);
             boost::shared_ptr<Hedgehog::Mirage::CRenderingInfrastructure> m_spRenderingInfrastructure;
-            BB_INSERT_PADDING(0x84);
+            BB_INSERT_PADDING(0x5C);
+            boost::shared_ptr<Hedgehog::Database::CDatabase> m_spDatabase;
+            BB_INSERT_PADDING(0x20);
             boost::shared_ptr<Hedgehog::Database::CDatabaseLoader> m_spDatabaseLoader;
             BB_INSERT_PADDING(0x134);
             boost::shared_ptr<CParameterEditor> m_spParameterEditor;
@@ -55,6 +58,7 @@ namespace Sonic
 
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_pMessageManager, 0x20);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spRenderingInfrastructure, 0x3C);
+    BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spDatabase, 0xA0);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spDatabaseLoader, 0xC8);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spParameterEditor, 0x204);
     BB_ASSERT_SIZEOF(CApplicationDocument::CMember, 0x230);
