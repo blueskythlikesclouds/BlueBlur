@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Hedgehog/Base/Container/hhMap.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
 
@@ -7,6 +8,7 @@ namespace Hedgehog::Mirage
 {
     class CInstanceInfo;
     class CSingleElement;
+    class CMaterialData;
     class CModelData;
     class CMatrixNode;
     class CMatrixNodeSingleElementNode;
@@ -24,7 +26,8 @@ namespace Hedgehog::Mirage
     {
     public:
         boost::shared_ptr<CInstanceInfo> m_spInstanceInfo;
-        BB_INSERT_PADDING(0x14);
+        hh::map<CMaterialData*, boost::shared_ptr<CMaterialData>> m_MaterialMap;
+        BB_INSERT_PADDING(0x8);
 
         CSingleElement(const bb_null_ctor&) : CElement(bb_null_ctor{}) {}
 
@@ -47,5 +50,6 @@ namespace Hedgehog::Mirage
     };
 
     BB_ASSERT_OFFSETOF(CSingleElement, m_spInstanceInfo, 0x8C);
+    BB_ASSERT_OFFSETOF(CSingleElement, m_MaterialMap, 0x94);
     BB_ASSERT_SIZEOF(CSingleElement, 0xA8);
 }
