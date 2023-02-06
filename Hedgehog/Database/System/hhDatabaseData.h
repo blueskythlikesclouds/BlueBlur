@@ -35,6 +35,11 @@ namespace Hedgehog::Database
             return (m_Flags & eDatabaseDataFlags_IsMadeOne) != 0;
         }
 
+        void SetMadeOne()
+        {
+            m_Flags |= eDatabaseDataFlags_IsMadeOne;
+        }
+
         bool IsMadeAllInternal()
         {
             // Alternatively can call fpCDatabaseDataIsMadeAllInternal

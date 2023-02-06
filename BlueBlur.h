@@ -119,12 +119,14 @@
 #include <CSD/Manager/csdmScene.h>
 #include <CSD/Manager/csdmSceneObserver.h>
 #include <CSD/Manager/csdmSubjectBase.h>
+#include <CSD/Platform/csdTexList.h>
 
 #include <Sonic/DX_PATCH.h>
 #include <Sonic/Animation/AnimationContext.h>
 #include <Sonic/Camera/Camera.h>
 #include <Sonic/CSD/CsdDatabaseWrapper.h>
 #include <Sonic/CSD/CsdProject.h>
+#include <Sonic/CSD/CsdTexListMirage.h>
 #include <Sonic/CSD/GameObjectCSD.h>
 #include <Sonic/Debug/DebugStageSelectMenu.h>
 #include <Sonic/FxPipeline/FxSceneRenderer.h>

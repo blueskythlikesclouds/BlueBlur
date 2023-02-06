@@ -8,6 +8,7 @@ namespace Chao::CSD
     struct Project;
     class CProject;
     class CScene;
+    class CTexList;
     
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCProjectCreateScene0, 0x677220,
         const CProject* This, RCPtr<CScene>& out_rcScene, const char* in_pName, void* in_pFactory);
@@ -21,7 +22,9 @@ namespace Chao::CSD
     class CProject : public CResourceBase<Project>, CBase
     {
     public:
-        BB_INSERT_PADDING(0x40);
+        BB_INSERT_PADDING(0x1C);
+        RCPtr<CTexList> m_rcTexList;
+        BB_INSERT_PADDING(0x1C);
 
         RCPtr<CScene> CreateScene(const char* in_pName) const
         {
@@ -60,5 +63,6 @@ namespace Chao::CSD
         }
     };
 
+    BB_ASSERT_OFFSETOF(CProject, m_rcTexList, 0x2C);
     BB_ASSERT_SIZEOF(CProject, 0x50);
 }
