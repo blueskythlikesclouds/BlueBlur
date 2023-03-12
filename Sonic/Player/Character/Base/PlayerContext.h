@@ -79,7 +79,7 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_PathInput2D; //0x150
 
         uint8_t m_Field160;
-        size_t m_Field164;
+        size_t m_GroundAttribute;
         uint8_t m_Field168;
         size_t m_RestartCount; // 0x16C
 
@@ -185,7 +185,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field140, 0x140);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_PathInput2D, 0x150);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field160, 0x160);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field164, 0x164);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_GroundAttribute, 0x164);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field168, 0x168);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_RestartCount, 0x16C);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field170, 0x170);

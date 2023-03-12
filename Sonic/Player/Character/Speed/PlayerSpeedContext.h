@@ -174,18 +174,27 @@ namespace Sonic::Player
         boost::shared_ptr<CReactionJumpQTE>   m_spReactionJumpQTE_HUDPtr; // 0x7F4
         BB_INSERT_PADDING(0x04);
         boost::shared_ptr<CTrickJumpSequence> m_spTrickJumpSequence;      // 0x800
-        BB_INSERT_PADDING(0x178);
+        BB_INSERT_PADDING(0x8);
 
-        CRigidBody* m_pRigidBody_01; // 0x980
-        BB_INSERT_PADDING(0xFC);
-        CRigidBody* m_pRigidBody_02; // 0xA80
-        BB_INSERT_PADDING(0x3C);
-        CRigidBody* m_pRigidBody_03; // 0xAC0
-        BB_INSERT_PADDING(0x3C);
-        CRigidBody* m_pRigidBody_04; // 0xB00
-        BB_INSERT_PADDING(0xFC);
-        CRigidBody* m_pRigidBody_05; // 0xC00
-        BB_INSERT_PADDING(0x244);
+        struct SGroundSearch
+        {
+            uint8_t Unknown;
+            Hedgehog::Math::CVector Normal;
+            Hedgehog::Math::CVector Position;
+            Sonic::CRigidBody* pRigidBody;
+        };
+
+        enum EGroundSearch
+        {
+            eGroundSearch_CC = 10,
+            nGroundSearch = 21
+        };
+
+        SGroundSearch m_aGroundSearch[nGroundSearch]; // 0x810
+        std::bitset<nGroundSearch> m_GroundSearchFlag; // 0xD50
+        BB_INSERT_PADDING(0x50);
+        size_t m_ResolveGroundNormalCompleteResultType; // 0xDA4
+        BB_INSERT_PADDING(0xA0);
 
         boost::shared_ptr<CSonicHudCountDownImpl>    m_spSonicHudCountDownImpl;    // 0xE48
         boost::shared_ptr<CSonicHudHomingAttackImpl> m_spSonicHudHomingAttackImpl; // 0xE50
@@ -330,11 +339,13 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_HangOnActorID, 0x7D8);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spReactionJumpQTE_HUDPtr, 0x7F4);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spTrickJumpSequence, 0x800);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pRigidBody_01, 0x980);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pRigidBody_02, 0xA80);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pRigidBody_03, 0xAC0);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pRigidBody_04, 0xB00);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pRigidBody_05, 0xC00);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext::SGroundSearch, Unknown, 0x00);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext::SGroundSearch, Normal, 0x10);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext::SGroundSearch, Position, 0x20);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext::SGroundSearch, pRigidBody, 0x30);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_aGroundSearch, 0x810);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_GroundSearchFlag, 0xD50);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ResolveGroundNormalCompleteResultType, 0xDA4);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spSonicHudCountDownImpl, 0xE48);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spSonicHudHomingAttackImpl, 0xE50);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spShapeCastCollision_06, 0xE58);

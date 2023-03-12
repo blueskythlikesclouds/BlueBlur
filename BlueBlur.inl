@@ -1,5 +1,8 @@
 #pragma once
 
+// std
+#include <bitset>
+
 // boost
 #include <boost/any.hpp>
 #include <boost/function.hpp>
