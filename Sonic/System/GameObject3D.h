@@ -18,7 +18,8 @@ namespace Sonic
     public:
         BB_INSERT_PADDING(0x8);
         boost::shared_ptr<CMatrixNodeTransform> m_spMatrixNodeTransform;
-        BB_INSERT_PADDING(0x34);
+        boost::shared_ptr<void> m_spEventCollisionHolder;
+        BB_INSERT_PADDING(0x2C);
 
         CGameObject3D(const bb_null_ctor&) : CGameObject(bb_null_ctor{}), CMatrixNodeListener(bb_null_ctor{}) {}
 
@@ -34,12 +35,12 @@ namespace Sonic
 
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, RemoveCallback, 0xD5C770, (Sonic::CGameDocument*, pGameDocument))
 
-        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, CGameObject24, 0xD5D540, (void*, A1))
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, CGameObject24, 0xD5D540, (void*, gameplayFlowManager))
 
         BB_OVERRIDE_FUNCTION_PTR(bool, CMatrixNodeListener, MatrixNodeChangedCallback, 0xD5C780, 
             (const Hedgehog::Math::CMatrix&, matrix), (size_t, flags))
 
-        BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable34, 0xD5D6D0, (void*, A1))
+        BB_VIRTUAL_FUNCTION_PTR(void,  SetModelVisibility,    0xD5D6D0, (bool, isVisible))
         BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable38, 0xD5D200, (void*, A1), (void*, A2), (void*, A3), (void*, A4))
         BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable3C, 0xD5CCB0, (void*, A1), (void*, A2), (void*, A3))
         BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable40, 0xD5CCE0, (void*, A1), (void*, A2))
