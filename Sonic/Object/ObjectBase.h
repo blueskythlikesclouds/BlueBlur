@@ -39,8 +39,8 @@ namespace Sonic
         virtual bool CObjectBase70(void*, void*, void*) { return true; }
         virtual void CObjectBase74(void*) {}
         virtual void CObjectBase78(void*) {}
-        virtual void CObjectBase7C(void*) {}
-        virtual void CObjectBase80(void*) {}
+        virtual void SetUpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) {}
+        virtual void SetUpdatePostParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) {}
         virtual void CObjectBase84(void*) {}
 
         BB_VIRTUAL_FUNCTION_PTR(void*, CObjectBase88, 0x10585D0, (void*, A1))
