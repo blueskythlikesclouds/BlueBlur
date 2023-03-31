@@ -48,7 +48,8 @@ namespace Sonic
         {
         public:
             Hedgehog::Base::TSynchronizedPtr<CGameDocument> m_pGameDocument;
-            BB_INSERT_PADDING(0x7C);
+            Hedgehog::Base::TSynchronizedPtr<CWorld> m_pWorld;
+            BB_INSERT_PADDING(0x78);
         };
 
         CMember* m_pMember;
@@ -75,8 +76,8 @@ namespace Sonic
         virtual bool CGameObject10() { return true; }
         virtual void* CGameObject14() { return 0; }
 
-        virtual void Initialize(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
-            Sonic::CGameDocument* pGameDocument) {}
+        virtual void* Initialize(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
+            Sonic::CGameDocument* pGameDocument) { return nullptr; }
 
         virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
             Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) = 0;
@@ -101,6 +102,7 @@ namespace Sonic
     };
 
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
+    BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pWorld, 0x04);
     BB_ASSERT_SIZEOF(CGameObject::CMember, 0x80);
 
     BB_ASSERT_OFFSETOF(CGameObject, m_pMember, 0xA4);

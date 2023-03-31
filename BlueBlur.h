@@ -123,6 +123,7 @@
 
 #include <Sonic/DX_PATCH.h>
 #include <Sonic/Animation/AnimationContext.h>
+#include <Sonic/Animation/AnimationStateMachine.h>
 #include <Sonic/Camera/Camera.h>
 #include <Sonic/CSD/CsdDatabaseWrapper.h>
 #include <Sonic/CSD/CsdProject.h>
@@ -219,6 +220,7 @@ namespace Hedgehog
     namespace mot = Motion;
     namespace fnd = Universe;
     namespace ygg = Yggdrasill;
+    namespace anim = Animation;
 }
 
 namespace app = Sonic;

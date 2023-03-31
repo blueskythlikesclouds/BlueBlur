@@ -1,12 +1,17 @@
 #pragma once
 
+namespace Hedgehog::Animation
+{
+    class CAnimationPose;
+}
+
 namespace Sonic
 {
     class IAnimationContext
     {
     public:
-        virtual void IAnimationContext0() = 0;
-        virtual void IAnimationContext4(void*) = 0;
-        virtual void IAnimationContext8(void*) = 0;
+        virtual Hedgehog::Animation::CAnimationPose* GetAnimationPose() = 0;
+        virtual const Hedgehog::Math::CVector& GetPlaybackVectorA(const Hedgehog::Math::CVector& in_velocity) = 0;
+        virtual const Hedgehog::Math::CVector& GetPlaybackVectorB(const Hedgehog::Math::CVector& in_velocity) = 0;
     };
 }

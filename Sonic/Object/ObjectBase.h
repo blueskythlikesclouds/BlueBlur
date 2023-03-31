@@ -20,7 +20,7 @@ namespace Sonic
         BB_OVERRIDE_FUNCTION_PTR(void, CUpdateUnit, UpdateParallel, 0x10589A0, 
             (const Hedgehog::Universe::SUpdateInfo&, in_rUpdateInfo))
 
-        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, Initialize, 0x1058670, 
+        BB_OVERRIDE_FUNCTION_PTR(void*, CGameObject, Initialize, 0x1058670, 
             (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder), (Sonic::CGameDocument*, in_pGameDocument))
 
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0x1058B00, (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder),
@@ -30,16 +30,17 @@ namespace Sonic
 
         virtual void CObjectBase5C() {}
 
-        BB_VIRTUAL_FUNCTION_PTR(void*, CObjectBase60, 0x10585E0, (void*, A1))
+        BB_VIRTUAL_FUNCTION_PTR(void*, SetAddUpdateUnit, 0x10585E0, (void*, A1))
 
-        virtual bool CObjectBase64(void*, void*) { return true; }
-        virtual bool CObjectBase68(void*) { return true; }
-        virtual bool CObjectBase6C(void*, void*, void*) { return true; }
+        virtual bool SetAddRenderables(Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
+        virtual bool SetAddColliders(const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
+        virtual bool SetAddStateMachine(const Hedgehog::Base::THolder<Sonic::CWorld>& in_worldHolder,
+            Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
         virtual bool CObjectBase70(void*, void*, void*) { return true; }
         virtual void CObjectBase74(void*) {}
         virtual void CObjectBase78(void*) {}
-        virtual void CObjectBase7C(void*) {}
-        virtual void CObjectBase80(void*) {}
+        virtual void SetUpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) {}
+        virtual void SetUpdatePostParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) {}
         virtual void CObjectBase84(void*) {}
 
         BB_VIRTUAL_FUNCTION_PTR(void*, CObjectBase88, 0x10585D0, (void*, A1))
