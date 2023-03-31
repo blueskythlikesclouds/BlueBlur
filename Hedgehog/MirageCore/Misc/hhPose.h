@@ -6,10 +6,7 @@ namespace Hedgehog::Mirage
 {
     class CModelData;
     class CInstanceInfo;
-}
 
-namespace Hedgehog::Animation
-{
     class CPose : public Base::CObject
     {
     public:

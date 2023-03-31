@@ -68,6 +68,7 @@ with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
 "namespace hh = Hedgehog;\n"\
 "namespace Hedgehog\n"\
 "{\n"\
+"    namespace anim = Animation;\n"\
 "    namespace base = Base;\n"\
 "    namespace db = Database;\n"\
 "    namespace fx = FxRenderFramework;\n"\

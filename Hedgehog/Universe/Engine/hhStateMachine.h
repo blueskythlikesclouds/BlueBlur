@@ -25,6 +25,9 @@ namespace Hedgehog::Universe
             }
         };
 
+        TStateMachine() : CStateMachineBase() {}
+        TStateMachine(const bb_null_ctor& nil) : CStateMachineBase(nil) {}
+
         TContext* GetContext() const
         {
             return static_cast<TContext*>(m_pContext);

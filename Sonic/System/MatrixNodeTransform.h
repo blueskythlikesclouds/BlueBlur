@@ -5,29 +5,28 @@
 
 namespace Sonic
 {
+    class CMatrixNodeTransform;
+
+    static uint32_t pCMatrixNodeTransformCtor = 0xD172B0;
+
+    static void fCMatrixNodeTransformCtor(CMatrixNodeTransform* This)
+    {
+        __asm
+        {
+            mov edi, This
+            call[pCMatrixNodeTransformCtor]
+        }
+    }
+
     class CMatrixNodeTransform : public Hedgehog::Mirage::CMatrixNode
     {
-    private:
-        static void* fpCMatrixNodeTransformCtor(void* This)
-        {
-            void* result = nullptr;
-            uint32_t func = 0x00D172B0;
-            __asm
-            {
-                mov edi, This
-                call func
-                mov result, eax
-            }
-
-            return result;
-        }
     public:
         Hedgehog::Mirage::CTransform m_Transform;
         Hedgehog::Math::CMatrix m_WorldMatrix;
 
         CMatrixNodeTransform()
         {
-            fpCMatrixNodeTransformCtor(this);
+            fCMatrixNodeTransformCtor(this);
         }
     };
 

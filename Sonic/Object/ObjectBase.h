@@ -20,7 +20,7 @@ namespace Sonic
         BB_OVERRIDE_FUNCTION_PTR(void, CUpdateUnit, UpdateParallel, 0x10589A0, 
             (const Hedgehog::Universe::SUpdateInfo&, in_rUpdateInfo))
 
-        BB_OVERRIDE_FUNCTION_PTR(void*, CGameObject, Initialize, 0x1058670, 
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, Initialize, 0x1058670, 
             (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder), (Sonic::CGameDocument*, in_pGameDocument))
 
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0x1058B00, (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder),

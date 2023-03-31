@@ -76,8 +76,8 @@ namespace Sonic
         virtual bool CGameObject10() { return true; }
         virtual void* CGameObject14() { return 0; }
 
-        virtual void* Initialize(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
-            Sonic::CGameDocument* pGameDocument) { return nullptr; }
+        virtual void Initialize(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
+            Sonic::CGameDocument* pGameDocument) {}
 
         virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
             Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) = 0;

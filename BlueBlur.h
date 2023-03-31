@@ -19,8 +19,9 @@
 #undef _ITERATOR_DEBUG_LEVEL
 #pragma pop_macro("_ITERATOR_DEBUG_LEVEL")
 
+#include <Hedgehog/Animation/hhAnimationControl.h>
+#include <Hedgehog/Animation/hhAnimationControlSingle.h>
 #include <Hedgehog/Animation/hhAnimationPose.h>
-#include <Hedgehog/Animation/hhPose.h>
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/hhRefCountObject.h>
 #include <Hedgehog/Base/Platform/D3D9/hhCriticalSectionD3D9.h>
@@ -49,6 +50,7 @@
 #include <Hedgehog/MirageCore/Misc/hhDirector.h>
 #include <Hedgehog/MirageCore/Misc/hhInstanceInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>
+#include <Hedgehog/MirageCore/Misc/hhPose.h>
 #include <Hedgehog/MirageCore/Misc/hhPrimitive.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingDevice.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingInfrastructure.h>
@@ -123,7 +125,9 @@
 
 #include <Sonic/DX_PATCH.h>
 #include <Sonic/Animation/AnimationContext.h>
+#include <Sonic/Animation/AnimationState.h>
 #include <Sonic/Animation/AnimationStateMachine.h>
+#include <Sonic/Animation/State/AnimationStateSingle.h>
 #include <Sonic/Camera/Camera.h>
 #include <Sonic/CSD/CsdDatabaseWrapper.h>
 #include <Sonic/CSD/CsdProject.h>
@@ -212,6 +216,7 @@
 namespace hh = Hedgehog;
 namespace Hedgehog
 {
+    namespace anim = Animation;
     namespace base = Base;
     namespace db = Database;
     namespace fx = FxRenderFramework;
@@ -220,7 +225,6 @@ namespace Hedgehog
     namespace mot = Motion;
     namespace fnd = Universe;
     namespace ygg = Yggdrasill;
-    namespace anim = Animation;
 }
 
 namespace app = Sonic;
