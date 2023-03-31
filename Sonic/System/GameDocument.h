@@ -68,7 +68,7 @@ namespace Sonic
             float m_Field9C;
             BB_INSERT_PADDING(0x08);
             Hedgehog::Base::CSharedString m_Name01;
-        	BB_INSERT_PADDING(0x48);
+            BB_INSERT_PADDING(0x48);
             CParameterBank* m_pParamaterBank;
             BB_INSERT_PADDING(0x28);
             boost::shared_ptr<CNextStagePreloadingManager> m_spNextStagePreloadingManager;

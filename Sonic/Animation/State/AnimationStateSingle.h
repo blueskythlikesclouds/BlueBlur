@@ -4,11 +4,11 @@
 
 namespace Sonic
 {
-	class CAnimationStateSingle : public CAnimationState
-	{
-	public:
-		BB_INSERT_PADDING(0x4);
-	};
+    class CAnimationStateSingle : public CAnimationState
+    {
+    public:
+        BB_INSERT_PADDING(0x4);
+    };
 
-	BB_ASSERT_SIZEOF(CAnimationStateSingle, 0x1A0);
+    BB_ASSERT_SIZEOF(CAnimationStateSingle, 0x1A0);
 }
