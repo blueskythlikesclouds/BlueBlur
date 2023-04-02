@@ -29,9 +29,9 @@ namespace Hedgehog::Base
             return (CData*)((char*)m_ptr - offsetof(CData, m_Data));
         }
 
-        void SetData(CData* pData)
+        void SetData(CData* in_pData)
         {
-            m_ptr = (const T*)((char*)pData + offsetof(CData, m_Data));
+            m_ptr = (const T*)((char*)in_pData + offsetof(CData, m_Data));
         }
 
     public:
@@ -48,31 +48,29 @@ namespace Hedgehog::Base
             m_ptr = ms_memStatic;
         }
 
-        void Set(const CCowData& other)
+        void Set(const CCowData& in_rOther)
         {
-            m_ptr = other.m_ptr;
+            m_ptr = in_rOther.m_ptr;
 
             if (!IsMemStatic())
                 InterlockedIncrement(&GetData()->m_RefCountAndLength);
         }
 
-        void Set(const T* pPtr, const size_t length)
+        void Set(const T* in_pPtr, const size_t in_Length)
         {
-            Unset();
-
-            if (!length) 
+            if (!in_Length)
                 return;
 
-            const size_t memSize = offsetof(CData, m_Data) + length * sizeof(T);
+            const size_t memSize = offsetof(CData, m_Data) + in_Length * sizeof(T);
             const size_t memSizeAligned = (memSize + 0x10) & 0xFFFFFFF0;
 
             CData* pData = (CData*)__HH_ALLOC(memSizeAligned);
-            pData->m_RefCountAndLength = (length << 16) | 1;
+            pData->m_RefCountAndLength = (in_Length << 16) | 1;
 
-            if (pPtr)
+            if (in_pPtr)
             {
-                memcpy(pData->m_Data, pPtr, length * sizeof(T));
-                memset(&pData->m_Data[length], 0, memSizeAligned - memSize);
+                memcpy(pData->m_Data, in_pPtr, in_Length * sizeof(T));
+                memset(&pData->m_Data[in_Length], 0, memSizeAligned - memSize);
             }
 
             SetData(pData);
@@ -83,20 +81,40 @@ namespace Hedgehog::Base
 
         }
 
-        CCowData(CCowData&& other)
+        CCowData(const CCowData& in_Other)
         {
-            m_ptr = other.m_ptr;
-            other.m_ptr = ms_memStatic;
+            Set(in_Other);
         }
 
-        CCowData(const CCowData& other)
+        CCowData(CCowData&& io_rOther)
         {
-            Set(other);
+            m_ptr = io_rOther.m_ptr;
+            io_rOther.m_ptr = ms_memStatic;
         }
 
         ~CCowData()
         {
             Unset();
+        }
+
+        CCowData& operator=(CCowData&& io_rOther)
+        {
+            if (this != &io_rOther)
+            {
+                m_ptr = io_rOther.m_ptr;
+                io_rOther.m_ptr = ms_memStatic;
+            }
+            return *this;
+        }
+
+        CCowData& operator=(const CCowData& in_rOther)
+        {
+            if (this != &in_rOther)
+            {
+                Unset();
+                Set(in_rOther);
+            }
+            return *this;
         }
     };
 }

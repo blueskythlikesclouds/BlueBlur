@@ -20,9 +20,20 @@ namespace Hedgehog::Base
 
         }
 
-        CSharedString(const char* data)
+        CSharedString(const CSharedString& in_rOther)
+            : m_data(in_rOther.m_data)
         {
-            m_data.Set(data, data ? strlen(data) : 0);
+
+        }
+
+        CSharedString(CSharedString&& io_rOther)
+            : m_data(std::move(io_rOther.m_data))
+        {
+        }
+
+        CSharedString(const char* in_pData)
+        {
+            m_data.Set(in_pData, in_pData ? strlen(in_pData) : 0);
         }
 
         const char* c_str() const
@@ -30,63 +41,68 @@ namespace Hedgehog::Base
             return m_data.Get();
         }
 
-        int compare(const CSharedString& other) const
+        int compare(const CSharedString& in_rOther) const
         {
-            return fpCSharedStringCompare(this, other);
+            return fpCSharedStringCompare(this, in_rOther);
         }
 
-        CSharedString& operator=(const CSharedString& other)
+        CSharedString& operator=(const char* in_pOther)
         {
             m_data.Unset();
-            m_data.Set(other.m_data);
+            m_data.Set(in_pOther, in_pOther ? strlen(in_pOther) : 0);
+            return *this;
+        }
+
+        CSharedString& operator=(const CSharedString& in_rOther)
+        {
+            m_data = in_rOther.m_data;
             return *this;
         }        
-        
-        CSharedString& operator=(const char* other)
+
+        CSharedString& operator=(CSharedString&& io_rOther)
         {
-            m_data.Unset();
-            m_data.Set(other, other ? strlen(other) : 0);
+            m_data = std::move(io_rOther.m_data);
             return *this;
         }
 
-        bool operator>(const CSharedString& other) const
+        bool operator>(const CSharedString& in_rOther) const
         {
-            return compare(other) > 0;
+            return compare(in_rOther) > 0;
         }
 
-        bool operator>=(const CSharedString& other) const
+        bool operator>=(const CSharedString& in_rOther) const
         {
-            return compare(other) >= 0;
+            return compare(in_rOther) >= 0;
         }
 
-        bool operator<(const CSharedString& other) const
+        bool operator<(const CSharedString& in_rOther) const
         {
-            return compare(other) < 0;
+            return compare(in_rOther) < 0;
         }
 
-        bool operator<=(const CSharedString& other) const
+        bool operator<=(const CSharedString& in_rOther) const
         {
-            return compare(other) <= 0;
+            return compare(in_rOther) <= 0;
         }
 
-        bool operator==(const CSharedString& other) const
+        bool operator==(const CSharedString& in_rOther) const
         {
-            return compare(other) == 0;
+            return compare(in_rOther) == 0;
         }              
         
-        bool operator!=(const CSharedString& other) const
+        bool operator!=(const CSharedString& in_rOther) const
         {
-            return !(*this == other);
+            return !(*this == in_rOther);
         }
 
-        bool operator==(const char* other) const
+        bool operator==(const char* in_pOther) const
         {
-            return strcmp(c_str(), other) == 0;
+            return strcmp(c_str(), in_pOther) == 0;
         }       
         
-        bool operator!=(const char* other) const
+        bool operator!=(const char* in_pOther) const
         {
-            return !(*this == other);
+            return !(*this == in_pOther);
         }
     };
 
