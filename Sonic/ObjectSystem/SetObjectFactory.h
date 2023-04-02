@@ -66,18 +66,17 @@ namespace Sonic
 #define SET_OBJECT_MAKE_HOOK(type) \
     static inline Sonic::SSetObjectMake g_##type##Make = { &(type::Make), nullptr }; \
     \
-    static void __cdecl f##type##MakeHook(Sonic::CSetObjectFactory* pSetObjectFactory) \
+    static void __fastcall f##type##MakeHook(Sonic::CSetObjectFactory* pSetObjectFactory) \
     { \
-        pSetObjectFactory->m_MakeList.push_back({ g_##type##Make, type::ms_Name }); \
+        pSetObjectFactory->m_MakeList.emplace_back(g_##type##Make, type::ms_Name); \
     } \
     \
     static inline uint32_t g_##type##MakeReturnAddr = 0x660AE0; \
     \
     static void __declspec(naked) f##type##MakeTrampoline() \
     { \
-        __asm { push esi } \
+        __asm { mov ecx, esi } \
         __asm { call f##type##MakeHook } \
-        __asm { pop esi } \
         __asm { jmp[g_##type##MakeReturnAddr] } \
     }
 
