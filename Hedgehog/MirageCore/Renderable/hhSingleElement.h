@@ -29,7 +29,7 @@ namespace Hedgehog::Mirage
         hh::map<CMaterialData*, boost::shared_ptr<CMaterialData>> m_MaterialMap;
         BB_INSERT_PADDING(0x8);
 
-        CSingleElement(const bb_null_ctor&) : CElement(bb_null_ctor{}) {}
+        CSingleElement(const bb_null_ctor& nil) : CElement(nil) {}
 
         CSingleElement(const boost::shared_ptr<CModelData>& spModelData) : CSingleElement(bb_null_ctor{})
         {

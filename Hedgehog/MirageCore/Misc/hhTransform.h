@@ -16,22 +16,22 @@ namespace Hedgehog::Mirage
             m_Matrix = Eigen::Translation3f(m_Position) * m_Rotation;
         }
 
-        void SetRotation(const Math::CQuaternion& rotation)
+        void SetRotation(const Math::CQuaternion& in_rRotation)
         {
-            m_Rotation = rotation;
+            m_Rotation = in_rRotation;
             UpdateMatrix();
         }
 
-        void SetPosition(const Math::CVector& position)
+        void SetPosition(const Math::CVector& in_rPosition)
         {
-            m_Position = position;
+            m_Position = in_rPosition;
             UpdateMatrix();
         }
 
-        void SetRotationAndPosition(const Math::CQuaternion& rotation, const Math::CVector& position)
+        void SetRotationAndPosition(const Math::CQuaternion& in_rRotation, const Math::CVector& in_rPosition)
         {
-            m_Rotation = rotation;
-            m_Position = position;
+            m_Rotation = in_rRotation;
+            m_Position = in_rPosition;
             UpdateMatrix();
         }
     };

@@ -34,13 +34,13 @@ namespace Sonic
 
         virtual bool SetAddRenderables(Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
         virtual bool SetAddColliders(const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
-        virtual bool SetAddStateMachine(const Hedgehog::Base::THolder<Sonic::CWorld>& in_worldHolder,
+        virtual bool SetAddStateMachine(const Hedgehog::Base::THolder<Sonic::CWorld>& in_rWorldHolder,
             Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
         virtual bool CObjectBase70(void*, void*, void*) { return true; }
         virtual void CObjectBase74(void*) {}
         virtual void CObjectBase78(void*) {}
-        virtual void SetUpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) {}
-        virtual void SetUpdatePostParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) {}
+        virtual void SetUpdateParallel(const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo) {}
+        virtual void SetUpdatePostParallel(const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo) {}
         virtual void CObjectBase84(void*) {}
 
         BB_VIRTUAL_FUNCTION_PTR(void*, CObjectBase88, 0x10585D0, (void*, A1))

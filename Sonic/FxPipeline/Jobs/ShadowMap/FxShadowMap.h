@@ -26,23 +26,23 @@ namespace Sonic
     static void* const pCFxShadowMapSetRenderStates = (void*)0x10C61D0;
     static void* const pCFxShadowMapUnsetRenderStates = (void*)0x10C6160;
 
-    static void fCFxShadowMapSetRenderStates(Hedgehog::Yggdrasill::CYggDevice* pDevice, uint32_t enableReverseCull)
+    static void fCFxShadowMapSetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
     {
         __asm
         {
-            mov eax, pDevice
-            push enableReverseCull
+            mov eax, in_pDevice
+            push in_EnableReverseCull
             call[pCFxShadowMapSetRenderStates]
             add esp, 4
         }
     }
 
-    static void fCFxShadowMapUnsetRenderStates(Hedgehog::Yggdrasill::CYggDevice* pDevice, uint32_t enableReverseCull)
+    static void fCFxShadowMapUnsetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
     {
         __asm
         {
-            mov eax, pDevice
-            push enableReverseCull
+            mov eax, in_pDevice
+            push in_EnableReverseCull
             call[pCFxShadowMapUnsetRenderStates]
             add esp, 4
         }
@@ -68,14 +68,14 @@ namespace Sonic
             fpCFxShadowMapInitializeCameras(this);
         }
 
-        void SetRenderStates(const bool enableReverseCull)
+        void SetRenderStates(const bool in_EnableReverseCull)
         {
-            fCFxShadowMapSetRenderStates(m_pScheduler->m_pMisc->m_pDevice, enableReverseCull);
+            fCFxShadowMapSetRenderStates(m_pScheduler->m_pMisc->m_pDevice, in_EnableReverseCull);
         }
 
-        void UnsetRenderStates(const bool enableReverseCull)
+        void UnsetRenderStates(const bool in_EnableReverseCull)
         {
-            fCFxShadowMapUnsetRenderStates(m_pScheduler->m_pMisc->m_pDevice, enableReverseCull);
+            fCFxShadowMapUnsetRenderStates(m_pScheduler->m_pMisc->m_pDevice, in_EnableReverseCull);
         }
     };
 

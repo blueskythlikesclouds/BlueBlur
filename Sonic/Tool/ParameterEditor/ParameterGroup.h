@@ -10,19 +10,19 @@ namespace Sonic
     static void* const pCParameterGroupCreateParameterCategory = (void*)0xCE90B0;
 
     static CEditParam* fCParameterGroupCreateParameterCategory(
-        const Hedgehog::Base::CSharedString* pName, CParameterGroup* pParameterGroup, const Hedgehog::Base::CSharedString* pDescription, uint32_t unknown)
+        const Hedgehog::Base::CSharedString* in_pName, CParameterGroup* in_pParameterGroup, const Hedgehog::Base::CSharedString* in_pDescription, uint32_t in_Unknown)
     {
         __asm
         {
-            mov eax, pName
-            mov ecx, pParameterGroup
-            push unknown
-            push pDescription
+            mov eax, in_pName
+            mov ecx, in_pParameterGroup
+            push in_Unknown
+            push in_pDescription
             call [pCParameterGroupCreateParameterCategory]
         }
     }
 
-    static inline BB_FUNCTION_PTR(void, __stdcall, fpCParameterGroupFlush, 0xCE8EF0, CParameterGroup* pParameterGroup);
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpCParameterGroupFlush, 0xCE8EF0, CParameterGroup* in_pParameterGroup);
 
     class CParameterGroup : public CAbstractParameterNode
     {
@@ -30,9 +30,9 @@ namespace Sonic
         static constexpr void* ms_pVfTable = (void*)0x16E5FA4;
 
         CEditParam* CreateParameterCategory(
-            const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description)
+            const Hedgehog::Base::CSharedString& in_rName, const Hedgehog::Base::CSharedString& in_rDescription)
         {
-            return fCParameterGroupCreateParameterCategory(&name, this, &description, 0xFF);
+            return fCParameterGroupCreateParameterCategory(&in_rName, this, &in_rDescription, 0xFF);
         }
 
         void Flush()

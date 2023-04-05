@@ -15,7 +15,7 @@ namespace Hedgehog::Mirage
         boost::shared_ptr<CModelData> m_spModel;
         BB_INSERT_PADDING(0x78);
 
-        CElement(const bb_null_ctor&) : CRenderable(bb_null_ctor{}) {}
+        CElement(const bb_null_ctor& nil) : CRenderable(nil) {}
 
         CElement() : CElement(bb_null_ctor{})
         {

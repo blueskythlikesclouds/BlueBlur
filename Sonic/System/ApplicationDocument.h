@@ -50,9 +50,9 @@ namespace Sonic
         CMember* m_pMember;
         BB_INSERT_PADDING(0x38);
 
-        void AddMessageActor(const Hedgehog::Base::CSharedString& category, Hedgehog::Universe::CMessageActor* pMessageActor)
+        void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor)
         {
-            m_pMember->m_pMessageManager->Add(category, pMessageActor);
+            m_pMember->m_pMessageManager->Add(in_rCategory, in_pMessageActor);
         }
     };
 

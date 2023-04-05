@@ -12,25 +12,25 @@ namespace Sonic
     static void* const pCParamTypeListAddValue = (void*)0xCEBD70;
 
     static CParamTypeList* fCParamTypeListConstructor(
-        CParamTypeList* pParamTypeList, const Hedgehog::Base::CSharedString* pDescription, uint32_t* pValue, uint32_t unknown)
+        CParamTypeList* in_pParamTypeList, const Hedgehog::Base::CSharedString* in_pDescription, uint32_t* in_pValue, uint32_t in_Unknown)
     {
         __asm
         {
-            mov esi, pParamTypeList
-            push unknown
-            push pValue
-            push pDescription
+            mov esi, in_pParamTypeList
+            push in_Unknown
+            push in_pValue
+            push in_pDescription
             call[pCParamTypeListConstructor]
         }
     }
 
-    static void fCParamTypeListAddValue(CParamTypeList* pParamTypeList, const Hedgehog::Base::CSharedString* pName, uint32_t value)
+    static void fCParamTypeListAddValue(CParamTypeList* in_pParamTypeList, const Hedgehog::Base::CSharedString* in_pName, uint32_t in_Value)
     {
         __asm
         {
-            mov eax, pName
-            mov edi, pParamTypeList
-            mov esi, value
+            mov eax, in_pName
+            mov edi, in_pParamTypeList
+            mov esi, in_Value
             call[pCParamTypeListAddValue]
         }
     }
@@ -63,15 +63,15 @@ namespace Sonic
 
         CMember* m_pMember;
 
-        void AddValue(const Hedgehog::Base::CSharedString& name, uint32_t value)
+        void AddValue(const Hedgehog::Base::CSharedString& in_rName, uint32_t in_Value)
         {
-            fCParamTypeListAddValue(this, &name, value);
+            fCParamTypeListAddValue(this, &in_rName, in_Value);
         }
 
-        static CParamTypeList* Create(uint32_t* pValue, const Hedgehog::Base::CSharedString& description)
+        static CParamTypeList* Create(uint32_t* in_pValue, const Hedgehog::Base::CSharedString& in_rDescription)
         {
             CParamTypeList* pParamTypeList = (CParamTypeList*)__HH_ALLOC(sizeof(CParamTypeList));
-            fCParamTypeListConstructor(pParamTypeList, &description, pValue, 0);
+            fCParamTypeListConstructor(pParamTypeList, &in_rDescription, in_pValue, 0);
 
             pParamTypeList->AddRef();
             return pParamTypeList;

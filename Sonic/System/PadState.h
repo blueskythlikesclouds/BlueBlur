@@ -65,24 +65,24 @@ namespace Sonic
 
         BB_INSERT_PADDING(0x20);
 
-        bool IsDown(const EKeyState keys) const
+        bool IsDown(const EKeyState in_Keys) const
         {
-            return (DownState & keys) == keys;
+            return (DownState & in_Keys) == in_Keys;
         }
 
-        bool IsUp(const EKeyState keys) const
+        bool IsUp(const EKeyState in_Keys) const
         {
-            return (UpState & keys) == keys;
+            return (UpState & in_Keys) == in_Keys;
         }
 
-        bool IsTapped(const EKeyState keys) const
+        bool IsTapped(const EKeyState in_Keys) const
         {
-            return (TappedState & keys) == keys;
+            return (TappedState & in_Keys) == in_Keys;
         }
 
-        bool IsReleased(const EKeyState keys) const
+        bool IsReleased(const EKeyState in_Keys) const
         {
-            return (ReleasedState & keys) == keys;
+            return (ReleasedState & in_Keys) == in_Keys;
         }
     };
 

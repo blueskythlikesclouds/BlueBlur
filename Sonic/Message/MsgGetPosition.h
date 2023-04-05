@@ -11,8 +11,8 @@ namespace Sonic::Message
 
         Hedgehog::Math::CVector* m_pPosition;
 
-        MsgGetPosition(Hedgehog::Math::CVector* position) : m_pPosition(position) {}
-        MsgGetPosition(Hedgehog::Math::CVector& position) : m_pPosition(&position) {}
+        MsgGetPosition(Hedgehog::Math::CVector* in_pPosition) : m_pPosition(in_pPosition) {}
+        MsgGetPosition(Hedgehog::Math::CVector& in_rPosition) : m_pPosition(&in_rPosition) {}
     };
 
     BB_ASSERT_OFFSETOF(MsgGetPosition, m_pPosition, 0x10);

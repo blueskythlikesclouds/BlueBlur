@@ -39,24 +39,24 @@ namespace Hedgehog::Base
         {
         }
 
-        CRefPtr(T* obj)
-            : m_pObject(obj)
+        CRefPtr(T* in_pObj)
+            : m_pObject(in_pObj)
         {
             if (m_pObject)
                 m_pObject->AddRef();
         }
 
-        CRefPtr(const CRefPtr& other)
-            : m_pObject(other.m_pObject)
+        CRefPtr(const CRefPtr& in_rOther)
+            : m_pObject(in_rOther.m_pObject)
         {
             if (m_pObject)
                 m_pObject->AddRef();
         }
 
-        CRefPtr(CRefPtr&& other)
-            : m_pObject(other.m_pObject)
+        CRefPtr(CRefPtr&& in_rOther)
+            : m_pObject(in_rOther.m_pObject)
         {
-            other.m_pObject = nullptr;
+            in_rOther.m_pObject = nullptr;
         }
 
         ~CRefPtr()
@@ -65,12 +65,12 @@ namespace Hedgehog::Base
                 m_pObject->Release();
         }
 
-        CRefPtr& operator=(T* obj)
+        CRefPtr& operator=(T* in_rObj)
         {
             if (m_pObject)
                 m_pObject->Release();
 
-            m_pObject = obj;
+            m_pObject = in_rObj;
 
             if (m_pObject)
                 m_pObject->AddRef();
@@ -78,12 +78,12 @@ namespace Hedgehog::Base
             return *this;
         }
 
-        CRefPtr& operator=(const CRefPtr& other)
+        CRefPtr& operator=(const CRefPtr& in_rOther)
         {
             if (m_pObject)
                 m_pObject->Release();
 
-            m_pObject = other.m_pObject;
+            m_pObject = in_rOther.m_pObject;
 
             if (m_pObject)
                 m_pObject->AddRef();
@@ -91,13 +91,13 @@ namespace Hedgehog::Base
             return *this;
         }
 
-        CRefPtr& operator=(CRefPtr&& other)
+        CRefPtr& operator=(CRefPtr&& io_rOther)
         {
             if (m_pObject)
                 m_pObject->Release();
 
-            m_pObject = other.m_pObject;
-            other.m_pObject = nullptr;
+            m_pObject = io_rOther.m_pObject;
+            io_rOther.m_pObject = nullptr;
 
             return *this;
         }
@@ -147,11 +147,11 @@ namespace Hedgehog::Base
             m_pObject = nullptr;
         }
 
-        void Swap(CRefPtr& other)
+        void Swap(CRefPtr& io_rOther)
         {
             T* obj = m_pObject;
-            m_pObject = other.m_pObject;
-            other.m_pObject = obj;
+            m_pObject = io_rOther.m_pObject;
+            io_rOther.m_pObject = obj;
         }
 
     private:

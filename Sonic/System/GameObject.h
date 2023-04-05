@@ -33,13 +33,13 @@ namespace Sonic
     }
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectUpdateParallel, 0xD5F2A0,
-        CGameObject* This, const Hedgehog::Universe::SUpdateInfo& updateInfo);
+        CGameObject* This, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo);
 
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCGameObjectProcessMessage, 0xD60590,
-        Hedgehog::Universe::CMessageActor* This, Hedgehog::Universe::Message& message, bool flag);
+        Hedgehog::Universe::CMessageActor* This, Hedgehog::Universe::Message& in_rMsg, bool in_Flag);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectAddRenderable, 0xD5F620,
-        CGameObject* This, const Hedgehog::Base::CStringSymbol category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& spRenderable, const bool castShadow);
+        CGameObject* This, const Hedgehog::Base::CStringSymbol in_Category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow);
 
     class CGameObject : public Hedgehog::Universe::CUpdateUnit, public Hedgehog::Universe::CMessageActor
     {
@@ -54,7 +54,7 @@ namespace Sonic
 
         CMember* m_pMember;
 
-        CGameObject(const bb_null_ctor&) : CUpdateUnit(bb_null_ctor{}), CMessageActor(bb_null_ctor{}) {}
+        CGameObject(const bb_null_ctor& nil) : CUpdateUnit(nil), CMessageActor(nil) {}
 
         CGameObject() : CGameObject(bb_null_ctor{})
         {
@@ -63,26 +63,26 @@ namespace Sonic
 
         virtual ~CGameObject();
 
-        void UpdateParallel(const Hedgehog::Universe::SUpdateInfo& updateInfo) override
+        void UpdateParallel(const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo) override
         {
-            fpCGameObjectUpdateParallel(this, updateInfo);
+            fpCGameObjectUpdateParallel(this, in_rUpdateInfo);
         }
 
-        bool ProcessMessage(Hedgehog::Universe::Message& message, bool flag) override
+        bool ProcessMessage(Hedgehog::Universe::Message& in_rMsg, bool in_Flag) override
         {
-            return fpCGameObjectProcessMessage(this, message, flag);
+            return fpCGameObjectProcessMessage(this, in_rMsg, in_Flag);
         }
 
         virtual bool CGameObject10() { return true; }
         virtual void* CGameObject14() { return 0; }
 
-        virtual void Initialize(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
-            Sonic::CGameDocument* pGameDocument) {}
+        virtual void Initialize(const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder, 
+            Sonic::CGameDocument* in_pGameDocument) {}
 
-        virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& worldHolder, 
-            Sonic::CGameDocument* pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase) = 0;
+        virtual void AddCallback(const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder, 
+            Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) = 0;
 
-        virtual void RemoveCallback(Sonic::CGameDocument* pGameDocument) {}
+        virtual void RemoveCallback(Sonic::CGameDocument* in_pGameDocument) {}
 
         virtual void CGameObject24(void*) {}
         virtual void KillCallback() {}
@@ -94,10 +94,10 @@ namespace Sonic
             return m_pMember->m_pGameDocument;
         }
 
-        void AddRenderable(const Hedgehog::Base::CStringSymbol category, 
-            const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& spRenderable, const bool castShadow)
+        void AddRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
+            const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow)
         {
-            fpCGameObjectAddRenderable(this, category, spRenderable, castShadow);
+            fpCGameObjectAddRenderable(this, in_Category, in_spRenderable, in_CastShadow);
         }
     };
 

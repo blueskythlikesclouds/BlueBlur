@@ -14,16 +14,16 @@ namespace Hedgehog::Universe
 
     static inline BB_FUNCTION_PTR(CMessageActor*, __thiscall, fpCMessageActorCtor, 0x768A00, CMessageActor* This);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorExecuteParallelJob, 0x7680C0, CMessageActor* This, const SUpdateInfo& updateInfo);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorExecuteParallelJob, 0x7680C0, CMessageActor* This, const SUpdateInfo& in_rUpdateInfo);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageByID, 0x768340,
-        CMessageActor* This, const char* path, size_t line, size_t actorID, const boost::shared_ptr<Message>& spMessage, float time);   
+        CMessageActor* This, const char* in_pPath, size_t in_Line, size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage, float in_Time);   
     
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageByCategory, 0x7684E0,
-        CMessageActor* This, const char* path, size_t line, const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage, float time);
+        CMessageActor* This, const char* in_pPath, size_t in_Line, const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMessage, float in_Time);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageImmByID, 0x767EE0,
-        CMessageActor* This, const char* path, size_t line, size_t actorID, const boost::shared_ptr<Message>& spMessage);
+        CMessageActor* This, const char* in_pPath, size_t in_Line, size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage);
 
     class CMessageActor : public IMessageProcess, public Base::CObject, public IParallelJob
     {
@@ -34,7 +34,7 @@ namespace Hedgehog::Universe
         CMessageManager* m_pMessageManager;
         BB_INSERT_PADDING(0x18);
 
-        CMessageActor(const bb_null_ctor&) : IMessageProcess(bb_null_ctor{}), CObject(bb_null_ctor{}), IParallelJob(bb_null_ctor{}) {}
+        CMessageActor(const bb_null_ctor& nil) : IMessageProcess(nil), CObject(nil), IParallelJob(nil) {}
 
         CMessageActor() : CMessageActor(bb_null_ctor{})
         {
@@ -43,36 +43,36 @@ namespace Hedgehog::Universe
 
         virtual ~CMessageActor();
 
-        virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) override
+        virtual void ExecuteParallelJob(const SUpdateInfo& in_rUpdateInfo) override
         {
-            fpCMessageActorExecuteParallelJob(this, updateInfo);
+            fpCMessageActorExecuteParallelJob(this, in_rUpdateInfo);
         }
 
-        virtual bool ProcessMessage(Message& message, bool flag)
+        virtual bool ProcessMessage(Message& in_rMsg, bool in_Flag)
         {
             return false;
         }
 
-        virtual IStateMachineMessageReceiver* GetStateMachineMessageReceiver(bool flag)
+        virtual IStateMachineMessageReceiver* GetStateMachineMessageReceiver(bool in_Flag)
         {
             return nullptr;
         }
 
 #undef SendMessage
 
-        void SendMessage(const size_t actorID, const boost::shared_ptr<Message>& spMessage, float time = 0.0f)
+        void SendMessage(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage, float in_Time = 0.0f)
         {
-            fpCMessageActorSendMessageByID(this, nullptr, 0, actorID, spMessage, time);
+            fpCMessageActorSendMessageByID(this, nullptr, 0, in_ActorID, in_spMessage, in_Time);
         }      
         
-        void SendMessage(const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage, float time = 0.0f)
+        void SendMessage(const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMessage, float in_Time = 0.0f)
         {
-            fpCMessageActorSendMessageByCategory(this, nullptr, 0, actorCategory, spMessage, time);
+            fpCMessageActorSendMessageByCategory(this, nullptr, 0, in_rActorCategory, in_spMessage, in_Time);
         }      
         
-        void SendMessageImm(const size_t actorID, const boost::shared_ptr<Message>& spMessage)
+        void SendMessageImm(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage)
         {
-            fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
+            fpCMessageActorSendMessageImmByID(this, nullptr, 0, in_ActorID, in_spMessage);
         }
     };
 

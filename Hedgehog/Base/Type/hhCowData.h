@@ -101,6 +101,7 @@ namespace Hedgehog::Base
         {
             if (this != &io_rOther)
             {
+                Unset();
                 m_ptr = io_rOther.m_ptr;
                 io_rOther.m_ptr = ms_memStatic;
             }

@@ -15,16 +15,16 @@ namespace Sonic
 
     static void fCGameObjectModelCtor(
         CGameObjectModel* This,
-        const boost::shared_ptr<Hedgehog::Database::CDatabase>* spDatabase,
-        const Hedgehog::Base::CStringSymbol category,
-        const Hedgehog::Base::CSharedString* modelName
+        const boost::shared_ptr<Hedgehog::Database::CDatabase>* in_spDatabase,
+        const Hedgehog::Base::CStringSymbol in_Category,
+        const Hedgehog::Base::CSharedString* in_pModelName
     )
     {
         __asm
         {
-            push modelName 
-            push category.m_pSymbolNode
-            push spDatabase
+            push in_pModelName
+            push in_Category.m_pSymbolNode
+            push in_spDatabase
             mov eax, This
             call[pCGameObjectModelCtor]
         }
@@ -35,12 +35,12 @@ namespace Sonic
     public:
         BB_INSERT_PADDING(0x14);
 
-        CGameObjectModel(const bb_null_ctor&) : CGameObject3D(bb_null_ctor{}) {}
+        CGameObjectModel(const bb_null_ctor& nil) : CGameObject3D(nil) {}
 
-        CGameObjectModel(const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase, 
-            const Hedgehog::Base::CStringSymbol category, const Hedgehog::Base::CSharedString& modelName) : CGameObjectModel(bb_null_ctor{})
+        CGameObjectModel(const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase, 
+            const Hedgehog::Base::CStringSymbol in_Category, const Hedgehog::Base::CSharedString& in_rModelName) : CGameObjectModel(bb_null_ctor{})
         {
-            fCGameObjectModelCtor(this, &spDatabase, category, &modelName);
+            fCGameObjectModelCtor(this, &in_spDatabase, in_Category, &in_rModelName);
         }
 
         virtual ~CGameObjectModel();

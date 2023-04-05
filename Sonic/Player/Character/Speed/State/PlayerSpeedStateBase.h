@@ -21,7 +21,7 @@ namespace Sonic::Player
             }
         }
 
-        CStateSpeedBase(const bb_null_ctor&) : TState(bb_null_ctor{}) {}
+        CStateSpeedBase(const bb_null_ctor& nil) : TState(nil) {}
 
         CStateSpeedBase() : CStateSpeedBase(bb_null_ctor{})
         {

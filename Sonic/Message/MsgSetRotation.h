@@ -11,7 +11,7 @@ namespace Sonic::Message
 
         Hedgehog::Math::CQuaternion m_Rotation;
 
-        MsgSetRotation(const Hedgehog::Math::CQuaternion& rotation) : m_Rotation(rotation) {}
+        MsgSetRotation(const Hedgehog::Math::CQuaternion& in_rRotation) : m_Rotation(in_rRotation) {}
     };
 
     BB_ASSERT_OFFSETOF(MsgSetRotation, m_Rotation, 0x10);

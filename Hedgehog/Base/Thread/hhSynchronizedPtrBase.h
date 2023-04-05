@@ -11,17 +11,17 @@ namespace Hedgehog::Base
         CSynchronizedObject* m_pObject;
 
     public:
-        CSynchronizedPtrBase(CSynchronizedObject* pObject) : m_pObject(pObject) {}
+        CSynchronizedPtrBase(CSynchronizedObject* in_pObject) : m_pObject(in_pObject) {}
 
-        CSynchronizedPtrBase(const CSynchronizedPtrBase& other) = default;
-        CSynchronizedPtrBase(CSynchronizedPtrBase&& other) : m_pObject(other.m_pObject)
+        CSynchronizedPtrBase(const CSynchronizedPtrBase& in_rOther) = default;
+        CSynchronizedPtrBase(CSynchronizedPtrBase&& io_rOther) : m_pObject(io_rOther.m_pObject)
         {
-            other.m_pObject = nullptr;
+            io_rOther.m_pObject = nullptr;
         }
 
-        CSynchronizedPtrBase& operator=(CSynchronizedObject* const pObject)
+        CSynchronizedPtrBase& operator=(CSynchronizedObject* const in_pObject)
         {
-            m_pObject = pObject;
+            m_pObject = in_pObject;
             return *this;
         }
 

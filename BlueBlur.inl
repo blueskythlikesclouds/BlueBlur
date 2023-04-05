@@ -79,10 +79,10 @@ namespace Hedgehog::Math
     using CVector2 = Eigen::Vector2f;
     using CVector4 = Eigen::Vector4f;
 }
-#else
-#include "hhMath.h"
-#endif
 
+#else
+#include <hhMath.h>
+#endif
 
 struct bb_null_ctor{};
 

@@ -13,14 +13,14 @@ namespace Hedgehog::Universe
     class CUpdateManager;
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCUpdateManagerAdd, 0x77AF20,
-        CUpdateManager* This, const Hedgehog::Base::CSharedString& category, CUpdateUnit* pUpdateUnit);
+        CUpdateManager* This, const Hedgehog::Base::CSharedString& in_rCategory, CUpdateUnit* in_pUpdateUnit);
 
     class CUpdateManager
     {
     public:
-        void Add(const Hedgehog::Base::CSharedString& category, CUpdateUnit* pUpdateUnit)
+        void Add(const Hedgehog::Base::CSharedString& in_rCategory, CUpdateUnit* in_pUpdateUnit)
         {
-            fpCUpdateManagerAdd(this, category, pUpdateUnit);
+            fpCUpdateManagerAdd(this, in_rCategory, in_pUpdateUnit);
         }
     };
 }

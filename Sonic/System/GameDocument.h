@@ -42,9 +42,9 @@ namespace Sonic
     BB_ASSERT_SIZEOF(BGMData, 0x18);
 
     static inline BB_FUNCTION_PTR(void, __stdcall, fpAddGameObject, 0xD631A0,
-        CGameDocument* pGameDocument, const Hedgehog::Base::THolder<CWorld>& worldHolder,
-        const boost::shared_ptr<CGameObject>& spGameObject, boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase,
-        CGameObject* pParentGameObject);
+        CGameDocument* in_pGameDocument, const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder,
+        const boost::shared_ptr<CGameObject>& in_spGameObject, boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase,
+        CGameObject* in_pParentGameObject);
 
     class CGameDocument : public Hedgehog::Base::CSynchronizedObject
     {
@@ -93,20 +93,20 @@ namespace Sonic
 
         virtual ~CGameDocument() = default;
 
-        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const Hedgehog::Base::CSharedString& name = "main") const
+        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const Hedgehog::Base::CSharedString& in_rName = "main") const
         {
-            const auto pair = m_pMember->m_Worlds.find(name);
+            const auto pair = m_pMember->m_Worlds.find(in_rName);
             return pair != m_pMember->m_Worlds.end() ? pair->second.get() : nullptr;
         }
 
-        void AddGameObject(const boost::shared_ptr<CGameObject>& spGameObject, const char* worldName = "main", CGameObject* pParentGameObject = nullptr)
+        void AddGameObject(const boost::shared_ptr<CGameObject>& in_spGameObject, const char* in_pWorldName = "main", CGameObject* in_pParentGameObject = nullptr)
         {
-            fpAddGameObject(this, *GetWorld(worldName), spGameObject, m_pMember->m_spDatabase, pParentGameObject);
+            fpAddGameObject(this, *GetWorld(in_pWorldName), in_spGameObject, m_pMember->m_spDatabase, in_pParentGameObject);
         }
 
-        void AddUpdateUnit(const Hedgehog::Base::CSharedString& category, Hedgehog::Universe::CUpdateUnit* pUpdateUnit)
+        void AddUpdateUnit(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CUpdateUnit* in_pUpdateUnit)
         {
-            m_pMember->m_spUpdateManager->Add(category, pUpdateUnit);
+            m_pMember->m_spUpdateManager->Add(in_rCategory, in_pUpdateUnit);
         }
     };
 

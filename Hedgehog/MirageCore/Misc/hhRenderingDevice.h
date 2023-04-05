@@ -15,28 +15,28 @@ namespace Hedgehog::Mirage
     class CRenderingInfrastructure;
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDeviceSetRenderState, 0x40BB20,
-        CRenderingDevice* This, D3DRENDERSTATETYPE type, uint32_t value);
+        CRenderingDevice* This, D3DRENDERSTATETYPE in_Type, uint32_t in_Value);
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDevicePushRenderState, 0x6F7FD0,
-        CRenderingDevice* This, D3DRENDERSTATETYPE type, uint32_t value);
+        CRenderingDevice* This, D3DRENDERSTATETYPE in_Type, uint32_t in_Value);
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDevicePopRenderState, 0x6F8040,
-        CRenderingDevice* This, D3DRENDERSTATETYPE type);
+        CRenderingDevice* This, D3DRENDERSTATETYPE in_Type);
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDeviceLockRenderState, 0x6F7C60,
-        CRenderingDevice* This, D3DRENDERSTATETYPE type);
+        CRenderingDevice* This, D3DRENDERSTATETYPE in_Type);
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDeviceUnlockRenderState, 0x6F7C90,
-        CRenderingDevice* This, D3DRENDERSTATETYPE type);
+        CRenderingDevice* This, D3DRENDERSTATETYPE in_Type);
 
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDeviceSetPixelShaderParameterF, 0x411BF0,
-        CRenderingDevice* This, const Hedgehog::Base::CStringSymbol& symbol, const float* data, uint32_t count, uint32_t offset, const boost::shared_ptr<CPixelShaderData>& spPixelShaderData);
+        CRenderingDevice* This, const Hedgehog::Base::CStringSymbol& in_rSymbol, const float* in_pData, uint32_t in_Count, uint32_t in_Offset, const boost::shared_ptr<CPixelShaderData>& in_spPixelShaderData);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCRenderingDeviceSetViewMatrix, 0x6FA760,
-        CRenderingDevice* This, const Math::CMatrix& viewMatrix);
+        CRenderingDevice* This, const Math::CMatrix& in_rViewMatrix);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCRenderingDeviceSetAtlasParameterData, 0x6FA080,
-        CRenderingDevice* This, float* const pData);
+        CRenderingDevice* This, float* const in_pData);
 
     class CRenderingDevice
     {
@@ -53,44 +53,44 @@ namespace Hedgehog::Mirage
         const Base::CStringSymbol* m_pPixelShaderPermutation;
         BB_INSERT_PADDING(0x3C);
 
-        void SetRenderState(D3DRENDERSTATETYPE type, uint32_t value)
+        void SetRenderState(D3DRENDERSTATETYPE in_Type, uint32_t in_Value)
         {
-            fpCRenderingDeviceSetRenderState(this, type, value);
+            fpCRenderingDeviceSetRenderState(this, in_Type, in_Value);
         }
 
-        void PushRenderState(D3DRENDERSTATETYPE type, uint32_t value)
+        void PushRenderState(D3DRENDERSTATETYPE in_Type, uint32_t in_Value)
         {
-            fpCRenderingDevicePushRenderState(this, type, value);
+            fpCRenderingDevicePushRenderState(this, in_Type, in_Value);
         }
 
-        void PopRenderState(D3DRENDERSTATETYPE type)
+        void PopRenderState(D3DRENDERSTATETYPE in_Type)
         {
-            fpCRenderingDevicePopRenderState(this, type);
+            fpCRenderingDevicePopRenderState(this, in_Type);
         }
 
-        void LockRenderState(D3DRENDERSTATETYPE type)
+        void LockRenderState(D3DRENDERSTATETYPE in_Type)
         {
-            fpCRenderingDeviceLockRenderState(this, type);
+            fpCRenderingDeviceLockRenderState(this, in_Type);
         }
 
-        void UnlockRenderState(D3DRENDERSTATETYPE type)
+        void UnlockRenderState(D3DRENDERSTATETYPE in_Type)
         {
-            fpCRenderingDeviceUnlockRenderState(this, type);
+            fpCRenderingDeviceUnlockRenderState(this, in_Type);
         }
 
-        void SetPixelShaderParameterF(const Hedgehog::Base::CStringSymbol& symbol, const float* data, uint32_t count, uint32_t offset, const boost::shared_ptr<CPixelShaderData>& spPixelShaderData)
+        void SetPixelShaderParameterF(const Hedgehog::Base::CStringSymbol& in_rSymbol, const float* in_pData, uint32_t in_Count, uint32_t in_Offset, const boost::shared_ptr<CPixelShaderData>& in_spPixelShaderData)
         {
-            fpCRenderingDeviceSetPixelShaderParameterF(this, symbol, data, count, offset, spPixelShaderData);
+            fpCRenderingDeviceSetPixelShaderParameterF(this, in_rSymbol, in_pData, in_Count, in_Offset, in_spPixelShaderData);
         }
 
-        void SetViewMatrix(const Math::CMatrix& viewMatrix)
+        void SetViewMatrix(const Math::CMatrix& in_rViewMatrix)
         {
-            fpCRenderingDeviceSetViewMatrix(this, viewMatrix);
+            fpCRenderingDeviceSetViewMatrix(this, in_rViewMatrix);
         }
 
-        void SetAtlasParameterData(float* const pData)
+        void SetAtlasParameterData(float* const in_pData)
         {
-            fpCRenderingDeviceSetAtlasParameterData(this, pData);
+            fpCRenderingDeviceSetAtlasParameterData(this, in_pData);
         }
     };
 

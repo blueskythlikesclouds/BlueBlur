@@ -21,7 +21,7 @@ namespace Sonic
 
     struct SParamEnumValue
     {
-        const char* Name;
+        const char* pName;
         uint32_t Value;
     };
 
@@ -33,72 +33,72 @@ namespace Sonic
     static void* const pCEditParamAddParamTypeList = (void*)0xCEF700;
 
     static CParamBool* fCEditParamCreateParamBool(
-        const SParamValueCreationParams<bool>* pCreationParams, CEditParam* pEditParam, const Hedgehog::Base::CSharedString* pName)
+        const SParamValueCreationParams<bool>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
         {
-            mov eax, pCreationParams
-            push pName
-            push pEditParam
+            mov eax, in_pCreationParams
+            push in_pName
+            push in_pEditParam
             call[pCEditParamCreateParamBool]
         }
     }
 
     static CParamValue<unsigned long>* fCEditParamCreateParamUnsignedLong(
-        const SParamValueCreationParams<unsigned long>* pCreationParams, CEditParam* pEditParam, const Hedgehog::Base::CSharedString* pName)
+        const SParamValueCreationParams<unsigned long>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
         {
-            mov eax, pCreationParams
-            push pName
-            push pEditParam
+            mov eax, in_pCreationParams
+            push in_pName
+            push in_pEditParam
             call[pCEditParamCreateParamUnsignedLong]
         }
     }
 
     static CParamValue<long>* fCEditParamCreateParamLong(
-        const SParamValueCreationParams<long>* pCreationParams, CEditParam* pEditParam, const Hedgehog::Base::CSharedString* pName)
+        const SParamValueCreationParams<long>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
         {
-            mov eax, pCreationParams
-            push pName
-            push pEditParam
+            mov eax, in_pCreationParams
+            push in_pName
+            push in_pEditParam
             call[pCEditParamCreateParamLong]
         }
     }
 
     static CParamValue<int>* fCEditParamCreateParamInt(
-        const SParamValueCreationParams<int>* pCreationParams, CEditParam* pEditParam, const Hedgehog::Base::CSharedString* pName)
+        const SParamValueCreationParams<int>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
         {
-            mov eax, pCreationParams
-            push pName
-            push pEditParam
+            mov eax, in_pCreationParams
+            push in_pName
+            push in_pEditParam
             call[pCEditParamCreateParamInt]
         }
     }
 
     static CParamValue<float>* fCEditParamCreateParamFloat(
-        const SParamValueCreationParams<float>* pCreationParams, CEditParam* pEditParam, const Hedgehog::Base::CSharedString* pName)
+        const SParamValueCreationParams<float>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
         {
-            mov eax, pCreationParams
-            push pName
-            push pEditParam
+            mov eax, in_pCreationParams
+            push in_pName
+            push in_pEditParam
             call[pCEditParamCreateParamFloat]
         }
     }
 
-    static void fCEditParamAddParamTypeList(const Hedgehog::Base::CSharedString* pName, CEditParam* pEditParam, CParamTypeList* pParamTypeList)
+    static void fCEditParamAddParamTypeList(const Hedgehog::Base::CSharedString* in_pName, CEditParam* in_pEditParam, CParamTypeList* in_pParamTypeList)
     {
         __asm
         {
-            mov eax, pName
-            mov ecx, pEditParam
-            push pParamTypeList
+            mov eax, in_pName
+            mov ecx, in_pEditParam
+            push in_pParamTypeList
             call[pCEditParamAddParamTypeList]
         }
     }
@@ -109,81 +109,81 @@ namespace Sonic
         hh::vector<CParamBase*> m_ParamList;
         BB_INSERT_PADDING(0x20);
 
-        CParamBool* CreateParamBool(const SParamValueCreationParams<bool>& creationParams, const Hedgehog::Base::CSharedString& name)
+        CParamBool* CreateParamBool(const SParamValueCreationParams<bool>& in_rCreationParams, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return fCEditParamCreateParamBool(&creationParams, this, &name);
+            return fCEditParamCreateParamBool(&in_rCreationParams, this, &in_rName);
         }
 
-        CParamBool* CreateParamBool(bool* pValue, const Hedgehog::Base::CSharedString& name)
+        CParamBool* CreateParamBool(bool* pValue, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return CreateParamBool({ pValue, *pValue }, name);
+            return CreateParamBool({ pValue, *pValue }, in_rName);
         }
 
-        CParamValue<unsigned long>* CreateParamUnsignedLong(const SParamValueCreationParams<unsigned long>& creationParams, const Hedgehog::Base::CSharedString& name)
+        CParamValue<unsigned long>* CreateParamUnsignedLong(const SParamValueCreationParams<unsigned long>& in_rCreationParams, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return fCEditParamCreateParamUnsignedLong(&creationParams, this, &name);
+            return fCEditParamCreateParamUnsignedLong(&in_rCreationParams, this, &in_rName);
         }
 
-        CParamValue<unsigned long>* CreateParamUnsignedLong(unsigned long* pValue, const Hedgehog::Base::CSharedString& name)
+        CParamValue<unsigned long>* CreateParamUnsignedLong(unsigned long* pValue, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return CreateParamUnsignedLong({ pValue, *pValue }, name);
+            return CreateParamUnsignedLong({ pValue, *pValue }, in_rName);
         }
 
-        CParamValue<long>* CreateParamLong(const SParamValueCreationParams<long>& creationParams, const Hedgehog::Base::CSharedString& name)
+        CParamValue<long>* CreateParamLong(const SParamValueCreationParams<long>& in_rCreationParams, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return fCEditParamCreateParamLong(&creationParams, this, &name);
+            return fCEditParamCreateParamLong(&in_rCreationParams, this, &in_rName);
         }
 
-        CParamValue<long>* CreateParamLong(long* pValue, const Hedgehog::Base::CSharedString& name)
+        CParamValue<long>* CreateParamLong(long* pValue, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return CreateParamLong({ pValue, *pValue }, name);
+            return CreateParamLong({ pValue, *pValue }, in_rName);
         }
 
-        CParamValue<int>* CreateParamInt(const SParamValueCreationParams<int>& creationParams, const Hedgehog::Base::CSharedString& name)
+        CParamValue<int>* CreateParamInt(const SParamValueCreationParams<int>& in_rCreationParams, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return fCEditParamCreateParamInt(&creationParams, this, &name);
+            return fCEditParamCreateParamInt(&in_rCreationParams, this, &in_rName);
         }
 
-        CParamValue<int>* CreateParamInt(int* pValue, const Hedgehog::Base::CSharedString& name)
+        CParamValue<int>* CreateParamInt(int* pValue, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return CreateParamInt({ pValue, *pValue }, name);
+            return CreateParamInt({ pValue, *pValue }, in_rName);
         }
 
-        CParamValue<float>* CreateParamFloat(const SParamValueCreationParams<float>& creationParams, const Hedgehog::Base::CSharedString& name)
+        CParamValue<float>* CreateParamFloat(const SParamValueCreationParams<float>& in_rCreationParams, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return fCEditParamCreateParamFloat(&creationParams, this, &name);
+            return fCEditParamCreateParamFloat(&in_rCreationParams, this, &in_rName);
         }
 
-        CParamValue<float>* CreateParamFloat(float* pValue, const Hedgehog::Base::CSharedString& name)
+        CParamValue<float>* CreateParamFloat(float* pValue, const Hedgehog::Base::CSharedString& in_rName)
         {
-            return CreateParamFloat({ pValue, *pValue }, name);
+            return CreateParamFloat({ pValue, *pValue }, in_rName);
         }
 
         template<typename T>
         CParamTypeList* CreateParamTypeList(
-            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const T& values)
+            uint32_t* pValue, const Hedgehog::Base::CSharedString& in_rName, const Hedgehog::Base::CSharedString& in_rDescription, const T& in_rValues)
         {
-            CParamTypeList* pParamTypeList = CParamTypeList::Create(pValue, description);
+            CParamTypeList* pParamTypeList = CParamTypeList::Create(pValue, in_rDescription);
 
-            for (auto& value : values)
-                pParamTypeList->AddValue(value.Name, value.Value);
+            for (auto& value : in_rValues)
+                pParamTypeList->AddValue(value.pName, value.Value);
 
             pParamTypeList->AddRef();
-            fCEditParamAddParamTypeList(&name, this, pParamTypeList);
+            fCEditParamAddParamTypeList(&in_rName, this, pParamTypeList);
 
             return pParamTypeList;
         }
 
         CParamTypeList* CreateParamTypeList(
-            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const std::initializer_list<SParamEnumValue>& values)
+            uint32_t* pValue, const Hedgehog::Base::CSharedString& in_rName, const Hedgehog::Base::CSharedString& in_rDescription, const std::initializer_list<SParamEnumValue>& in_rValues)
         {
-            return CreateParamTypeList<std::initializer_list<SParamEnumValue>>(pValue, name, description, values);
+            return CreateParamTypeList<std::initializer_list<SParamEnumValue>>(pValue, in_rName, in_rDescription, in_rValues);
         }
 
         CParamTypeList* CreateParamTypeList(
-            uint32_t* pValue, const Hedgehog::Base::CSharedString& name, const Hedgehog::Base::CSharedString& description, const std::vector<SParamEnumValue>& values)
+            uint32_t* pValue, const Hedgehog::Base::CSharedString& in_rName, const Hedgehog::Base::CSharedString& in_rDescription, const std::vector<SParamEnumValue>& in_rValues)
         {
-            return CreateParamTypeList<std::vector<SParamEnumValue>>(pValue, name, description, values);
+            return CreateParamTypeList<std::vector<SParamEnumValue>>(pValue, in_rName, in_rDescription, in_rValues);
         }
     };
 

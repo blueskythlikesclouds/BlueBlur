@@ -10,17 +10,17 @@ namespace Hedgehog::Base
         T* m_pObject;
 
     public:
-        TSynchronizedPtr(T* pObject) : m_pObject(pObject) {}
+        TSynchronizedPtr(T* in_pObject) : m_pObject(in_pObject) {}
 
-        TSynchronizedPtr(const TSynchronizedPtr& other) = default;
-        TSynchronizedPtr(TSynchronizedPtr&& other) : m_pObject(other.m_pObject)
+        TSynchronizedPtr(const TSynchronizedPtr& in_rOther) = default;
+        TSynchronizedPtr(TSynchronizedPtr&& io_rOther) : m_pObject(io_rOther.m_pObject)
         {
-            other.m_pObject = nullptr;
+            io_rOther.m_pObject = nullptr;
         }
 
-        TSynchronizedPtr<T, ForceSync>& operator=(T* const pObject)
+        TSynchronizedPtr<T, ForceSync>& operator=(T* const in_pObject)
         {
-            m_pObject = pObject;
+            m_pObject = in_pObject;
             return *this;
         }
 

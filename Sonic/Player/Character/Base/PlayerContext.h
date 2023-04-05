@@ -37,13 +37,13 @@ namespace Sonic::Player
     static uint32_t pCPlayerContextChangeState = 0xE4FF30;
 
     static Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextChangeState(
-        CPlayerContext* This, const Hedgehog::Base::CSharedString* pType)
+        CPlayerContext* This, const Hedgehog::Base::CSharedString* in_pType)
     {
         Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* pResult;
 
         __asm
         {
-            mov eax, pType
+            mov eax, in_pType
             mov ecx, This
             call[pCPlayerContextChangeState]
             mov pResult, eax
@@ -134,7 +134,7 @@ namespace Sonic::Player
         virtual void CPlayerContext54() {}
         virtual void CPlayerContext58() {}
 
-        virtual void ChangeAnimation(const Hedgehog::Base::CSharedString& name) = 0;
+        virtual void ChangeAnimation(const Hedgehog::Base::CSharedString& in_rName) = 0;
 
         virtual void CPlayerContext60() {}
         virtual void CPlayerContext64() {}
@@ -142,7 +142,7 @@ namespace Sonic::Player
         virtual void CPlayerContext6C() {}
         virtual void CPlayerContext70() {}
 
-        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t cueId, size_t flags) = 0;
+        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t in_CueId, size_t in_Flags) = 0;
 
         virtual void CPlayerContext78() {}
         virtual void CPlayerContext7C() {}
@@ -157,15 +157,15 @@ namespace Sonic::Player
             return fpCPlayerContextGetCurrentAnimationName(this);
         }
 
-        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(const Hedgehog::Base::CSharedString& type)
+        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(const Hedgehog::Base::CSharedString& in_rType)
         {
-            return fCPlayerContextChangeState(this, &type);
+            return fCPlayerContextChangeState(this, &in_rType);
         }
 
         template<typename T>
         T* ChangeState()
         {
-            return static_cast<T*>(ChangeState(T::ms_StateName));
+            return static_cast<T*>(ChangeState(T::ms_pStateName));
         }
     };
 

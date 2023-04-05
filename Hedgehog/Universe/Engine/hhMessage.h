@@ -3,16 +3,16 @@
 #include <Hedgehog/Base/hhObject.h>
 
 #define HH_FND_MSG_MAKE_TYPE(name) \
-    static constexpr const char* ms_Type = (const char*)(name); \
+    static constexpr const char* ms_pType = (const char*)(name); \
     \
-    bool IsOfType(const char* pType) const override \
+    bool IsOfType(const char* in_pType) const override \
     { \
-        return pType == ms_Type; \
+        return in_pType == ms_pType; \
     } \
     \
     const char* GetType() const override \
     { \
-        return ms_Type; \
+        return ms_pType; \
     }
 
 namespace Hedgehog::Universe
@@ -25,13 +25,13 @@ namespace Hedgehog::Universe
 
         virtual ~Message() = default;
 
-        virtual bool IsOfType(const char* pType) const = 0;
+        virtual bool IsOfType(const char* in_pType) const = 0;
         virtual const char* GetType() const = 0;
 
         template<typename T>
         bool Is() const
         {
-            return IsOfType(T::ms_Type);
+            return IsOfType(T::ms_pType);
         }
     };
 

@@ -15,7 +15,7 @@ namespace Hedgehog::Database
     static inline BB_FUNCTION_PTR(void, __cdecl, fpCDatabaseCreateDatabase, 0x696C30, boost::shared_ptr<CDatabase>& out_spDatabase, size_t in_Unknown);
     
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetRawData, 0x40F010,
-        CDatabase* This, boost::shared_ptr<CRawData>& spRawData, const Hedgehog::Base::CSharedString& name, uint32_t unknown);
+        CDatabase* This, boost::shared_ptr<CRawData>& out_spRawData, const Hedgehog::Base::CSharedString& in_rName, uint32_t in_Unknown);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetDatabaseDataNames, 0x692FD0,
         const CDatabase* This, hh::vector<Hedgehog::Base::CSharedString>& out_rDatabaseDataNames);
@@ -34,10 +34,10 @@ namespace Hedgehog::Database
             return spDatabase;
         }
 
-        boost::shared_ptr<CRawData> GetRawData(const Base::CSharedString& name, uint32_t unknown = 0)
+        boost::shared_ptr<CRawData> GetRawData(const Base::CSharedString& in_rName, uint32_t in_Unknown = 0)
         {
             boost::shared_ptr<CRawData> spRawData;
-            fpCDatabaseGetRawData(this, spRawData, name, unknown);
+            fpCDatabaseGetRawData(this, spRawData, in_rName, in_Unknown);
             return spRawData;
         }
 

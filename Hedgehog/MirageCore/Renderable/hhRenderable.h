@@ -14,7 +14,7 @@ namespace Hedgehog::Mirage
         bool m_Enabled;
         float m_Field8;
 
-        CRenderable(const bb_null_ctor&) : CObject(bb_null_ctor{}) {}
+        CRenderable(const bb_null_ctor& nil) : CObject(nil) {}
 
         CRenderable() : CRenderable(bb_null_ctor{})
         {

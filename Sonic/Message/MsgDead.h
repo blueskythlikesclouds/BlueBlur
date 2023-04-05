@@ -11,7 +11,7 @@ namespace Sonic::Message
 
         bool m_OutOfControl;
 
-        MsgDead(const bool outOfControl) : m_OutOfControl(outOfControl) {}
+        MsgDead(const bool in_OutOfControl) : m_OutOfControl(in_OutOfControl) {}
     };
 
     BB_ASSERT_OFFSETOF(MsgDead, m_OutOfControl, 0x10);

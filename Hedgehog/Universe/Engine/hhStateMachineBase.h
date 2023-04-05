@@ -11,10 +11,10 @@ namespace Hedgehog::Universe
     class CStateMachineBase;
 
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCStateMachineBaseProcessMessageInStateMachine, 0x76B640,
-        CStateMachineBase* This, Message& message, bool flag);
+        CStateMachineBase* This, Message& in_rMsg, bool in_Flag);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseUpdateStateMachine, 0x76DF00,
-        CStateMachineBase* This, const SUpdateInfo& updateInfo);
+        CStateMachineBase* This, const SUpdateInfo& in_rUpdateInfo);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseCtor, 0x76E3C0, 
         CStateMachineBase* This);
@@ -34,7 +34,7 @@ namespace Hedgehog::Universe
 
             static inline BB_FUNCTION_PTR(void, __thiscall, fpCtor, 0x76DD70, CStateBase* This);
 
-            CStateBase(const bb_null_ctor&) : IMessageProcess(bb_null_ctor{}), CObject(bb_null_ctor{}) {}
+            CStateBase(const bb_null_ctor& nil) : IMessageProcess(nil), CObject(nil) {}
 
             CStateBase() : CStateBase(bb_null_ctor{})
             {
@@ -46,7 +46,7 @@ namespace Hedgehog::Universe
                 return m_pContext;
             }
 
-            virtual bool ProcessMessage(Message& message, bool flag)
+            virtual bool ProcessMessage(Message& in_rMsg, bool in_Flag)
             {
                 return false;
             }
@@ -75,7 +75,7 @@ namespace Hedgehog::Universe
         SUpdateInfo m_UpdateInfo;
         BB_INSERT_PADDING(0x30);
 
-        CStateMachineBase(const bb_null_ctor&) : IStateMachineMessageReceiver(bb_null_ctor{}), CObject(bb_null_ctor{}) {}
+        CStateMachineBase(const bb_null_ctor& nil) : IStateMachineMessageReceiver(nil), CObject(nil) {}
 
         CStateMachineBase() : CStateMachineBase(bb_null_ctor{})
         {
@@ -83,22 +83,22 @@ namespace Hedgehog::Universe
         }
 
         static inline BB_FUNCTION_PTR(void, __thiscall, fpRegisterStateFactory, 0x76CAA0,
-            CStateMachineBase* This, Base::CSharedString name, boost::function<boost::shared_ptr<CStateBase>()> factory);
+            CStateMachineBase* This, Base::CSharedString in_Name, boost::function<boost::shared_ptr<CStateBase>()> in_Factory);
 
-        void RegisterStateFactory(Base::CSharedString name, boost::function<boost::shared_ptr<CStateBase>()> factory)
+        void RegisterStateFactory(Base::CSharedString in_Name, boost::function<boost::shared_ptr<CStateBase>()> in_Factory)
         {
-            fpRegisterStateFactory(this, std::move(name), std::move(factory));
+            fpRegisterStateFactory(this, std::move(in_Name), std::move(in_Factory));
         }
 
         template<typename TState>
         void RegisterStateFactory()
         {
-            RegisterStateFactory(std::move(Base::CSharedString(TState::ms_StateName)), [] { return boost::make_shared<TState>(); });
+            RegisterStateFactory(std::move(Base::CSharedString(TState::ms_pStateName)), [] { return boost::make_shared<TState>(); });
         }
 
-        void UpdateStateMachine(const SUpdateInfo& updateInfo)
+        void UpdateStateMachine(const SUpdateInfo& in_rUpdateInfo)
         {
-            fpCStateMachineBaseUpdateStateMachine(this, updateInfo);
+            fpCStateMachineBaseUpdateStateMachine(this, in_rUpdateInfo);
         }
 
         void* GetContextBase() const
@@ -112,7 +112,7 @@ namespace Hedgehog::Universe
         }
 
         static inline BB_FUNCTION_PTR(void, __thiscall, fpGetCurrentState, 0x76B5C0,
-            CStateMachineBase* This, boost::shared_ptr<CStateBase>& spState);
+            CStateMachineBase* This, boost::shared_ptr<CStateBase>& out_spState);
 
         boost::shared_ptr<CStateBase> GetCurrentState()
         {
@@ -122,24 +122,24 @@ namespace Hedgehog::Universe
         }
 
         static inline BB_FUNCTION_PTR(void, __thiscall, fpChangeState, 0x76F230,
-            CStateMachineBase* This, boost::shared_ptr<CStateBase>& spState, Base::CSharedString name, int priority, float time, bool flag);
+            CStateMachineBase* This, boost::shared_ptr<CStateBase>& out_spState, Base::CSharedString in_Name, int in_Priority, float in_Time, bool in_Flag);
 
-        boost::shared_ptr<CStateBase> ChangeState(Base::CSharedString name, const int priority = 0, const float time = 0, const bool flag = false)
+        boost::shared_ptr<CStateBase> ChangeState(Base::CSharedString in_Name, const int in_Priority = 0, const float in_Time = 0, const bool in_Flag = false)
         {
             boost::shared_ptr<CStateBase> spState;
-            fpChangeState(this, spState, std::move(name), priority, time, flag);
+            fpChangeState(this, spState, std::move(in_Name), in_Priority, in_Time, in_Flag);
             return spState;
         }
 
         template<typename TState>
-        boost::shared_ptr<TState> ChangeState(const int priority = 0, const float time = 0, const bool flag = false)
+        boost::shared_ptr<TState> ChangeState(const int in_Priority = 0, const float in_Time = 0, const bool in_Flag = false)
         {
-            return boost::static_pointer_cast<TState>(ChangeState(std::move(Base::CSharedString(TState::ms_StateName)), priority, time, flag));
+            return boost::static_pointer_cast<TState>(ChangeState(std::move(Base::CSharedString(TState::ms_pStateName)), in_Priority, in_Time, in_Flag));
         }
 
-        virtual bool ProcessMessageInStateMachine(Message& message, bool flag) override
+        virtual bool ProcessMessageInStateMachine(Message& in_rMsg, bool in_Flag) override
         {
-            return fpCStateMachineBaseProcessMessageInStateMachine(this, message, flag);
+            return fpCStateMachineBaseProcessMessageInStateMachine(this, in_rMsg, in_Flag);
         }
 
         virtual ~CStateMachineBase();

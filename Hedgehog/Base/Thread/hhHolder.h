@@ -11,7 +11,7 @@ namespace Hedgehog::Base
     class THolder : public CHolderBase
     {
     public:
-        THolder(T* pObject) : CHolderBase(pObject, ForceSync) {}
+        THolder(T* in_pObject) : CHolderBase(in_pObject, ForceSync) {}
 
         T* get() const
         {

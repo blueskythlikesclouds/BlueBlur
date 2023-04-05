@@ -22,21 +22,21 @@ namespace Hedgehog::Base
             
         }
 
-        CHolderBase(CSynchronizedObject* pSynchronizedObject, bool forceSync = false)
+        CHolderBase(CSynchronizedObject* in_pSynchronizedObject, bool in_ForceSync = false)
         {
-            fpCHolderBaseCtor(this, pSynchronizedObject, forceSync);
+            fpCHolderBaseCtor(this, in_pSynchronizedObject, in_ForceSync);
         }
 
-        CHolderBase(CHolderBase&& other)
+        CHolderBase(CHolderBase&& io_rOther)
         {
-            m_pSynchronizedObject = other.m_pSynchronizedObject;
-            m_Locked = other.m_Locked;
+            m_pSynchronizedObject = io_rOther.m_pSynchronizedObject;
+            m_Locked = io_rOther.m_Locked;
 
-            other.m_pSynchronizedObject = nullptr;
-            other.m_Locked = false;
+            io_rOther.m_pSynchronizedObject = nullptr;
+            io_rOther.m_Locked = false;
         }
 
-        CHolderBase(const CHolderBase& other) = delete;
+        CHolderBase(const CHolderBase& in_rOther) = delete;
 
         ~CHolderBase()
         {

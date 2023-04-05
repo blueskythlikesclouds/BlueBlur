@@ -57,12 +57,12 @@ namespace Hedgehog::Yggdrasill
     class CYggSceneRenderer;
     class CYggScheduler;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererRender, 0x789890, CYggSceneRenderer* This, ERenderCategory type, ERenderLevel slot);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererRender, 0x789890, CYggSceneRenderer* This, ERenderCategory in_Category, ERenderLevel in_Level);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererResetMaterialColor, 0x10D4EB0, CYggSceneRenderer* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetLightViewProjection, 0x789360, CYggSceneRenderer* This, const Math::CMatrix& view, const Math::CMatrix44& projection);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererLockShader, 0x789BE0, CYggSceneRenderer* This, const Hedgehog::Mirage::SShaderPair& shaderPair, size_t flags);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetLightViewProjection, 0x789360, CYggSceneRenderer* This, const Math::CMatrix& in_rView, const Math::CMatrix44& in_rProjection);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererLockShader, 0x789BE0, CYggSceneRenderer* This, const Hedgehog::Mirage::SShaderPair& in_rShaderPair, size_t in_Flags);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnlockShader, 0x789860, CYggSceneRenderer* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetCamera, 0x7890F0, CYggSceneRenderer* This, Hedgehog::Mirage::CCamera* pCamera, size_t flags);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetCamera, 0x7890F0, CYggSceneRenderer* This, Hedgehog::Mirage::CCamera* in_pCamera, size_t in_Flags);
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnsetCamera, 0x789110, CYggSceneRenderer* This);
 
     class CYggSceneRenderer : public Base::CObject
@@ -83,14 +83,14 @@ namespace Hedgehog::Yggdrasill
         virtual void _4() = 0;
         virtual void _8() = 0;
 
-        void Render(ERenderCategory type, ERenderLevel slot)
+        void Render(ERenderCategory in_Category, ERenderLevel in_Level)
         {
-            fpCYggSceneRendererRender(this, type, slot);
+            fpCYggSceneRendererRender(this, in_Category, in_Level);
         }
 
-        void Render(uint32_t type, uint32_t slot)
+        void Render(uint32_t in_Category, uint32_t in_Level)
         {
-            fpCYggSceneRendererRender(this, (ERenderCategory)type, (ERenderLevel)slot);
+            fpCYggSceneRendererRender(this, (ERenderCategory)in_Category, (ERenderLevel)in_Level);
         }
 
         void ResetMaterialColor()
@@ -98,14 +98,14 @@ namespace Hedgehog::Yggdrasill
             fpCYggSceneRendererResetMaterialColor(this);
         }
 
-        void SetLightViewProjection(const Math::CMatrix& view, const Math::CMatrix44& projection)
+        void SetLightViewProjection(const Math::CMatrix& in_rView, const Math::CMatrix44& in_rProjection)
         {
-            fpCYggSceneRendererSetLightViewProjection(this, view, projection);
+            fpCYggSceneRendererSetLightViewProjection(this, in_rView, in_rProjection);
         }
 
-        void LockShader(const Hedgehog::Mirage::SShaderPair& shaderPair, const size_t flags)
+        void LockShader(const Hedgehog::Mirage::SShaderPair& in_rShaderPair, const size_t in_Flags)
         {
-            fpCYggSceneRendererLockShader(this, shaderPair, flags);
+            fpCYggSceneRendererLockShader(this, in_rShaderPair, in_Flags);
         }
 
         void UnlockShader()
@@ -113,9 +113,9 @@ namespace Hedgehog::Yggdrasill
             fpCYggSceneRendererUnlockShader(this);
         }
 
-        void SetCamera(Hedgehog::Mirage::CCamera* pCamera, const size_t flags)
+        void SetCamera(Hedgehog::Mirage::CCamera* in_pCamera, const size_t in_Flags)
         {
-            fpCYggSceneRendererSetCamera(this, pCamera, flags);
+            fpCYggSceneRendererSetCamera(this, in_pCamera, in_Flags);
         }
 
         void UnsetCamera()

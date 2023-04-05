@@ -13,7 +13,7 @@ namespace Hedgehog::Universe
     public:
         BB_INSERT_PADDING(0x24);
 
-        CUpdateUnit(const bb_null_ctor&) : CObject(bb_null_ctor{}), IParallelJob(bb_null_ctor{}) {}
+        CUpdateUnit(const bb_null_ctor& nil) : CObject(nil), IParallelJob(nil) {}
 
         CUpdateUnit() : CUpdateUnit(bb_null_ctor{})
         {
@@ -22,13 +22,13 @@ namespace Hedgehog::Universe
 
         virtual ~CUpdateUnit();
 
-        virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) override
+        virtual void ExecuteParallelJob(const SUpdateInfo& in_rUpdateInfo) override
         {
-            UpdateParallel(updateInfo);
+            UpdateParallel(in_rUpdateInfo);
         }
 
-        virtual void UpdateParallel(const SUpdateInfo& updateInfo) {}
-        virtual void UpdateSerial(const SUpdateInfo& updateInfo) {}
+        virtual void UpdateParallel(const SUpdateInfo& in_rUpdateInfo) {}
+        virtual void UpdateSerial(const SUpdateInfo& in_rUpdateInfo) {}
     };
 
     BB_ASSERT_SIZEOF(CUpdateUnit, 0x28);

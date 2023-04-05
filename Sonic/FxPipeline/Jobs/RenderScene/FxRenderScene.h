@@ -15,14 +15,14 @@ namespace Sonic
         Hedgehog::Yggdrasill::ERenderLevel m_RenderLevels;
         BB_INSERT_PADDING(0x20);
 
-        void RenderScene(Hedgehog::Yggdrasill::ERenderCategory category, Hedgehog::Yggdrasill::ERenderLevel level)
+        void RenderScene(Hedgehog::Yggdrasill::ERenderCategory in_Category, Hedgehog::Yggdrasill::ERenderLevel in_Level)
         {
-            m_pScheduler->m_pMisc->m_spSceneRenderer->Render(category & m_RenderCategories, level & m_RenderLevels);
+            m_pScheduler->m_pMisc->m_spSceneRenderer->Render(in_Category & m_RenderCategories, in_Level & m_RenderLevels);
         }
 
-        void RenderScene(uint32_t category, uint32_t level)
+        void RenderScene(uint32_t in_Category, uint32_t in_Level)
         {
-            m_pScheduler->m_pMisc->m_spSceneRenderer->Render(category & m_RenderCategories, level & m_RenderLevels);
+            m_pScheduler->m_pMisc->m_spSceneRenderer->Render(in_Category & m_RenderCategories, in_Level & m_RenderLevels);
         }
     };
 

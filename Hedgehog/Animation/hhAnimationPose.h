@@ -16,10 +16,17 @@ namespace Hedgehog::Animation
     class CAnimationPose;
     class CIkRaycastInterface;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fCAnimationPoseCtor, 0x006CB140,
-        CAnimationPose* This, const boost::shared_ptr<Hedgehog::Database::CDatabase>& spDatabase, const Hedgehog::Base::CSharedString& name);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseCtor, 0x6CB140,
+        CAnimationPose* This, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase, const Hedgehog::Base::CSharedString& in_rName);
 
-    static inline BB_FUNCTION_PTR(void*, __cdecl, fBoostCAnimCache, 0x006C9850, const boost::shared_ptr<void>& boost);
+    static inline BB_FUNCTION_PTR(void*, __cdecl, fpCAnimationPoseCreateAnimationCache, 0x6C9850, 
+        const boost::shared_ptr<CAnimationCache>& out_spAnimationCache);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseAddAnimationList, 0x6CBFC0, 
+        CAnimationPose* This, void* in_pList, int in_Count);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseUpdate, 0x6CCCB0,
+        CAnimationPose* This, float in_DeltaTime);
 
     // TODO: MOVE THESE TO THEIR OWN LOCATIONS.
 
@@ -78,35 +85,37 @@ namespace Hedgehog::Animation
         boost::shared_ptr<CIkRaycastInterface> m_spFootIK; // 0x90
 
         BB_INSERT_PADDING(0x78) {};
-        //Hedgehog::Mirage::CMatrixNodeListener m_NodeListener;
 
         boost::shared_ptr<Database::CDatabase> m_spDatabase; // 0x110
         BB_INSERT_PADDING(0x18) {};
         boost::shared_ptr<CAnimationCache> m_spAnimationCache; // 0x130
-        BB_INSERT_PADDING(0x14) {};
+        BB_INSERT_PADDING(0x18) {};
+
+        static boost::shared_ptr<CAnimationCache> CreateAnimationCache()
+        {
+            boost::shared_ptr<CAnimationCache> spAnimationCache;
+            fpCAnimationPoseCreateAnimationCache(spAnimationCache);
+            return spAnimationCache;
+        }
 
         CAnimationPose(const bb_null_ctor&)
         {
         }
 
-        CAnimationPose(const boost::shared_ptr<Database::CDatabase>& database, const Base::CSharedString& name) : CAnimationPose(bb_null_ctor{})
+        CAnimationPose(const boost::shared_ptr<Database::CDatabase>& in_spDatabase, const Base::CSharedString& in_rName) : CAnimationPose(bb_null_ctor{})
         {
-            fCAnimationPoseCtor(this, database, name);
-            boost::shared_ptr<void> ptr{};
-            fBoostCAnimCache(m_spAnimationCache);
-            m_spAnimationCache = ptr;
+            fpCAnimationPoseCtor(this, in_spDatabase, in_rName);
+            m_spAnimationCache = CreateAnimationCache();
         }
 
-        void CommitAnimLists(void* list, int count)
+        void AddAnimationList(void* in_pList, int in_Count)
         {
-            BB_FUNCTION_PTR(void, __thiscall, func, 0x006CBFC0, CAnimationPose * This, void* _list, int _count);
-            func(this, list, count);
+            fpCAnimationPoseAddAnimationList(this, in_pList, in_Count);
         }
 
-        void Update(float deltaTime)
+        void Update(float in_DeltaTime)
         {
-            BB_FUNCTION_PTR(void, __thiscall, func, 0x006CCCB0, CAnimationPose * This, float _deltaTime);
-            func(this, deltaTime);
+            fpCAnimationPoseUpdate(this, in_DeltaTime);
         }
     };
 

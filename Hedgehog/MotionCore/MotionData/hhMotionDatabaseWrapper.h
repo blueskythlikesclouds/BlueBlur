@@ -13,21 +13,21 @@ namespace Hedgehog::Motion
     class CMotionDatabaseWrapper;
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetLightMotionData, 0x7599C0,
-        CMotionDatabaseWrapper* This, boost::shared_ptr<CLightMotionData>& spLightMotionData, const Hedgehog::Base::CSharedString& name, uint32_t unknown);
+        CMotionDatabaseWrapper* This, boost::shared_ptr<CLightMotionData>& out_spLightMotionData, const Hedgehog::Base::CSharedString& in_rName, uint32_t in_Unknown);
 
     class CMotionDatabaseWrapper
     {
     public:
         Hedgehog::Database::CDatabase* m_pDatabase;
 
-        CMotionDatabaseWrapper(Hedgehog::Database::CDatabase* pDatabase) : m_pDatabase(pDatabase)
+        CMotionDatabaseWrapper(Hedgehog::Database::CDatabase* in_pDatabase) : m_pDatabase(in_pDatabase)
         {
         }
 
-        boost::shared_ptr<CLightMotionData> GetLightMotionData(const Base::CSharedString& name, uint32_t unknown = 0)
+        boost::shared_ptr<CLightMotionData> GetLightMotionData(const Base::CSharedString& in_rName, uint32_t in_Unknown = 0)
         {
             boost::shared_ptr<CLightMotionData> spLightMotionData;
-            fpCDatabaseGetLightMotionData(this, spLightMotionData, name, unknown);
+            fpCDatabaseGetLightMotionData(this, spLightMotionData, in_rName, in_Unknown);
             return spLightMotionData;
         }
     };

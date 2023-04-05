@@ -64,7 +64,6 @@
 #include <Hedgehog/MirageCore/Renderable/hhOptimalBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
-#include <Hedgehog/MirageCore/Renderable/hhTerrainRenderable.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightData.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMaterialData.h>

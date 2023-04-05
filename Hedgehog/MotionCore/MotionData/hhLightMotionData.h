@@ -32,7 +32,7 @@ namespace Hedgehog::Motion
     class CLightMotionData;
 
     static inline BB_FUNCTION_PTR(void, __cdecl, fpCLightMotionDataStep, 0x758640, 
-        CLightMotionData* This, uint32_t index, float frame, CLightSubMotionValueData& valueData, const Math::CMatrix& matrix);
+        CLightMotionData* This, uint32_t in_Index, float in_Frame, CLightSubMotionValueData& in_rValueData, const Math::CMatrix& in_rMatrix);
 
     class CLightMotionData : public Hedgehog::Database::CDatabaseData
     {
@@ -41,9 +41,9 @@ namespace Hedgehog::Motion
         CLightSubMotionData* m_SubMotions;
         BB_INSERT_PADDING(0xC);
 
-        void Step(uint32_t index, float frame, CLightSubMotionValueData& valueData, const Math::CMatrix& matrix = Math::CMatrix::Identity())
+        void Step(uint32_t in_Index, float in_Frame, CLightSubMotionValueData& in_rValueData, const Math::CMatrix& in_rMatrix = Math::CMatrix::Identity())
         {
-            fpCLightMotionDataStep(this, index, frame, valueData, matrix);
+            fpCLightMotionDataStep(this, in_Index, in_Frame, in_rValueData, in_rMatrix);
         }
     };
 

@@ -11,7 +11,7 @@ namespace Hedgehog::Universe
         class TState : public CStateBase
         {
         public:
-            TState(const bb_null_ctor&) : CStateBase(bb_null_ctor{}) {}
+            TState(const bb_null_ctor& nil) : CStateBase(nil) {}
             TState() : CStateBase() {}
 
             TContext* GetContext() const
@@ -33,9 +33,9 @@ namespace Hedgehog::Universe
             return static_cast<TContext*>(m_pContext);
         }
 
-        virtual void SetContext(TContext* pContext)
+        virtual void SetContext(TContext* in_pContext)
         {
-            m_pContext = static_cast<void*>(pContext);
+            m_pContext = static_cast<void*>(in_pContext);
         }
     };
 }

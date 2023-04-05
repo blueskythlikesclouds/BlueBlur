@@ -243,13 +243,13 @@ namespace Sonic::Player
         boost::shared_ptr<CWaitHandle>     m_spWaitHandle;     // 0x1220
         BB_INSERT_PADDING(0x08);
 
-        uint8_t GetStateFlag(const EStateFlag in_stateFlag) const;
-        void SetStateFlag(const EStateFlag in_stateFlag, const uint8_t in_flag) const;
+        uint8_t GetStateFlag(const EStateFlag in_StateFlag) const;
+        void SetStateFlag(const EStateFlag in_StateFlag, const uint8_t in_Flag) const;
 
         // Trick IntelliSense to suggest this macro.
 #pragma push_macro("StateFlag")
 #undef StateFlag
-        void StateFlag(const EStateFlag in_stateFlag) const;
+        void StateFlag(const EStateFlag in_StateFlag) const;
 #pragma pop_macro("StateFlag")
 
         void HandleVelocityChanged()

@@ -11,7 +11,7 @@ namespace Sonic
     static inline BB_FUNCTION_PTR(CGameObject3D*, __stdcall, fpCGameObject3DCtor, 0xD5DAC0, CGameObject3D* This);
 
     static inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObject3DSetPosition, 0xD5CE10,
-        CGameObject3D* This, const Hedgehog::Math::CVector& position);
+        CGameObject3D* This, const Hedgehog::Math::CVector& in_rPosition);
 
     class CGameObject3D : public CGameObject, public Hedgehog::Mirage::CMatrixNodeListener
     {
@@ -21,7 +21,7 @@ namespace Sonic
         boost::shared_ptr<void> m_spEventCollisionHolder;
         BB_INSERT_PADDING(0x2C);
 
-        CGameObject3D(const bb_null_ctor&) : CGameObject(bb_null_ctor{}), CMatrixNodeListener(bb_null_ctor{}) {}
+        CGameObject3D(const bb_null_ctor& nil) : CGameObject(nil), CMatrixNodeListener(nil) {}
 
         CGameObject3D() : CGameObject3D(bb_null_ctor{})
         {
@@ -30,15 +30,15 @@ namespace Sonic
 
         virtual ~CGameObject3D();
 
-        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0xD5CB80, (const Hedgehog::Base::THolder<CWorld>&, worldHolder),
-            (Sonic::CGameDocument*, pGameDocument), (const boost::shared_ptr<Hedgehog::Database::CDatabase>&, spDatabase))
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0xD5CB80, (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder),
+            (Sonic::CGameDocument*, in_pGameDocument), (const boost::shared_ptr<Hedgehog::Database::CDatabase>&, in_spDatabase))
 
-        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, RemoveCallback, 0xD5C770, (Sonic::CGameDocument*, pGameDocument))
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, RemoveCallback, 0xD5C770, (Sonic::CGameDocument*, in_pGameDocument))
 
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, CGameObject24, 0xD5D540, (void*, in_pGameplayFlowManager))
 
         BB_OVERRIDE_FUNCTION_PTR(bool, CMatrixNodeListener, MatrixNodeChangedCallback, 0xD5C780, 
-            (const Hedgehog::Math::CMatrix&, matrix), (size_t, flags))
+            (const Hedgehog::Math::CMatrix&, in_rMatrix), (size_t, in_Flags))
 
         BB_VIRTUAL_FUNCTION_PTR(void,  SetVisible, 0xD5D6D0, (bool, in_IsVisible))
         BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable38, 0xD5D200, (void*, A1), (void*, A2), (void*, A3), (void*, A4))
@@ -51,9 +51,9 @@ namespace Sonic
         BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable54, 0xD5CC50, (void*, A1), (void*, A2), (void*, A3))
         BB_VIRTUAL_FUNCTION_PTR(void*, CGameObject3DVtable58, 0xD5CC80, (void*, A1), (void*, A2))
 
-        void SetPosition(const Hedgehog::Math::CVector& position)
+        void SetPosition(const Hedgehog::Math::CVector& in_rPosition)
         {
-            fpCGameObject3DSetPosition(this, position);
+            fpCGameObject3DSetPosition(this, in_rPosition);
         }
     };
 
