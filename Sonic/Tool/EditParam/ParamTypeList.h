@@ -38,8 +38,6 @@ namespace Sonic
     class CParamTypeList : public CParamBase
     {
     public:
-        static constexpr void* ms_pVfTable = (void*)0x016E5C74;
-
         class CMember
         {
         public:
@@ -47,11 +45,14 @@ namespace Sonic
             {
             public:
                 hh::map<uint32_t, Hedgehog::Base::CSharedString> m_ValueMap;
-                BB_INSERT_PADDING(0x44);
+                boost::function1<void, uint32_t> m_ChangedCallbackA;
+                boost::function<void()> m_ChangedCallbackB;
                 uint32_t* m_pValue;
-                uint32_t m_DefaultValue;
+                uint32_t m_Value;
                 Hedgehog::Base::CSharedString m_Description;
-                BB_INSERT_PADDING(0xC);
+                BB_INSERT_PADDING(0x4);
+                uint32_t m_ValueMax;
+                BB_INSERT_PADDING(0x4);
             };
 
             FuncData* m_pFuncData;
@@ -79,9 +80,12 @@ namespace Sonic
     };
 
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ValueMap, 0x8);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ChangedCallbackA, 0x18);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ChangedCallbackB, 0x38);
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_pValue, 0x58);
-    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_DefaultValue, 0x5C);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_Value, 0x5C);
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_Description, 0x60);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ValueMax, 0x68);
     BB_ASSERT_SIZEOF(CParamTypeList::CMember::FuncData, 0x70);
 
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember, m_pFuncData, 0x0);

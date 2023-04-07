@@ -199,6 +199,7 @@
 #include <Sonic/System/RenderDirector/RenderDirector.h>
 #include <Sonic/System/RenderDirector/RenderDirectorFxPipeline.h>
 #include <Sonic/Tool/EditParam/EditParam.h>
+#include <Sonic/Tool/EditParam/FuncList.h>
 #include <Sonic/Tool/EditParam/ParamBase.h>
 #include <Sonic/Tool/EditParam/ParamBool.h>
 #include <Sonic/Tool/EditParam/ParamTypeList.h>

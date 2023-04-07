@@ -14,9 +14,10 @@ namespace Sonic
     template<typename T>
     struct SParamValueCreationParams
     {
-        T* m_pValue;
-        T m_DefaultValue;
-        alignas(4) BB_INSERT_PADDING(0x24);
+        T* pValue;
+        T DefaultValue;
+        boost::function1<void, T> ChangedCallback;
+        Hedgehog::Base::CSharedString Description;
     };
 
     struct SParamEnumValue

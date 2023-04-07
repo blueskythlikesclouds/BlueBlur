@@ -10,7 +10,7 @@ namespace Hedgehog::Base
         uint32_t m_refCount;
 
     public:
-        CRefCountObject() : m_refCount(1) {}
+        CRefCountObject() : m_refCount(0) {}
 
         virtual ~CRefCountObject() = default;
 
