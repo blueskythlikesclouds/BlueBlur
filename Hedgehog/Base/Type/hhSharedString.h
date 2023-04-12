@@ -370,6 +370,12 @@ namespace Hedgehog::Base
             return *this;
         }
 
+        CSharedString& operator=(const char* in_pStr)
+        {
+            assign(in_pStr);
+            return *this;
+        }
+
         CSharedString& operator=(CSharedString&& io_rOther)
         {
             assign(std::move(io_rOther));
