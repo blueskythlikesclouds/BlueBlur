@@ -71,6 +71,14 @@
     mov eax, 41C1F0h
     jmp eax
 
+??0SArchiveParam@Database@Hedgehog@@QAE@HI@Z:
+    mov eax, 446F90h
+    jmp eax
+
+??1SArchiveParam@Database@Hedgehog@@QAE@XZ:
+    mov eax, 446E30h
+    jmp eax
+
 public ??1CMessageActor@Universe@Hedgehog@@UAE@XZ
 public ??1CUpdateUnit@Universe@Hedgehog@@UAE@XZ
 public ??1CStateBase@CStateMachineBase@Universe@Hedgehog@@UAE@XZ
@@ -83,5 +91,7 @@ public ??0CGameObjectCSD@Sonic@@QAE@MVCStringSymbol@Base@Hedgehog@@@Z
 public ??0CGameObjectCSD@Sonic@@QAE@V?$RCPtr@VCProject@CSD@Chao@@@CSD@Chao@@MVCStringSymbol@Base@Hedgehog@@_N@Z
 public ??1CGameObjectCSD@Sonic@@UAE@XZ
 public ??1RCObject@RCPtrAbs@CSD@Chao@@UAE@XZ
+public ??0SArchiveParam@Database@Hedgehog@@QAE@HI@Z
+public ??1SArchiveParam@Database@Hedgehog@@QAE@XZ
 
 end
