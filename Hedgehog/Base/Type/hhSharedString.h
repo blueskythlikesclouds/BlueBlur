@@ -171,6 +171,8 @@ namespace Hedgehog::Base
         }
 
     public:
+        static constexpr size_t npos = ~0u;
+
         CSharedString() : m_pStr(ms_pMemStatic)
         {
         }
@@ -233,6 +235,44 @@ namespace Hedgehog::Base
         bool empty() const
         {
             return size() == 0;
+        }
+
+        const char* begin() const
+        {
+            return get();
+        }
+
+        const char* end() const
+        {
+            return !IsMemStatic() ? &m_pStr[GetHolder()->Length] : ms_pMemStatic;
+        }
+
+        CSharedString substr(size_t pos = 0, size_t len = npos) const
+        {
+            if (IsMemStatic()) 
+                return CSharedString();
+
+            if (len > (GetHolder()->Length - pos))
+                len = GetHolder()->Length - pos;
+
+            if (pos == 0 && len == GetHolder()->Length)
+                return *this;
+
+            return SStringHolder::Make(&m_pStr[pos], len);
+        }
+
+        size_t find(char c, size_t pos = 0) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            for (size_t i = pos; i < GetHolder()->Length; i++)
+            {
+                if (m_pStr[i] == c)
+                    return i;
+            }
+
+            return npos;
         }
 
         void assign(const CSharedString& in_rOther)
