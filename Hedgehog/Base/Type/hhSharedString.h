@@ -275,6 +275,160 @@ namespace Hedgehog::Base
             return npos;
         }
 
+        size_t find(const char* s, size_t pos = 0) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            size_t len = strlen(s);
+            for (size_t i = pos; i < GetHolder()->Length - len + 1; i++)
+            {
+                if (strncmp(m_pStr + i, s, len) == 0)
+                    return i;
+            }
+
+            return npos;
+        }
+
+        size_t rfind(char c, size_t pos = npos) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            if (pos >= GetHolder()->Length)
+                pos = GetHolder()->Length - 1;
+
+            for (size_t i = pos; i != static_cast<size_t>(-1); i--)
+            {
+                if (m_pStr[i] == c)
+                    return i;
+            }
+
+            return npos;
+        }
+
+        size_t find_first_of(const char* s, size_t pos = 0) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            size_t len = strlen(s);
+            for (size_t i = pos; i < GetHolder()->Length; i++)
+            {
+                for (size_t j = 0; j < len; j++)
+                {
+                    if (m_pStr[i] == s[j])
+                        return i;
+                }
+            }
+
+            return npos;
+        }
+
+        size_t find_last_of(const char* s, size_t pos = npos) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            if (pos >= GetHolder()->Length)
+                pos = GetHolder()->Length - 1;
+
+            size_t len = strlen(s);
+            for (size_t i = pos; i != static_cast<size_t>(-1); i--)
+            {
+                for (size_t j = 0; j < len; j++)
+                {
+                    if (m_pStr[i] == s[j])
+                        return i;
+                }
+            }
+
+            return npos;
+        }
+
+        size_t find_first_not_of(const char* s, size_t pos = 0) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            size_t len = strlen(s);
+            for (size_t i = pos; i < GetHolder()->Length; i++)
+            {
+                bool found = false;
+                for (size_t j = 0; j < len; j++)
+                {
+                    if (m_pStr[i] == s[j])
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                    return i;
+            }
+
+            return npos;
+        }
+
+        size_t find_last_not_of(const char* s, size_t pos = npos) const
+        {
+            if (IsMemStatic())
+                return npos;
+
+            if (pos >= GetHolder()->Length)
+                pos = GetHolder()->Length - 1;
+
+            size_t len = strlen(s);
+            for (size_t i = pos; i != static_cast<size_t>(-1); i--)
+            {
+                bool found = false;
+                for (size_t j = 0; j < len; j++)
+                {
+                    if (m_pStr[i] == s[j])
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                    return i;
+            }
+
+            return npos;
+        }
+
+        size_t find(const CSharedString& str, size_t pos = 0) const
+        {
+            return find(str.c_str(), pos);
+        }
+
+        size_t rfind(const CSharedString& str, size_t pos = npos) const
+        {
+            return rfind(str.c_str(), pos);
+        }
+
+        size_t find_first_of(const CSharedString& str, size_t pos = 0) const
+        {
+            return find_first_of(str.c_str(), pos);
+        }
+
+        size_t find_last_of(const CSharedString& str, size_t pos = npos) const
+        {
+            return find_last_of(str.c_str(), pos);
+        }
+
+        size_t find_first_not_of(const CSharedString& str, size_t pos = 0) const
+        {
+            return find_first_not_of(str.c_str(), pos);
+        }
+
+        size_t find_last_not_of(const CSharedString& str, size_t pos = npos) const
+        {
+            return find_last_not_of(str.c_str(), pos);
+        }
+
         void assign(const CSharedString& in_rOther)
         {
             if (!IsMemStatic())
