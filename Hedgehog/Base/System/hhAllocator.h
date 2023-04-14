@@ -2,9 +2,9 @@
 
 #include <BlueBlur.inl>
 
-static inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOC, 0x65FC60, const size_t size);
-static inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOCALIGN, 0x65FCE0, const size_t size, const size_t align);
-static inline BB_FUNCTION_PTR(void, __cdecl, __HH_FREE, 0x65FD70, void* pData);
+static inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOC, 0x65FC60, const size_t in_Size);
+static inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOCALIGN, 0x65FCE0, const size_t in_Size, const size_t in_Align);
+static inline BB_FUNCTION_PTR(void, __cdecl, __HH_FREE, 0x65FD70, void* in_pData);
 
 namespace Hedgehog::Base
 {

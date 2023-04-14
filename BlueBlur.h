@@ -2,28 +2,14 @@
 
 #pragma comment(lib, "BlueBlur.lib")
 
-#if (defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL != 0) || defined(_MAP_) || defined(_XTREE_)
-#if defined(_VECTOR_) || defined(_LIST_) || defined(_MAP_) || defined(_XTREE_)
-#error "BlueBlur must be included before STL"
-#endif
-#endif
-
-#pragma push_macro("_ITERATOR_DEBUG_LEVEL")
-#undef _ITERATOR_DEBUG_LEVEL
-#define _ITERATOR_DEBUG_LEVEL 0
-
-#include <Hedgehog/Base/Container/hhMap.h>
-#include <Hedgehog/Base/Container/hhList.h>
-#include <Hedgehog/Base/Container/hhVector.h>
-
-#undef _ITERATOR_DEBUG_LEVEL
-#pragma pop_macro("_ITERATOR_DEBUG_LEVEL")
-
 #include <Hedgehog/Animation/hhAnimationControl.h>
 #include <Hedgehog/Animation/hhAnimationControlSingle.h>
 #include <Hedgehog/Animation/hhAnimationPose.h>
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/hhRefCountObject.h>
+#include <Hedgehog/Base/Container/hhList.h>
+#include <Hedgehog/Base/Container/hhMap.h>
+#include <Hedgehog/Base/Container/hhVector.h>
 #include <Hedgehog/Base/Platform/D3D9/hhCriticalSectionD3D9.h>
 #include <Hedgehog/Base/System/hhAllocator.h>
 #include <Hedgehog/Base/System/hhSymbol.h>

@@ -12,9 +12,6 @@ os.system("ml /c /nologo /safeseh /Fo \"{}\" \"{}\"".format(objFilePath, asmFile
 os.system("lib /nologo /OUT:{} {}".format(libFilePath, objFilePath))
 
 def generateIncludes(f, x):
-    first = []
-    second = []
-
     for (directoryPath, dirNames, fileNames) in os.walk(srcDirectoryPath + "/" + x):
         prefix = directoryPath[directoryPath.index(x):].replace("\\", "/")
     
@@ -22,38 +19,9 @@ def generateIncludes(f, x):
             continue
     
         for fileName in fileNames:
-            line = "#include <{}/{}>\n".format(prefix, fileName)
-            if "Container" in prefix:
-                if "hhMap" in fileName:
-                    first.insert(0, line)
-                else:
-                    first.append(line)
-            else:
-                second.append(line)
+            f.write("#include <{}/{}>\n".format(prefix, fileName))
 
-
-    if first:
-        f.write("#if (defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL != 0) || defined(_MAP_) || defined(_XTREE_)\n"\
-"#if defined(_VECTOR_) || defined(_LIST_) || defined(_MAP_) || defined(_XTREE_)\n"\
-"#error \"BlueBlur must be included before STL\"\n"\
-"#endif\n"\
-"#endif\n"\
-"\n"\
-"#pragma push_macro(\"_ITERATOR_DEBUG_LEVEL\")\n"\
-"#undef _ITERATOR_DEBUG_LEVEL\n"\
-"#define _ITERATOR_DEBUG_LEVEL 0\n\n")
-
-        for line in first:
-            f.write(line)
-
-        f.write("\n#undef _ITERATOR_DEBUG_LEVEL\n")
-        f.write("#pragma pop_macro(\"_ITERATOR_DEBUG_LEVEL\")\n\n")
-
-    if second:
-        for line in second:
-            f.write(line)
-
-        f.write("\n")
+    f.write("\n")
     
 with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
     f.write("#pragma once\n\n")
