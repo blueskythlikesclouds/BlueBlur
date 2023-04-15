@@ -8,28 +8,28 @@ namespace Hedgehog
     class vector
     {
     protected:
-        Allocator m_alloc;
-        T* m_begin;
-        T* m_end;
-        T* m_capacityEnd;
+        Allocator m_Alloc;
+        T* m_pFirst;
+        T* m_pLast;
+        T* m_pEnd;
 
         void ReserveUnchecked(size_t in_NewCapacity)
         {
-            T* alloc = m_alloc.allocate(in_NewCapacity);
-            std::uninitialized_move(m_begin, m_end, alloc);
+            T* alloc = m_Alloc.allocate(in_NewCapacity);
+            std::uninitialized_move(m_pFirst, m_pLast, alloc);
 
-            std::destroy(m_begin, m_end);
-            m_alloc.deallocate(m_begin, m_capacityEnd - m_begin);
+            std::destroy(m_pFirst, m_pLast);
+            m_Alloc.deallocate(m_pFirst, m_pEnd - m_pFirst);
 
-            m_end = alloc + (m_end - m_begin);
-            m_begin = alloc;
-            m_capacityEnd = alloc + in_NewCapacity;
+            m_pLast = alloc + (m_pLast - m_pFirst);
+            m_pFirst = alloc;
+            m_pEnd = alloc + in_NewCapacity;
         }
 
         void ReserveOne()
         {
-            if (m_end == m_capacityEnd)
-                ReserveUnchecked(m_begin != m_end ? (m_capacityEnd - m_begin) * 2 : 1);
+            if (m_pLast == m_pEnd)
+                ReserveUnchecked(m_pFirst != m_pLast ? (m_pEnd - m_pFirst) * 2 : 1);
         }
 
     public:
@@ -51,37 +51,37 @@ namespace Hedgehog
             using pointer = T*;
             using reference = T&;
 
-            iterator() : m_ptr(nullptr) {}
-            iterator(pointer p) : m_ptr(p) {}
+            iterator() : m_pPtr(nullptr) {}
+            iterator(T* p) : m_pPtr(p) {}
 
-            reference operator*() const { return *m_ptr; }
-            pointer operator->() const { return m_ptr; }
+            reference operator*() const { return *m_pPtr; }
+            pointer operator->() const { return m_pPtr; }
 
-            iterator& operator++() { ++m_ptr; return *this; }
+            iterator& operator++() { ++m_pPtr; return *this; }
             iterator operator++(int) { iterator tmp = *this; ++(*this); return tmp; }
 
-            iterator& operator--() { --m_ptr; return *this; }
+            iterator& operator--() { --m_pPtr; return *this; }
             iterator operator--(int) { iterator tmp = *this; --(*this); return tmp; }
 
-            iterator& operator+=(difference_type n) { m_ptr += n; return *this; }
+            iterator& operator+=(difference_type n) { m_pPtr += n; return *this; }
             iterator operator+(difference_type n) const { iterator tmp = *this; return tmp += n; }
             friend iterator operator+(difference_type n, iterator it) { return it + n; }
 
             iterator& operator-=(difference_type n) { return *this += -n; }
             iterator operator-(difference_type n) const { iterator tmp = *this; return tmp -= n; }
-            difference_type operator-(const iterator& other) const { return m_ptr - other.m_ptr; }
+            difference_type operator-(const iterator& other) const { return m_pPtr - other.m_pPtr; }
 
             reference operator[](difference_type n) const { return *(*this + n); }
 
-            bool operator==(const iterator& other) const { return m_ptr == other.m_ptr; }
+            bool operator==(const iterator& other) const { return m_pPtr == other.m_pPtr; }
             bool operator!=(const iterator& other) const { return !(*this == other); }
-            bool operator<(const iterator& other) const { return m_ptr < other.m_ptr; }
+            bool operator<(const iterator& other) const { return m_pPtr < other.m_pPtr; }
             bool operator<=(const iterator& other) const { return !(other < *this); }
             bool operator>(const iterator& other) const { return other < *this; }
             bool operator>=(const iterator& other) const { return !(*this < other); }
 
         private:
-            pointer m_ptr;
+            T* m_pPtr;
 
             friend class vector;
             friend class const_iterator;
@@ -96,38 +96,38 @@ namespace Hedgehog
             using pointer = const T*;
             using reference = const T&;
 
-            const_iterator() : m_ptr(nullptr) {}
-            const_iterator(pointer p) : m_ptr(p) {}
-            const_iterator(const iterator& other) : m_ptr(other.m_ptr) {}
+            const_iterator() : m_pPtr(nullptr) {}
+            const_iterator(T* p) : m_pPtr(p) {}
+            const_iterator(const iterator& other) : m_pPtr(other.m_pPtr) {}
 
-            reference operator*() const { return *m_ptr; }
-            pointer operator->() const { return m_ptr; }
+            reference operator*() const { return *m_pPtr; }
+            pointer operator->() const { return m_pPtr; }
 
-            const_iterator& operator++() { ++m_ptr; return *this; }
+            const_iterator& operator++() { ++m_pPtr; return *this; }
             const_iterator operator++(int) { const_iterator tmp = *this; ++(*this); return tmp; }
 
-            const_iterator& operator--() { --m_ptr; return *this; }
+            const_iterator& operator--() { --m_pPtr; return *this; }
             const_iterator operator--(int) { const_iterator tmp = *this; --(*this); return tmp; }
 
-            const_iterator& operator+=(difference_type n) { m_ptr += n; return *this; }
+            const_iterator& operator+=(difference_type n) { m_pPtr += n; return *this; }
             const_iterator operator+(difference_type n) const { const_iterator tmp = *this; return tmp += n; }
             friend const_iterator operator+(difference_type n, const_iterator it) { return it + n; }
 
             const_iterator& operator-=(difference_type n) { return *this += -n; }
             const_iterator operator-(difference_type n) const { const_iterator tmp = *this; return tmp -= n; }
-            difference_type operator-(const const_iterator& other) const { return m_ptr - other.m_ptr; }
+            difference_type operator-(const const_iterator& other) const { return m_pPtr - other.m_pPtr; }
 
             reference operator[](difference_type n) const { return *(*this + n); }
 
-            bool operator==(const const_iterator& other) const { return m_ptr == other.m_ptr; }
+            bool operator==(const const_iterator& other) const { return m_pPtr == other.m_pPtr; }
             bool operator!=(const const_iterator& other) const { return !(*this == other); }
-            bool operator<(const const_iterator& other) const { return m_ptr < other.m_ptr; }
+            bool operator<(const const_iterator& other) const { return m_pPtr < other.m_pPtr; }
             bool operator<=(const const_iterator& other) const { return !(other < *this); }
             bool operator>(const const_iterator& other) const { return other < *this; }
             bool operator>=(const const_iterator& other) const { return !(*this < other); }
 
         private:
-            pointer m_ptr;
+            T* m_pPtr;
             friend class vector;
         };
 
@@ -135,162 +135,162 @@ namespace Hedgehog
         using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
         vector() 
-            : m_alloc()
-            , m_begin()
-            , m_end()
-            , m_capacityEnd()
+            : m_Alloc()
+            , m_pFirst()
+            , m_pLast()
+            , m_pEnd()
         {
         }
 
         explicit vector(const Allocator& alloc) 
-            : m_alloc(alloc)
-            , m_begin()
-            , m_end()
-            , m_capacityEnd()
+            : m_Alloc(alloc)
+            , m_pFirst()
+            , m_pLast()
+            , m_pEnd()
         {
         }
 
         vector(size_type count, const T& value, const Allocator& alloc = Allocator())
-            : m_alloc(alloc)
+            : m_Alloc(alloc)
         {
             if (count != 0)
             {
-                m_begin = m_alloc.allocate(count);
-                m_end = m_begin + count;
-                m_capacityEnd = m_end;
-                std::uninitialized_fill(m_begin, m_end, value);
+                m_pFirst = m_Alloc.allocate(count);
+                m_pLast = m_pFirst + count;
+                m_pEnd = m_pLast;
+                std::uninitialized_fill(m_pFirst, m_pLast, value);
             }
             else
             {
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         explicit vector(size_type count, const Allocator& alloc = Allocator())
-            : m_alloc(alloc)
+            : m_Alloc(alloc)
         {
             if (count != 0)
             {
-                m_begin = m_alloc.allocate(count);
-                m_end = m_begin + count;
-                m_capacityEnd = m_end;
-                std::uninitialized_default_construct(m_begin, m_end);
+                m_pFirst = m_Alloc.allocate(count);
+                m_pLast = m_pFirst + count;
+                m_pEnd = m_pLast;
+                std::uninitialized_default_construct(m_pFirst, m_pLast);
             }
             else
             {
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         template<class InputIt>
         vector(InputIt first, InputIt last, const Allocator& alloc = Allocator())
-            : m_alloc(alloc)
+            : m_Alloc(alloc)
         {
             auto count = std::distance(first, last);
 
             if (count != 0)
             {
-                m_begin = m_alloc.allocate(count);
-                m_end = m_begin + count;
-                m_capacityEnd = m_end;
-                std::uninitialized_copy(first, last, m_begin);
+                m_pFirst = m_Alloc.allocate(count);
+                m_pLast = m_pFirst + count;
+                m_pEnd = m_pLast;
+                std::uninitialized_copy(first, last, m_pFirst);
             }
             else
             {
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         vector(const vector& other)
-            : m_alloc(other.m_alloc)
+            : m_Alloc(other.m_Alloc)
         {
             if (!other.empty())
             {
-                m_begin = m_alloc.allocate(other.size());
-                m_end = m_begin + other.size();
-                m_capacityEnd = m_end;
-                std::uninitialized_copy(other.m_begin, other.m_end, m_begin);
+                m_pFirst = m_Alloc.allocate(other.size());
+                m_pLast = m_pFirst + other.size();
+                m_pEnd = m_pLast;
+                std::uninitialized_copy(other.m_pFirst, other.m_pLast, m_pFirst);
             }
             else
             {
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         vector(const vector& other, const Allocator& alloc)
-            : m_alloc(alloc)
+            : m_Alloc(alloc)
         {
             if (!other.empty())
             {
-                m_begin = m_alloc.allocate(other.size());
-                m_end = m_begin + other.size();
-                m_capacityEnd = m_end;
-                std::uninitialized_copy(other.m_begin, other.m_end, m_begin);
+                m_pFirst = m_Alloc.allocate(other.size());
+                m_pLast = m_pFirst + other.size();
+                m_pEnd = m_pLast;
+                std::uninitialized_copy(other.m_pFirst, other.m_pLast, m_pFirst);
             }
             else
             {
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         vector(vector&& other)
+            : m_Alloc(std::move(other.m_Alloc))
         {
-            m_alloc = std::move(other.m_alloc);
-            m_begin = other.m_begin;
-            m_end = other.m_end;
-            m_capacityEnd = other.m_capacityEnd;
-            other.m_begin = nullptr;
-            other.m_end = nullptr;
-            other.m_capacityEnd = nullptr;
+            m_pFirst = other.m_pFirst;
+            m_pLast = other.m_pLast;
+            m_pEnd = other.m_pEnd;
+            other.m_pFirst = nullptr;
+            other.m_pLast = nullptr;
+            other.m_pEnd = nullptr;
         }
 
         vector(vector&& other, const Allocator& alloc)
-            : m_alloc(alloc)
+            : m_Alloc(alloc)
         {
-            m_begin = other.m_begin;
-            m_end = other.m_end;
-            m_capacityEnd = other.m_capacityEnd;
-            other.m_begin = nullptr;
-            other.m_end = nullptr;
-            other.m_capacityEnd = nullptr;
+            m_pFirst = other.m_pFirst;
+            m_pLast = other.m_pLast;
+            m_pEnd = other.m_pEnd;
+            other.m_pFirst = nullptr;
+            other.m_pLast = nullptr;
+            other.m_pEnd = nullptr;
         }
 
         vector(std::initializer_list<T> init, const Allocator& alloc = Allocator())
-            : m_alloc(alloc)
+            : m_Alloc(alloc)
         {
             if (init.size() != 0)
             {
-                m_begin = m_alloc.allocate(init.size());
-                m_end = m_begin + init.size();
-                m_capacityEnd = m_end;
-                std::uninitialized_copy(init.begin(), init.end(), m_begin);
+                m_pFirst = m_Alloc.allocate(init.size());
+                m_pLast = m_pFirst + init.size();
+                m_pEnd = m_pLast;
+                std::uninitialized_copy(init.begin(), init.end(), m_pFirst);
             }
             else
             {
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         ~vector()
         {
-            std::destroy(m_begin, m_end);
-            m_alloc.deallocate(m_begin, m_capacityEnd - m_begin);
+            std::destroy(m_pFirst, m_pLast);
+            m_Alloc.deallocate(m_pFirst, m_pEnd - m_pFirst);
 
-            m_begin = nullptr;
-            m_end = nullptr;
-            m_capacityEnd = nullptr;
+            m_pFirst = nullptr;
+            m_pLast = nullptr;
+            m_pEnd = nullptr;
         }
 
         vector& operator=(const vector& other)
@@ -302,8 +302,8 @@ namespace Hedgehog
                 if (!other.empty())
                 {
                     reserve(other.size());
-                    m_end += other.size();
-                    std::uninitialized_copy(other.m_begin, other.m_end, m_begin);
+                    m_pLast += other.size();
+                    std::uninitialized_copy(other.m_pFirst, other.m_pLast, m_pFirst);
                 }
             }
             return *this;
@@ -313,12 +313,12 @@ namespace Hedgehog
         {
             if (this != &other)
             {
-                m_begin = other.m_begin;
-                m_end = other.m_end;
-                m_capacityEnd = other.m_capacityEnd;
-                other.m_begin = nullptr;
-                other.m_end = nullptr;
-                other.m_capacityEnd = nullptr;
+                m_pFirst = other.m_pFirst;
+                m_pLast = other.m_pLast;
+                m_pEnd = other.m_pEnd;
+                other.m_pFirst = nullptr;
+                other.m_pLast = nullptr;
+                other.m_pEnd = nullptr;
             }
             return *this;
         }
@@ -336,8 +336,8 @@ namespace Hedgehog
             if (count != 0)
             {
                 reserve(count);
-                m_end += count;
-                std::uninitialized_fill(m_begin, m_end, value);
+                m_pLast += count;
+                std::uninitialized_fill(m_pFirst, m_pLast, value);
             }
         }
 
@@ -350,8 +350,8 @@ namespace Hedgehog
             if (count != 0)
             {
                 reserve(count);
-                std::uninitialized_copy(first, last, m_begin);
-                m_end += count;
+                std::uninitialized_copy(first, last, m_pFirst);
+                m_pLast += count;
             }
         }
 
@@ -362,94 +362,94 @@ namespace Hedgehog
             if (ilist.size() != 0)
             {
                 reserve(ilist.size());
-                std::uninitialized_copy(ilist.begin(), ilist.end(), m_begin);
-                m_end += ilist.size();
+                std::uninitialized_copy(ilist.begin(), ilist.end(), m_pFirst);
+                m_pLast += ilist.size();
             }
         }
 
         allocator_type get_allocator() const
         {
-            return m_alloc;
+            return m_Alloc;
         }
 
         reference at(size_type pos)
         {
-            return m_begin[pos];
+            return m_pFirst[pos];
         }
 
         const_reference at(size_type pos) const
         {
-            return m_begin[pos];
+            return m_pFirst[pos];
         }
 
         reference operator[](size_type pos)
         {
-            return m_begin[pos];
+            return m_pFirst[pos];
         }
 
         const_reference operator[](size_type pos) const
         {
-            return m_begin[pos];
+            return m_pFirst[pos];
         }
 
         reference front()
         {
-            return m_begin[0];
+            return m_pFirst[0];
         }
 
         const_reference front() const
         {
-            return m_begin[0];
+            return m_pFirst[0];
         }
 
         reference back()
         {
-            return m_end[-1];
+            return m_pLast[-1];
         }
 
         const_reference back() const
         {
-            return m_end[-1];
+            return m_pLast[-1];
         }
 
         T* data()
         {
-            return m_begin;
+            return m_pFirst;
         }
 
         const T* data() const
         {
-            return m_begin;
+            return m_pFirst;
         }
 
         iterator begin()
         {
-            return iterator(m_begin);
+            return iterator(m_pFirst);
         }
 
         const_iterator begin() const
         {
-            return const_iterator(m_begin);
+            return const_iterator(m_pFirst);
         }
 
         const_iterator cbegin() const
         {
-            return const_iterator(m_begin);
+            return const_iterator(m_pFirst);
         }
 
         iterator end()
         {
-            return iterator(m_end);
+            return iterator(m_pLast);
         }
 
         const_iterator end() const
         {
-            return const_iterator(m_end);
+            return const_iterator(m_pLast);
         }
 
         const_iterator cend() const
         {
-            return const_iterator(m_end);
+            return const_iterator(m_pLast);
         }
 
         reverse_iterator rbegin()
@@ -484,12 +484,12 @@ namespace Hedgehog
 
         bool empty() const
         {
-            return m_begin == m_end;
+            return m_pFirst == m_pLast;
         }
 
         size_type size() const
         {
-            return m_end - m_begin;
+            return m_pLast - m_pFirst;
         }
 
         size_type max_size() const
@@ -499,34 +499,34 @@ namespace Hedgehog
 
         void reserve(size_type new_cap)
         {
-            if (m_begin + new_cap > m_capacityEnd)
+            if (m_pFirst + new_cap > m_pEnd)
                 ReserveUnchecked(new_cap);
         }
 
         size_type capacity() const
         {
-            return m_capacityEnd - m_begin;
+            return m_pEnd - m_pFirst;
         }
 
         void shrink_to_fit()
         {
-            if (m_begin != m_end)
+            if (m_pFirst != m_pLast)
             {
-                ReserveUnchecked(m_end - m_begin);
+                ReserveUnchecked(m_pLast - m_pFirst);
             }
             else
             {
-                m_alloc.deallocate(m_begin, m_capacityEnd - m_begin);
-                m_begin = nullptr;
-                m_end = nullptr;
-                m_capacityEnd = nullptr;
+                m_Alloc.deallocate(m_pFirst, m_pEnd - m_pFirst);
+                m_pFirst = nullptr;
+                m_pLast = nullptr;
+                m_pEnd = nullptr;
             }
         }
 
         void clear()
         {
-            std::destroy(m_begin, m_end);
-            m_end = m_begin;
+            std::destroy(m_pFirst, m_pLast);
+            m_pLast = m_pFirst;
         }
 
         iterator insert(const_iterator pos, const T& value)
@@ -543,53 +543,49 @@ namespace Hedgehog
         iterator emplace(const_iterator pos, Args&&... args)
         {
             auto offset = pos - begin();
-            if (m_end == m_capacityEnd)
+            if (m_pLast == m_pEnd)
             {
-                size_t capacity = m_begin != m_end ? (m_capacityEnd - m_begin) * 2 : 1;
+                size_t capacity = m_pFirst != m_pLast ? (m_pEnd - m_pFirst) * 2 : 1;
 
-                T* alloc = m_alloc.allocate(capacity);
-                std::uninitialized_move(m_begin, m_begin + offset, alloc);
+                T* alloc = m_Alloc.allocate(capacity);
+                std::uninitialized_move(m_pFirst, m_pFirst + offset, alloc);
                 new (alloc + offset) T(std::forward<Args>(args)...);
-                std::uninitialized_move(m_begin + offset, m_end, alloc + offset + 1);
+                std::uninitialized_move(m_pFirst + offset, m_pLast, alloc + offset + 1);
 
-                std::destroy(m_begin, m_end);
-                m_alloc.deallocate(m_begin, m_capacityEnd - m_begin);
+                std::destroy(m_pFirst, m_pLast);
+                m_Alloc.deallocate(m_pFirst, m_pEnd - m_pFirst);
 
-                m_end = alloc + (m_end - m_begin) + 1;
-                m_begin = alloc;
-                m_capacityEnd = alloc + capacity;
+                m_pLast = alloc + (m_pLast - m_pFirst) + 1;
+                m_pFirst = alloc;
+                m_pEnd = alloc + capacity;
             }
             else
             {
-                new (m_end) T();
-                std::move_backward(m_begin + offset, m_end, m_end + 1);
-                new (m_begin + offset) T(std::forward<Args>(args)...);
-                ++m_end;
+                new (m_pLast) T();
+                std::move_backward(m_pFirst + offset, m_pLast, m_pLast + 1);
+                new (m_pFirst + offset) T(std::forward<Args>(args)...);
+                ++m_pLast;
             }
-            return iterator(m_begin + offset);
+            return iterator(m_pFirst + offset);
         }
 
         iterator erase(const_iterator pos)
         {
-            T* pPos = m_begin + (pos - begin());
-            std::move(pPos + 1, m_end, pPos);
+            std::move(pos.m_pPtr + 1, m_pLast, pos.m_pPtr);
             pop_back();
 
-            return iterator(pPos);
+            return iterator(pos.m_pPtr);
         }
 
         iterator erase(const_iterator first, const_iterator last)
         {
-            T* pFirst = m_begin + (first - begin());
-            T* pLast = m_begin + (last - begin());
+            std::move(last.m_pPtr, m_pLast, first.m_pPtr);
 
-            std::move(pLast, m_end, pFirst);
+            T* pNewLast = m_pLast - (last.m_pPtr - first.m_pPtr);
+            std::destroy(pNewLast, m_pLast);
+            m_pLast = pNewLast;
 
-            T* pNewLast = m_end - (pLast - pFirst);
-            std::destroy(pNewLast, m_end);
-            m_end = pNewLast;
-
-            return iterator(pFirst);
+            return iterator(first.m_pPtr);
         }
 
         void push_back(const T& value)
@@ -606,14 +602,14 @@ namespace Hedgehog
         reference emplace_back(Args&&... args)
         {
             ReserveOne();
-            new (m_end) T(std::forward<Args>(args)...);
-            return *(m_end++);
+            new (m_pLast) T(std::forward<Args>(args)...);
+            return *(m_pLast++);
         }
 
         void pop_back()
         {
-            --m_end;
-            m_end->~T();
+            --m_pLast;
+            m_pLast->~T();
         }
 
         void resize(size_type count)
@@ -623,25 +619,27 @@ namespace Hedgehog
 
         void resize(size_type count, const value_type& value)
         {
-            if (m_begin + count < m_end)
+            if (m_pFirst + count < m_pLast)
             {
-                std::destroy(m_begin + count, m_end);
+                std::destroy(m_pFirst + count, m_pLast);
             }
-            else if (m_begin + count > m_end)
+            else if (m_pFirst + count > m_pLast)
             {
                 ReserveUnchecked(count);
-                std::uninitialized_fill(m_end, m_begin + count, value);
+                std::uninitialized_fill(m_pLast, m_pFirst + count, value);
             }
-            m_end = m_begin + count;
+            m_pLast = m_pFirst + count;
         }
 
         void swap(vector& other)
         {
-            std::swap(m_begin, other.m_begin);
-            std::swap(m_end, other.m_end);
-            std::swap(m_capacityEnd, other.m_capacityEnd);
+            std::swap(m_pFirst, other.m_pFirst);
+            std::swap(m_pLast, other.m_pLast);
+            std::swap(m_pEnd, other.m_pEnd);
         }
     };
+
+    BB_ASSERT_SIZEOF(vector<int>, 0x10);
 }
 
 namespace hh = Hedgehog;
