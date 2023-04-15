@@ -22,9 +22,9 @@ static inline struct bb_allocation_tracker
 
     bool IsAllEmpty() const
     {
-        EnterCriticalSection(&CriticalSection);
-
         bool allEmpty = true;
+
+        EnterCriticalSection(&CriticalSection);
 
         for (auto& [key, value] : AllocationCounts)
             allEmpty &= value == 0;
@@ -71,7 +71,7 @@ namespace Hedgehog::Base
 
         value_type* allocate(std::size_t n)
         {
-#if BB_ENABLE_ALLOCATION_TRACKER
+#ifdef BB_ENABLE_ALLOCATION_TRACKER
             g_bb_allocation_tracker.Increment<T>();
 #endif
             return reinterpret_cast<value_type*>(__HH_ALLOC(n * sizeof(value_type)));
@@ -79,7 +79,7 @@ namespace Hedgehog::Base
 
         void deallocate(value_type* p, std::size_t) noexcept
         {
-#if BB_ENABLE_ALLOCATION_TRACKER
+#ifdef BB_ENABLE_ALLOCATION_TRACKER
             if (p) g_bb_allocation_tracker.Decrement<T>();
 #endif
             __HH_FREE(reinterpret_cast<void*>(p));
