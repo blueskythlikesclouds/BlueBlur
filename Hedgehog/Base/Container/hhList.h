@@ -251,7 +251,7 @@ namespace Hedgehog
 
         ~list()
         {
-            for (SNode* pIt = m_pHead->pNext; pIt != m_pHead->pPrev; pIt = pIt->pNext)
+            for (SNode* pIt = m_pHead->pNext; pIt != m_pHead; pIt = pIt->pNext)
             {
                 pIt->Value.~T();
                 m_Alloc.deallocate(pIt, 1);
@@ -492,7 +492,7 @@ namespace Hedgehog
 
         void clear()
         {
-            for (SNode* pIt = m_pHead->pNext; pIt != m_pHead->pPrev; pIt = pIt->pNext)
+            for (SNode* pIt = m_pHead->pNext; pIt != m_pHead; pIt = pIt->pNext)
             {
                 pIt->Value.~T();
                 m_Alloc.deallocate(pIt, 1);
