@@ -573,9 +573,7 @@ namespace Hedgehog
         {
             T* pPos = m_begin + (pos - begin());
             std::move(pPos + 1, m_end, pPos);
-
-            --m_end;
-            m_end->~T();
+            pop_back();
 
             return iterator(pPos);
         }
@@ -620,16 +618,7 @@ namespace Hedgehog
 
         void resize(size_type count)
         {
-            if (m_begin + count < m_end)
-            {
-                std::destroy(m_begin + count, m_end);
-            }
-            else if (m_begin + count > m_end)
-            {
-                ReserveUnchecked(count);
-                std::uninitialized_default_construct(m_end, m_begin + count);
-            }
-            m_end = m_begin + count;
+            resize(count, T{});
         }
 
         void resize(size_type count, const value_type& value)
