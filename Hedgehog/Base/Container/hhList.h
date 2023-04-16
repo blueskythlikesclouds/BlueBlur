@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <list>
 #include <Hedgehog/Base/System/hhAllocator.h>
 
 namespace Hedgehog
@@ -262,6 +261,9 @@ namespace Hedgehog
 
         list& operator=(const list& other)
         {
+            if (this == &other)
+                return *this;
+
             SNode* pThisNode = m_pHead->pNext;
             SNode* pOtherNode = other.m_pHead->pNext;
 
@@ -299,10 +301,13 @@ namespace Hedgehog
 
         list& operator=(list&& other)
         {
-            clear();
+            if (this != &other)
+            {
+                clear();
 
-            std::swap(m_pHead, other.m_pHead);
-            std::swap(m_Count, other.m_Count);
+                std::swap(m_pHead, other.m_pHead);
+                std::swap(m_Count, other.m_Count);
+            }
 
             return *this;
         }

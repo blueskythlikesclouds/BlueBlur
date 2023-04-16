@@ -4,10 +4,11 @@
 
 #ifdef BB_ENABLE_ALLOCATION_TRACKER
 #include <unordered_map>
+#include <unordered_set>
 
 static inline struct bb_allocation_tracker
 {
-    std::unordered_map<std::string, size_t> AllocationCounts;
+    std::unordered_map<std::string, std::unordered_set<void*>> AllocationsByType;
     mutable CRITICAL_SECTION CriticalSection;
 
     bb_allocation_tracker()
@@ -26,8 +27,8 @@ static inline struct bb_allocation_tracker
 
         EnterCriticalSection(&CriticalSection);
 
-        for (auto& [key, value] : AllocationCounts)
-            allEmpty &= value == 0;
+        for (auto& [name, allocations] : AllocationsByType)
+            allEmpty &= allocations.empty();
             
         LeaveCriticalSection(&CriticalSection);
 
@@ -35,18 +36,27 @@ static inline struct bb_allocation_tracker
     }
 
     template<typename T>
-    void Increment()
+    void Add(T* pMem)
     {
+        assert(pMem && "Allocation failure");
+
         EnterCriticalSection(&CriticalSection);
-        ++AllocationCounts[typeid(T).name()];
+        AllocationsByType[typeid(T).name()].emplace(pMem);
         LeaveCriticalSection(&CriticalSection);
     }
 
     template<typename T>
-    void Decrement()
+    void Remove(T* pMem)
     {
         EnterCriticalSection(&CriticalSection);
-        --AllocationCounts[typeid(T).name()];
+
+        auto& allocations = AllocationsByType[typeid(T).name()];
+        const auto pair = allocations.find(pMem);
+        if (pair == allocations.end())
+            assert(0 && "Attempted to deallocate twice");
+        else
+            allocations.erase(pair);
+
         LeaveCriticalSection(&CriticalSection);
     }
 
@@ -71,18 +81,20 @@ namespace Hedgehog::Base
 
         value_type* allocate(std::size_t n)
         {
+            value_type* pMem = reinterpret_cast<value_type*>(__HH_ALLOC(n * sizeof(value_type)));
+
 #ifdef BB_ENABLE_ALLOCATION_TRACKER
-            g_bb_allocation_tracker.Increment<T>();
+            g_bb_allocation_tracker.Add<T>(pMem);
 #endif
-            return reinterpret_cast<value_type*>(__HH_ALLOC(n * sizeof(value_type)));
+            return pMem;
         }
 
         void deallocate(value_type* p, std::size_t) noexcept
         {
 #ifdef BB_ENABLE_ALLOCATION_TRACKER
-            if (p) g_bb_allocation_tracker.Decrement<T>();
+            if (p) g_bb_allocation_tracker.Remove<T>(p);
 #endif
-            __HH_FREE(reinterpret_cast<void*>(p));
+            __HH_FREE(p);
         }
     };
 
