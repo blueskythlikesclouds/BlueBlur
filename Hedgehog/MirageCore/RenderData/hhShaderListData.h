@@ -12,7 +12,7 @@ namespace Hedgehog::Mirage
     class CVertexShaderPermutationData
     {
     public:
-        map<size_t, boost::shared_ptr<CVertexShaderData>> m_VertexShaders;
+        hh::map<size_t, boost::shared_ptr<CVertexShaderData>> m_VertexShaders;
         size_t m_SubPermutations;
     };
 
@@ -23,8 +23,8 @@ namespace Hedgehog::Mirage
     class CPixelShaderPermutationData
     {
     public:
-        map<Base::CStringSymbol, boost::shared_ptr<CVertexShaderPermutationData>> m_VertexShaderPermutations;
-        map<size_t, boost::shared_ptr<CPixelShaderData>> m_PixelShaders;
+        hh::map<Base::CStringSymbol, boost::shared_ptr<CVertexShaderPermutationData>> m_VertexShaderPermutations;
+        hh::map<size_t, boost::shared_ptr<CPixelShaderData>> m_PixelShaders;
         size_t m_SubPermutations;
         BB_INSERT_PADDING(0x4);
     };
@@ -37,7 +37,7 @@ namespace Hedgehog::Mirage
     class CShaderListData : public Database::CDatabaseData
     {
     public:
-        map<Base::CStringSymbol, CPixelShaderPermutationData> m_PixelShaderPermutations;
+        hh::map<Base::CStringSymbol, CPixelShaderPermutationData> m_PixelShaderPermutations;
     };
 
     BB_ASSERT_OFFSETOF(CShaderListData, m_PixelShaderPermutations, 0xC);

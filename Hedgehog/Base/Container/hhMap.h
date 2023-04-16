@@ -2,13 +2,17 @@
 
 #include <Hedgehog/Base/System/hhAllocator.h>
 
+#ifdef BB_EXCLUDE_NAMESPACE_ALIASES
+namespace hh
+#else
 namespace Hedgehog
+#endif
 {
     template<
         class Key, 
         class T, 
         class Compare = std::less<Key>, 
-        class Allocator = Base::TAllocator<std::pair<const Key, T>>>
+        class Allocator = Hedgehog::Base::TAllocator<std::pair<const Key, T>>>
     class map
     {
     protected:
@@ -984,4 +988,6 @@ namespace Hedgehog
     BB_ASSERT_SIZEOF((map<int, int>), 0xC);
 }
 
+#ifndef BB_EXCLUDE_NAMESPACE_ALIASES
 namespace hh = Hedgehog;
+#endif

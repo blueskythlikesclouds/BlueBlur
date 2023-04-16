@@ -2,9 +2,13 @@
 
 #include <Hedgehog/Base/System/hhAllocator.h>
 
+#ifdef BB_EXCLUDE_NAMESPACE_ALIASES
+namespace hh
+#else
 namespace Hedgehog
+#endif
 {
-    template<typename T, typename Allocator = Base::TAllocator<T>>
+    template<typename T, typename Allocator = Hedgehog::Base::TAllocator<T>>
     class list
     {
     protected:
@@ -736,4 +740,6 @@ namespace Hedgehog
     BB_ASSERT_SIZEOF(list<int>, 0xC);
 }
 
+#ifndef BB_EXCLUDE_NAMESPACE_ALIASES
 namespace hh = Hedgehog;
+#endif

@@ -32,6 +32,7 @@ with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
     generateIncludes(f, "Sonic")
     
     f.write(
+"#ifndef BB_EXCLUDE_NAMESPACE_ALIASES\n"\
 "// Lost World/Forces style namespace aliases\n"\
 "namespace hh = Hedgehog;\n"\
 "namespace Hedgehog\n"\
@@ -46,4 +47,5 @@ with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
 "    namespace fnd = Universe;\n"\
 "    namespace ygg = Yggdrasill;\n"\
 "}\n\n"\
-"namespace app = Sonic;\n")
+"namespace app = Sonic;\n"\
+"#endif")

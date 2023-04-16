@@ -197,6 +197,7 @@
 #include <Sonic/Tool/ParameterEditor/ParameterFile.h>
 #include <Sonic/Tool/ParameterEditor/ParameterGroup.h>
 
+#ifndef BB_EXCLUDE_NAMESPACE_ALIASES
 // Lost World/Forces style namespace aliases
 namespace hh = Hedgehog;
 namespace Hedgehog
@@ -213,3 +214,4 @@ namespace Hedgehog
 }
 
 namespace app = Sonic;
+#endif

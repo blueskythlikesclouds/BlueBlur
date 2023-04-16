@@ -11,12 +11,12 @@ namespace Hedgehog::Mirage
     class CNodeGroupModelData : public Database::CDatabaseData
     {
     public:
-        vector<boost::shared_ptr<CMeshData>> m_OpaqueMeshes;
-        vector<boost::shared_ptr<CMeshData>> m_TransparentMeshes;
-        vector<boost::shared_ptr<CMeshData>> m_PunchThroughMeshes;
+        hh::vector<boost::shared_ptr<CMeshData>> m_OpaqueMeshes;
+        hh::vector<boost::shared_ptr<CMeshData>> m_TransparentMeshes;
+        hh::vector<boost::shared_ptr<CMeshData>> m_PunchThroughMeshes;
         size_t m_SpecialMeshGroupNum;
         boost::shared_ptr<size_t[]> m_SpecialMeshGroupModes;
-        vector<vector<boost::shared_ptr<CMeshData>>> m_SpecialMeshGroups;
+        hh::vector<hh::vector<boost::shared_ptr<CMeshData>>> m_SpecialMeshGroups;
         Base::CSharedString m_Name;
         bool m_Visible;
     };
