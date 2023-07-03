@@ -36,7 +36,11 @@ namespace Hedgehog::Base
             io_rOther.m_Locked = false;
         }
 
-        CHolderBase(const CHolderBase& in_rOther) = delete;
+        CHolderBase(const CHolderBase& in_rOther)
+        {
+            m_pSynchronizedObject = in_rOther.m_pSynchronizedObject;
+            m_Locked = false;
+        }
 
         ~CHolderBase()
         {
