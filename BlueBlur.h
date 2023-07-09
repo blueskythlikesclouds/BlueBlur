@@ -20,6 +20,8 @@
 #include <Hedgehog/Base/Thread/hhSynchronizedPtrBase.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Database/System/hhArchiveDatabaseLoader.h>
+#include <Hedgehog/Database/System/hhArchiveList.h>
+#include <Hedgehog/Database/System/hhArchiveListManager.h>
 #include <Hedgehog/Database/System/hhArchiveParam.h>
 #include <Hedgehog/Database/System/hhDatabase.h>
 #include <Hedgehog/Database/System/hhDatabaseData.h>

@@ -2,14 +2,15 @@
 
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
-
-#include "hhArchiveParam.h"
+#include <Hedgehog/Database/System/hhArchiveParam.h>
 
 namespace Hedgehog::Database
 {
     struct SArchiveParam;
     struct SLoadElement;
+
     class CArchiveList;
+    class CArchiveListManager;
 
     class CDatabase;
     class CDatabaseLoader;
@@ -18,12 +19,15 @@ namespace Hedgehog::Database
         CDatabaseLoader* This, boost::shared_ptr<CArchiveList>& out_spArchiveList,
         const Hedgehog::Base::CSharedString& in_rArchiveName, const Hedgehog::Base::CSharedString& in_rArchiveListName, const SArchiveParam& in_rArchiveParam);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadArchiveList, 0x69AFF0,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadArchiveList0, 0x69AFF0,
         CDatabaseLoader* This, boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveListName);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadArchiveList1, 0x69B360,
+        CDatabaseLoader* This, const boost::shared_ptr<CArchiveList>& in_spArchiveList, const uint8_t* in_pData, size_t in_DataSize);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadArchive, 0x69AB10,
         CDatabaseLoader* This, boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveName, 
-        const SArchiveParam& in_rArchiveParam, bool in_Unknown0, bool in_Unknown1);
+        const SArchiveParam& in_rArchiveParam, bool in_Unknown0, bool in_LoadImm);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadDirectory, 0x69B760,
         CDatabaseLoader* This, const boost::shared_ptr<CDatabase>& in_spDatabase, const Hedgehog::Base::CSharedString& in_rDirectoryPath, const SArchiveParam& in_rArchiveParam);
@@ -34,7 +38,9 @@ namespace Hedgehog::Database
     class CDatabaseLoader : public Base::CObject
     {
     public:
-        BB_INSERT_PADDING(0x70);
+        BB_INSERT_PADDING(0x2C);
+        boost::shared_ptr<CArchiveListManager> m_spArchiveListManager;
+        BB_INSERT_PADDING(0x3C);
 
         virtual ~CDatabaseLoader() = default;
 
@@ -49,12 +55,17 @@ namespace Hedgehog::Database
 
         void LoadArchiveList(boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveListName)
         {
-            fpCDatabaseLoaderLoadArchiveList(this, in_spDatabase, in_rArchiveListName);
+            fpCDatabaseLoaderLoadArchiveList0(this, in_spDatabase, in_rArchiveListName);
         }
 
-        void LoadArchive(boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveName, const SArchiveParam& in_rArchiveParam, bool in_Unknown0, bool in_Unknown1)
+        void LoadArchiveList(const boost::shared_ptr<CArchiveList>& in_spArchiveList, const uint8_t* in_pData, size_t in_DataSize)
         {
-            fpCDatabaseLoaderLoadArchive(this, in_spDatabase, in_rArchiveName, in_rArchiveParam, in_Unknown0, in_Unknown1);
+            fpCDatabaseLoaderLoadArchiveList1(this, in_spArchiveList, in_pData, in_DataSize);
+        }
+
+        void LoadArchive(boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rArchiveName, const SArchiveParam& in_rArchiveParam, bool in_Unknown0, bool in_LoadImm)
+        {
+            fpCDatabaseLoaderLoadArchive(this, in_spDatabase, in_rArchiveName, in_rArchiveParam, in_Unknown0, in_LoadImm);
         }
 
         void LoadDirectory(const boost::shared_ptr<CDatabase>& in_spDatabase, const Hedgehog::Base::CSharedString& in_rDirectoryPath, const SArchiveParam& in_rArchiveParam)
@@ -70,5 +81,6 @@ namespace Hedgehog::Database
         }
     };
 
+    BB_ASSERT_OFFSETOF(CDatabaseLoader, m_spArchiveListManager, 0x30);
     BB_ASSERT_SIZEOF(CDatabaseLoader, 0x74);
 }

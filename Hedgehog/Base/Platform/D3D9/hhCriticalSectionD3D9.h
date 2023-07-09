@@ -1,10 +1,10 @@
 #pragma once
 
-#include <BlueBlur.inl>
+#include <Hedgehog/Base/hhObject.h>
 
 namespace Hedgehog::Base
 {
-    class CCriticalSectionD3D9
+    class CCriticalSectionD3D9 : public CObject
     {
     public:
         RTL_CRITICAL_SECTION m_CriticalSection;
