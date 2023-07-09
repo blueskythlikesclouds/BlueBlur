@@ -249,7 +249,7 @@ namespace Hedgehog::Base
 
         CSharedString substr(size_t pos = 0, size_t len = npos) const
         {
-            if (IsMemStatic()) 
+            if (IsMemStatic() || len == 0) 
                 return CSharedString();
 
             if (len > (GetHolder()->Length - pos))
