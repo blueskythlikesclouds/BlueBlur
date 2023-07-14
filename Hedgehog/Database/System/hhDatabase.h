@@ -9,6 +9,7 @@ namespace Hedgehog::Base
 
 namespace Hedgehog::Database
 {
+    class CArchiveList;
     class CDatabase;
     class CRawData;
 
@@ -19,6 +20,9 @@ namespace Hedgehog::Database
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetDatabaseDataNames, 0x692FD0,
         const CDatabase* This, hh::vector<Hedgehog::Base::CSharedString>& out_rDatabaseDataNames);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseAddArchiveList, 0x691900,
+        CDatabase* This, const boost::shared_ptr<CArchiveList>& in_spArchiveList);
 
     class CDatabase : public Base::CObject
     {
@@ -46,6 +50,11 @@ namespace Hedgehog::Database
             hh::vector<Hedgehog::Base::CSharedString> databaseDataNames;
             fpCDatabaseGetDatabaseDataNames(this, databaseDataNames);
             return databaseDataNames;
+        }
+
+        void AddArchiveList(const boost::shared_ptr<CArchiveList>& in_spArchiveList)
+        {
+            fpCDatabaseAddArchiveList(this, in_spArchiveList);
         }
     };
 
