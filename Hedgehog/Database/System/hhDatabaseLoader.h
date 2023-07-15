@@ -35,6 +35,9 @@ namespace Hedgehog::Database
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadFile, 0x69BAD0,
         CDatabaseLoader* This, boost::shared_ptr<SLoadElement>& out_spLoadElement, boost::shared_ptr<CDatabase> in_spDatabase, const Hedgehog::Base::CSharedString& in_rFileName, const Hedgehog::Base::CSharedString& in_rDirectoryPath, const SArchiveParam& in_rArchiveParam);
 
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseLoaderLoadData, 0x6999C0,
+        CDatabaseLoader* This, const boost::shared_ptr<CDatabase>& in_spDatabase, const Hedgehog::Base::CSharedString& in_rName, const uint8_t* in_pData, uint32_t in_DataSize, boost::shared_ptr<uint8_t[]> in_spDataSource, const SArchiveParam& in_rArchiveParam);
+
     class CDatabaseLoader : public Base::CObject
     {
     public:
@@ -78,6 +81,11 @@ namespace Hedgehog::Database
             boost::shared_ptr<SLoadElement> spLoadElement;
             fpCDatabaseLoaderLoadFile(this, spLoadElement, in_spDatabase, in_rName, in_rFilePath, in_rArchiveParam);
             return spLoadElement;
+        }
+
+        void LoadData(const boost::shared_ptr<CDatabase>& in_spDatabase, const Hedgehog::Base::CSharedString& in_rName, const uint8_t* in_pData, uint32_t in_DataSize, boost::shared_ptr<uint8_t[]> in_spDataSource, const SArchiveParam& in_rArchiveParam)
+        {
+            fpCDatabaseLoaderLoadData(this, in_spDatabase, in_rName, in_pData, in_DataSize, in_spDataSource, in_rArchiveParam);
         }
     };
 
