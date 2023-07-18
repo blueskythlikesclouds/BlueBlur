@@ -87,6 +87,14 @@
     mov eax, 69D9D0h
     jmp eax
 
+??0CDecompressCAB@Database@Hedgehog@@QAE@XZ:
+    mov eax, 6A0FC0h
+    jmp eax
+
+??1CDecompressCAB@Database@Hedgehog@@QAE@XZ:
+    mov eax, 6A1760h
+    jmp eax
+
 public ??1CMessageActor@Universe@Hedgehog@@UAE@XZ
 public ??1CUpdateUnit@Universe@Hedgehog@@UAE@XZ
 public ??1CStateBase@CStateMachineBase@Universe@Hedgehog@@UAE@XZ
@@ -103,5 +111,7 @@ public ??0SArchiveParam@Database@Hedgehog@@QAE@HI@Z
 public ??1SArchiveParam@Database@Hedgehog@@QAE@XZ
 public ??0CArchiveList@Database@Hedgehog@@QAE@XZ
 public ??1CArchiveList@Database@Hedgehog@@QAE@XZ
+public ??0CDecompressCAB@Database@Hedgehog@@QAE@XZ
+public ??1CDecompressCAB@Database@Hedgehog@@QAE@XZ
 
 end
