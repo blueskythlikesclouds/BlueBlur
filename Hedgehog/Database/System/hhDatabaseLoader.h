@@ -3,6 +3,13 @@
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Database/System/hhArchiveParam.h>
+#include <Hedgehog/Database/System/hhCompressor.h>
+
+namespace Hedgehog::Base
+{
+    class CEventWaitD3D9;
+    class CCompressor;
+}
 
 namespace Hedgehog::Database
 {
@@ -41,7 +48,11 @@ namespace Hedgehog::Database
     class CDatabaseLoader : public Base::CObject
     {
     public:
-        BB_INSERT_PADDING(0x2C);
+        BB_INSERT_PADDING(8);
+        boost::scoped_ptr<Base::CEventWaitD3D9> m_scpEventWait;
+        BB_INSERT_PADDING(0x10);
+        boost::shared_ptr<Base::CCompressor> m_spCompressor;
+        BB_INSERT_PADDING(0x8);
         boost::shared_ptr<CArchiveListManager> m_spArchiveListManager;
         BB_INSERT_PADDING(0x3C);
 
@@ -89,6 +100,8 @@ namespace Hedgehog::Database
         }
     };
 
+    BB_ASSERT_OFFSETOF(CDatabaseLoader, m_scpEventWait, 0xC);
+    BB_ASSERT_OFFSETOF(CDatabaseLoader, m_spCompressor, 0x20);
     BB_ASSERT_OFFSETOF(CDatabaseLoader, m_spArchiveListManager, 0x30);
     BB_ASSERT_SIZEOF(CDatabaseLoader, 0x74);
 }
