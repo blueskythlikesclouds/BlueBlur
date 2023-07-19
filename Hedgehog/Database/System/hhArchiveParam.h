@@ -4,6 +4,8 @@
 
 namespace Hedgehog::Database
 {
+    class CAbstractReader;
+
     struct SArchiveParam
     {
         int Priority;
@@ -11,9 +13,9 @@ namespace Hedgehog::Database
 
         size_t Field8;
         size_t FieldC;
-        boost::anonymous_shared_ptr Field10;
-        boost::function<void()> Field18;
-        boost::function<void()> Field38;
+        boost::shared_ptr<CAbstractReader> spAbstractReader;
+        boost::function<void()> BeforeArchiveLoadCallback;
+        boost::function<void()> AfterArchiveLoadCallback;
 
         struct SField58
         {
@@ -35,9 +37,9 @@ namespace Hedgehog::Database
     BB_ASSERT_OFFSETOF(SArchiveParam, Flags, 0x4);
     BB_ASSERT_OFFSETOF(SArchiveParam, Field8, 0x8);
     BB_ASSERT_OFFSETOF(SArchiveParam, FieldC, 0xC);
-    BB_ASSERT_OFFSETOF(SArchiveParam, Field10, 0x10);
-    BB_ASSERT_OFFSETOF(SArchiveParam, Field18, 0x18);
-    BB_ASSERT_OFFSETOF(SArchiveParam, Field38, 0x38);
+    BB_ASSERT_OFFSETOF(SArchiveParam, spAbstractReader, 0x10);
+    BB_ASSERT_OFFSETOF(SArchiveParam, BeforeArchiveLoadCallback, 0x18);
+    BB_ASSERT_OFFSETOF(SArchiveParam, AfterArchiveLoadCallback, 0x38);
     BB_ASSERT_OFFSETOF(SArchiveParam, Field58, 0x58);
     BB_ASSERT_OFFSETOF(SArchiveParam, Field98, 0x98);
     BB_ASSERT_OFFSETOF(SArchiveParam, FieldA0, 0xA0);
