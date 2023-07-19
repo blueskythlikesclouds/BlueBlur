@@ -23,9 +23,12 @@
 #include <Hedgehog/Database/System/hhArchiveList.h>
 #include <Hedgehog/Database/System/hhArchiveListManager.h>
 #include <Hedgehog/Database/System/hhArchiveParam.h>
+#include <Hedgehog/Database/System/hhCallback.h>
+#include <Hedgehog/Database/System/hhCompressor.h>
 #include <Hedgehog/Database/System/hhDatabase.h>
 #include <Hedgehog/Database/System/hhDatabaseData.h>
 #include <Hedgehog/Database/System/hhDatabaseLoader.h>
+#include <Hedgehog/Database/System/hhDecompressCAB.h>
 #include <Hedgehog/Database/System/hhRawData.h>
 #include <Hedgehog/FxRenderFramework/hhDrawInstanceParam.h>
 #include <Hedgehog/FxRenderFramework/hhScreenRenderParam.h>

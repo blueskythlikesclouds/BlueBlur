@@ -10,7 +10,7 @@ namespace Hedgehog::Database
     {
     public:
         boost::shared_ptr<Base::CCriticalSectionD3D9> m_spCriticalSection;
-        hh::map<Base::CSharedString, boost::shared_ptr<CDatabaseData>> m_DatabaseEntryMap; // TODO: value type is wrong
+        hh::map<Base::CSharedString, hh::vector<Base::CSharedString>> m_DatabaseEntryMap;
         bool m_Loaded;
         hh::vector<uint32_t> m_ArchiveSizes;
 
