@@ -16,7 +16,7 @@ namespace Hedgehog::Base
         }
     };
 
-    static inline BB_FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* pName);
+    static inline BB_FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* in_pName);
 
     class CStringSymbol
     {
@@ -27,7 +27,7 @@ namespace Hedgehog::Base
         {
         }
 
-        CStringSymbol(const char* pName) : m_pSymbolNode(MakeStringSymbol(pName))
+        CStringSymbol(const char* in_pName) : m_pSymbolNode(MakeStringSymbol(in_pName))
         {
         }
 
@@ -36,9 +36,14 @@ namespace Hedgehog::Base
             return m_pSymbolNode->GetValue();
         }
 
-        bool operator<(const CStringSymbol& other) const
+        bool operator==(const CStringSymbol& in_rOther) const
         {
-            return m_pSymbolNode < other.m_pSymbolNode;
+            return m_pSymbolNode == in_rOther.m_pSymbolNode;
+        }
+
+        bool operator<(const CStringSymbol& in_rOther) const
+        {
+            return m_pSymbolNode < in_rOther.m_pSymbolNode;
         }
     };
 
