@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BlueBlur.inl>
+#include <Hedgehog/MirageCore/Misc/hhRenderStateInfo.h>
 
 namespace Hedgehog::Base
 {
@@ -47,9 +47,8 @@ namespace Hedgehog::Mirage
         void* m_pGlobalParametersData;
         uint32_t m_GlobalParameterIndex;
 
-        BB_INSERT_PADDING(0x4);
-        uint32_t m_Field14;
-        BB_INSERT_PADDING(0x7598);
+        SRenderStateInfo m_RenderStateInfo;
+        BB_INSERT_PADDING(0x298);
         const Base::CStringSymbol* m_pPixelShaderPermutation;
         BB_INSERT_PADDING(0x3C);
 
@@ -98,7 +97,7 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_pD3DDevice, 0x4);
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_pGlobalParametersData, 0x8);
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_GlobalParameterIndex, 0xC);
-    BB_ASSERT_OFFSETOF(CRenderingDevice, m_Field14, 0x14);
+    BB_ASSERT_OFFSETOF(CRenderingDevice, m_RenderStateInfo, 0x10);
     BB_ASSERT_OFFSETOF(CRenderingDevice, m_pPixelShaderPermutation, 0x75B0);
     BB_ASSERT_SIZEOF(CRenderingDevice, 0x75F0);
 }

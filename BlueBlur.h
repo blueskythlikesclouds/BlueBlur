@@ -38,6 +38,7 @@
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeNormal.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeSingleElementNode.h>
 #include <Hedgehog/MirageCore/Misc/hhDirector.h>
+#include <Hedgehog/MirageCore/Misc/hhGlobalParametersData.h>
 #include <Hedgehog/MirageCore/Misc/hhInstanceInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>
 #include <Hedgehog/MirageCore/Misc/hhPose.h>
@@ -45,6 +46,7 @@
 #include <Hedgehog/MirageCore/Misc/hhRenderingDevice.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingInfrastructure.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderScene.h>
+#include <Hedgehog/MirageCore/Misc/hhRenderStateInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhSamplerState.h>
 #include <Hedgehog/MirageCore/Misc/hhStaticLightContext.h>
 #include <Hedgehog/MirageCore/Misc/hhTransform.h>
