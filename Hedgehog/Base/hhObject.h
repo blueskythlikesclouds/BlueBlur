@@ -24,5 +24,19 @@ namespace Hedgehog::Base
         {
             return __HH_FREE(in_pMem);
         }
+
+        void* operator new(const size_t in_Size, void* in_pObj)
+        {
+            return in_pObj;
+        }
+
+        void* operator new(const size_t in_Size, const size_t in_Align, void* in_pObj)
+        {
+            return in_pObj;
+        }
+
+        void operator delete(void* in_pMem, void* in_pObj)
+        {
+        }
     };
 }
