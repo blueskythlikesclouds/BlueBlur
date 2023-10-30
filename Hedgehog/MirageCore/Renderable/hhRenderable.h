@@ -2,14 +2,10 @@
 
 #include <Hedgehog/Base/hhObject.h>
 
-namespace Hedgehog::FxRenderFramework
-{
-    struct SRenderDevice;
-}
-
 namespace Hedgehog::Mirage
 {
     class CRenderable;
+    class CRenderInfo;
 
     static inline BB_FUNCTION_PTR(CRenderable*, __thiscall, fpCRenderableCtor, 0x6F49C0, CRenderable* This);
 
@@ -27,7 +23,7 @@ namespace Hedgehog::Mirage
         }
 
         virtual ~CRenderable() = default;
-        virtual void Render(const FxRenderFramework::SRenderDevice& in_rRenderDevice, Base::CStringSymbol in_RenderLevel, uint32_t in_Unknown) {}
+        virtual void Render(const CRenderInfo& in_rRenderInfo, Base::CStringSymbol in_RenderLevel, uint32_t in_Unknown) {}
         virtual void CRenderableVtbl08(size_t) {}
         virtual void CRenderableVtbl0C(size_t, size_t) {}
         virtual void CRenderableVtbl10(size_t) {}

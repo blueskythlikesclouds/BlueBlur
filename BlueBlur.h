@@ -31,7 +31,6 @@
 #include <Hedgehog/Database/System/hhDecompressCAB.h>
 #include <Hedgehog/Database/System/hhRawData.h>
 #include <Hedgehog/FxRenderFramework/hhDrawInstanceParam.h>
-#include <Hedgehog/FxRenderFramework/hhRenderDevice.h>
 #include <Hedgehog/FxRenderFramework/hhScreenRenderParam.h>
 #include <Hedgehog/MirageCore/Camera/hhCamera.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
@@ -44,6 +43,7 @@
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>
 #include <Hedgehog/MirageCore/Misc/hhPose.h>
 #include <Hedgehog/MirageCore/Misc/hhPrimitive.h>
+#include <Hedgehog/MirageCore/Misc/hhRenderInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingDevice.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingInfrastructure.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderScene.h>
