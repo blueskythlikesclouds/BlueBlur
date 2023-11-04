@@ -10,6 +10,7 @@ namespace Sonic
     template<typename T>
     class CParamValue;
     class CParamBool;
+    class CParamBase;
 
     template<typename T>
     struct SParamValueCreationParams
@@ -106,6 +107,56 @@ namespace Sonic
 
     class CEditParam : public Hedgehog::Base::CRefCountObject
     {
+    private:
+
+        __declspec(noinline) void pSetFloat(const SParamValueCreationParams<float>& param, const Hedgehog::Base::CSharedString& name) volatile
+        {
+            uint32_t func = 0x005908B0;
+            __asm
+            {
+                mov eax, param
+                push 0xFF
+                push name
+                push this
+                call func
+            }
+        }
+        __declspec(noinline) void pSetBool(const SParamValueCreationParams<bool>& param, const Hedgehog::Base::CSharedString& name) volatile
+        {
+            uint32_t func = 0x00CEF3D0;
+            __asm
+            {
+                mov eax, param
+                push 0xFF
+                push name
+                push this
+                call func
+            }
+        }
+        __declspec(noinline) void pSetInt(const SParamValueCreationParams<uint32_t>& param, const Hedgehog::Base::CSharedString& name) volatile
+        {
+            uint32_t func = 0x00591440;
+            __asm
+            {
+                mov eax, param
+                push 0xFF
+                push name
+                push this
+                call func
+            }
+        }
+        __declspec(noinline) void pAddParamBase(Sonic::CParamBase* param, const Hedgehog::Base::CSharedString& name) volatile
+        {
+            uint32_t func = 0x00CEF700;
+            __asm
+            {
+                mov ecx, this
+                mov eax, name
+                push param
+                call func
+            }
+        }
+
     public:
         hh::vector<CParamBase*> m_ParamList;
         BB_INSERT_PADDING(0x20);
@@ -185,6 +236,23 @@ namespace Sonic
             uint32_t* pValue, const Hedgehog::Base::CSharedString& in_rName, const Hedgehog::Base::CSharedString& in_rDescription, const std::vector<SParamEnumValue>& in_rValues)
         {
             return CreateParamTypeList<std::vector<SParamEnumValue>>(pValue, in_rName, in_rDescription, in_rValues);
+        }
+
+        void SetFloat(float* inVar, const Hedgehog::Base::CSharedString& name)
+        {
+            pSetFloat({ inVar, *inVar }, name);
+        }
+        void SetBool(bool* inVar, const Hedgehog::Base::CSharedString& name)
+        {
+            pSetBool({ inVar, *inVar }, name);
+        }
+        void SetInt(uint32_t* inVar, const Hedgehog::Base::CSharedString& name)
+        {
+            pSetInt({ inVar, *inVar }, name);
+        }
+        void SetParamBase(Sonic::CParamBase* param, const Hedgehog::Base::CSharedString& name)
+        {
+            pAddParamBase(param, name);
         }
     };
 
