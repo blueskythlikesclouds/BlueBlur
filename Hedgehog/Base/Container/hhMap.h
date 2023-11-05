@@ -770,7 +770,7 @@ namespace Hedgehog
 
         T& operator[](const Key& key)
         {
-            return emplace(key).first->second;
+            return emplace(key, T{}).first->second;
         }
 
         T& operator[](Key&& key)

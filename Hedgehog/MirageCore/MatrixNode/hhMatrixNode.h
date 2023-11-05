@@ -15,8 +15,8 @@ namespace Hedgehog::Mirage
 
         virtual ~CMatrixNode() = default;
         virtual void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) = 0;
-        virtual Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
-        virtual Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
+        virtual const Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
+        virtual const Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
 
         void NotifyChanged()
         {

@@ -14,6 +14,8 @@ namespace Hedgehog::Mirage
     class CRenderingDevice;
     class CRenderingInfrastructure;
 
+    class CGlobalParametersData;
+
     static inline BB_FUNCTION_PTR(void*, __thiscall, fpCRenderingDeviceSetRenderState, 0x40BB20,
         CRenderingDevice* This, D3DRENDERSTATETYPE in_Type, uint32_t in_Value);
 
@@ -44,7 +46,7 @@ namespace Hedgehog::Mirage
         CRenderingInfrastructure* m_pRenderingInfrastructure;
         DX_PATCH::IDirect3DDevice9* m_pD3DDevice;
 
-        void* m_pGlobalParametersData;
+        CGlobalParametersData* m_pGlobalParametersData;
         uint32_t m_GlobalParameterIndex;
 
         SRenderStateInfo m_RenderStateInfo;

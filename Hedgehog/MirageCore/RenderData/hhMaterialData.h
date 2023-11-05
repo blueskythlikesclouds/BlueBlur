@@ -5,6 +5,7 @@
 
 namespace Hedgehog::Mirage
 {
+    class CMaterialData;
     class CTexsetData;
     class CShaderListData;
     class CParameterFloat4Element;
@@ -17,6 +18,8 @@ namespace Hedgehog::Mirage
         eMaterialFlags_Int4ParamsEmpty = 0x2,
         eMaterialFlags_BoolParamsEmpty = 0x4
     };
+
+    static BB_FUNCTION_PTR(CMaterialData*, __thiscall, fpCMaterialDataCtor, 0x704CA0, CMaterialData*);
 
     class CMaterialData : public Database::CDatabaseData
     {
@@ -32,6 +35,11 @@ namespace Hedgehog::Mirage
         bool m_Additive;
         uint8_t m_MaterialFlags; // see EMaterialFlags
         void* m_pField5C;
+
+        CMaterialData()
+        {
+            fpCMaterialDataCtor(this);
+        }
     };
 
     BB_ASSERT_OFFSETOF(CMaterialData, m_spTexsetData, 0xC);
