@@ -1,6 +1,6 @@
 #pragma once
 //#include <Sonic/System/GameObject.h>
-#include <BlurBlur.inl>
+#include <BlueBlur.inl>
 
 namespace Sonic
 {
@@ -17,29 +17,30 @@ namespace Sonic
 		}
 	}
 
-	static constexpr uint32_t pCRayCastCollisionCastRay = 0x010BE270;
-	static bool fCRayCastCollisionCastRay(uint32_t in_pWorld, uint32_t in_CollisionMask, const Hedgehog::Math::CVector& in_RayStart, const Hedgehog::Math::CVector& in_RayEnd, HitInformation* out_HitInfo)
-	{
-		bool result = false;
-
-		__asm
-		{
-			mov edx, in_CollisionMask
-			mov edi, in_pWorld
-			mov esi, out_HitInfo
-			mov ecx, in_RayEnd
-			push in_RayStart
-
-			call [pCRayCastCollisionCastRay]
-
-			mov result, al
-		}
-
-		return result;
-	}
-
 	class CRayCastCollision
 	{
+		struct HitInformation;
+		static constexpr uint32_t pCRayCastCollisionCastRay = 0x010BE270;
+		static bool fCRayCastCollisionCastRay(uint32_t in_pWorld, uint32_t in_CollisionMask, const Hedgehog::Math::CVector& in_RayStart, const Hedgehog::Math::CVector& in_RayEnd, HitInformation* out_HitInfo)
+		{
+			bool result = false;
+
+			__asm
+			{
+				mov edx, in_CollisionMask
+				mov edi, in_pWorld
+				mov esi, out_HitInfo
+				mov ecx, in_RayEnd
+				push in_RayStart
+
+				call[pCRayCastCollisionCastRay]
+
+				mov result, al
+			}
+
+			return result;
+		}
+
 	public:
 		struct __declspec(align(4)) HitInformation
 		{
