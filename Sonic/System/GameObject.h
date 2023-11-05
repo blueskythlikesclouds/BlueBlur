@@ -95,7 +95,7 @@ namespace Sonic
         }
 
         void AddRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
-            const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow)
+            const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow = true)
         {
             fpCGameObjectAddRenderable(this, in_Category, in_spRenderable, in_CastShadow);
         }

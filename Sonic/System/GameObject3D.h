@@ -3,22 +3,75 @@
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
 #include <Sonic/System/GameObject.h>
 
+namespace Hedgehog::Database
+{
+    class CDatabase;
+}
+
 namespace Sonic
 {
     class CGameObject3D;
     class CMatrixNodeTransform;
+    class CRigidBody;
+    class CEventCollisionHolder;
 
     static inline BB_FUNCTION_PTR(CGameObject3D*, __stdcall, fpCGameObject3DCtor, 0xD5DAC0, CGameObject3D* This);
 
     static inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObject3DSetPosition, 0xD5CE10,
         CGameObject3D* This, const Hedgehog::Math::CVector& in_rPosition);
 
+    static inline BB_FUNCTION_PTR(bool, __stdcall, fpCGameObject3DAddRigidBody, 0xE98BD0,
+        const boost::shared_ptr<Sonic::CRigidBody>&, Sonic::CGameObject3D* This, hk2010_2_0::hkpShape* in_pShape, int in_Mask,
+        boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> in_spMatrixNode);
+
+    static inline BB_FUNCTION_PTR(void*, __stdcall, fpCGameObject3DAddEventCollision, 0xD5E090,
+        CGameObject3D* This, const Hedgehog::Base::CStringSymbol& symbol, hk2010_2_0::hkpShape** in_ppShape, int in_Mask, bool in_IsOffset, bool in_IsTrigger);
+
+    static inline BB_FUNCTION_PTR(void*, __stdcall, fpCGameObject3DAddEventCollisionGivenNode, 0xD5DC90,
+        CGameObject3D* This, const Hedgehog::Base::CStringSymbol& symbol, hk2010_2_0::hkpShape** in_ppShape, int in_Mask, bool in_IsTrigger,
+        boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> in_spMatrixNode);
+
+    // An optimized function takes shared pointers on the stack, so we have to be a bit... tricky.
+
+    static constexpr int pCGameObject3DAddRigidBodyFromDatabase = 0x00E98EB0;
+    static void __declspec(naked) __declspec(noinline) fCGameObject3DAddRigidBodyFromDatabase()
+    {
+        __asm
+        {
+            mov eax, ecx
+            jmp pCGameObject3DAddRigidBodyFromDatabase
+        }
+    }
+
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCGameObject3DAddRigidBodyFromDatabase, fCGameObject3DAddRigidBodyFromDatabase,
+        const char* in_ContainerName, const boost::shared_ptr<CRigidBody>& in_spRigidBody, Sonic::CGameObject3D* This,
+        const char* in_ShapeName, int in_ColID, boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> in_spMatrixNodeSingleElement,
+        boost::shared_ptr<Hedgehog::Database::CDatabase> in_spDatabase);
+
+
+    // Skyth's method that doesn't actually work, to-be explored:
+    /*
+    static uint32_t pCGameObject3DAddRigidBodyFromDatabase = 0xE98EB0;
+
+    static bool __declspec(naked) __declspec(noinline) __fastcall
+        fCGameObject3DAddRigidBodyFromDatabase(const char* containerName, void* unused_edx, const boost::shared_ptr<Sonic::CRigidBody>& spRigidBody, Sonic::CGameObject3D* This,
+        const char* shapeName, int colID, boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> spMatrixNodeSingleElement,
+        boost::shared_ptr<Hedgehog::Database::CDatabase> spDatabase) noexcept
+    {
+        __asm
+        {
+            mov eax, ecx
+            jmp[fCGameObject3DAddRigidBodyFromDatabase]
+        }
+    }
+    */
+
     class CGameObject3D : public CGameObject, public Hedgehog::Mirage::CMatrixNodeListener
     {
     public:
         BB_INSERT_PADDING(0x8);
         boost::shared_ptr<CMatrixNodeTransform> m_spMatrixNodeTransform;
-        boost::shared_ptr<void> m_spEventCollisionHolder;
+        boost::shared_ptr<CEventCollisionHolder> m_spEventCollisionHolder;
         BB_INSERT_PADDING(0x2C);
 
         CGameObject3D(const bb_null_ctor& nil) : CGameObject(nil), CMatrixNodeListener(nil) {}
@@ -54,6 +107,35 @@ namespace Sonic
         void SetPosition(const Hedgehog::Math::CVector& in_rPosition)
         {
             fpCGameObject3DSetPosition(this, in_rPosition);
+        }
+
+        // Adds a CRigidBody to this game, attached to a MatrixNode.
+        // Requires a hkpShape to be made first, and collision mask ID--see the function 0x1255FA0 for examples.
+        bool AddRigidBody(const boost::shared_ptr<CRigidBody>& rigidBody, hk2010_2_0::hkpShape* shape, int collisionID, const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& matrixNode)
+        {
+            return fpCGameObject3DAddRigidBody(rigidBody, this, shape, collisionID, matrixNode);
+        }
+
+        // Adds a CRigidBody to this game, attached to a MatrixNode.
+        // Takes in the name of a ".phy.hkx" file, which is the container for rigidbodies in the game.
+        // Also takes in the name of the rigidbody from the container to use.
+        bool AddRigidBody(const boost::shared_ptr<CRigidBody>& in_rRigidBody, const char* in_ContainerName,
+                          const char* in_ShapeName, int in_ColID,
+                          const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& in_spMatrixNode,
+                          const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase)
+        {
+            return fpCGameObject3DAddRigidBodyFromDatabase(in_ContainerName, in_rRigidBody, this, in_ShapeName, in_ColID, in_spMatrixNode, in_spDatabase);
+        }
+
+        void AddEventCollision(const Hedgehog::Base::CStringSymbol& in_rSymbol, hk2010_2_0::hkpShape* in_pShape, int in_CollisionMask, bool in_IsOffset, bool in_IsContactPhantom)
+        {
+            fpCGameObject3DAddEventCollision(this, in_rSymbol, &in_pShape, in_CollisionMask, in_IsOffset, in_IsContactPhantom);
+        }
+
+        void AddEventCollision(const Hedgehog::Base::CStringSymbol& in_rSymbol, hk2010_2_0::hkpShape* in_pShape, int in_CollisionMask,
+            bool in_IsContactPhantom, const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& in_rMatrixNode)
+        {
+            fpCGameObject3DAddEventCollisionGivenNode(this, in_rSymbol, &in_pShape, in_CollisionMask, in_IsContactPhantom, in_rMatrixNode);
         }
     };
 
