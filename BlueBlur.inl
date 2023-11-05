@@ -54,6 +54,26 @@
 #define BB_OVERRIDE_FUNCTION_PTR(returnType, baseType, function, location, ...) \
     BB_VTABLE_FUNCTION_PTR(, returnType, baseType*, function, location, override, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))
 
+#define BB_OVERRIDE_FUNCTION_PTR_CONST(returnType, baseType, function, location, ...) \
+    BB_VTABLE_FUNCTION_PTR(, returnType, const baseType*, function, location, const override, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))
+
+
+#define _BB_VTABLE_FUNCTION_PTR_NOARG(virtual, returnType, type, function, location, override) \
+    virtual returnType function() override \
+    { \
+        BB_FUNCTION_PTR(returnType, __thiscall, fp##function, location, type This); \
+        return fp##function(this); \
+    }
+
+#define BB_VIRTUAL_FUNCTION_PTR_NOARG(returnType, function, location, ...) \
+    _BB_VTABLE_FUNCTION_PTR_NOARG(virtual, returnType, decltype(this), function, location, )
+
+#define BB_OVERRIDE_FUNCTION_PTR_NOARG(returnType, baseType, function, location, ...) \
+    _BB_VTABLE_FUNCTION_PTR_NOARG(, returnType, baseType*, function, location, override)
+
+#define BB_OVERRIDE_FUNCTION_PTR_CONST_NOARG(returnType, baseType, function, location, ...) \
+    _BB_VTABLE_FUNCTION_PTR_NOARG(, returnType, const baseType*, function, location, const override)
+
 template<int TActual, int TExpected>
 struct bb_assert_offsetof
 {
@@ -79,10 +99,10 @@ namespace Hedgehog::Math
     using CVector2 = Eigen::Vector2f;
     using CVector4 = Eigen::Vector4f;
 }
-
 #else
-#include <hhMath.h>
+#include "hhMath.h"
 #endif
+
 
 struct bb_null_ctor{};
 
