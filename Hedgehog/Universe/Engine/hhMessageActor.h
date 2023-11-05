@@ -176,6 +176,14 @@ namespace Hedgehog::Universe
             auto spMessage = boost::make_shared<T>();
             return fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
         }
+
+        template<typename T, typename ... V>
+        void SendMessageImm(const size_t actorID, V& ... messageVars)
+        {
+            static_assert(std::is_base_of<Message, T>::value, "T must inherit from Message");
+
+            SendMessageImm(actorID, T(messageVars...));
+        }
     };
 
     BB_ASSERT_OFFSETOF(CMessageActor, m_ActorID, 0x2C);
