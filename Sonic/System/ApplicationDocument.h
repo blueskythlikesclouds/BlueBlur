@@ -36,7 +36,9 @@ namespace Sonic
             boost::shared_ptr<Hedgehog::Database::CDatabase> m_spDatabase;
             BB_INSERT_PADDING(0x20);
             boost::shared_ptr<Hedgehog::Database::CDatabaseLoader> m_spDatabaseLoader;
-            BB_INSERT_PADDING(0x134);
+            BB_INSERT_PADDING(0x18);
+            boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> m_spMatrixNodeRoot;
+            BB_INSERT_PADDING(0x114);
             boost::shared_ptr<CParameterEditor> m_spParameterEditor;
             BB_INSERT_PADDING(0x24);
 
@@ -65,6 +67,7 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spShaderDatabase, 0x88);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spDatabase, 0xA0);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spDatabaseLoader, 0xC8);
+    BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spMatrixNodeRoot, 0xE8);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spParameterEditor, 0x204);
     BB_ASSERT_SIZEOF(CApplicationDocument::CMember, 0x230);
 
