@@ -2,6 +2,8 @@
 
 #pragma comment(lib, "BlueBlur.lib")
 
+#include <Havok/havok.h>
+
 #include <Hedgehog/Animation/hhAnimationControl.h>
 #include <Hedgehog/Animation/hhAnimationControlSingle.h>
 #include <Hedgehog/Animation/hhAnimationPose.h>
@@ -140,6 +142,8 @@
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>
 #include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.h>
 #include <Sonic/FxPipeline/Jobs/ToneMapping/FxToneMapping.h>
+#include <Sonic/Havok/RigidBody.h>
+#include <Sonic/Havok/RaycastCollision.h>
 #include <Sonic/Message/MsgAddImpulse.h>
 #include <Sonic/Message/MsgAddVelocity.h>
 #include <Sonic/Message/MsgDead.h>
