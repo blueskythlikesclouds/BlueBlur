@@ -84,6 +84,7 @@
 #include <Hedgehog/MotionCore/Motion/hhSingleElementEffectMotionAll.h>
 #include <Hedgehog/MotionCore/Motion/hhSingleElementEffectUvMotion.h>
 #include <Hedgehog/MotionCore/Motion/hhTexcoordMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhTexpatternMotion.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
 #include <Hedgehog/Universe/Engine/hhMessage.h>
