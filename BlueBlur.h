@@ -59,6 +59,7 @@
 #include <Hedgehog/MirageCore/Renderable/hhOptimalBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
+#include <Hedgehog/MirageCore/Renderable/hhSingleElementEffect.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightData.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMaterialData.h>
@@ -79,6 +80,13 @@
 #include <Hedgehog/MirageCore/RenderData/hhTextureData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderCodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderData.h>
+#include <Hedgehog/MotionCore/Motion/hhMaterialMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhMotionBase.h>
+#include <Hedgehog/MotionCore/Motion/hhSingleElementEffectMatMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhSingleElementEffectMotionAll.h>
+#include <Hedgehog/MotionCore/Motion/hhSingleElementEffectUvMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhTexcoordMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhTexpatternMotion.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
 #include <Hedgehog/Universe/Engine/hhMessage.h>

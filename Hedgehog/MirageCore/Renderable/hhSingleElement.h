@@ -14,6 +14,7 @@ namespace Hedgehog::Mirage
     class CInstanceInfo;
     class CSingleElement;
     class CSingleMorphElement;
+    class CSingleElementEffect;
     class CMaterialData;
     class CModelData;
     class CMatrixNode;
@@ -42,7 +43,7 @@ namespace Hedgehog::Mirage
     public:
         boost::shared_ptr<CInstanceInfo> m_spInstanceInfo;
         hh::map<CMaterialData*, boost::shared_ptr<CMaterialData>> m_MaterialMap;
-        BB_INSERT_PADDING(0x8);
+        boost::shared_ptr<CSingleElementEffect> m_spSingleElementEffect;
 
         CSingleElement(const bb_null_ctor& nil) : CElement(nil) {}
 
@@ -76,6 +77,7 @@ namespace Hedgehog::Mirage
 
     BB_ASSERT_OFFSETOF(CSingleElement, m_spInstanceInfo, 0x8C);
     BB_ASSERT_OFFSETOF(CSingleElement, m_MaterialMap, 0x94);
+    BB_ASSERT_OFFSETOF(CSingleElement, m_spSingleElementEffect, 0xA0);
     BB_ASSERT_SIZEOF(CSingleElement, 0xA8);
 
     class CSingleMorphElement : public CSingleElement

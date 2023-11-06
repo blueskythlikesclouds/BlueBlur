@@ -48,7 +48,7 @@ namespace Sonic
     BB_ASSERT_SIZEOF(CSetObjectFactory, 0x20);
 }
 
-#define SET_OBJECT_MAKE(name) \
+#define BB_SET_OBJECT_MAKE(name) \
     template<typename base_t> \
     static auto get_function_base_type(void(base_t::*)())->base_t; \
     \
@@ -63,7 +63,7 @@ namespace Sonic
         return boost::make_shared<Sonic::CSetObjectEntry>(boost::make_shared<Sonic::SSetObjectInfo>(spSetObject, spSetObject), ms_Name); \
     }
 
-#define SET_OBJECT_MAKE_HOOK(type) \
+#define BB_SET_OBJECT_MAKE_HOOK(type) \
     static inline Sonic::SSetObjectMake g_##type##Make = { &(type::Make), nullptr }; \
     \
     static void __fastcall f##type##MakeHook(Sonic::CSetObjectFactory* pSetObjectFactory) \
@@ -80,7 +80,7 @@ namespace Sonic
         __asm { jmp[g_##type##MakeReturnAddr] } \
     }
 
-#define INSTALL_SET_OBJECT_MAKE_HOOK(type) \
+#define BB_INSTALL_SET_OBJECT_MAKE_HOOK(type) \
     { \
         uint32_t* pNextHookAddr = (uint32_t*)0xEBD51C; \
         \
