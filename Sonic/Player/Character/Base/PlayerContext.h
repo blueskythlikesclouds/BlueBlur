@@ -5,6 +5,7 @@
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
 
 #undef PlaySound
+enum class ePlayerParameter;
 
 namespace Hedgehog::Mirage
 {
@@ -26,6 +27,10 @@ namespace Sonic
 
 namespace Sonic::Player
 {
+    // TODO: Move somewhere else, or just map out all the states I guess????
+    // Enum of every state name.
+    enum class StateAction;
+
     class CParameter;
     class CPlayer;
     class CPlayerContext;
@@ -51,6 +56,36 @@ namespace Sonic::Player
 
         return pResult;
     }
+
+    static float __cdecl fpGetFloatParameter(const void* paramList, const int param)
+    {
+#ifdef _USE_STATIC
+        getFloatParameter_param = param;
+        getFloatParameter_paramList = (uint32_t)paramList;
+
+        fpGetFloatParameter_asm();
+
+        return getFloatParameter_return;
+#else
+        uint32_t func = 0x0053A9F0;
+        volatile float result = 0.0f;
+        uint32_t _paramList = (uint32_t)paramList;
+        uint32_t _param = param;
+
+        __asm
+        {
+            push     _param
+            mov eax, _paramList
+            call[func]
+            movss dword ptr[result], xmm0
+        }
+
+        return result;
+#endif
+    }
+
+    // Helper function, please consider putting this somewhere else like in a "helpers" header in BlueBlur?
+    const char* fStringFromStateAction(StateAction state);
 
     class CPlayerContext : public Hedgehog::Base::CObject
     {
@@ -94,9 +129,19 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_Field180;
         Hedgehog::Math::CVector m_Field190;
 
-        size_t m_Field1A0;
-        size_t m_Field1A4;
-        void* m_pSkills; //0x1A8
+        size_t m_SuperRenderableActorID; // 0x1A0
+
+        // HACK: unaligned keyword doesn't work & this is basically a 64bit int at 0x1A4 for some reason.
+        // We can just make these private I guess, use a member function to acces them.
+    private:
+        uint32_t m_SkillsP1; // 0x1A4
+        uint32_t m_SkillsP2; // 0x1A8
+    public:
+        uint64_t Skills()
+        {
+            return *(uint64_t*)&m_SkillsP1;
+        }
+
         uint8_t m_Field1AC[172];
 
         float m_Field258;
@@ -142,7 +187,7 @@ namespace Sonic::Player
         virtual void CPlayerContext6C() {}
         virtual void CPlayerContext70() {}
 
-        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t in_CueId, size_t in_Flags) = 0;
+        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t in_CueId, bool in_Loop) = 0;
 
         virtual void CPlayerContext78() {}
         virtual void CPlayerContext7C() {}
@@ -160,6 +205,17 @@ namespace Sonic::Player
         Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(const Hedgehog::Base::CSharedString& in_rType)
         {
             return fCPlayerContextChangeState(this, &in_rType);
+        }
+
+        inline Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(StateAction in_State)
+        {
+            return ChangeState(fStringFromStateAction(in_State));
+        }
+
+        const float GetFloatParamByInt(const int in_Param) const
+        {
+            const float result = fpGetFloatParameter(this->m_spParameter.get(), in_Param);
+            return result;
         }
 
         template<typename T>
@@ -196,9 +252,13 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field178, 0x178);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field180, 0x180);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field190, 0x190);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1A0, 0x1A0);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1A4, 0x1A4);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_pSkills,  0x1A8);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_SuperRenderableActorID, 0x1A0);
+
+    // Because they're private, these assertions don't work.
+    // Set them to public & uncomment these if you want to verify these specifically work.
+    //BB_ASSERT_OFFSETOF(CPlayerContext, m_SkillsP1, 0x1A4);
+    //BB_ASSERT_OFFSETOF(CPlayerContext, m_SkillsP2, 0x1A8);
+
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1AC, 0x1AC);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field258, 0x258);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field25C, 0x25C);
@@ -206,4 +266,740 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spParentParameter, 0x274);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spParameter, 0x27C);
     BB_ASSERT_SIZEOF(CPlayerContext, 0x290);
+
+    // Helper class & function. TODO: Migrate to another location.
+
+    // Class that we use to map every valid state in Generations, leveraging intellisense for autocompletion instead of relying on strings.
+    enum class StateAction
+    {
+        Stand,
+        Walk,
+        JumpShort,
+        Jump,
+        MoveStop,
+        Brake,
+        BrakeEnd,
+        BrakeTurn,
+        Fall,
+        Land,
+        LandJumpShort,
+        DeadLanding,
+        JumpSpring,
+        JumpSpringHeadLand,
+        HangOn,
+        ReactionJump,    // THIS CRASHES THE GAME AND IS REALLY FUCKED UP
+        ReactionLand,
+        TrickJump,
+        CrashWall,
+        CrashWallDown,
+        PressDead,
+        PressDamage,
+        WallJumpReady,
+        WallJump,
+        Battery,    // Game crashes lol
+        Sliding,
+        ShoesSliding,
+        GoalAir,
+        Goal,
+        ExternalControl_Crash,
+        TrickJumpSuccess,
+        FinishExternalControlAir,
+        PushingWall,
+        PushObject,
+        KickBox,
+        PlayAnimation,
+        NormalDamage,
+        NormalDamageStandUp,
+        NormalDamageAir,
+        NormalDamageDead,
+        NormalDamageDeadAir,
+        DamageCancel,
+        DamageOnRunning,
+        DamageOnStomping,
+        TrickAttackLand,
+        TrickAttack,
+        SpecialJump,
+        DrowningDead,
+        MoveToPositionAndWait,
+        WallRunDamage,
+        LookUp,
+        Stagger,
+        TakeBreath_Crash,
+        Suffocate_Crash,
+        HipSliding,
+        AdlibTrick,
+        AdlibTrickFailure,
+        Pipe,
+        AirBoost,
+        Drift,
+        NoStanding,
+        HomingAttack,
+        HomingAttackAfter,
+        Grind,
+        GrindJumpSide_Crash,
+        GrindSquat_Crash,
+        GrindJumpShort_Crash,
+        GrindLandJumpShort_Crash,
+        GrindSwitch_Crash,
+        GrindDamageMiddle_Crash,
+        GrindToWallWalk_Crash,
+        OnSlipFloor,
+        Stepping_Crash,
+        TramRiding_Crash,
+        BeforeBoundJump,
+        BoundJump,
+        StumbleAir,
+        StumbleGround,
+        QuickStep,
+        RunQuickStep,
+        StartDash,
+        StartEvent,
+        StartCrouching,
+        BoardWalk,
+        BoardGetOn,
+        BoardGetOff,
+        BoardNormalDamage,
+        BoardJumpShort,
+        BoardJump,
+        BoardAdlibTrick,
+        BoardQuickStep,
+        BoardRunQuickStep,
+        BoardFall,
+        BoardGrind,
+        BoardGrindJumpShort,
+        BoardGrindJumpSide,
+        BoardGrindLandJumpShort,
+        BoardLandJumpShort,
+        BoardAirBoost,
+        BoardJumpSpring,
+        BoardDrift,
+        JumpHurdle,
+        Squat,
+        SlidingEnd,
+        SelectJump,
+        JumpSelector,
+        Stomping_Crash,
+        StompingLand,
+        LightSpeedDash,
+        SelectJumpAfter,
+        DivingFloat,
+        DivingDive,
+        DivingDamage,
+        SquatKick,
+        OnIce,
+        DamageFreeze,
+        DamageShock,
+        DamageNearFar,
+        Spin,
+        SpinCharge,
+        SpinChargeSliding,
+        SpinSliding,
+        SquatCharge,
+        FloatingBoost,
+        TransformRocket,
+        TransformSpike,
+        TransformSp,
+        TransformStandard,
+        RocketIdle,
+        RocketLaunch,
+        RocketEnd,
+        RocketOverHeat,
+        SpikeIdle,
+        SpikeWalk,
+        SpikeFall,
+        SpikeJump,
+        SpikeLand,
+        SpikeCharge,
+        SpikeBoost,
+        SpikeJumpSpring,
+        SpikeSpecialJump,
+        SpikeDamageShock,
+        SpikeHomingAttack,
+        SpikeHomingAttackAfter,
+        NONE
+    };
+    // Helper function that takes in a "StateAction" enum, leveraging intellisense to autocomplete vanilla Generations state names.
+    static inline const char* fStringFromStateAction(StateAction state)
+    {
+        switch (state)
+        {
+        default:
+        case StateAction::Stand:
+        {
+            return "Stand";
+        }
+        case StateAction::Walk:
+        {
+            return "Walk";
+        }
+        case StateAction::JumpShort:
+        {
+            return "JumpShort";
+        }
+        case StateAction::Jump:
+        {
+            return "Jump";
+        }
+        case StateAction::MoveStop:
+        {
+            return "MoveStop";
+        }
+        case StateAction::Brake:
+        {
+            return "Brake";
+        }
+        case StateAction::BrakeEnd:
+        {
+            return "BrakeEnd";
+        }
+        case StateAction::BrakeTurn:
+        {
+            return "BrakeTurn";
+        }
+        case StateAction::Fall:
+        {
+            return "Fall";
+        }
+        case StateAction::Land:
+        {
+            return "Land";
+        }
+        case StateAction::LandJumpShort:
+        {
+            return "LandJumpShort";
+        }
+        case StateAction::DeadLanding:
+        {
+            return "DeadLanding";
+        }
+        case StateAction::JumpSpring:
+        {
+            return "JumpSpring";
+        }
+        case StateAction::JumpSpringHeadLand:
+        {
+            return "JumpSpringHeadLand";
+        }
+        case StateAction::HangOn:
+        {
+            return "HangOn";
+        }
+        case StateAction::ReactionJump:
+        {
+            return "ReactionJump";
+        }
+        case StateAction::ReactionLand:
+        {
+            return "ReactionLand";
+        }
+        case StateAction::TrickJump:
+        {
+            return "TrickJump";
+        }
+        case StateAction::CrashWall:
+        {
+            return "CrashWall";
+        }
+        case StateAction::CrashWallDown:
+        {
+            return "CrashWallDown";
+        }
+        case StateAction::PressDead:
+        {
+            return "PressDead";
+        }
+        case StateAction::PressDamage:
+        {
+            return "PressDamage";
+        }
+        case StateAction::WallJumpReady:
+        {
+            return "WallJumpReady";
+        }
+        case StateAction::WallJump:
+        {
+            return "WallJump";
+        }
+        case StateAction::Battery:
+        {
+            return "Battery";
+        }
+        case StateAction::Sliding:
+        {
+            return "Sliding";
+        }
+        case StateAction::ShoesSliding:
+        {
+            return "ShoesSliding";
+        }
+        case StateAction::GoalAir:
+        {
+            return "GoalAir";
+        }
+        case StateAction::Goal:
+        {
+            return "Goal";
+        }
+        case StateAction::ExternalControl_Crash:
+        {
+            return "ExternalControl_Crash";
+        }
+        case StateAction::TrickJumpSuccess:
+        {
+            return "TrickJumpSuccess";
+        }
+        case StateAction::FinishExternalControlAir:
+        {
+            return "FinishExternalControlAir";
+        }
+        case StateAction::PushingWall:
+        {
+            return "PushingWall";
+        }
+        case StateAction::PushObject:
+        {
+            return "PushObject";
+        }
+        case StateAction::KickBox:
+        {
+            return "KickBox";
+        }
+        case StateAction::PlayAnimation:
+        {
+            return "PlayAnimation";
+        }
+        case StateAction::NormalDamage:
+        {
+            return "NormalDamage";
+        }
+        case StateAction::NormalDamageStandUp:
+        {
+            return "NormalDamageStandUp";
+        }
+        case StateAction::NormalDamageAir:
+        {
+            return "NormalDamageAir";
+        }
+        case StateAction::NormalDamageDead:
+        {
+            return "NormalDamageDead";
+        }
+        case StateAction::NormalDamageDeadAir:
+        {
+            return "NormalDamageDeadAir";
+        }
+        case StateAction::DamageCancel:
+        {
+            return "DamageCancel";
+        }
+        case StateAction::DamageOnRunning:
+        {
+            return "DamageOnRunning";
+        }
+        case StateAction::DamageOnStomping:
+        {
+            return "DamageOnStomping";
+        }
+        case StateAction::TrickAttackLand:
+        {
+            return "TrickAttackLand";
+        }
+        case StateAction::TrickAttack:
+        {
+            return "TrickAttack";
+        }
+        case StateAction::SpecialJump:
+        {
+            return "SpecialJump";
+        }
+        case StateAction::DrowningDead:
+        {
+            return "DrowningDead";
+        }
+        case StateAction::MoveToPositionAndWait:
+        {
+            return "MoveToPositionAndWait";
+        }
+        case StateAction::WallRunDamage:
+        {
+            return "WallRunDamage";
+        }
+        case StateAction::LookUp:
+        {
+            return "LookUp";
+        }
+        case StateAction::Stagger:
+        {
+            return "Stagger";
+        }
+        case StateAction::TakeBreath_Crash:
+        {
+            return "TakeBreath_Crash";
+        }
+        case StateAction::Suffocate_Crash:
+        {
+            return "Suffocate_Crash";
+        }
+        case StateAction::HipSliding:
+        {
+            return "HipSliding";
+        }
+        case StateAction::AdlibTrick:
+        {
+            return "AdlibTrick";
+        }
+        case StateAction::AdlibTrickFailure:
+        {
+            return "AdlibTrickFailure";
+        }
+        case StateAction::Pipe:
+        {
+            return "Pipe";
+        }
+        case StateAction::AirBoost:
+        {
+            return "AirBoost";
+        }
+        case StateAction::Drift:
+        {
+            return "Drift";
+        }
+        case StateAction::NoStanding:
+        {
+            return "NoStanding";
+        }
+        case StateAction::HomingAttack:
+        {
+            return "HomingAttack";
+        }
+        case StateAction::HomingAttackAfter:
+        {
+            return "HomingAttackAfter";
+        }
+        case StateAction::Grind:
+        {
+            return "Grind";
+        }
+        case StateAction::GrindJumpSide_Crash:
+        {
+            return "GrindJumpSide_Crash";
+        }
+        case StateAction::GrindSquat_Crash:
+        {
+            return "GrindSquat_Crash";
+        }
+        case StateAction::GrindJumpShort_Crash:
+        {
+            return "GrindJumpShort_Crash";
+        }
+        case StateAction::GrindLandJumpShort_Crash:
+        {
+            return "GrindLandJumpShort_Crash";
+        }
+        case StateAction::GrindSwitch_Crash:
+        {
+            return "GrindSwitch_Crash";
+        }
+        case StateAction::GrindDamageMiddle_Crash:
+        {
+            return "GrindDamageMiddle_Crash";
+        }
+        case StateAction::GrindToWallWalk_Crash:
+        {
+            return "GrindToWallWalk_Crash";
+        }
+        case StateAction::OnSlipFloor:
+        {
+            return "OnSlipFloor";
+        }
+        case StateAction::Stepping_Crash:
+        {
+            return "Stepping_Crash";
+        }
+        case StateAction::TramRiding_Crash:
+        {
+            return "TramRiding_Crash";
+        }
+        case StateAction::BeforeBoundJump:
+        {
+            return "BeforeBoundJump";
+        }
+        case StateAction::BoundJump:
+        {
+            return "BoundJump";
+        }
+        case StateAction::StumbleAir:
+        {
+            return "StumbleAir";
+        }
+        case StateAction::StumbleGround:
+        {
+            return "StumbleGround";
+        }
+        case StateAction::QuickStep:
+        {
+            return "QuickStep";
+        }
+        case StateAction::RunQuickStep:
+        {
+            return "RunQuickStep";
+        }
+        case StateAction::StartDash:
+        {
+            return "StartDash";
+        }
+        case StateAction::StartEvent:
+        {
+            return "StartEvent";
+        }
+        case StateAction::StartCrouching:
+        {
+            return "StartCrouching";
+        }
+        case StateAction::BoardWalk:
+        {
+            return "BoardWalk";
+        }
+        case StateAction::BoardGetOn:
+        {
+            return "BoardGetOn";
+        }
+        case StateAction::BoardGetOff:
+        {
+            return "BoardGetOff";
+        }
+        case StateAction::BoardNormalDamage:
+        {
+            return "BoardNormalDamage";
+        }
+        case StateAction::BoardJumpShort:
+        {
+            return "BoardJumpShort";
+        }
+        case StateAction::BoardJump:
+        {
+            return "BoardJump";
+        }
+        case StateAction::BoardAdlibTrick:
+        {
+            return "BoardAdlibTrick";
+        }
+        case StateAction::BoardQuickStep:
+        {
+            return "BoardQuickStep";
+        }
+        case StateAction::BoardRunQuickStep:
+        {
+            return "BoardRunQuickStep";
+        }
+        case StateAction::BoardFall:
+        {
+            return "BoardFall";
+        }
+        case StateAction::BoardGrind:
+        {
+            return "BoardGrind";
+        }
+        case StateAction::BoardGrindJumpShort:
+        {
+            return "BoardGrindJumpShort";
+        }
+        case StateAction::BoardGrindJumpSide:
+        {
+            return "BoardGrindJumpSide";
+        }
+        case StateAction::BoardGrindLandJumpShort:
+        {
+            return "BoardGrindLandJumpShort";
+        }
+        case StateAction::BoardLandJumpShort:
+        {
+            return "BoardLandJumpShort";
+        }
+        case StateAction::BoardAirBoost:
+        {
+            return "BoardAirBoost";
+        }
+        case StateAction::BoardJumpSpring:
+        {
+            return "BoardJumpSpring";
+        }
+        case StateAction::BoardDrift:
+        {
+            return "BoardDrift";
+        }
+        case StateAction::JumpHurdle:
+        {
+            return "JumpHurdle";
+        }
+        case StateAction::Squat:
+        {
+            return "Squat";
+        }
+        case StateAction::SlidingEnd:
+        {
+            return "SlidingEnd";
+        }
+        case StateAction::SelectJump:
+        {
+            return "SelectJump";
+        }
+        case StateAction::JumpSelector:
+        {
+            return "JumpSelector";
+        }
+        case StateAction::Stomping_Crash:
+        {
+            return "Stomping_Crash";
+        }
+        case StateAction::StompingLand:
+        {
+            return "StompingLand";
+        }
+        case StateAction::LightSpeedDash:
+        {
+            return "LightSpeedDash";
+        }
+        case StateAction::SelectJumpAfter:
+        {
+            return "SelectJumpAfter";
+        }
+        case StateAction::DivingFloat:
+        {
+            return "DivingFloat";
+        }
+        case StateAction::DivingDive:
+        {
+            return "DivingDive";
+        }
+        case StateAction::DivingDamage:
+        {
+            return "DivingDamage";
+        }
+        case StateAction::SquatKick:
+        {
+            return "SquatKick";
+        }
+        case StateAction::OnIce:
+        {
+            return "OnIce";
+        }
+        case StateAction::DamageFreeze:
+        {
+            return "DamageFreeze";
+        }
+        case StateAction::DamageShock:
+        {
+            return "DamageShock";
+        }
+        case StateAction::DamageNearFar:
+        {
+            return "DamageNearFar";
+        }
+        case StateAction::Spin:
+        {
+            return "Spin";
+        }
+        case StateAction::SpinCharge:
+        {
+            return "SpinCharge";
+        }
+        case StateAction::SpinChargeSliding:
+        {
+            return "SpinChargeSliding";
+        }
+        case StateAction::SpinSliding:
+        {
+            return "SpinSliding";
+        }
+        case StateAction::SquatCharge:
+        {
+            return "SquatCharge";
+        }
+        case StateAction::FloatingBoost:
+        {
+            return "FloatingBoost";
+        }
+        case StateAction::TransformRocket:
+        {
+            return "TransformRocket";
+        }
+        case StateAction::TransformSpike:
+        {
+            return "TransformSpike";
+        }
+        case StateAction::TransformSp:
+        {
+            return "TransformSp";
+        }
+        case StateAction::TransformStandard:
+        {
+            return "TransformStandard";
+        }
+        case StateAction::RocketIdle:
+        {
+            return "RocketIdle";
+        }
+        case StateAction::RocketLaunch:
+        {
+            return "RocketLaunch";
+        }
+        case StateAction::RocketEnd:
+        {
+            return "RocketEnd";
+        }
+        case StateAction::RocketOverHeat:
+        {
+            return "RocketOverHeat";
+        }
+        case StateAction::SpikeIdle:
+        {
+            return "SpikeIdle";
+        }
+        case StateAction::SpikeWalk:
+        {
+            return "SpikeWalk";
+        }
+        case StateAction::SpikeFall:
+        {
+            return "SpikeFall";
+        }
+        case StateAction::SpikeJump:
+        {
+            return "SpikeJump";
+        }
+        case StateAction::SpikeLand:
+        {
+            return "SpikeLand";
+        }
+        case StateAction::SpikeCharge:
+        {
+            return "SpikeCharge";
+        }
+        case StateAction::SpikeBoost:
+        {
+            return "SpikeBoost";
+        }
+        case StateAction::SpikeJumpSpring:
+        {
+            return "SpikeJumpSpring";
+        }
+        case StateAction::SpikeSpecialJump:
+        {
+            return "SpikeSpecialJump";
+        }
+        case StateAction::SpikeDamageShock:
+        {
+            return "SpikeDamageShock";
+        }
+        case StateAction::SpikeHomingAttack:
+        {
+            return "SpikeHomingAttack";
+        }
+        case StateAction::SpikeHomingAttackAfter:
+        {
+            return "SpikeHomingAttackAfter";
+        }
+        }
+    }
 }

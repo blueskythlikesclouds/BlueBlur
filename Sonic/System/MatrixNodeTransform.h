@@ -18,6 +18,12 @@ namespace Sonic
         }
     }
 
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeTransformSetChild, 0x6F46B0,
+        Hedgehog::Mirage::CMatrixNode* This, Hedgehog::Mirage::CMatrixNode* in_pChildMatrixNode);
+
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeTransformUpdateMatrix, 0xD17170,
+        Hedgehog::Mirage::CMatrixNode* This, Hedgehog::Mirage::CMatrixNode* in_pParentMatrixNode);
+
     class CMatrixNodeTransform : public Hedgehog::Mirage::CMatrixNode
     {
     public:
@@ -27,6 +33,29 @@ namespace Sonic
         CMatrixNodeTransform()
         {
             fCMatrixNodeTransformCtor(this);
+        }
+
+        void SetParent(CMatrixNode* pParentNode)
+        {
+            fpCMatrixNodeTransformSetChild(pParentNode, this);
+        }
+        void SetChild(CMatrixNode* pChildNode)
+        {
+            fpCMatrixNodeTransformSetChild(this, pChildNode);
+        }
+
+        void UpdateMatrix(CMatrixNode* pParentMatrixNode) override
+        {
+            fpCMatrixNodeTransformUpdateMatrix(this, pParentMatrixNode);
+        }
+
+        const Hedgehog::Math::CMatrix& GetLocalMatrix() const override
+        {
+            return m_Transform.m_Matrix;
+        }
+        const Hedgehog::Math::CMatrix& GetWorldMatrix() const override
+        {
+            return m_WorldMatrix;
         }
     };
 

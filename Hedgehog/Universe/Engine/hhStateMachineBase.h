@@ -16,7 +16,7 @@ namespace Hedgehog::Universe
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseUpdateStateMachine, 0x76DF00,
         CStateMachineBase* This, const SUpdateInfo& in_rUpdateInfo);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseCtor, 0x76E3C0, 
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseCtor, 0x76E3C0,
         CStateMachineBase* This);
 
     class CStateMachineBase : public IStateMachineMessageReceiver, public Base::CObject
@@ -30,7 +30,10 @@ namespace Hedgehog::Universe
             float m_Time;
             BB_INSERT_PADDING(0x4);
             Base::CSharedString m_Name;
-            BB_INSERT_PADDING(0x44);
+            int m_Field01C;
+            float m_DeactivateTime;
+            BB_INSERT_PADDING(0x34);
+            boost::shared_ptr<Hedgehog::Universe::CStateMachineBase::CStateBase> m_spNextState;
 
             static inline BB_FUNCTION_PTR(void, __thiscall, fpCtor, 0x76DD70, CStateBase* This);
 
@@ -61,19 +64,66 @@ namespace Hedgehog::Universe
             virtual void LeaveState() {}
 
             virtual void CStateBase18() {}
-            virtual void CStateBase1C() {}
+            virtual void CStateBase1C(float deltaTime, bool flag) {}
 
             virtual const Base::CSharedString& GetStateName() 
             {
                 return m_Name;
             }
+
+            float GetDeltaTime()
+            {
+                return m_pStateMachine->m_UpdateInfo.DeltaTime;
+            }
+
+            __declspec(noinline) void HoldPropertyFloat(const hh::Base::CSharedString& name, const float* value) volatile
+            {
+                static constexpr uint32_t func = 0x0050DFB0;
+                __asm
+                {
+                    mov eax, this
+                    mov edi, name
+                    push value
+                    call func
+                }
+            }
+
+            __declspec(noinline) void HoldPropertyBool(const hh::Base::CSharedString& name, const bool* value) volatile
+            {
+                static constexpr uint32_t func = 0x0050DD40;
+                __asm
+                {
+                    mov eax, this
+                    mov edi, name
+                    push value
+                    call func
+                }
+            }
+
+        };
+
+        class CInterpolator
+        {
+        public:
+            float m_OnePointZero = 0.0f;
+            float m_EaseTime = 0.0f;
+            float m_Time = 0.0f;
+            int m_BlendAmountMaybe = 0;
+            BB_INSERT_PADDING(0x04) {};
+            boost::shared_ptr<CInterpolator> m_spPreviousInterpolator;
+            boost::shared_ptr<CStateBase> m_spState;
+            boost::shared_ptr<void> m_spInterpolationStrategy;
+            BB_INSERT_PADDING(0x04) {};
         };
 
         BB_INSERT_PADDING(0x18);
         void* m_pContext;
         float m_Time;
         SUpdateInfo m_UpdateInfo;
-        BB_INSERT_PADDING(0x30);
+        hh::map<void*, void*> m_StatesMap;
+        int m_NumStates;
+        BB_INSERT_PADDING(0x18);
+        boost::shared_ptr<CInterpolator> m_spInterpolator;
 
         CStateMachineBase(const bb_null_ctor& nil) : IStateMachineMessageReceiver(nil), CObject(nil) {}
 

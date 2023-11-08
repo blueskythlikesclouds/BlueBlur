@@ -4,6 +4,23 @@
 
 namespace Sonic
 {
+    class CObjectBase;
+
+    static inline uint32_t pCObjectBaseAddRenderable = 0xE95DC0;
+    static inline void __declspec(naked) __declspec(noinline) fCObjectBaseAddRenderable()
+    {
+        __asm
+        {
+            mov eax, ecx
+            jmp pCObjectBaseAddRenderable
+        }
+    }
+
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCObjectBaseAddRenderable, fCObjectBaseAddRenderable,
+        const boost::shared_ptr<Hedgehog::Mirage::CSingleElement>& out_spSingleElement, Sonic::CObjectBase* This,
+        const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase, const char* assetName, boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> matrixNode);
+
+
     class CObjectBase : public CGameObject3D
     {
     public:
@@ -30,7 +47,7 @@ namespace Sonic
 
         virtual void CObjectBase5C() {}
 
-        BB_VIRTUAL_FUNCTION_PTR(void*, SetAddUpdateUnit, 0x10585E0, (void*, A1))
+        BB_VIRTUAL_FUNCTION_PTR(void, SetAddUpdateUnit, 0x10585E0, (Sonic::CGameDocument*, in_pGameDocument))
 
         virtual bool SetAddRenderables(Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
         virtual bool SetAddColliders(const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) { return true; }
@@ -45,7 +62,16 @@ namespace Sonic
 
         BB_VIRTUAL_FUNCTION_PTR(void*, CObjectBase88, 0x10585D0, (void*, A1))
 
-        virtual void CObjectBase8C(void*) {}
+        virtual void CObjectBase8C()
+        {
+            return;
+        }
+
+        bool AddRenderableFromDatabase(const char* assetName, const boost::shared_ptr<Hedgehog::Mirage::CSingleElement>& out_spSingleElement,
+            const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& matrixNode, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase)
+        {
+            return fpCObjectBaseAddRenderable(out_spSingleElement, this, in_spDatabase, assetName, matrixNode);
+        }
     };
 
     BB_ASSERT_OFFSETOF(CObjectBase, m_FieldF4, 0xF4);

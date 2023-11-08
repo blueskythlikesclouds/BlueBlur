@@ -29,23 +29,7 @@ namespace Hedgehog::Animation
         CAnimationPose* This, float in_DeltaTime);
 
     // TODO: MOVE THESE TO THEIR OWN LOCATIONS.
-
-    template <typename T>
-    class hvkArray
-    {
-    public:
-        T* m_ptr;
-        uint32_t m_numElements;
-        uint32_t m_maxElements;
-
-        template <typename E>
-        T* GetIndex(E i)
-        {
-            return (T*)((uint32_t)m_ptr + ((int)i * sizeof(T)));
-        }
-    };
-
-    class hvkQsTransform
+    class hkQsTransform
     {
     public:
         Hedgehog::Math::CVector     m_Position {};
@@ -56,8 +40,8 @@ namespace Hedgehog::Animation
     struct SAnimData
     {
         void* m_pSkeleton{}; // type hkaSkeleton
-        hvkArray<hvkQsTransform> m_TransformArray{};
-        hvkArray<hvkQsTransform> m_TransformArray2{};
+        hk2010_2_0::hkArray<hkQsTransform> m_TransformArray{};
+        hk2010_2_0::hkArray<hkQsTransform> m_TransformArray2{};
         BB_INSERT_PADDING(0x04) {};
     };
 
@@ -66,7 +50,7 @@ namespace Hedgehog::Animation
     public:
         BB_INSERT_PADDING(0x2C) {};
         boost::shared_ptr<CAnimationSkeleton> m_spAnimationSkeleton; // 0x30
-        void* m_pHavokSkeleton{}; // 0x38, hkaAnimatedSkeleton*
+        hk2010_2_0::hkaAnimatedSkeleton* m_pHavokSkeleton{}; // 0x38
         Mirage::CInstanceInfo* m_pInstanceInfo{}; // 0x3C
         boost::shared_ptr<Mirage::CModelData> m_spModelData; // 0x40
         BB_INSERT_PADDING(0x04) {};
@@ -74,8 +58,8 @@ namespace Hedgehog::Animation
         boost::shared_ptr<CAnimationControlSingle> m_spAnimationControlSingle; // 0x4C
         SAnimData* m_pAnimData{};
         int m_numBones = 0;
-        void* m_pMatrixListA{};
-        void* m_pMatrixListB{};
+        Hedgehog::Math::CMatrix* m_pMatrixListA{};
+        Hedgehog::Math::CMatrix* m_pMatrixListB{};
         int m_UnknownMapSize = 0;
 
         BB_INSERT_PADDING(0x14) {};
@@ -90,6 +74,13 @@ namespace Hedgehog::Animation
         BB_INSERT_PADDING(0x18) {};
         boost::shared_ptr<CAnimationCache> m_spAnimationCache; // 0x130
         BB_INSERT_PADDING(0x18) {};
+
+        BB_OVERRIDE_FUNCTION_PTR_CONST_NOARG(size_t, Mirage::CPose, GetMatrixNum, 0x6CCB60);
+        BB_OVERRIDE_FUNCTION_PTR_CONST_NOARG(const Math::CMatrix*, Mirage::CPose, GetMatrixList, 0x6CCBB0);
+        BB_OVERRIDE_FUNCTION_PTR_CONST_NOARG(const Math::CMatrix*, Mirage::CPose, GetPrevMatrixList, 0x6C7A60);
+        BB_OVERRIDE_FUNCTION_PTR_CONST(void, Mirage::CPose, GetMatrix, 0x6C7A70, (size_t, in_Index), (Math::CMatrix&, out_rMatrix))
+        BB_OVERRIDE_FUNCTION_PTR(void, Mirage::CPose, SetModel,  0x6C8E90, (const boost::shared_ptr<Mirage::CModelData>&, in_spModelData))
+        BB_OVERRIDE_FUNCTION_PTR(void, Mirage::CPose, SetInstanceInfo, 0x6C7950, (Mirage::CInstanceInfo*, in_pInstanceInfo))
 
         static boost::shared_ptr<CAnimationCache> CreateAnimationCache()
         {

@@ -14,7 +14,9 @@ namespace Sonic::Player
             return *ms_pInstance;
         }
 
-        BB_INSERT_PADDING(0x2A0);
+        BB_INSERT_PADDING(0x48);
+        boost::shared_ptr<void> m_spForwardPathController;
+        BB_INSERT_PADDING(0x250);
     };
 
     BB_ASSERT_SIZEOF(CSonicContext, 0x14D0);

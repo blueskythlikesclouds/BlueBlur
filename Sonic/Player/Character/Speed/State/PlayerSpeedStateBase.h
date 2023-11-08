@@ -21,11 +21,29 @@ namespace Sonic::Player
             }
         }
 
+        static inline uint32_t pSetBool = 0x50DD40;
+
+        static void fSetBool(CPlayerSpeedContext::CStateSpeedBase* This, const Hedgehog::Base::CSharedString& in_rName, const bool& in_rValue)
+        {
+            __asm
+            {
+                push in_rValue
+                mov eax, This
+                mov edi, in_rName
+                call[pSetBool]
+            }
+        }
+
         CStateSpeedBase(const bb_null_ctor& nil) : TState(nil) {}
 
         CStateSpeedBase() : CStateSpeedBase(bb_null_ctor{})
         {
             fCtor(this);
+        }
+
+        void SetBool(const Hedgehog::Base::CSharedString& in_rName, const bool& in_rValue)
+        {
+            fSetBool(this, in_rName, in_rValue);
         }
 
         CPlayerSpeedContext* GetContext() const
