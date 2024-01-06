@@ -20,7 +20,8 @@ namespace Hedgehog::Mirage
 
     struct SRenderStateInfo
     {
-        BB_INSERT_PADDING(0x8);
+        uint32_t ForceAlphaColorIndex;
+        uint32_t CameraIndex;
         uint32_t ShaderLockCount;
         float DepthBias;
         float SlopeScaledDepthBias;
@@ -33,6 +34,8 @@ namespace Hedgehog::Mirage
         SRenderState RenderStates[210];
     };
 
+    BB_ASSERT_OFFSETOF(SRenderStateInfo, ForceAlphaColorIndex, 0x0);
+    BB_ASSERT_OFFSETOF(SRenderStateInfo, CameraIndex, 0x4);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, ShaderLockCount, 0x8);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, DepthBias, 0xC);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, SlopeScaledDepthBias, 0x10);

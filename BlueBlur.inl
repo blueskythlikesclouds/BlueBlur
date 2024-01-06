@@ -88,6 +88,11 @@ struct bb_assert_sizeof
 
 #ifndef BB_EXCLUDE_MATH_DEFINITIONS
 
+namespace Sonic
+{
+    using CNoAlignVector = Eigen::Vector3f;
+}
+
 // Hedgehog::Math
 namespace Hedgehog::Math
 {

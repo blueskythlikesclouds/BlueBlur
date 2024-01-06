@@ -90,6 +90,9 @@
 #include <Hedgehog/MotionCore/Motion/hhTexpatternMotion.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
+#include <Hedgehog/Sound/Handle/hhSoundHandle.h>
+#include <Hedgehog/Sound/Handle/hhSoundHandleBgm.h>
+#include <Hedgehog/Sound/Handle/hhSoundHandleCri.h>
 #include <Hedgehog/Universe/Engine/hhMessage.h>
 #include <Hedgehog/Universe/Engine/hhMessageActor.h>
 #include <Hedgehog/Universe/Engine/hhMessageManager.h>
@@ -134,6 +137,7 @@
 #include <Sonic/Animation/AnimationStateMachine.h>
 #include <Sonic/Animation/State/AnimationStateSingle.h>
 #include <Sonic/Camera/Camera.h>
+#include <Sonic/Collision/PhysicsUnit.h>
 #include <Sonic/CSD/CsdDatabaseWrapper.h>
 #include <Sonic/CSD/CsdProject.h>
 #include <Sonic/CSD/CsdTexListMirage.h>
@@ -151,6 +155,9 @@
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>
 #include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.h>
 #include <Sonic/FxPipeline/Jobs/ToneMapping/FxToneMapping.h>
+#include <Sonic/Havok/CollisionHitPointInfo.h>
+#include <Sonic/Havok/EntityUnit.h>
+#include <Sonic/Havok/PhysicsWorld.h>
 #include <Sonic/Havok/RaycastCollision.h>
 #include <Sonic/Havok/RigidBody.h>
 #include <Sonic/Message/MsgAddImpulse.h>
@@ -193,6 +200,7 @@
 #include <Sonic/Player/Parameter/SonicParameter.h>
 #include <Sonic/Player/Parameter/SonicSpParameter.h>
 #include <Sonic/System/ApplicationDocument.h>
+#include <Sonic/System/BGMData.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>
 #include <Sonic/System/GameObject3D.h>
@@ -202,6 +210,7 @@
 #include <Sonic/System/MatrixNodeTransform.h>
 #include <Sonic/System/PadState.h>
 #include <Sonic/System/World.h>
+#include <Sonic/System/GameplayFlow/GameActParameter.h>
 #include <Sonic/System/LightManager/LightManager.h>
 #include <Sonic/System/LightManager/LocalLight.h>
 #include <Sonic/System/RenderDirector/RenderDirector.h>

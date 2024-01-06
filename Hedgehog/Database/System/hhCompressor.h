@@ -1,4 +1,5 @@
 #pragma once
+
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Database/System/hhCallback.h>
 
@@ -13,6 +14,7 @@ namespace Hedgehog::Database
 namespace Hedgehog::Base
 {
 	class CEventWait;
+
 	class CCompressor : public Hedgehog::Base::CObject
 	{
 	public:

@@ -93,7 +93,8 @@ namespace Hedgehog::Mirage
         eShaderConstant_PlayableParam0 = 86,
         eShaderConstant_TexcoordIndex = 87,
         eShaderConstant_ZOffsetRate = 88,
-        eShaderConstant_TexcoordOffset = 89
+        eShaderConstant_TexcoordOffset = 89,
+        eShaderConstant_Max = 90
     };
 
     struct SShaderConstant
@@ -105,16 +106,16 @@ namespace Hedgehog::Mirage
     class CGlobalParametersData : public Base::CObject
     {
     public:
-        Base::CStringSymbol m_ConstantNames[90];
+        Base::CStringSymbol m_ConstantNames[eShaderConstant_Max];
 
-        SShaderConstant m_VertexFloat4Constants[90];
-        SShaderConstant m_PixelFloat4Constants[90];
+        SShaderConstant m_VertexFloat4Constants[eShaderConstant_Max];
+        SShaderConstant m_PixelFloat4Constants[eShaderConstant_Max];
 
-        SShaderConstant m_VertexInt4Constants[90];
-        SShaderConstant m_PixelInt4Constants[90];
+        SShaderConstant m_VertexInt4Constants[eShaderConstant_Max];
+        SShaderConstant m_PixelInt4Constants[eShaderConstant_Max];
 
-        SShaderConstant m_VertexBoolConstants[90];
-        SShaderConstant m_PixelBoolConstants[90];
+        SShaderConstant m_VertexBoolConstants[eShaderConstant_Max];
+        SShaderConstant m_PixelBoolConstants[eShaderConstant_Max];
 
         boost::shared_ptr<CVertexShaderParameterData> m_spGlobalVertexShaderParameterData;
         boost::shared_ptr<CPixelShaderParameterData> m_spGlobalPixelShaderParameterData;

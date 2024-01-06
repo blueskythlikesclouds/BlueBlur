@@ -18,7 +18,7 @@ namespace Hedgehog::Universe
     class CUpdateManager
     {
     public:
-        void Add(const Hedgehog::Base::CSharedString& in_rCategory, CUpdateUnit* in_pUpdateUnit)
+        void AddUpdateUnit(const Hedgehog::Base::CSharedString& in_rCategory, CUpdateUnit* in_pUpdateUnit)
         {
             fpCUpdateManagerAdd(this, in_rCategory, in_pUpdateUnit);
         }

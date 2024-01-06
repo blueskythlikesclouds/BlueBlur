@@ -31,8 +31,6 @@ namespace Sonic
         CGameObject3D* This, const Hedgehog::Base::CStringSymbol& in_rSymbol, hk2010_2_0::hkpShape** in_ppShape, int in_Mask, bool in_IsTrigger,
         boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> in_spMatrixNode);
 
-    // An optimized function takes shared pointers on the stack, so we have to be a bit... tricky.
-
     static constexpr uint32_t pCGameObject3DAddRigidBodyFromDatabase = 0xE98EB0;
 
     static void __declspec(naked) __declspec(noinline) fCGameObject3DAddRigidBodyFromDatabase()
