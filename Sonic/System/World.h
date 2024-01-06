@@ -31,10 +31,7 @@ namespace Sonic
 
         CMember* m_pMember;
 
-        boost::shared_ptr<CCamera> GetCamera() const
-        {
-            return m_pMember->m_spOverrideCamera ? m_pMember->m_spOverrideCamera : m_pMember->m_spCamera;
-        }
+        boost::shared_ptr<CCamera> GetCamera() const;
     };
 
     BB_ASSERT_OFFSETOF(CWorld::CMember, m_spRenderScene, 0x0);
@@ -47,3 +44,5 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CWorld, m_pMember, 0x80);
     BB_ASSERT_SIZEOF(CWorld, 0x84);
 }
+
+#include <Sonic/System/World.inl>

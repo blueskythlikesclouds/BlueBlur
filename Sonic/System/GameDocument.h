@@ -33,11 +33,6 @@ namespace Sonic
     class CParticleManager;
     class CEventManager;
 
-    static inline BB_FUNCTION_PTR(void, __stdcall, fpAddGameObject, 0xD631A0,
-        CGameDocument* in_pGameDocument, const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder,
-        const boost::shared_ptr<CGameObject>& in_spGameObject, boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase,
-        CGameObject* in_pParentGameObject);
-
     class CGameDocument : public Hedgehog::Base::CSynchronizedObject
     {
     public:
@@ -73,10 +68,7 @@ namespace Sonic
 
         static constexpr Hedgehog::Base::TSynchronizedPtr<CGameDocument>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CGameDocument>*)0x1E0BE5C;
 
-        static Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetInstance()
-        {
-            return *ms_pInstance;
-        }
+        static Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetInstance();
 
         CMember* m_pMember;
         BB_INSERT_PADDING(0x0C);
@@ -85,21 +77,10 @@ namespace Sonic
 
         virtual ~CGameDocument() = default;
 
-        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const Hedgehog::Base::CSharedString& in_rName = "main") const
-        {
-            const auto pair = m_pMember->m_Worlds.find(in_rName);
-            return pair != m_pMember->m_Worlds.end() ? pair->second.get() : nullptr;
-        }
+        Hedgehog::Base::TSynchronizedPtr<CWorld> GetWorld(const Hedgehog::Base::CSharedString& in_rName = "main") const;
 
-        void AddGameObject(const boost::shared_ptr<CGameObject>& in_spGameObject, const char* in_pWorldName = "main", CGameObject* in_pParentGameObject = nullptr)
-        {
-            fpAddGameObject(this, *GetWorld(in_pWorldName), in_spGameObject, m_pMember->m_spDatabase, in_pParentGameObject);
-        }
-
-        void AddUpdateUnit(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CUpdateUnit* in_pUpdateUnit)
-        {
-            m_pMember->m_spUpdateManager->AddUpdateUnit(in_rCategory, in_pUpdateUnit);
-        }
+        void AddGameObject(const boost::shared_ptr<CGameObject>& in_spGameObject, const char* in_pWorldName = "main", CGameObject* in_pParentGameObject = nullptr);
+        void AddUpdateUnit(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CUpdateUnit* in_pUpdateUnit);
     };
 
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spUpdateManager, 0x0);
@@ -124,3 +105,5 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CGameDocument, m_pMember, 0x8);
     BB_ASSERT_SIZEOF(CGameDocument, 0x20);
 }
+
+#include <Sonic/System/GameDocument.inl>

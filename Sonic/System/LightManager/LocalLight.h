@@ -26,39 +26,15 @@ namespace Sonic
         size_t m_RefCount;
         bool m_Dirty;
 
-        CLocalLight() : m_RefCount(0), m_Dirty(true)
-        {
-        }
+        CLocalLight();
 
-        size_t AddRef()
-        {
-            return ++m_RefCount;
-        }
+        size_t AddRef();
+        size_t Release();
 
-        size_t Release()
-        {
-            if (--m_RefCount == 0)
-            {
-                delete this;
-                return 0;
-            }
-
-            return m_RefCount;
-        }
-
-        void SetPosition(const Hedgehog::Math::CVector& in_rPosition)
-        {
-            m_Dirty |= m_spLight->m_Position != in_rPosition;
-            m_spLight->m_Position = in_rPosition;
-        }
-
-        void SetRange(const Hedgehog::Math::CVector4& in_rRange)
-        {
-            m_Dirty |= m_spLight->m_Range != in_rRange;
-            m_spLight->m_Range = in_rRange;
-        }
+        void SetPosition(const Hedgehog::Math::CVector& in_rPosition);
+        void SetRange(const Hedgehog::Math::CVector4& in_rRange);
     };
-    
+
     BB_ASSERT_OFFSETOF(CLocalLight, m_spLight, 0x0);
     BB_ASSERT_OFFSETOF(CLocalLight, m_RefCount, 0x8);
     BB_ASSERT_OFFSETOF(CLocalLight, m_Dirty, 0xC);
@@ -74,3 +50,5 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CLocalLightContext, m_LocalLights, 0x8);
     BB_ASSERT_SIZEOF(CLocalLightContext, 0x18);
 }
+
+#include <Sonic/System/LightManager/LocalLight.inl>

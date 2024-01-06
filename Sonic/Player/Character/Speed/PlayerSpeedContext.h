@@ -9,8 +9,6 @@
 
 #define StateFlag(x) \
     m_pStateFlag->m_Flags[Sonic::Player::CPlayerSpeedContext::x]
-#define FGetParameter(x) \
-    m_spParameter->Get<float>(Sonic::Player::x)
 
 namespace Sonic
 {
@@ -46,29 +44,14 @@ namespace Hedgehog::Database
 
 namespace Sonic::Player
 {
-    class CPlayerSpeedContext;
     class CPlayerSpeedProxyListener;
-
-    static uint32_t pCPlayerSpeedContextHandleVelocityChanged = 0xE4F100;
-
-    static void fpCPlayerSpeedContextHandleVelocityChanged(CPlayerSpeedContext* This)
-    {
-        __asm
-        {
-            mov esi, This
-            call[pCPlayerSpeedContextHandleVelocityChanged]
-        }
-    }
 
     class CPlayerSpeedContext : public CPlayerContext
     {
     public:
         static constexpr CPlayerSpeedContext** ms_pInstance = (CPlayerSpeedContext**)0x1E5E2F0;
 
-        static CPlayerSpeedContext* GetInstance()
-        {
-            return *ms_pInstance;
-        }
+        static CPlayerSpeedContext* GetInstance();
 
         enum EStateFlag;
         class CStateFlag;
@@ -289,217 +272,40 @@ namespace Sonic::Player
         void StateFlag(const EStateFlag in_stateFlag) const;
 #pragma pop_macro("StateFlag")
 
-#pragma push_macro("FGetParameter")
-#undef FGetParameter
-        void FGetParameter(const EPlayerSpeedParameter in_Parameter) const;
-#pragma pop_macro("FGetParameter")
+        void HandleVelocityChanged();
+        void HandleHorizontalOrVerticalVelocityChanged();
 
-        void HandleVelocityChanged()
-        {
-            fpCPlayerSpeedContextHandleVelocityChanged(this);
-        }
-
-        void HandleHorizontalOrVerticalVelocityChanged()
-        {
-            m_Velocity = m_HorizontalVelocity + m_VerticalVelocity;
-            m_VelocityChanged = false;
-            m_HorizontalOrVerticalVelocityChanged = false;
-        }
-
-        const Hedgehog::Math::CVector& GetVelocity()
-        {
-            if (m_HorizontalOrVerticalVelocityChanged)
-                HandleHorizontalOrVerticalVelocityChanged();
-
-            return m_Velocity;
-        }
-
-        void SetVelocity(const Hedgehog::Math::CVector& in_rVelocity)
-        {
-            m_Velocity = in_rVelocity;
-            m_VelocityChanged = true;
-            m_HorizontalOrVerticalVelocityChanged = false;
-        }
+        const Hedgehog::Math::CVector& GetVelocity();
+        void SetVelocity(const Hedgehog::Math::CVector& in_rVelocity);
 
         // 0x00E4F390
-        const Hedgehog::Math::CVector& GetHorizontalVelocity()
-        {
-            if (m_VelocityChanged)
-                HandleVelocityChanged();
-        
-            return m_HorizontalVelocity;
-        }
+        const Hedgehog::Math::CVector& GetHorizontalVelocity();
+        void SetHorizontalVelocity(const Hedgehog::Math::CVector& in_rVelocity);
+        void SetHorizontalVelocityClearChanged(const Hedgehog::Math::CVector& in_rVelocity);
 
-        void SetHorizontalVelocity(const Hedgehog::Math::CVector& in_rVelocity)
-        {
-            if (m_VelocityChanged)
-                HandleVelocityChanged();
-        
-            m_HorizontalVelocity = in_rVelocity;
-            m_VelocityChanged = false;
-            m_HorizontalOrVerticalVelocityChanged = true;
-        }
+        const Hedgehog::Math::CVector& GetVerticalVelocity();
+        void SetVerticalVelocity(const Hedgehog::Math::CVector& in_rVelocity);
 
-        void SetHorizontalVelocityClearChanged(const Hedgehog::Math::CVector& in_rVelocity)
-        {
-            m_HorizontalVelocity = in_rVelocity;
-            HandleHorizontalOrVerticalVelocityChanged();
-        }
+        void AddVelocity(const Hedgehog::Math::CVector& in_rImpulse);
 
-        const Hedgehog::Math::CVector& GetVerticalVelocity()
-        {
-            if (m_VelocityChanged)
-                HandleVelocityChanged();
-
-            return m_VerticalVelocity;
-        }
-
-        void SetVerticalVelocity(const Hedgehog::Math::CVector& in_rVelocity)
-        {
-            if (m_VelocityChanged)
-                HandleVelocityChanged();
-
-            m_VerticalVelocity = in_rVelocity;
-            m_VelocityChanged = false;
-            m_HorizontalOrVerticalVelocityChanged = true;
-        }
-
-        void AddVelocity(const Hedgehog::Math::CVector& in_rImpulse)
-        {
-            if (m_HorizontalOrVerticalVelocityChanged)
-            {
-                HandleHorizontalOrVerticalVelocityChanged();
-            }
-            m_Velocity += in_rImpulse;
-            m_VelocityChanged = true;
-            m_HorizontalOrVerticalVelocityChanged = false;
-        }
-
-        // The direction of the player's current horizontal velocity. If the player is not moving, return zero vector.
-        Hedgehog::Math::CVector GetHorizontalVelocityDirection()
-        {
-            const Hedgehog::Math::CVector horizontalVelocity = GetHorizontalVelocity();
-            if (horizontalVelocity.squaredNorm() < FLT_EPSILON)
-                return Hedgehog::Math::CVector::Zero();
-
-            return horizontalVelocity.normalized();
-        }
+        // The direction of the player's current horizontal velocity. If the player is not moving, returns zero vector.
+        Hedgehog::Math::CVector GetHorizontalVelocityDirection();
 
         // The direction of the player's movement. Defaults to the player's forward direction at a standstill. Useful for impulses.
-         Hedgehog::Math::CVector GetHorizontalMovementDirection()
-         {
-             const Hedgehog::Math::CVector horizontalVelocity = GetHorizontalVelocity();
-             if (horizontalVelocity.squaredNorm() < FLT_EPSILON)
-                 return GetFrontDirection();
+        Hedgehog::Math::CVector GetHorizontalMovementDirection();
 
-             return horizontalVelocity.normalized();
-         }
+        Hedgehog::Math::CVector GetUpDirection() volatile;
+        Hedgehog::Math::CVector GetRightDirection() volatile;
+        Hedgehog::Math::CVector GetFrontDirection() volatile;
 
-        __declspec(noinline) Hedgehog::Math::CVector GetUpDirection() volatile
-        {
-            static uint32_t func = 0x00E71FB0;
+        float GetRotationSpeed() volatile;
 
-            volatile Hedgehog::Math::CVector result;
-            volatile uint32_t pResult = reinterpret_cast<uint32_t>(&result);
+        float GetRotationForce(
+            const Hedgehog::Math::CVector& in_rFrontDirection,
+            const Hedgehog::Math::CVector& in_rTargetDirection) volatile;
 
-            __asm
-            {
-                mov eax, this
-                mov esi, result
-                call [func]
-                mov result, eax
-            }
-
-            return *(Hedgehog::Math::CVector*)pResult;
-        }
-
-        __declspec(noinline) Hedgehog::Math::CVector GetRightDirection() volatile
-        {
-            static uint32_t func = 0x00E72070;
-
-            volatile Hedgehog::Math::CVector result;
-            volatile uint32_t pResult = reinterpret_cast<uint32_t>(&result);
-
-            __asm
-            {
-                mov eax, this
-                mov esi, result
-                call [func]
-                mov result, eax
-            }
-
-            return *(Hedgehog::Math::CVector*)pResult;
-        }
-
-        __declspec(noinline) Hedgehog::Math::CVector GetFrontDirection() volatile
-        {
-            static uint32_t func = 0x00E72010;
-
-            volatile Hedgehog::Math::CVector result;
-            volatile uint32_t pResult = reinterpret_cast<uint32_t>(&result);
-
-            __asm
-            {
-                mov eax, this
-                mov esi, result
-                call [func]
-                mov result, eax
-            }
-
-            return *(Hedgehog::Math::CVector*)pResult;
-        }
-
-        __declspec(noinline) float GetRotationSpeed() volatile
-        {
-            static uint32_t func = 0x00E547F0;
-            volatile float result = 0.0f;
-
-            __asm
-            {
-                mov esi, this
-                call [func]
-                movss dword ptr[result], xmm0
-            }
-
-            return result;
-        }
-
-        __declspec(noinline) float GetRotationForce(
-            const Hedgehog::Math::CVector& in_FrontDirection,
-            const Hedgehog::Math::CVector& in_TargetDirection) volatile
-        {
-            volatile float result = 0.0f;
-            static uint32_t func = 0x00E53490;
-
-            __asm
-            {
-                push in_TargetDirection
-                mov edi, in_FrontDirection
-                mov eax, this
-                call[func]
-                movss dword ptr[result], xmm0
-            }
-
-            return result;
-        }
-
-        __declspec(noinline) void SetYawRotation(const Hedgehog::Math::CQuaternion& in_rRotation, bool in_UpdateMatrix = true) volatile
-        {
-            static uint32_t func = 0x00E51800;
-
-            __asm
-            {
-                push in_UpdateMatrix
-                mov ecx, in_rRotation
-                mov eax, this
-                call [func]
-            }
-        }
-
-        void SetYawRotation(float in_Angle, bool in_UpdateMatrix = true)
-        {
-            SetYawRotation(Hedgehog::Math::CQuaternion(Eigen::AngleAxisf(in_Angle, Hedgehog::Math::CVector(0,1,0))), in_UpdateMatrix);
-        }
+        void SetYawRotation(const Hedgehog::Math::CQuaternion& in_rRotation, bool in_UpdateMatrix = true) volatile;
+        void SetYawRotation(float in_Angle, bool in_UpdateMatrix = true);
 
         float GetMaxChaosEnergy() const;
     };
@@ -553,3 +359,5 @@ namespace Sonic::Player
 
     BB_ASSERT_SIZEOF(CPlayerSpeedContext, 0x1230);
 }
+
+#include <Sonic/Player/Character/Speed/PlayerSpeedContext.inl>

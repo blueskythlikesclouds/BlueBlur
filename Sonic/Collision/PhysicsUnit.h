@@ -51,40 +51,13 @@ namespace Sonic
 		virtual void GetProperty(uint64_t* weird, int hash) {}
 		virtual bool HasProperty(int hash) { return false; }
 
-		void AddProperty(int id, int value)
-		{
-			struct
-			{
-				int value;
-				int buffer;
-			} data;
-			data.value = value;
-			AddProperty(id, (uint64_t*)&data);
-		}
+		void AddProperty(int id, int value);
 
-		void AddBoolProperty(int hashedName, int id)
-		{
-			if (!HasProperty(hashedName))
-				return;
-
-			uint64_t data = 0;
-			GetProperty(&data, hashedName);
-
-			data = data != 0;
-			AddProperty(id, &data);
-		}
-
-		bool GetBoolProperty(int id)
-		{
-			if (!HasProperty(id))
-				return false;
-
-			uint64_t data = 0;
-			GetProperty(&data, id);
-
-			return data != 0;
-		}
-	};
+        void AddBoolProperty(int hashedName, int id);
+        bool GetBoolProperty(int id);
+    };
 
 	BB_ASSERT_SIZEOF(CPhysicsUnit, 0x48);
 }
+
+#include <Sonic/Collision/PhysicsUnit.inl>

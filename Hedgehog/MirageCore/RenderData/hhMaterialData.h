@@ -19,8 +19,6 @@ namespace Hedgehog::Mirage
         eMaterialFlags_BoolParamsEmpty = 0x4
     };
 
-    static inline BB_FUNCTION_PTR(CMaterialData*, __thiscall, fpCMaterialDataCtor, 0x704CA0, CMaterialData*);
-
     class CMaterialData : public Database::CDatabaseData
     {
     public:
@@ -36,10 +34,7 @@ namespace Hedgehog::Mirage
         uint8_t m_MaterialFlags; // see EMaterialFlags
         void* m_pField5C;
 
-        CMaterialData()
-        {
-            fpCMaterialDataCtor(this);
-        }
+        CMaterialData();
     };
 
     BB_ASSERT_OFFSETOF(CMaterialData, m_spTexsetData, 0xC);
@@ -54,3 +49,5 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CMaterialData, m_pField5C, 0x5C);
     BB_ASSERT_SIZEOF(CMaterialData, 0x60);
 }
+
+#include <Hedgehog/MirageCore/RenderData/hhMaterialData.inl>

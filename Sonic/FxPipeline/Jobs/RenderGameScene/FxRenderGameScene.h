@@ -13,8 +13,8 @@ namespace Sonic
 {
     class CFxRenderGameScene;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxRenderGameSceneInitialize, 0x10C8A00, CFxRenderGameScene* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxRenderGameSceneExecute, 0x10CA5A0, CFxRenderGameScene* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxRenderGameSceneInitialize, 0x10C8A00, CFxRenderGameScene* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxRenderGameSceneExecute, 0x10CA5A0, CFxRenderGameScene* This);
 
     class CFxRenderGameScene : public CFxRenderScene
     {

@@ -65,26 +65,13 @@ namespace Sonic
 
         BB_INSERT_PADDING(0x20);
 
-        bool IsDown(const EKeyState in_Keys) const
-        {
-            return (DownState & in_Keys) == in_Keys;
-        }
-
-        bool IsUp(const EKeyState in_Keys) const
-        {
-            return (UpState & in_Keys) == in_Keys;
-        }
-
-        bool IsTapped(const EKeyState in_Keys) const
-        {
-            return (TappedState & in_Keys) == in_Keys;
-        }
-
-        bool IsReleased(const EKeyState in_Keys) const
-        {
-            return (ReleasedState & in_Keys) == in_Keys;
-        }
+        bool IsDown(const EKeyState in_Keys) const;
+        bool IsUp(const EKeyState in_Keys) const;
+        bool IsTapped(const EKeyState in_Keys) const;
+        bool IsReleased(const EKeyState in_Keys) const;
     };
 
     BB_ASSERT_SIZEOF(SPadState, 0x54);
 }
+
+#include <Sonic/System/PadState.inl>

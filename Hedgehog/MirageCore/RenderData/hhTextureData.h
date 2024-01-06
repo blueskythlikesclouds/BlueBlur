@@ -6,10 +6,6 @@
 
 namespace Hedgehog::Mirage
 {
-    class CTextureData;
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCTextureDataCtor, 0x6F88B0, CTextureData* This);
-
     class CPictureData;
 
     class CTextureData : public Database::CDatabaseData
@@ -20,10 +16,7 @@ namespace Hedgehog::Mirage
         SSamplerState m_SamplerState;
         Base::CStringSymbol m_Type;
 
-        CTextureData()
-        {
-            fpCTextureDataCtor(this);
-        }
+        CTextureData();
     };
 
     BB_ASSERT_OFFSETOF(CTextureData, m_spPictureData, 0xC);
@@ -32,3 +25,5 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CTextureData, m_Type, 0x2C);
     BB_ASSERT_SIZEOF(CTextureData, 0x30);
 }
+
+#include <Hedgehog/MirageCore/RenderData/hhTextureData.inl>

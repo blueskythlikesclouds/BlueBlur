@@ -47,18 +47,12 @@ namespace Sonic
 
         static constexpr Hedgehog::Base::TSynchronizedPtr<CApplicationDocument>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CApplicationDocument>*)0x1E66B34;
 
-        static Hedgehog::Base::TSynchronizedPtr<CApplicationDocument> GetInstance()
-        {
-            return *ms_pInstance;
-        }
+        static Hedgehog::Base::TSynchronizedPtr<CApplicationDocument> GetInstance();
 
         CMember* m_pMember;
         BB_INSERT_PADDING(0x38);
 
-        void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor)
-        {
-            m_pMember->m_pMessageManager->AddMessageActor(in_rCategory, in_pMessageActor);
-        }
+        void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor);
     };
 
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_pMessageManager, 0x20);
@@ -74,3 +68,5 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CApplicationDocument, m_pMember, 0x4);
     BB_ASSERT_SIZEOF(CApplicationDocument, 0x40);
 }
+
+#include <Sonic/System/ApplicationDocument.inl>

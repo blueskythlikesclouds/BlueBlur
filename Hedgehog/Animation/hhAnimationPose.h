@@ -16,18 +16,6 @@ namespace Hedgehog::Animation
     class CAnimationPose;
     class CIkRaycastInterface;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseCtor, 0x6CB140,
-        CAnimationPose* This, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase, const Hedgehog::Base::CSharedString& in_rName);
-
-    static inline BB_FUNCTION_PTR(void*, __cdecl, fpCAnimationPoseCreateAnimationCache, 0x6C9850, 
-        const boost::shared_ptr<CAnimationCache>& out_spAnimationCache);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseAddAnimationList, 0x6CBFC0, 
-        CAnimationPose* This, void* in_pList, int in_Count);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseUpdate, 0x6CCCB0,
-        CAnimationPose* This, float in_DeltaTime);
-
     // TODO: MOVE THESE TO THEIR OWN LOCATIONS.
     class hkQsTransform
     {
@@ -82,32 +70,13 @@ namespace Hedgehog::Animation
         BB_OVERRIDE_FUNCTION_PTR(void, Mirage::CPose, SetModel,  0x6C8E90, (const boost::shared_ptr<Mirage::CModelData>&, in_spModelData))
         BB_OVERRIDE_FUNCTION_PTR(void, Mirage::CPose, SetInstanceInfo, 0x6C7950, (Mirage::CInstanceInfo*, in_pInstanceInfo))
 
-        static boost::shared_ptr<CAnimationCache> CreateAnimationCache()
-        {
-            boost::shared_ptr<CAnimationCache> spAnimationCache;
-            fpCAnimationPoseCreateAnimationCache(spAnimationCache);
-            return spAnimationCache;
-        }
+        static boost::shared_ptr<CAnimationCache> CreateAnimationCache();
 
-        CAnimationPose(const bb_null_ctor&)
-        {
-        }
+        CAnimationPose(const bb_null_ctor&) {}
+        CAnimationPose(const boost::shared_ptr<Database::CDatabase>& in_spDatabase, const Base::CSharedString& in_rName);
 
-        CAnimationPose(const boost::shared_ptr<Database::CDatabase>& in_spDatabase, const Base::CSharedString& in_rName) : CAnimationPose(bb_null_ctor{})
-        {
-            fpCAnimationPoseCtor(this, in_spDatabase, in_rName);
-            m_spAnimationCache = CreateAnimationCache();
-        }
-
-        void AddAnimationList(void* in_pList, int in_Count)
-        {
-            fpCAnimationPoseAddAnimationList(this, in_pList, in_Count);
-        }
-
-        void Update(float in_DeltaTime)
-        {
-            fpCAnimationPoseUpdate(this, in_DeltaTime);
-        }
+        void AddAnimationList(void* in_pList, int in_Count);
+        void Update(float in_DeltaTime);
     };
 
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spAnimationSkeleton, 0x30);
@@ -120,3 +89,5 @@ namespace Hedgehog::Animation
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spAnimationCache, 0x130);
     BB_ASSERT_SIZEOF(CAnimationPose, 0x150);
 }
+
+#include <Hedgehog/Animation/hhAnimationPose.inl>

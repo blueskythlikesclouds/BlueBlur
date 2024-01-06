@@ -4,10 +4,6 @@
 
 namespace Hedgehog::Animation
 {
-    class CAnimationControl;
-
-    static BB_FUNCTION_PTR(void, __thiscall, fpCAnimationControlSetPlaybackSpeed, 0x6D21C0, CAnimationControl* This, float in_Speed);
-
     class CAnimationControl : public Base::CObject
     {
     public:
@@ -25,10 +21,7 @@ namespace Hedgehog::Animation
 
         virtual ~CAnimationControl() = default;
 
-        void SetPlaybackSpeed(float in_Speed)
-        {
-            fpCAnimationControlSetPlaybackSpeed(this, in_Speed);
-        }
+        void SetPlaybackSpeed(float in_Speed);
     };
 
     BB_ASSERT_OFFSETOF(CAnimationControl, m_PlaybackSpeed, 0x18);
@@ -36,3 +29,6 @@ namespace Hedgehog::Animation
     BB_ASSERT_OFFSETOF(CAnimationControl, m_Field6C, 0x6C);
     BB_ASSERT_SIZEOF(CAnimationControl, 0xE8);
 }
+
+
+#include <Hedgehog/Animation/hhAnimationControl.inl>

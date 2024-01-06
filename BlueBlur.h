@@ -189,8 +189,8 @@
 #include <Sonic/Player/Character/SonicSp/SonicSpContext.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeed.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
-#include <Sonic/Player/Character/Speed/PlayerSpeedContext.inl>
 #include <Sonic/Player/Character/Speed/StateFlag.h>
+#include <Sonic/Player/Character/Speed/State/PlayerSpeedState.h>
 #include <Sonic/Player/Character/Speed/State/PlayerSpeedStateBase.h>
 #include <Sonic/Player/Character/Speed/State/PlayerSpeedStateReactionLand.h>
 #include <Sonic/Player/Parameter/PlayerCommonParameter.h>

@@ -54,16 +54,7 @@ namespace Hedgehog::Yggdrasill
         eRenderLevel_Resident     = 0x200
     };
 
-    class CYggSceneRenderer;
     class CYggScheduler;
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererRender, 0x789890, CYggSceneRenderer* This, ERenderCategory in_Category, ERenderLevel in_Level);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererResetMaterialColor, 0x10D4EB0, CYggSceneRenderer* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetLightViewProjection, 0x789360, CYggSceneRenderer* This, const Math::CMatrix& in_rView, const Math::CMatrix44& in_rProjection);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererLockShader, 0x789BE0, CYggSceneRenderer* This, const Hedgehog::Mirage::SShaderPair& in_rShaderPair, size_t in_Flags);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnlockShader, 0x789860, CYggSceneRenderer* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererSetCamera, 0x7890F0, CYggSceneRenderer* This, Hedgehog::Mirage::CCamera* in_pCamera, size_t in_Flags);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggSceneRendererUnsetCamera, 0x789110, CYggSceneRenderer* This);
 
     class CYggSceneRenderer : public Base::CObject
     {
@@ -83,45 +74,18 @@ namespace Hedgehog::Yggdrasill
         virtual void _4() = 0;
         virtual void _8() = 0;
 
-        void Render(ERenderCategory in_Category, ERenderLevel in_Level)
-        {
-            fpCYggSceneRendererRender(this, in_Category, in_Level);
-        }
+        void Render(ERenderCategory in_Category, ERenderLevel in_Level);
+        void Render(uint32_t in_Category, uint32_t in_Level);
 
-        void Render(uint32_t in_Category, uint32_t in_Level)
-        {
-            fpCYggSceneRendererRender(this, (ERenderCategory)in_Category, (ERenderLevel)in_Level);
-        }
+        void ResetMaterialColor();
 
-        void ResetMaterialColor()
-        {
-            fpCYggSceneRendererResetMaterialColor(this);
-        }
+        void SetLightViewProjection(const Math::CMatrix& in_rView, const Math::CMatrix44& in_rProjection);
 
-        void SetLightViewProjection(const Math::CMatrix& in_rView, const Math::CMatrix44& in_rProjection)
-        {
-            fpCYggSceneRendererSetLightViewProjection(this, in_rView, in_rProjection);
-        }
+        void LockShader(const Hedgehog::Mirage::SShaderPair& in_rShaderPair, const size_t in_Flags);
+        void UnlockShader();
 
-        void LockShader(const Hedgehog::Mirage::SShaderPair& in_rShaderPair, const size_t in_Flags)
-        {
-            fpCYggSceneRendererLockShader(this, in_rShaderPair, in_Flags);
-        }
-
-        void UnlockShader()
-        {
-            fpCYggSceneRendererUnlockShader(this);
-        }
-
-        void SetCamera(Hedgehog::Mirage::CCamera* in_pCamera, const size_t in_Flags)
-        {
-            fpCYggSceneRendererSetCamera(this, in_pCamera, in_Flags);
-        }
-
-        void UnsetCamera()
-        {
-            fpCYggSceneRendererUnsetCamera(this);
-        }
+        void SetCamera(Hedgehog::Mirage::CCamera* in_pCamera, const size_t in_Flags);
+        void UnsetCamera();
     };
 
     BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pScheduler, 0x10);
@@ -132,3 +96,5 @@ namespace Hedgehog::Yggdrasill
     BB_ASSERT_OFFSETOF(CYggSceneRenderer, m_pLightManager, 0x30);
     BB_ASSERT_SIZEOF(CYggSceneRenderer, 0xB0);
 }
+
+#include <Hedgehog/Yggdrasill/hhYggSceneRenderer.inl>

@@ -10,12 +10,6 @@ namespace Chao::CSD
 
 namespace Sonic
 {
-    class CGameObjectCSD;
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectCSDAddCallback, 0x10DB680,
-        CGameObjectCSD* This, const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder,
-        Sonic::CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase);
-
     class CGameObjectCSD : public CGameObject
     {
     public:
@@ -26,12 +20,11 @@ namespace Sonic
         CGameObjectCSD(Chao::CSD::RCPtr<Chao::CSD::CProject> in_rcProject, float in_Unknown, Hedgehog::Base::CStringSymbol in_RenderableCategory, bool in_Flag); // 0x10DBB20
         ~CGameObjectCSD() override; // 0x10DBA90
 
-        void AddCallback(const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder, CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) override
-        {
-            fpCGameObjectCSDAddCallback(this, in_rWorldHolder, in_pGameDocument, in_spDatabase);
-        }
+        void AddCallback(const Hedgehog::Base::THolder<CWorld>& in_rWorldHolder, CGameDocument* in_pGameDocument, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase) override;
     };
 
     BB_ASSERT_OFFSETOF(CGameObjectCSD, m_rcProject, 0xA8);
     BB_ASSERT_SIZEOF(CGameObjectCSD, 0xE8);
 }
+
+#include <Sonic/CSD/GameObjectCSD.inl>

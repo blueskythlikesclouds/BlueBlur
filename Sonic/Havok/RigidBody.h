@@ -26,12 +26,12 @@ namespace Sonic
 		uint32_t m_Field108;
 		uint32_t m_Field10C;
 
-		hk2010_2_0::hkpShape* GetShape() const
-		{
-			return m_pHkpRigidBody->m_Collideable.m_Shape;
-		}
-	};
+		hk2010_2_0::hkpShape* GetShape() const;
+    };
 
 	BB_ASSERT_OFFSETOF(CRigidBody, m_Field60, 0x60);
 	BB_ASSERT_SIZEOF(CRigidBody, 0x110);
 }
+
+
+#include <Sonic/Havok/RigidBody.inl>

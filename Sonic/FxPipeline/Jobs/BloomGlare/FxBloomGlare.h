@@ -6,8 +6,8 @@ namespace Sonic
 {
     class CFxBloomGlare;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxBloomGlareInitialize, 0x10D4130, CFxBloomGlare* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxBloomGlareExecute, 0x10D3C20, CFxBloomGlare* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxBloomGlareInitialize, 0x10D4130, CFxBloomGlare* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxBloomGlareExecute, 0x10D3C20, CFxBloomGlare* This);
 
     class CFxBloomGlare : public CFxJob
     {

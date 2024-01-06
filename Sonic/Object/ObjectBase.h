@@ -4,23 +4,6 @@
 
 namespace Sonic
 {
-    class CObjectBase;
-
-    static inline uint32_t pCObjectBaseAddRenderable = 0xE95DC0;
-
-    static void __declspec(naked) __declspec(noinline) fCObjectBaseAddRenderable()
-    {
-        __asm
-        {
-            mov eax, ecx
-            jmp pCObjectBaseAddRenderable
-        }
-    }
-
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCObjectBaseAddRenderable, fCObjectBaseAddRenderable,
-        const boost::shared_ptr<Hedgehog::Mirage::CSingleElement>& out_spSingleElement, Sonic::CObjectBase* This,
-        const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase, const char* in_pModelName, boost::shared_ptr<Hedgehog::Mirage::CMatrixNode> in_spMatrixNode);
-
     class CObjectBase : public CGameObject3D
     {
     public:
@@ -62,16 +45,10 @@ namespace Sonic
 
         BB_VIRTUAL_FUNCTION_PTR(void*, CObjectBase88, 0x10585D0, (void*, A1))
 
-        virtual void CObjectBase8C()
-        {
-            return;
-        }
+        virtual void CObjectBase8C() {}
 
         bool AddRenderable(const char* in_pModelName, const boost::shared_ptr<Hedgehog::Mirage::CSingleElement>& out_spSingleElement,
-            const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& in_rMatrixNode, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase)
-        {
-            return fpCObjectBaseAddRenderable(out_spSingleElement, this, in_spDatabase, in_pModelName, in_rMatrixNode);
-        }
+            const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& in_rMatrixNode, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase);
     };
 
     BB_ASSERT_OFFSETOF(CObjectBase, m_FieldF4, 0xF4);
@@ -79,3 +56,5 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CObjectBase, m_FieldFC, 0xFC);
     BB_ASSERT_SIZEOF(CObjectBase, 0x100);
 }
+
+#include <Sonic/Object/ObjectBase.inl>

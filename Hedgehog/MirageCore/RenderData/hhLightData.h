@@ -21,9 +21,7 @@ namespace Hedgehog::Mirage
         uint32_t m_Attribute;
         size_t m_Field58;
 
-        CLightData() : m_Type(eLightType_Directional), m_Attribute(0), m_Field58(1)
-        {
-        }
+        CLightData() : m_Type(eLightType_Directional), m_Attribute(0), m_Field58(1) {}
     };
 
     BB_ASSERT_OFFSETOF(CLightData, m_Position, 0x10);

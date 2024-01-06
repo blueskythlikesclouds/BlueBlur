@@ -15,7 +15,6 @@ namespace Sonic
         CSetObjectEntry(const boost::shared_ptr<SSetObjectInfo>& in_spSetObjectInfo, const Hedgehog::Base::CSharedString& in_rName)
             : m_spSetObjectInfo(in_spSetObjectInfo), m_Name(in_rName)
         {
-            
         }
     };
 

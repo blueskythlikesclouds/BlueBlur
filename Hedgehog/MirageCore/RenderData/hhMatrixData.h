@@ -1,4 +1,5 @@
 #pragma once
+
 #include <Hedgehog/Base/hhObject.h>
 
 namespace Hedgehog::Mirage

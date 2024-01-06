@@ -19,34 +19,8 @@ namespace Sonic
 {
     class CFxShadowMap;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxShadowMapInitialize, 0x10C6CE0, CFxShadowMap* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxShadowMapExecute, 0x10C68D0, CFxShadowMap* This);
-    static inline BB_FUNCTION_PTR(void, __stdcall, fpCFxShadowMapInitializeCameras, 0x10C6A10, CFxShadowMap* This);
-
-    static void* const pCFxShadowMapSetRenderStates = (void*)0x10C61D0;
-    static void* const pCFxShadowMapUnsetRenderStates = (void*)0x10C6160;
-
-    static void fCFxShadowMapSetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
-    {
-        __asm
-        {
-            mov eax, in_pDevice
-            push in_EnableReverseCull
-            call[pCFxShadowMapSetRenderStates]
-            add esp, 4
-        }
-    }
-
-    static void fCFxShadowMapUnsetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
-    {
-        __asm
-        {
-            mov eax, in_pDevice
-            push in_EnableReverseCull
-            call[pCFxShadowMapUnsetRenderStates]
-            add esp, 4
-        }
-    }
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxShadowMapInitialize, 0x10C6CE0, CFxShadowMap* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxShadowMapExecute, 0x10C68D0, CFxShadowMap* This);
 
     class CFxShadowMap : public CFxJob
     {
@@ -63,20 +37,10 @@ namespace Sonic
         uint32_t m_ShadowMapSize;
         BB_INSERT_PADDING(0x4);
 
-        void InitializeCameras()
-        {
-            fpCFxShadowMapInitializeCameras(this);
-        }
+        void InitializeCameras();
 
-        void SetRenderStates(const bool in_EnableReverseCull)
-        {
-            fCFxShadowMapSetRenderStates(m_pScheduler->m_pMisc->m_pDevice, in_EnableReverseCull);
-        }
-
-        void UnsetRenderStates(const bool in_EnableReverseCull)
-        {
-            fCFxShadowMapUnsetRenderStates(m_pScheduler->m_pMisc->m_pDevice, in_EnableReverseCull);
-        }
+        void SetRenderStates(const bool in_EnableReverseCull);
+        void UnsetRenderStates(const bool in_EnableReverseCull);
     };
 
     BB_ASSERT_OFFSETOF(CFxShadowMap, m_spColorSurface, 0x48);
@@ -91,3 +55,5 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CFxShadowMap, m_ShadowMapSize, 0xA4);
     BB_ASSERT_SIZEOF(CFxShadowMap, 0xAC);
 }
+
+#include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.inl>

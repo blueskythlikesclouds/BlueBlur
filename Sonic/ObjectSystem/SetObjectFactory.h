@@ -64,14 +64,14 @@ namespace Sonic
     }
 
 #define BB_SET_OBJECT_MAKE_HOOK(type) \
-    static inline Sonic::SSetObjectMake g_##type##Make = { &(type::Make), nullptr }; \
+    inline Sonic::SSetObjectMake g_##type##Make = { &(type::Make), nullptr }; \
     \
     static void __fastcall f##type##MakeHook(Sonic::CSetObjectFactory* pSetObjectFactory) \
     { \
         pSetObjectFactory->m_MakeList.emplace_back(g_##type##Make, type::ms_Name); \
     } \
     \
-    static inline uint32_t g_##type##MakeReturnAddr = 0x660AE0; \
+    inline uint32_t g_##type##MakeReturnAddr = 0x660AE0; \
     \
     static void __declspec(naked) f##type##MakeTrampoline() \
     { \

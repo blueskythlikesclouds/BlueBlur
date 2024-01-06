@@ -13,14 +13,12 @@ namespace Chao::CSD
 
         virtual ~CResourceBase() = default;
 
-        virtual void CopyResource(const CResourceBase& in_rOther)
-        {
-            m_rcData = in_rOther.m_rcData;
-            m_DataSize = in_rOther.m_DataSize;
-        }
+        virtual void CopyResource(const CResourceBase& in_rOther);
     };
 
     BB_ASSERT_OFFSETOF(CResourceBase<void>, m_rcData, 0x4);
     BB_ASSERT_OFFSETOF(CResourceBase<void>, m_DataSize, 0xC);
     BB_ASSERT_SIZEOF(CResourceBase<void>, 0x10);
 }
+
+#include <CSD/Manager/csdmResourceBase.inl>

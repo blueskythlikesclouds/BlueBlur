@@ -11,8 +11,8 @@ namespace Sonic
 {
     class CFxToneMapping;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxToneMappingInitialize, 0x10C5420, CFxToneMapping* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxToneMappingExecute, 0x10C5BB0, CFxToneMapping* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxToneMappingInitialize, 0x10C5420, CFxToneMapping* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxToneMappingExecute, 0x10C5BB0, CFxToneMapping* This);
 
     class CFxToneMapping : public CFxJob
     {

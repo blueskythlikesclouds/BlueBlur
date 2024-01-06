@@ -13,13 +13,7 @@ namespace Sonic::StageSelectMenu
         Hedgehog::Universe::TStateMachine<CDebugStageSelectMenuXml> m_StateMachine;
         BB_INSERT_PADDING(0x4) {};
 
-        CDebugStageSelectMenuXml() : m_Name("Select")
-        {
-            *reinterpret_cast<size_t*>(this) = 0x16A081C;
-            *reinterpret_cast<size_t*>(static_cast<CMessageActor*>(this)) = 0x16A085C;
-
-            m_StateMachine.SetContext(this);
-        }
+        CDebugStageSelectMenuXml();
 
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0x10D8670, (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder),
             (Sonic::CGameDocument*, in_pGameDocument), (const boost::shared_ptr<Hedgehog::Database::CDatabase>&, in_spDatabase))
@@ -29,3 +23,5 @@ namespace Sonic::StageSelectMenu
     BB_ASSERT_OFFSETOF(CDebugStageSelectMenuXml, m_StateMachine, 0xCC);
     BB_ASSERT_SIZEOF(CDebugStageSelectMenuXml, 0x130);
 }
+
+#include <Sonic/Debug/DebugStageSelectMenu.inl>

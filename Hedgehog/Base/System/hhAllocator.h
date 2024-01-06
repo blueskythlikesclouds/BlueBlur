@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-static inline struct bb_allocation_tracker
+inline struct bb_allocation_tracker
 {
     std::unordered_map<std::string, std::unordered_set<void*>> AllocationsByType;
     mutable CRITICAL_SECTION CriticalSection;
@@ -64,9 +64,9 @@ static inline struct bb_allocation_tracker
 
 #endif
 
-static inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOC, 0x65FC60, const size_t in_Size);
-static inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOCALIGN, 0x65FCE0, const size_t in_Size, const size_t in_Align);
-static inline BB_FUNCTION_PTR(void, __cdecl, __HH_FREE, 0x65FD70, void* in_pData);
+inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOC, 0x65FC60, const size_t in_Size);
+inline BB_FUNCTION_PTR(void*, __cdecl, __HH_ALLOCALIGN, 0x65FCE0, const size_t in_Size, const size_t in_Align);
+inline BB_FUNCTION_PTR(void, __cdecl, __HH_FREE, 0x65FD70, void* in_pData);
 
 namespace Hedgehog::Base
 {

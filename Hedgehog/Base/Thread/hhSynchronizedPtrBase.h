@@ -11,38 +11,18 @@ namespace Hedgehog::Base
         CSynchronizedObject* m_pObject;
 
     public:
-        CSynchronizedPtrBase(CSynchronizedObject* in_pObject) : m_pObject(in_pObject) {}
+        CSynchronizedPtrBase(CSynchronizedObject* in_pObject);
+        CSynchronizedPtrBase(const CSynchronizedPtrBase& in_rOther);
+        CSynchronizedPtrBase(CSynchronizedPtrBase&& io_rOther);
 
-        CSynchronizedPtrBase(const CSynchronizedPtrBase& in_rOther) = default;
-        CSynchronizedPtrBase(CSynchronizedPtrBase&& io_rOther) : m_pObject(io_rOther.m_pObject)
-        {
-            io_rOther.m_pObject = nullptr;
-        }
+        CSynchronizedPtrBase& operator=(CSynchronizedObject* const in_pObject);
 
-        CSynchronizedPtrBase& operator=(CSynchronizedObject* const in_pObject)
-        {
-            m_pObject = in_pObject;
-            return *this;
-        }
+        CHolderBase get() const;
+        CHolderBase operator->() const;
+        CHolderBase operator*() const;
 
-        CHolderBase get() const
-        {
-            return CHolderBase(m_pObject);
-        }
-
-        CHolderBase operator->() const
-        {
-            return get();
-        }
-
-        CHolderBase operator*() const
-        {
-            return get();
-        }
-
-        explicit operator bool() const
-        {
-            return m_pObject != nullptr;
-        }
+        explicit operator bool() const;
     };
 }
+
+#include <Hedgehog/Base/Thread/hhSynchronizedPtrBase.inl>

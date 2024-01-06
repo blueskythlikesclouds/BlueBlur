@@ -19,7 +19,8 @@ def generateIncludes(f, x):
             continue
     
         for fileName in fileNames:
-            f.write("#include <{}/{}>\n".format(prefix, fileName))
+            if fileName.endswith(".h"):
+                f.write("#include <{}/{}>\n".format(prefix, fileName))
 
     f.write("\n")
     
