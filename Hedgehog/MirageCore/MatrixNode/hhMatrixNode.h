@@ -14,17 +14,17 @@ namespace Hedgehog::Mirage
     public:
         BB_INSERT_PADDING(0x5C);
 
-        virtual ~CMatrixNode() = default;
-        virtual void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) = 0;
-        virtual const Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
-        virtual const Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
-
-        CMatrixNode(const bb_null_ctor&) : CObject(bb_null_ctor{}) {}
+        CMatrixNode(const bb_null_ctor& nil) : CObject(nil) {}
 
         CMatrixNode()
         {
             fpCMatrixNodeCtor(this);
         }
+
+        virtual ~CMatrixNode() = default;
+        virtual void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) = 0;
+        virtual const Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
+        virtual const Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
 
         void NotifyChanged()
         {

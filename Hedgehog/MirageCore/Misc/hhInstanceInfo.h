@@ -8,7 +8,8 @@ namespace Hedgehog::Mirage
 
     enum EInstanceInfoFlags
     {
-        eInstanceInfoFlags_Invisible = 0x1
+        eInstanceInfoFlags_Invisible = 0x1,
+        eInstanceInfoFlags_HasEffect = 0x8
     };
 
     class CInstanceInfo : public CMatrixNodeListener

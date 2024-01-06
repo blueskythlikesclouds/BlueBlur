@@ -27,7 +27,8 @@ namespace Hedgehog::Universe
 
         TStateMachine() : CStateMachineBase() {}
         TStateMachine(const bb_null_ctor& nil) : CStateMachineBase(nil) {}
-        boost::shared_ptr<TState> GetCurrentState()
+
+        boost::shared_ptr<TState> GetCurrentState() const
         {
             boost::shared_ptr<CStateBase> spState;
             fpGetCurrentState(this, spState);

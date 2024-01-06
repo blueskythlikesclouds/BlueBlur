@@ -4,16 +4,10 @@
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
 
-namespace Hedgehog::Motion
-{
-    class CSingleElementEffectMotionAll;
-}
-
 namespace Hedgehog::Mirage
 {
     class CInstanceInfo;
     class CSingleElement;
-    class CSingleMorphElement;
     class CSingleElementEffect;
     class CMaterialData;
     class CModelData;
@@ -23,20 +17,17 @@ namespace Hedgehog::Mirage
     static inline BB_FUNCTION_PTR(CSingleElement*, __thiscall, fpCSingleElementCtor, 0x701D00,
         CSingleElement* This, const boost::shared_ptr<CModelData>& spModelData);
 
-    static inline BB_FUNCTION_PTR(CSingleMorphElement*, __thiscall, fpCSingleMorphElementCtor, 0x007040B0,
-        CSingleMorphElement* This, const boost::shared_ptr<CModelData>& _spModelData);
-
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSingleElementGetNode, 0x700B70,
         const CSingleElement* This, boost::shared_ptr<CMatrixNodeSingleElementNode>& out_spNode, const Hedgehog::Base::CSharedString& in_rName);
 
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCSingleElementBindMatrixNode, 0x700C00,
-        const CSingleElement* This, boost::shared_ptr<CMatrixNode> in_spMatrixNode);
+        CSingleElement* This, const boost::shared_ptr<CMatrixNode> in_spMatrixNode);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fBindAnimationPose, 0x700A50,
-        const CSingleElement* This, boost::shared_ptr<Hedgehog::Animation::CAnimationPose>& pose);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSingleElementBindPose, 0x700A50,
+        CSingleElement* This, const boost::shared_ptr<CPose>& in_spPose);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fBindEffectMotion, 0x700C70,
-        const CSingleElement* This, boost::shared_ptr<Hedgehog::Motion::CSingleElementEffectMotionAll>& motion);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSingleElementBindEffect, 0x700C70,
+        CSingleElement* This, const boost::shared_ptr<CSingleElementEffect>& in_spEffect);
 
     class CSingleElement : public CElement
     {
@@ -59,14 +50,14 @@ namespace Hedgehog::Mirage
             return spNode;
         }
 
-        void BindAnimationPose(boost::shared_ptr<Hedgehog::Animation::CAnimationPose>& pose)
+        void BindPose(const boost::shared_ptr<CPose>& in_spPose)
         {
-            fBindAnimationPose(this, pose);
+            fpCSingleElementBindPose(this, in_spPose);
         }
 
-        void BindEffectMotion(boost::shared_ptr<Hedgehog::Motion::CSingleElementEffectMotionAll>& motion)
+        void BindEffect(const boost::shared_ptr<CSingleElementEffect>& in_spEffect)
         {
-            fBindEffectMotion(this, motion);
+            fpCSingleElementBindEffect(this, in_spEffect);
         }
 
         void BindMatrixNode(const boost::shared_ptr<CMatrixNode>& in_spMatrixNode)
@@ -79,15 +70,4 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(CSingleElement, m_MaterialMap, 0x94);
     BB_ASSERT_OFFSETOF(CSingleElement, m_spSingleElementEffect, 0xA0);
     BB_ASSERT_SIZEOF(CSingleElement, 0xA8);
-
-    class CSingleMorphElement : public CSingleElement
-    {
-    public:
-        CSingleMorphElement(const bb_null_ctor& nil) : CSingleElement(nil) {}
-
-        CSingleMorphElement(const boost::shared_ptr<CModelData>& spModelData) : CSingleMorphElement(bb_null_ctor{})
-        {
-            fpCSingleMorphElementCtor(this, spModelData);
-        }
-    };
 }

@@ -9,10 +9,10 @@ namespace Hedgehog::Database
     class CArchiveList;
     class CArchiveListManager;
 
-    static BB_FUNCTION_PTR(void, __thiscall, fpCArchiveListManagerGetArchiveList, 0x6AAF00,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCArchiveListManagerGetArchiveList, 0x6AAF00,
         const CArchiveListManager* This, boost::shared_ptr<CArchiveList>& out_spArchiveList, const Base::CSharedString& in_rName);
 
-    static BB_FUNCTION_PTR(void, __thiscall, fpCArchiveListManagerAddArchiveList, 0x6AB010,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCArchiveListManagerAddArchiveList, 0x6AB010,
         CArchiveListManager* This, const Base::CSharedString& in_rName, boost::shared_ptr<CArchiveList> in_spArchiveList);
 
     class CArchiveListManager : public Base::CObject

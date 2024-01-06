@@ -27,6 +27,7 @@ with open(srcDirectoryPath + "/BlueBlur.h", "w") as f:
     f.write("#pragma once\n\n")
     f.write("#pragma comment(lib, \"BlueBlur.lib\")\n\n")
 
+    generateIncludes(f, "hk2010_2_0")
     generateIncludes(f, "Hedgehog")
     generateIncludes(f, "CSD")
     generateIncludes(f, "Sonic")

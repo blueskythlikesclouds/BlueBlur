@@ -19,7 +19,7 @@ namespace Hedgehog::Mirage
         eMaterialFlags_BoolParamsEmpty = 0x4
     };
 
-    static BB_FUNCTION_PTR(CMaterialData*, __thiscall, fpCMaterialDataCtor, 0x704CA0, CMaterialData*);
+    static inline BB_FUNCTION_PTR(CMaterialData*, __thiscall, fpCMaterialDataCtor, 0x704CA0, CMaterialData*);
 
     class CMaterialData : public Database::CDatabaseData
     {

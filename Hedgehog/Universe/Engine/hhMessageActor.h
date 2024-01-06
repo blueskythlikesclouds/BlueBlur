@@ -4,6 +4,7 @@
 #include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
 #include <Hedgehog/Universe/Thread/hhParallelJob.h>
+#include <Hedgehog/Universe/Engine/hhMessageManager.h>
 
 namespace Hedgehog::Universe
 {
@@ -17,31 +18,30 @@ namespace Hedgehog::Universe
     static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorExecuteParallelJob, 0x7680C0, CMessageActor* This, const SUpdateInfo& in_rUpdateInfo);
 
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorSendMessageByID, 0x768340,
-        CMessageActor* This, const char* in_pPath, size_t in_Line, size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage, float in_Time);   
+        CMessageActor* This, const char* in_pPath, size_t in_Line, size_t in_ActorID, const boost::shared_ptr<Message>& in_spMsg, float in_Time);   
     
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorSendMessageByCategory, 0x7684E0,
-        CMessageActor* This, const char* in_pPath, size_t in_Line, const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMessage, float in_Time);
+        CMessageActor* This, const char* in_pPath, size_t in_Line, const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMsg, float in_Time);
 
     static inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorSendMessageImmByID, 0x767EE0,
-        CMessageActor* This, const char* in_pPath, size_t in_Line, size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage);
+        CMessageActor* This, const char* in_pPath, size_t in_Line, size_t in_ActorID, const boost::shared_ptr<Message>& in_spMsg);
 
-    static inline BB_FUNCTION_PTR(CMessageActor*, __thiscall, fpCMessageActorGetActorFromID, 0x7773B0, Hedgehog::Base::CSynchronizedObject* _Obj, uint32_t id);
+    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorProcessMessage, 0x767D20, 
+        CMessageActor* This, Message& in_rMsg);
 
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorProcessMessage, 0x00767D20, const CMessageActor* a1, const Message& a2);
-
-    class CMessageActor : public IMessageProcess, public Base::CObject, public IParallelJob
+    class CMessageActor : public IMessageProcess, public IParallelJob
     {
     public:
-        BB_INSERT_PADDING(0x24);
+        BB_INSERT_PADDING(0x28);
         uint32_t m_ActorID;
         BB_INSERT_PADDING(0x0A);
         bool m_ActorIDCondition;
         bool m_ActorIDCondition2;
         BB_INSERT_PADDING(0x24);
-        CMessageManager* m_pMessageManager;
+        Base::TSynchronizedPtr<CMessageManager> m_pMessageManager;
         BB_INSERT_PADDING(0x18);
 
-        CMessageActor(const bb_null_ctor& nil) : IMessageProcess(nil), CObject(nil), IParallelJob(nil) {}
+        CMessageActor(const bb_null_ctor& nil) : IMessageProcess(nil), IParallelJob(nil) {}
 
         CMessageActor() : CMessageActor(bb_null_ctor{})
         {
@@ -67,122 +67,93 @@ namespace Hedgehog::Universe
 
 #undef SendMessage
 
-        CMessageActor* GetActorFromID(uint32_t in_ActorID) const
+        bool SendMessage(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMsg, float in_Time = 0.0f)
         {
-            return fpCMessageActorGetActorFromID(Hedgehog::Base::CHolderBase((Base::CSynchronizedObject*)m_pMessageManager).get(), in_ActorID);
+            return fpCMessageActorSendMessageByID(this, nullptr, 0, in_ActorID, in_spMsg, in_Time);
         }
 
-        bool SendMessage(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMessage, float in_Time = 0.0f)
+        bool SendMessage(const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMsg, float in_Time = 0.0f)
         {
-            return fpCMessageActorSendMessageByID(this, nullptr, 0, in_ActorID, in_spMessage, in_Time);
+            return fpCMessageActorSendMessageByCategory(this, nullptr, 0, in_rActorCategory, in_spMsg, in_Time);
         }
 
-        bool SendMessage(const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMessage, float in_Time = 0.0f)
+        bool SendMessageImm(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMsg)
         {
-            return fpCMessageActorSendMessageByCategory(this, nullptr, 0, in_rActorCategory, in_spMessage, in_Time);
-        }
-
-        bool SendMessageImm(const size_t actorID, const boost::shared_ptr<Message>& spMessage)
-        {
-            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
+            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, in_ActorID, in_spMsg);
         }
 
         // Custom implementation that passes in a message on the *stack* if it's immediate. Much faster.
-        bool SendMessageImm(const CMessageActor* actor, Message* message) const
+        bool SendMessageImm(CMessageActor* in_pActor, Message& in_rMsg) const
         {
             if (!m_pMessageManager)
                 return false;
 
-            if (!actor)
+            if (!in_pActor)
                 return false;
 
             if (!m_ActorIDCondition)
-                message->m_SenderActorID = m_ActorID;
+                in_rMsg.m_SenderActorID = m_ActorID;
 
-            return fpCMessageActorProcessMessage(actor, *message);
+            return fpCMessageActorProcessMessage(in_pActor, in_rMsg);
         }
 
-        bool SendMessageImm(const CMessageActor* actor, const Message& message) const
-        {
-            // Forgive the const cast, this is just to be compliant with Sonic Team's standards.
-            // MessageTypeSet messages don't need to be variables you keep around, but they DO need the sender's ID associated with them.
-            // Hence, const-cast to set the sender actor ID for a temporary object passed into this function.
-            return SendMessageImm(actor, const_cast<Message*>(&message));
-        }
-
-        bool SendMessageImm(const uint32_t actorID, const Message& message)
+        bool SendMessageImm(const uint32_t in_ActorID, Message& in_rMsg) const
         {
             if (!m_pMessageManager)
                 return false;
 
-            if (!actorID)
+            if (!in_ActorID)
                 return false;
 
-            CMessageActor* target = GetActorFromID(actorID);
-            if (!target)
+            CMessageActor* pActor = m_pMessageManager->GetMessageActor(in_ActorID);
+            if (!pActor)
                 return false;
 
-            return SendMessageImm(target, message);
+            return SendMessageImm(pActor, in_rMsg);
         }
 
-        bool SendMessageImm(const uint32_t actorID, Message* message)
-        {
-            if (!m_pMessageManager)
-                return false;
-
-            if (!actorID)
-                return false;
-
-            CMessageActor* target = GetActorFromID(actorID);
-            if (!target)
-                return false;
-
-            return SendMessageImm(target, message);
-        }
-
-        bool SendMessageSelfImm(Message& message) const
+        bool SendMessageSelfImm(Message& in_rMsg)
         {
             if (!m_ActorIDCondition)
-                message.m_SenderActorID = m_ActorID;
+                in_rMsg.m_SenderActorID = m_ActorID;
 
-            return fpCMessageActorProcessMessage(this, message);
+            return fpCMessageActorProcessMessage(this, in_rMsg);
         }
 
         template<typename T>
         bool SendMessageSelfImm()
         {
             static_assert(std::is_base_of<Message, T>::value, "T must inherit from Message");
-            auto actorID = this->m_ActorID;
 
-            auto spMessage = boost::make_shared<T>();
-            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
+            auto spMsg = boost::make_shared<T>();
+            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, m_ActorID, spMsg);
         }
 
-        template<typename T, typename ... V>
-        bool SendMessageSelfImm(V& ... messageVars)
+        template<typename T, typename... Args>
+        bool SendMessageSelfImm(Args&... args)
         {
             static_assert(std::is_base_of<Message, T>::value, "T must inherit from Message");
-            auto actorID = this->m_ActorID;
 
-            auto spMessage = boost::make_shared<T>(messageVars...);
-            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
+            auto spMsg = boost::make_shared<T>(std::forward<Args>(args)...);
+            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, m_ActorID, spMsg);
         }
 
         template<typename T>
-        bool SendMessageImm(const size_t actorID)
+        bool SendMessageImm(const size_t in_ActorID)
         {
             static_assert(std::is_base_of<Message, T>::value, "T must inherit from Message");
 
-            auto spMessage = boost::make_shared<T>();
-            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
+            auto spMsg = boost::make_shared<T>();
+            return fpCMessageActorSendMessageImmByID(this, nullptr, 0, in_ActorID, spMsg);
         }
 
-        template<typename T, typename ... V>
-        void SendMessageImm(const size_t actorID, V& ... messageVars)
+        template<typename T, typename... Args>
+        void SendMessageImm(const size_t in_ActorID, Args&... args)
         {
             static_assert(std::is_base_of<Message, T>::value, "T must inherit from Message");
 
-            SendMessageImm(actorID, T(messageVars...));
+            T msg(std::forward<Args>(args)...);
+            SendMessageImm(in_ActorID, msg);
         }
     };
 

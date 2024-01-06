@@ -11,19 +11,19 @@ namespace Hedgehog::Mirage
     class CMatrixNodeNormal : public CMatrixNode
     {
     private:
-        static constexpr int ms_pVtbl = 0x13E7018;
+        static constexpr size_t ms_pVtbl = 0x13E7018;
     public:
         Math::CMatrix m_LocalMatrix {};
         Math::CMatrix m_WorldMatrix {};
 
-        CMatrixNodeNormal() : CMatrixNode()
+        CMatrixNodeNormal()
         {
-            *(int*)this = ms_pVtbl;
+            *reinterpret_cast<size_t*>(this) = ms_pVtbl;
         }
 
-        CMatrixNodeNormal(const Math::CMatrix& in_rMatrix) : CMatrixNode(), m_LocalMatrix(in_rMatrix), m_WorldMatrix(in_rMatrix)
+        CMatrixNodeNormal(const Math::CMatrix& in_rMatrix) : m_LocalMatrix(in_rMatrix), m_WorldMatrix(in_rMatrix)
         {
-            *(int*)this = ms_pVtbl;
+            *reinterpret_cast<size_t*>(this) = ms_pVtbl;
         }
 
         void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) override

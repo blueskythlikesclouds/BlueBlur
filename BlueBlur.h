@@ -2,7 +2,7 @@
 
 #pragma comment(lib, "BlueBlur.lib")
 
-#include <Havok/havok.h>
+#include <hk2010_2_0/hk2010_2_0.h>
 
 #include <Hedgehog/Animation/hhAnimationControl.h>
 #include <Hedgehog/Animation/hhAnimationControlSingle.h>
@@ -60,6 +60,7 @@
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElementEffect.h>
+#include <Hedgehog/MirageCore/Renderable/hhSingleMorphElement.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightData.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMaterialData.h>
@@ -150,8 +151,8 @@
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>
 #include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.h>
 #include <Sonic/FxPipeline/Jobs/ToneMapping/FxToneMapping.h>
-#include <Sonic/Havok/RigidBody.h>
 #include <Sonic/Havok/RaycastCollision.h>
+#include <Sonic/Havok/RigidBody.h>
 #include <Sonic/Message/MsgAddImpulse.h>
 #include <Sonic/Message/MsgAddVelocity.h>
 #include <Sonic/Message/MsgDead.h>

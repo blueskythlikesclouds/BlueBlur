@@ -109,7 +109,7 @@ namespace Sonic
     {
     private:
 
-        __declspec(noinline) void pSetFloat(const SParamValueCreationParams<float>& param, const Hedgehog::Base::CSharedString& name) volatile
+        __declspec(noinline) void fSetFloat(const SParamValueCreationParams<float>& param, const Hedgehog::Base::CSharedString& name) volatile
         {
             uint32_t func = 0x005908B0;
             __asm
@@ -121,7 +121,7 @@ namespace Sonic
                 call func
             }
         }
-        __declspec(noinline) void pSetBool(const SParamValueCreationParams<bool>& param, const Hedgehog::Base::CSharedString& name) volatile
+        __declspec(noinline) void fSetBool(const SParamValueCreationParams<bool>& param, const Hedgehog::Base::CSharedString& name) volatile
         {
             uint32_t func = 0x00CEF3D0;
             __asm
@@ -133,7 +133,7 @@ namespace Sonic
                 call func
             }
         }
-        __declspec(noinline) void pSetInt(const SParamValueCreationParams<uint32_t>& param, const Hedgehog::Base::CSharedString& name) volatile
+        __declspec(noinline) void fSetInt(const SParamValueCreationParams<uint32_t>& param, const Hedgehog::Base::CSharedString& name) volatile
         {
             uint32_t func = 0x00591440;
             __asm
@@ -240,15 +240,15 @@ namespace Sonic
 
         void SetFloat(float* inVar, const Hedgehog::Base::CSharedString& name)
         {
-            pSetFloat({ inVar, *inVar }, name);
+            fSetFloat({ inVar, *inVar }, name);
         }
         void SetBool(bool* inVar, const Hedgehog::Base::CSharedString& name)
         {
-            pSetBool({ inVar, *inVar }, name);
+            fSetBool({ inVar, *inVar }, name);
         }
         void SetInt(uint32_t* inVar, const Hedgehog::Base::CSharedString& name)
         {
-            pSetInt({ inVar, *inVar }, name);
+            fSetInt({ inVar, *inVar }, name);
         }
         void SetParamBase(Sonic::CParamBase* param, const Hedgehog::Base::CSharedString& name)
         {

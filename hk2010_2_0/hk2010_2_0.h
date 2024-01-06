@@ -354,7 +354,7 @@ namespace hk2010_2_0
 		hkpBoxShape(float Width, float Height, float Length, float radius = 0.050000001f)
 		{
 			BB_FUNCTION_PTR(void*, __thiscall, ctor, 0x008CC880, hkpBoxShape* This, const Hedgehog::Math::CVector& _halfExtents, float _radius);
-			ctor(this, Hedgehog::Math::CVector(Width * 0.5, Height * 0.5, Length * 0.5), radius);
+			ctor(this, Hedgehog::Math::CVector(Width * 0.5f, Height * 0.5f, Length * 0.5f), radius);
 		}
 	};
 	BB_ASSERT_SIZEOF(hkpBoxShape, 0x30);

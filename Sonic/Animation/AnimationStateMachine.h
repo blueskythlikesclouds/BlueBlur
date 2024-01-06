@@ -32,13 +32,13 @@ namespace Sonic
         }
     }
 
-    static BB_FUNCTION_PTR(void, __stdcall, fpCAnimationStateMachineAddAnimationState, 0xCDFA20,
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpCAnimationStateMachineAddAnimationState, 0xCDFA20,
         CAnimationStateMachine* This, const boost::shared_ptr<CAnimationState>& out_spAnimationState, const Hedgehog::Base::CSharedString& in_rName, const Hedgehog::Base::CSharedString& in_rAlsoName);
 
-    static BB_FUNCTION_PTR(const boost::shared_ptr<CAnimationState>&, __stdcall, fpCAnimationStateMachineGetAnimationState, 0xCDFB40, 
+    static inline BB_FUNCTION_PTR(const boost::shared_ptr<CAnimationState>&, __stdcall, fpCAnimationStateMachineGetAnimationState, 0xCDFB40, 
         CAnimationStateMachine* This, const Hedgehog::Base::CSharedString& in_rName);
 
-    static BB_FUNCTION_PTR(void, __stdcall, fpCAnimationStateMachineChangeState, 0xCDFC80,
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpCAnimationStateMachineChangeState, 0xCDFC80,
         CAnimationStateMachine* This, boost::shared_ptr<CAnimationState>& out_spAnimationState, const Hedgehog::Base::CSharedString& in_rName);
 
     class CAnimationStateMachine : public Hedgehog::Universe::TStateMachine<IAnimationContext>

@@ -4,22 +4,26 @@
 
 namespace Sonic
 {
+	class CRigidBody;
 	class CRayCastCollision;
 
 	static constexpr uint32_t pCRayCastCollisionCtor = 0x01182980;
+
 	static void fpCRayCastCollisionCtor(CRayCastCollision* This, const Hedgehog::Base::THolder<CWorld>& pWorld)
 	{
 		__asm
 		{
 			mov eax, pWorld
 			mov esi, This
-			call [pCRayCastCollisionCtor]
+			call[pCRayCastCollisionCtor]
 		}
 	}
 
 	class CRayCastCollision
 	{
+	public:
 		struct HitInformation;
+	private:
 		static constexpr uint32_t pCRayCastCollisionCastRay = 0x010BE270;
 		static bool fCRayCastCollisionCastRay(uint32_t in_pWorld, uint32_t in_CollisionMask, const Hedgehog::Math::CVector& in_RayStart, const Hedgehog::Math::CVector& in_RayEnd, HitInformation* out_HitInfo)
 		{

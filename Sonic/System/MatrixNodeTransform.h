@@ -35,18 +35,18 @@ namespace Sonic
             fCMatrixNodeTransformCtor(this);
         }
 
-        void SetParent(CMatrixNode* pParentNode)
+        void SetParent(CMatrixNode* in_pParentNode)
         {
-            fpCMatrixNodeTransformSetChild(pParentNode, this);
+            fpCMatrixNodeTransformSetChild(in_pParentNode, this);
         }
-        void SetChild(CMatrixNode* pChildNode)
+        void SetChild(CMatrixNode* in_pChildNode)
         {
-            fpCMatrixNodeTransformSetChild(this, pChildNode);
+            fpCMatrixNodeTransformSetChild(this, in_pChildNode);
         }
 
-        void UpdateMatrix(CMatrixNode* pParentMatrixNode) override
+        void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) override
         {
-            fpCMatrixNodeTransformUpdateMatrix(this, pParentMatrixNode);
+            fpCMatrixNodeTransformUpdateMatrix(this, in_pParentMatrixNode);
         }
 
         const Hedgehog::Math::CMatrix& GetLocalMatrix() const override

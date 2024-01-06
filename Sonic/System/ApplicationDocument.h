@@ -57,7 +57,7 @@ namespace Sonic
 
         void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor)
         {
-            m_pMember->m_pMessageManager->Add(in_rCategory, in_pMessageActor);
+            m_pMember->m_pMessageManager->AddMessageActor(in_rCategory, in_pMessageActor);
         }
     };
 

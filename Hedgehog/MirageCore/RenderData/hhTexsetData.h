@@ -7,7 +7,7 @@ namespace Hedgehog::Mirage
     class CTextureData;
     class CTexsetData;
 
-    static BB_FUNCTION_PTR(CTexsetData*, __thiscall, fpCTexsetDataCtor, 0x6F8730, CTexsetData*);
+    static inline BB_FUNCTION_PTR(CTexsetData*, __thiscall, fpCTexsetDataCtor, 0x6F8730, CTexsetData*);
 
     class CTexsetData : public Database::CDatabaseData
     {

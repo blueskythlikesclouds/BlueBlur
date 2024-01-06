@@ -8,7 +8,7 @@ namespace Hedgehog::Mirage
 {
     class CTextureData;
 
-    static BB_FUNCTION_PTR(void, __thiscall, fpCTextureDataCtor, 0x6F88B0, CTextureData* This);
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCTextureDataCtor, 0x6F88B0, CTextureData* This);
 
     class CPictureData;
 

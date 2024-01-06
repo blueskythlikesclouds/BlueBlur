@@ -11,6 +11,7 @@ namespace Hedgehog::Base
 
     public:
         TSynchronizedPtr(T* in_pObject) : m_pObject(in_pObject) {}
+        TSynchronizedPtr() : m_pObject(nullptr) {}
 
         TSynchronizedPtr(const TSynchronizedPtr& in_rOther) = default;
         TSynchronizedPtr(TSynchronizedPtr&& io_rOther) : m_pObject(io_rOther.m_pObject)
