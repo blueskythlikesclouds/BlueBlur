@@ -10,7 +10,7 @@ namespace Hedgehog::Mirage
     public:
         virtual ~CRenderingInfrastructure() = default;
 
-        BB_INSERT_PADDING(0x5C);
+        BB_INSERT_PADDING(0x50);
         CRenderingDevice m_RenderingDevice;
     };
 
