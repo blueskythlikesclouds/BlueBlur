@@ -25,6 +25,11 @@ namespace Hedgehog::Base
         return m_pSymbolNode == in_rOther.m_pSymbolNode;
     }
 
+    inline bool CStringSymbol::operator!=(const CStringSymbol& in_rOther) const
+    {
+        return m_pSymbolNode != in_rOther.m_pSymbolNode;
+    }
+
     inline bool CStringSymbol::operator<(const CStringSymbol& in_rOther) const
     {
         return m_pSymbolNode < in_rOther.m_pSymbolNode;

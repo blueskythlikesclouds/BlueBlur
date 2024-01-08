@@ -17,6 +17,7 @@ namespace Hedgehog::Mirage
 
 namespace Sonic
 {
+    class CApplication;
     class CParameterEditor;
 
     class CApplicationDocument : public Hedgehog::Base::CSynchronizedObject
@@ -25,7 +26,9 @@ namespace Sonic
         class CMember
         {
         public:
-            BB_INSERT_PADDING(0x1C);
+            BB_INSERT_PADDING(0x10);
+            CApplication* m_pApplication;
+            BB_INSERT_PADDING(0x8);
             Hedgehog::Universe::CMessageManager* m_pMessageManager;
             BB_INSERT_PADDING(0x18);
             boost::shared_ptr<Hedgehog::Mirage::CRenderingInfrastructure> m_spRenderingInfrastructure;
@@ -55,6 +58,7 @@ namespace Sonic
         void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor);
     };
 
+    BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_pApplication, 0x14);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_pMessageManager, 0x20);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spRenderingInfrastructure, 0x3C);
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_spApplicationDatabase, 0x80);

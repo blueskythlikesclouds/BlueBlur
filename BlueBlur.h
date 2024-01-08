@@ -179,6 +179,8 @@
 #include <Sonic/ObjectSystem/SetObjectFactory.h>
 #include <Sonic/ObjectSystem/SetObjectInfo.h>
 #include <Sonic/ObjectSystem/SetObjectListener.h>
+#include <Sonic/Platform/D3D9/ApplicationD3D9.h>
+#include <Sonic/Platform/PC/ApplicationPC.h>
 #include <Sonic/Player/Character/Base/Player.h>
 #include <Sonic/Player/Character/Base/PlayerContext.h>
 #include <Sonic/Player/Character/Sonic/Sonic.h>
@@ -199,6 +201,7 @@
 #include <Sonic/Player/Parameter/SonicClassicParameter.h>
 #include <Sonic/Player/Parameter/SonicParameter.h>
 #include <Sonic/Player/Parameter/SonicSpParameter.h>
+#include <Sonic/System/Application.h>
 #include <Sonic/System/ApplicationDocument.h>
 #include <Sonic/System/BGMData.h>
 #include <Sonic/System/GameDocument.h>

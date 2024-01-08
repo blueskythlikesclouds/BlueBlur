@@ -16,7 +16,7 @@ namespace Hedgehog::Mirage
         CRenderable();
         virtual ~CRenderable() = default;
 
-        virtual void Render(const CRenderInfo& in_rRenderInfo, Base::CStringSymbol in_RenderLevel, uint32_t in_Unknown);
+        virtual void Render(const CRenderInfo& in_rRenderInfo, Base::CStringSymbol in_RenderLevel, uint32_t in_Unknown) {}
 
         virtual void CRenderableVtbl08(size_t) {}
         virtual void CRenderableVtbl0C(size_t, size_t) {}

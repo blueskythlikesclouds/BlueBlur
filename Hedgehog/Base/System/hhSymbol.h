@@ -24,6 +24,7 @@ namespace Hedgehog::Base
         const char* GetValue() const;
 
         bool operator==(const CStringSymbol& in_rOther) const;
+        bool operator!=(const CStringSymbol& in_rOther) const;
         bool operator<(const CStringSymbol& in_rOther) const;
     };
 
