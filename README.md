@@ -83,4 +83,3 @@ Combine prefixes as necessary, e.g., `m_sp` for a shared pointer as a class memb
 - If a portion of the byte range is irrelevant to your research or not mapped yet, use the `BB_INSERT_PADDING` macro to align class/struct members correctly.
 - When the class has a virtual function table, if you don't want to map every function in it, you can map only the virtual destructor.
 - The original file locations are likely available in the executable file as assertion file paths. If you cannot find the file path, use your intuition to place the file in a sensible place.
-- Functions that return a struct type 
