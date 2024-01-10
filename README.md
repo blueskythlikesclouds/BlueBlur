@@ -73,7 +73,7 @@ Combine prefixes as necessary, e.g., `m_sp` for a shared pointer as a class memb
 - Ensure that all class members are declared as public. Even if you suspect that a class member was private in the original code, having it public is more convenient in a modding API.
 - Avoid placing multiple class definitions in a single header file unless you have a good reason to do so.
 - Keep function pointers or addresses outside functions, define them as global variables in the corresponding .inl file. Mark these global variables as `inline` and never nest them within class definitions. You do not need to use the `g_` prefix for function pointers, `fp` is sufficient.
-- Use primitive types defined in `cstdint` instead of using types that come with the language, e.g., `uint32_t` instead of `unsigned int`. Using `float`, `double` and `bool` is okay.
+- Use primitive types defined in `cstdint` instead of using types that come with the language, e.g., use `uint32_t` instead of `unsigned int`. Using `float`, `double` and `bool` is okay.
 
 ### Mapping Rules
 
