@@ -92,7 +92,7 @@ namespace Hedgehog::Universe
     }
 
     inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseGetCurrentState, 0x76B5C0,
-        CStateMachineBase* This, boost::shared_ptr<CStateMachineBase::CStateBase>& out_spState);
+        const CStateMachineBase* This, boost::shared_ptr<CStateMachineBase::CStateBase>& out_spState);
 
     inline boost::shared_ptr<CStateMachineBase::CStateBase> CStateMachineBase::GetCurrentState()
     {
