@@ -16,7 +16,7 @@ namespace Hedgehog::Universe
     boost::shared_ptr<typename TStateMachine<TContext>::TState> TStateMachine<TContext>::GetCurrentState() const
     {
         boost::shared_ptr<CStateBase> spState;
-        fpGetCurrentState(this, spState);
+        fpCStateMachineBaseGetCurrentState(this, spState);
 
         return boost::static_pointer_cast<TState>(spState);
     }
