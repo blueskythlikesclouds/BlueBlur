@@ -12,7 +12,7 @@ namespace Sonic
         CPhysicsWorld* m_pPhysicsWorld{};
         void* m_pHkpAabbPhantom{};
 
-        CRayCastCollision(const Hedgehog::Base::TSynchronizedPtr<CWorld>& in_pWorld);
+        CRayCastCollision(const Hedgehog::Base::THolder<CWorld>& in_pWorldHolder);
     };
 
     BB_ASSERT_OFFSETOF(CRayCastCollision, m_pPhysicsWorld, 0x0);
