@@ -33,7 +33,7 @@ namespace Hedgehog::Animation
         BB_INSERT_PADDING(0x04) {};
     };
 
-    class CAnimationPose : public Mirage::CPose
+    class alignas(0x10) CAnimationPose : public Mirage::CPose
     {
     public:
         BB_INSERT_PADDING(0x2C) {};
