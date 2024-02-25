@@ -15,6 +15,7 @@ namespace Hedgehog::Animation
     class CAnimationSkeleton;
     class CAnimationPose;
     class CIkRaycastInterface;
+    struct SMotionInfo;
 
     // TODO: MOVE THESE TO THEIR OWN LOCATIONS.
     class hkQsTransform
@@ -75,7 +76,7 @@ namespace Hedgehog::Animation
         CAnimationPose(const bb_null_ctor&) {}
         CAnimationPose(const boost::shared_ptr<Database::CDatabase>& in_spDatabase, const Base::CSharedString& in_rName);
 
-        void AddAnimationList(void* in_pList, int in_Count);
+        void AddMotionInfo(SMotionInfo* in_pMotionInfo, size_t in_NumMotionInfo);
         void Update(float in_DeltaTime);
     };
 

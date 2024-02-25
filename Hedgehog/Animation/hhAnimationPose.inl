@@ -20,12 +20,12 @@ namespace Hedgehog::Animation
         m_spAnimationCache = CreateAnimationCache();
     }
 
-    inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseAddAnimationList, 0x6CBFC0,
-        CAnimationPose* This, void* in_pList, int in_Count);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseAddMotionInfo, 0x6CBFC0,
+        CAnimationPose* This, SMotionInfo* in_pMotionInfo, size_t in_NumMotionInfo);
 
-    inline void CAnimationPose::AddAnimationList(void* in_pList, int in_Count)
+    inline void CAnimationPose::AddMotionInfo(SMotionInfo* in_pMotionInfo, size_t in_NumMotionInfo)
     {
-        fpCAnimationPoseAddAnimationList(this, in_pList, in_Count);
+        fpCAnimationPoseAddMotionInfo(this, in_pMotionInfo, in_NumMotionInfo);
     }
 
     inline BB_FUNCTION_PTR(void, __thiscall, fpCAnimationPoseUpdate, 0x6CCCB0,

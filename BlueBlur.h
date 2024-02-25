@@ -7,6 +7,7 @@
 #include <Hedgehog/Animation/hhAnimationControl.h>
 #include <Hedgehog/Animation/hhAnimationControlSingle.h>
 #include <Hedgehog/Animation/hhAnimationPose.h>
+#include <Hedgehog/Animation/hhMotionInfo.h>
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/hhRefCountObject.h>
 #include <Hedgehog/Base/Container/hhList.h>
