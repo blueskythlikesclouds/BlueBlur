@@ -19,16 +19,16 @@ namespace Hedgehog::Mirage
             void* pVertexElements;
         };
 
-        DX_PATCH::IDirect3DVertexBuffer9* m_pD3DVertexBuffer;
         DX_PATCH::IDirect3DVertexBuffer9* m_pD3DIndexBuffer;
+        DX_PATCH::IDirect3DVertexBuffer9* m_pD3DVertexBuffer;
         hh::vector<SMeshData> m_MeshDataList;
         CRenderingInfrastructure* m_pRenderingInfrastructure;
         uint32_t m_Field28;
         uint32_t m_Field2C;
     };
 
-    BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_pD3DVertexBuffer, 0xC);
-    BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_pD3DIndexBuffer, 0x10);
+    BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_pD3DIndexBuffer, 0xC);
+    BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_pD3DVertexBuffer, 0x10);
     BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_MeshDataList, 0x14);
     BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_pRenderingInfrastructure, 0x24);
     BB_ASSERT_OFFSETOF(CShareVertexBuffer, m_Field28, 0x28);
