@@ -177,6 +177,7 @@
 #include <Sonic/Message/MsgSetVisible.h>
 #include <Sonic/Message/MsgStartHomingChase.h>
 #include <Sonic/Object/ObjectBase.h>
+#include <Sonic/Object/Common/ObjUpReel/ObjUpReel.h>
 #include <Sonic/ObjectSystem/SetObjectEntry.h>
 #include <Sonic/ObjectSystem/SetObjectFactory.h>
 #include <Sonic/ObjectSystem/SetObjectInfo.h>
