@@ -7,7 +7,7 @@ namespace Hedgehog::Base
 
     inline BB_FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* in_pName);
 
-    inline CStringSymbol::CStringSymbol(): m_pSymbolNode(MakeStringSymbol(""))
+    inline CStringSymbol::CStringSymbol(): m_pSymbolNode(nullptr)
     {
     }
 
