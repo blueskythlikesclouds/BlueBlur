@@ -35,6 +35,7 @@
 #include <Hedgehog/Database/System/hhRawData.h>
 #include <Hedgehog/FxRenderFramework/hhDrawInstanceParam.h>
 #include <Hedgehog/FxRenderFramework/hhScreenRenderParam.h>
+#include <Hedgehog/Math/hhSphere.h>
 #include <Hedgehog/MirageCore/Camera/hhCamera.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
@@ -77,12 +78,17 @@
 #include <Hedgehog/MirageCore/RenderData/hhPixelShaderData.h>
 #include <Hedgehog/MirageCore/RenderData/hhShaderListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhShareVertexBuffer.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainGroupData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainGroupInfoData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTerrainInstanceInfoData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTerrainModelData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTexsetData.h>
 #include <Hedgehog/MirageCore/RenderData/hhTextureData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderCodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderData.h>
+#include <Hedgehog/MirageCore/Terrain/hhTerrainGroupSubsetInfo.h>
+#include <Hedgehog/MirageCore/Terrain/hhTerrainInitializeInfo.h>
 #include <Hedgehog/MotionCore/Motion/hhMaterialMotion.h>
 #include <Hedgehog/MotionCore/Motion/hhMotionBase.h>
 #include <Hedgehog/MotionCore/Motion/hhSingleElementEffectMatMotion.h>
@@ -216,6 +222,7 @@
 #include <Sonic/System/InputState.h>
 #include <Sonic/System/MatrixNodeTransform.h>
 #include <Sonic/System/PadState.h>
+#include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>
 #include <Sonic/System/GameplayFlow/GameActParameter.h>
 #include <Sonic/System/LightManager/LightManager.h>
