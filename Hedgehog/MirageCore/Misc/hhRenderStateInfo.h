@@ -27,7 +27,9 @@ namespace Hedgehog::Mirage
         float SlopeScaledDepthBias;
         float DepthBiasCullModeNone;
         float SlopeScaledDepthBiasCullModeNone;
-        BB_INSERT_PADDING(0x10);
+        BB_INSERT_PADDING(0x8);
+        float PlayableParamRestoreHeight;
+        BB_INSERT_PADDING(0x4);
         bool DepthBiasEnable;
         bool RevertZ;
         BB_INSERT_PADDING(0x2);
@@ -41,6 +43,7 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(SRenderStateInfo, SlopeScaledDepthBias, 0x10);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, DepthBiasCullModeNone, 0x14);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, SlopeScaledDepthBiasCullModeNone, 0x18);
+    BB_ASSERT_OFFSETOF(SRenderStateInfo, PlayableParamRestoreHeight, 0x24);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, DepthBiasEnable, 0x2C);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, RevertZ, 0x2D);
     BB_ASSERT_OFFSETOF(SRenderStateInfo, RenderStates, 0x30);
