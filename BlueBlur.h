@@ -169,6 +169,12 @@
 #include <Sonic/Havok/PhysicsWorld.h>
 #include <Sonic/Havok/RaycastCollision.h>
 #include <Sonic/Havok/RigidBody.h>
+#include <Sonic/Instancer/InstanceModelData.h>
+#include <Sonic/Instancer/InstanceRenderObj.h>
+#include <Sonic/Instancer/InstanceRenderObjDX9.h>
+#include <Sonic/Instancer/MetaInstancer.h>
+#include <Sonic/Instancer/ObjGrassInstancer.h>
+#include <Sonic/Instancer/ObjInstancer.h>
 #include <Sonic/Message/MsgAddImpulse.h>
 #include <Sonic/Message/MsgAddVelocity.h>
 #include <Sonic/Message/MsgDead.h>
