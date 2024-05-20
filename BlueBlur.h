@@ -191,6 +191,7 @@
 #include <Sonic/Message/MsgStartHomingChase.h>
 #include <Sonic/Object/ObjectBase.h>
 #include <Sonic/Object/Common/ObjUpReel/ObjUpReel.h>
+#include <Sonic/Object/Common/ObjWallJumpBlock/ObjWallJumpBlock.h>
 #include <Sonic/ObjectSystem/SetObjectEntry.h>
 #include <Sonic/ObjectSystem/SetObjectFactory.h>
 #include <Sonic/ObjectSystem/SetObjectInfo.h>
