@@ -196,6 +196,7 @@
 #include <Sonic/ObjectSystem/SetObjectFactory.h>
 #include <Sonic/ObjectSystem/SetObjectInfo.h>
 #include <Sonic/ObjectSystem/SetObjectListener.h>
+#include <Sonic/ObjectSystem/ObjectUtility/ObjectEdgeEmissionEffect.h>
 #include <Sonic/ObjectSystem/Renderable/RopeRenderable.h>
 #include <Sonic/Platform/D3D9/ApplicationD3D9.h>
 #include <Sonic/Platform/PC/ApplicationPC.h>
