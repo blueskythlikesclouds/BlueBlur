@@ -16,8 +16,8 @@ namespace Hedgehog::Animation
         const char* FileName;
         float Speed = 1.0f;
         int32_t RepeatType = eMotionRepeatType_Loop;
-        int32_t Field10 = 0;
-        float Field14 = -1.0f;
+        float StartFrame = 0.0f;
+        float EndFrame = -1.0f;
         float Field18 = -1.0f;
         int32_t Field1C = 0;
 
@@ -32,8 +32,8 @@ namespace Hedgehog::Animation
     BB_ASSERT_OFFSETOF(SMotionInfo, FileName, 0x04);
     BB_ASSERT_OFFSETOF(SMotionInfo, Speed, 0x08);
     BB_ASSERT_OFFSETOF(SMotionInfo, RepeatType, 0x0C);
-    BB_ASSERT_OFFSETOF(SMotionInfo, Field10, 0x10);
-    BB_ASSERT_OFFSETOF(SMotionInfo, Field14, 0x14);
+    BB_ASSERT_OFFSETOF(SMotionInfo, StartFrame, 0x10);
+    BB_ASSERT_OFFSETOF(SMotionInfo, EndFrame, 0x14);
     BB_ASSERT_OFFSETOF(SMotionInfo, Field18, 0x18);
     BB_ASSERT_OFFSETOF(SMotionInfo, Field1C, 0x1C);
     BB_ASSERT_OFFSETOF(SMotionInfo, Field20, 0x20);
