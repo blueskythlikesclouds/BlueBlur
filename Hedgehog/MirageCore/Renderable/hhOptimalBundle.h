@@ -16,6 +16,11 @@ namespace Hedgehog::Mirage
         hh::vector<CRenderable*> m_RenderableList;
         hh::list<boost::anonymous_shared_ptr> m_FieldF4;
         hh::list<std::pair<boost::anonymous_shared_ptr, boost::anonymous_shared_ptr>> m_Field100;
+
+        COptimalBundle(); // 0x71B940
+
+        void AddRenderable(const boost::shared_ptr<CRenderable>& in_spRenderable);
+        void RemoveRenderable(const boost::shared_ptr<CRenderable>& in_spRenderable);
     };
 
     BB_ASSERT_OFFSETOF(COptimalBundle, m_FieldC, 0xC);
@@ -27,3 +32,5 @@ namespace Hedgehog::Mirage
     BB_ASSERT_OFFSETOF(COptimalBundle, m_Field100, 0x100);
     BB_ASSERT_SIZEOF(COptimalBundle, 0x10C);
 }
+
+#include <Hedgehog/MirageCore/Renderable/hhOptimalBundle.inl>

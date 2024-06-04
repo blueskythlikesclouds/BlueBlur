@@ -45,4 +45,11 @@ namespace Sonic
     {
         fpCGameObjectAddRenderable(this, in_Category, in_spRenderable, in_CastShadow);
     }
+
+    inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObjectRemoveRenderables, 0xD5EE50, CGameObject* This);
+
+    inline void CGameObject::RemoveRenderables()
+    {
+        fpCGameObjectRemoveRenderables(this);
+    }
 }
