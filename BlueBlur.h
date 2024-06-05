@@ -189,6 +189,10 @@
 #include <Sonic/Message/MsgSetRotation.h>
 #include <Sonic/Message/MsgSetVisible.h>
 #include <Sonic/Message/MsgStartHomingChase.h>
+#include <Sonic/Message/MsgActivateLayer.h>
+#include <Sonic/Message/MsgDeactivateLayer.h>
+#include <Sonic/Message/MsgRemakeAllSetObject.h>
+#include <Sonic/Message/MsgStartCommonButtonSign.h>
 #include <Sonic/Object/ObjectBase.h>
 #include <Sonic/Object/Common/ObjUpReel/ObjUpReel.h>
 #include <Sonic/Object/Common/ObjWallJumpBlock/ObjWallJumpBlock.h>
