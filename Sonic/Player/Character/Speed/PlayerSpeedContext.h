@@ -294,17 +294,16 @@ namespace Sonic::Player
         // The direction of the player's movement. Defaults to the player's forward direction at a standstill. Useful for impulses.
         Hedgehog::Math::CVector GetHorizontalMovementDirection();
 
-        Hedgehog::Math::CVector GetUpDirection() volatile;
-        Hedgehog::Math::CVector GetRightDirection() volatile;
-        Hedgehog::Math::CVector GetFrontDirection() volatile;
+        Hedgehog::Math::CVector GetUpDirection();
+        Hedgehog::Math::CVector GetRightDirection();
+        Hedgehog::Math::CVector GetFrontDirection();
 
-        float GetRotationSpeed() volatile;
-
+        float GetRotationSpeed();
         float GetRotationForce(
             const Hedgehog::Math::CVector& in_rFrontDirection,
-            const Hedgehog::Math::CVector& in_rTargetDirection) volatile;
+            const Hedgehog::Math::CVector& in_rTargetDirection);
 
-        void SetYawRotation(const Hedgehog::Math::CQuaternion& in_rRotation, bool in_UpdateMatrix = true) volatile;
+        void SetYawRotation(const Hedgehog::Math::CQuaternion& in_rRotation, bool in_UpdateMatrix = true);
         void SetYawRotation(float in_Angle, bool in_UpdateMatrix = true);
 
         float GetMaxChaosEnergy() const;
