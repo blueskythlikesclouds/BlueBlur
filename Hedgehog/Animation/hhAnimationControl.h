@@ -8,7 +8,7 @@ namespace Hedgehog::Animation
     {
     public:
         uint32_t m_Field4;
-        void* m_hkaDefaultAnimationControl;
+        hk2010_2_0::hkaDefaultAnimationControl* m_hkaDefaultAnimationControl;
         uint32_t m_FieldC;
         uint32_t m_PlaybackType;
         float m_Field14;

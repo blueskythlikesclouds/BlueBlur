@@ -26,6 +26,19 @@ namespace Hedgehog::Animation
         int32_t Field24 = -1;
         int32_t Field28 = -1;
         int32_t Field2C = -1;
+
+
+        SMotionInfo(const char* in_pName, const char* in_pFileName, float in_playbackSpeed, int32_t in_playbackType)
+            : Name(in_pName), FileName(in_pFileName), Speed(in_playbackSpeed), RepeatType(in_playbackType)
+        {}
+
+        SMotionInfo(const char* in_pName, const char* in_pFileName, int32_t in_playbackType)
+            : Name(in_pName), FileName(in_pFileName), Speed(1.0f), RepeatType(in_playbackType)
+        {}
+
+        SMotionInfo(const char* in_pName, const char* in_pFileName)
+            : Name(in_pName), FileName(in_pFileName), Speed(1.0f), RepeatType(eMotionRepeatType_Loop)
+        {}
     };
 
     BB_ASSERT_OFFSETOF(SMotionInfo, Name, 0x00);

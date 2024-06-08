@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Hedgehog/Base/Type/hhSharedString.h>
+#include <Hedgehog/Database/System/hhDatabaseData.h>
 #include <Hedgehog/MirageCore/Misc/hhPose.h>
 
 namespace Hedgehog::Database
@@ -37,7 +38,8 @@ namespace Hedgehog::Animation
     class alignas(0x10) CAnimationPose : public Mirage::CPose
     {
     public:
-        BB_INSERT_PADDING(0x2C) {};
+        BB_INSERT_PADDING(0x28) {};
+        bool m_Field2C;
         boost::shared_ptr<CAnimationSkeleton> m_spAnimationSkeleton; // 0x30
         hk2010_2_0::hkaAnimatedSkeleton* m_pHavokSkeleton{}; // 0x38
         Mirage::CInstanceInfo* m_pInstanceInfo{}; // 0x3C
