@@ -6,7 +6,9 @@
 
 #include <Hedgehog/Animation/hhAnimationControl.h>
 #include <Hedgehog/Animation/hhAnimationControlSingle.h>
+#include <Hedgehog/Animation/hhAnimationData.h>
 #include <Hedgehog/Animation/hhAnimationPose.h>
+#include <Hedgehog/Animation/hhAnimationSkeleton.h>
 #include <Hedgehog/Animation/hhMotionInfo.h>
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/hhRefCountObject.h>
@@ -108,6 +110,8 @@
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineBase.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineMessageReceiver.h>
+#include <Hedgehog/Universe/Engine/hhTinyStateMachine.h>
+#include <Hedgehog/Universe/Engine/hhTinyStateMachineBase.h>
 #include <Hedgehog/Universe/Engine/hhUpdateInfo.h>
 #include <Hedgehog/Universe/Engine/hhUpdateManager.h>
 #include <Hedgehog/Universe/Engine/hhUpdateUnit.h>
@@ -242,6 +246,8 @@
 #include <Sonic/Tool/EditParam/FuncList.h>
 #include <Sonic/Tool/EditParam/ParamBase.h>
 #include <Sonic/Tool/EditParam/ParamBool.h>
+#include <Sonic/Tool/EditParam/ParamPosition.h>
+#include <Sonic/Tool/EditParam/ParamRotation.h>
 #include <Sonic/Tool/EditParam/ParamTypeList.h>
 #include <Sonic/Tool/EditParam/ParamValue.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameter.h>
