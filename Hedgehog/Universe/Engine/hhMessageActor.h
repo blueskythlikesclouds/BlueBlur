@@ -41,10 +41,13 @@ namespace Hedgehog::Universe
 
         // Custom implementation that passes in a message on the *stack* if it's immediate. Much faster.
         bool SendMessageImm(CMessageActor* in_pActor, Message& in_rMsg) const;
+        bool SendMessageImm(CMessageActor* in_pActor, const Message& in_rMsg) const;
 
         bool SendMessageImm(const uint32_t in_ActorID, Message& in_rMsg) const;
+        bool SendMessageImm(const uint32_t in_ActorID, const Message& in_rMsg) const;
 
         bool SendMessageSelfImm(Message& in_rMsg);
+        bool SendMessageSelfImm(const Message& in_rMsg);
 
         template<typename T>
         bool SendMessageSelfImm();
