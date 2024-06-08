@@ -169,4 +169,22 @@ namespace Sonic
     {
         return CreateParamTypeList<std::vector<SParamEnumValue>>(pValue, in_rName, in_rDescription, in_rValues);
     }
+
+    inline void* pCEditParamAddParamBase = (void*)0xCEF700;
+    inline void fCEditParamAddParamBase(CEditParam* in_pEditParam, Sonic::CParamBase* param, const Hedgehog::Base::CSharedString& name)
+    {
+        __asm
+        {
+            mov eax, name
+            mov ecx, in_pEditParam
+            push param
+            call[pCEditParamAddParamBase]
+        }
+    }
+
+    inline void CEditParam::CreateParamBase(CParamBase* param, const Hedgehog::Base::CSharedString& name)
+    {
+        fCEditParamAddParamBase(this, param, name);
+    }
+
 }
