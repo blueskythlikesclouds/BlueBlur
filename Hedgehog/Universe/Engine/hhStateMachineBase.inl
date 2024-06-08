@@ -42,7 +42,7 @@ namespace Hedgehog::Universe
 
     inline void CStateMachineBase::CStateBase::HoldPropertyFloat(const hh::Base::CSharedString& in_rName, float in_Value)
     {
-        HoldPropertyFloat(in_rName, &in_pValue);
+        HoldPropertyFloat(in_rName, &in_Value);
     }
 
 
@@ -67,7 +67,7 @@ namespace Hedgehog::Universe
 
     inline void CStateMachineBase::CStateBase::HoldPropertyBool(const hh::Base::CSharedString& in_rName, bool in_Value)
     {
-        HoldPropertyBool(in_rName, &in_pValue);
+        HoldPropertyBool(in_rName, &in_Value);
     }
 
 

@@ -1,6 +1,6 @@
 ﻿namespace Sonic
 {
-    inline void CAnimationState::SetTransitionState(const Hedgehog::Base::CSharedString& in_rTargetStateName, bool in_IsTransition = true, float in_Unknown01 = -1.0f)
+    inline void CAnimationState::SetTransitionState(const Hedgehog::Base::CSharedString& in_rTargetStateName, bool in_IsTransition, float in_Unknown01)
     {
         m_TransitionState = in_rTargetStateName;
         m_Field90 = in_IsTransition;
