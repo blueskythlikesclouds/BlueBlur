@@ -4,6 +4,8 @@
 
 namespace Hedgehog::Mirage
 {
+    class CMatrixNodeListener;
+
     class CMatrixNode : public Base::CObject
     {
     public:
@@ -17,6 +19,9 @@ namespace Hedgehog::Mirage
         virtual const Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
         virtual const Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
 
+        void SetParent(CMatrixNode* in_pParentNode);
+        void SetChild(CMatrixNode* in_pChildNode);
+        void BindListener(CMatrixNodeListener* in_pListener);
         void NotifyChanged();
     };
 
