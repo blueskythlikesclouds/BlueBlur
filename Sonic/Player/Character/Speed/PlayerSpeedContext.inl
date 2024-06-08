@@ -19,7 +19,7 @@ namespace Sonic::Player
 
     inline uint32_t pCPlayerSpeedContextHandleVelocityChanged = 0xE4F100;
 
-    inline void fpCPlayerSpeedContextHandleVelocityChanged(CPlayerSpeedContext* This)
+    static void __declspec(noinline) fpCPlayerSpeedContextHandleVelocityChanged(CPlayerSpeedContext* This)
     {
         __asm
         {
@@ -127,7 +127,7 @@ namespace Sonic::Player
     }
 
     inline uint32_t pCPlayerSpeedContextGetUpDirection = 0xE71FB0;
-    inline void fCPlayerSpeedContextGetUpDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
+    static void __declspec(noinline) fCPlayerSpeedContextGetUpDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
     {
         __asm
         {
@@ -146,7 +146,7 @@ namespace Sonic::Player
     }
 
     inline uint32_t pCPlayerSpeedContextGetRightDirection = 0xE72070;
-    inline void fCPlayerSpeedContextGetRightDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
+    static void __declspec(noinline) fCPlayerSpeedContextGetRightDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
     {
         __asm
         {
@@ -165,7 +165,7 @@ namespace Sonic::Player
     }
 
     inline uint32_t pCPlayerSpeedContextGetFrontDirection = 0xE72010;
-    inline void fCPlayerSpeedContextGetFrontDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
+    static void __declspec(noinline) fCPlayerSpeedContextGetFrontDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
     {
         __asm
         {
@@ -184,7 +184,7 @@ namespace Sonic::Player
     }
 
     inline uint32_t pCPlayerSpeedContextGetRotationSpeed = 0xE547F0;
-    inline float fCPlayerSpeedContextGetRotationSpeed(const CPlayerSpeedContext* This)
+    static float fCPlayerSpeedContextGetRotationSpeed(const CPlayerSpeedContext* This)
     {
         volatile float result = 0.0f;
         __asm
@@ -203,7 +203,7 @@ namespace Sonic::Player
     }
 
     inline uint32_t pCPlayerSpeedContextGetRotationForce = 0xE53490;
-    inline float fCPlayerSpeedContextGetRotationForce(const CPlayerSpeedContext* This, const Hedgehog::Math::CVector& in_rFrontDirection,
+    static float fCPlayerSpeedContextGetRotationForce(const CPlayerSpeedContext* This, const Hedgehog::Math::CVector& in_rFrontDirection,
         const Hedgehog::Math::CVector& in_rTargetDirection)
     {
         volatile float result = 0.0f;
@@ -228,7 +228,7 @@ namespace Sonic::Player
 
     inline uint32_t pCPlayerSpeedContextSetYawRotation = 0xE51800;
 
-    inline void fCPlayerSpeedContextSetYawRotation(const CPlayerSpeedContext* This, const Hedgehog::Math::CQuaternion& in_rRotation,
+    static void __declspec(noinline) fCPlayerSpeedContextSetYawRotation(const CPlayerSpeedContext* This, const Hedgehog::Math::CQuaternion& in_rRotation,
         bool in_UpdateMatrix)
     {
         __asm
