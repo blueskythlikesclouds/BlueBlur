@@ -15,7 +15,25 @@ namespace Sonic
     {
     public:
         hk2010_2_0::hkpWorld* m_pHkpWorld;
-        BB_INSERT_PADDING(0x1CC);
+        hh::list<void*> m_List04;
+        hh::list<void*> m_List10;
+        BB_INSERT_PADDING(0x24);
+        Hedgehog::Math::CVector m_Field040;
+        Hedgehog::Math::CVector m_Field050;
+        char m_Field060;
+        char m_Field061;
+        char m_Field062;
+        BB_INSERT_PADDING(0x0C);
+        Hedgehog::Math::CVector m_WorldCenter;
+        int m_Field080;
+        BB_INSERT_PADDING(0x5C);
+        Hedgehog::Math::CVector m_Field0E0;
+        BB_INSERT_PADDING(0x10);
+        Hedgehog::Math::CVector m_Field100;
+        Hedgehog::Math::CVector m_Field110;
+        BB_INSERT_PADDING(0x08);
+        int m_pCollisionFilter;
+        BB_INSERT_PADDING(0xA0);
 
         bool CheckLineCollisionClosest(
             SCollisionHitPointInfo& out_rCollisionHitPointInfo,

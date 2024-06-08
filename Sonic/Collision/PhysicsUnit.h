@@ -46,12 +46,13 @@ namespace Sonic
         virtual void* GetCollider(void* a1) { return a1; }
         virtual void* fn02(void* a1) { return a1; }
         virtual void AddProperty(int in_Id, uint64_t* in_pValue) {}
-        virtual void fn04(int a1, int a2) {}
+        virtual void EditProperty(int in_Id, uint64_t* in_pValue) {}
         virtual void fn05(int a1, int a2) {}
         virtual void GetProperty(uint64_t* weird, int hash) {}
         virtual bool HasProperty(int hash) { return false; }
 
         void AddProperty(int id, int value);
+        void EditProperty(int id, int value);
 
         void AddBoolProperty(int hashedName, int id);
         bool GetBoolProperty(int id);

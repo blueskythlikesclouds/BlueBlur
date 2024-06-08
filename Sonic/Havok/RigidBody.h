@@ -27,6 +27,9 @@ namespace Sonic
         uint32_t m_Field10C;
 
         hk2010_2_0::hkpShape* GetShape() const;
+
+        BB_OVERRIDE_FUNCTION_PTR(bool, Hedgehog::Mirage::CMatrixNodeListener, MatrixNodeChangedCallback, 0x1180BE0,
+            (const Hedgehog::Math::CMatrix&, in_rMatrix), (size_t, in_Flags))
     };
 
     BB_ASSERT_OFFSETOF(CRigidBody, m_Field60, 0x60);
