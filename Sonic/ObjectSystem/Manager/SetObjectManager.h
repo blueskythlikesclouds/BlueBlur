@@ -8,7 +8,7 @@ namespace Sonic
     class CSetObjectManager
     {
     public:
-        class CSetObjectManagerMember
+        class CMember
         {
         public:
             BB_INSERT_PADDING(0x30);
@@ -19,13 +19,12 @@ namespace Sonic
             boost::shared_ptr<CSetObjectEventManager> m_spSetObjectEventManager;
         };
 
-        BB_ASSERT_OFFSETOF(CSetObjectManagerMember, m_spUserIDGroupCategoryManager, 0x38);
-        BB_ASSERT_OFFSETOF(CSetObjectManagerMember, m_spParameterBankManager, 0x40);
-        BB_ASSERT_OFFSETOF(CSetObjectManagerMember, m_spSetLayerManager, 0x50);
-        BB_ASSERT_OFFSETOF(CSetObjectManagerMember, m_spSetObjectEventManager, 0x58);
-
         BB_INSERT_PADDING(0xAC);
-        CSetObjectManagerMember* m_pMember;
+        CMember* m_pMember;
     };
     BB_ASSERT_OFFSETOF(CSetObjectManager, m_pMember, 0xAC);
+    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spUserIDGroupCategoryManager, 0x38);
+    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spParameterBankManager, 0x40);
+    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spSetLayerManager, 0x50);
+    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spSetObjectEventManager, 0x58);
 }
