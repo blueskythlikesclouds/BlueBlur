@@ -189,6 +189,10 @@
 #include <Sonic/Message/MsgSetRotation.h>
 #include <Sonic/Message/MsgSetVisible.h>
 #include <Sonic/Message/MsgStartHomingChase.h>
+#include <Sonic/Message/MsgActivateLayer.h>
+#include <Sonic/Message/MsgDeactivateLayer.h>
+#include <Sonic/Message/MsgRemakeAllSetObject.h>
+#include <Sonic/Message/MsgStartCommonButtonSign.h>
 #include <Sonic/Object/ObjectBase.h>
 #include <Sonic/Object/Common/ObjUpReel/ObjUpReel.h>
 #include <Sonic/Object/Common/ObjWallJumpBlock/ObjWallJumpBlock.h>
@@ -198,6 +202,7 @@
 #include <Sonic/ObjectSystem/SetObjectListener.h>
 #include <Sonic/ObjectSystem/ObjectUtility/ObjectEdgeEmissionEffect.h>
 #include <Sonic/ObjectSystem/Renderable/RopeRenderable.h>
+#include <Sonic/ObjectSystem/Manager/SetObjectManager.h>
 #include <Sonic/Platform/D3D9/ApplicationD3D9.h>
 #include <Sonic/Platform/PC/ApplicationPC.h>
 #include <Sonic/Player/Character/Base/Player.h>
