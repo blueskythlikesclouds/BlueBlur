@@ -9,9 +9,9 @@ namespace Sonic::Message
 	public:
 		HH_FND_MSG_MAKE_TYPE(0x0167F0D4);
 		Hedgehog::Base::CSharedString m_SetLayerName;
-		MsgDeactivatelayer(const Hedgehog::Base::CSharedString& in_rSetLayerName) : m_SetLayerName(in_rSetLayerName) {}
+		MsgDeactivateLayer(const Hedgehog::Base::CSharedString& in_rSetLayerName) : m_SetLayerName(in_rSetLayerName) {}
 	};
 
-	BB_ASSERT_OFFSETOF(MsgDeactivatelayer, m_SetLayerName, 0x10);
-	BB_ASSERT_SIZEOF(MsgDeactivatelayer, 0x14);
+	BB_ASSERT_OFFSETOF(MsgDeactivateLayer, m_SetLayerName, 0x10);
+	BB_ASSERT_SIZEOF(MsgDeactivateLayer, 0x14);
 }

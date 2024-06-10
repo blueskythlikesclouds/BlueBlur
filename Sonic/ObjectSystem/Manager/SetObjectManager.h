@@ -23,8 +23,8 @@ namespace Sonic
         CMember* m_pMember;
     };
     BB_ASSERT_OFFSETOF(CSetObjectManager, m_pMember, 0xAC);
-    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spUserIDGroupCategoryManager, 0x38);
-    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spParameterBankManager, 0x40);
+    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spUserIDGroupCategoryManager, 0x30);
+    BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spParameterBankManager, 0x38);
     BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spSetLayerManager, 0x50);
     BB_ASSERT_OFFSETOF(CSetObjectManager::CMember, m_spSetObjectEventManager, 0x58);
 }
