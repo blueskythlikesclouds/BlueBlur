@@ -21,8 +21,8 @@ namespace Sonic
         virtual void CSetObjectListener14(void*) {}
         virtual void CSetObjectListener18() {}
         virtual void CSetObjectListener1C(void*) {}
-        virtual void OnSetEditorStart() {}
-        virtual void OnSetEditorEnd() {}
+        virtual void OnEditEnter() {}
+        virtual void OnEditExit() {}
         virtual void CSetObjectListener28() {}
         virtual void CSetObjectListener2C() {}
         virtual void CSetObjectListener30(void*) {}
