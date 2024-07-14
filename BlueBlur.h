@@ -227,6 +227,7 @@
 #include <Sonic/Player/Parameter/SonicSpParameter.h>
 #include <Sonic/System/Application.h>
 #include <Sonic/System/ApplicationDocument.h>
+#include <Sonic/System/GameParameter.h>
 #include <Sonic/System/BGMData.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>
