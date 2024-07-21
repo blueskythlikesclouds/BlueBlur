@@ -21,6 +21,9 @@ namespace Hedgehog::Motion
         hh::vector<CTexpatternMotion> m_TexpatternMotionList;
         hh::vector<CVisibilityMotion> m_VisibilityMotionList;
         hh::vector<CMorphMotion> m_MorphMotionList;
+
+        CSingleElementEffectMotionAll(); // 0x7536F0
+        ~CSingleElementEffectMotionAll(); // 0x753650
     };
 
     BB_ASSERT_OFFSETOF(CSingleElementEffectMotionAll, m_IsInForeground, 0x40);

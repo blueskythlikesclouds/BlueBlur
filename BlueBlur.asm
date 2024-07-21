@@ -103,6 +103,14 @@
     mov eax, 6FA910h
     jmp eax
 
+??0CSingleElementEffectMotionAll@Motion@Hedgehog@@QAE@XZ:
+    mov eax, 7536F0h
+    jmp eax
+
+??1CSingleElementEffectMotionAll@Motion@Hedgehog@@UAE@XZ:
+    mov eax, 753650h
+    jmp eax
+
 public ??1CMessageActor@Universe@Hedgehog@@UAE@XZ
 public ??1CUpdateUnit@Universe@Hedgehog@@UAE@XZ
 public ??1CStateBase@CStateMachineBase@Universe@Hedgehog@@UAE@XZ
@@ -123,5 +131,7 @@ public ??0CDecompressCAB@Database@Hedgehog@@QAE@XZ
 public ??1CDecompressCAB@Database@Hedgehog@@QAE@XZ
 public ??0COptimalBundle@Mirage@Hedgehog@@QAE@XZ
 public ??0CBundle@Mirage@Hedgehog@@QAE@XZ
+public ??0CSingleElementEffectMotionAll@Motion@Hedgehog@@QAE@XZ
+public ??1CSingleElementEffectMotionAll@Motion@Hedgehog@@UAE@XZ
 
 end
