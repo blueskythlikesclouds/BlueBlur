@@ -16,7 +16,7 @@ namespace Sonic::Message
         BB_INSERT_PADDING(0x4);
         float m_JumpMinVelocity;
         float m_JumpMaxVelocity;
-        float m_Score;
+        int32_t m_Score;
         BB_INSERT_PADDING(0xC);
     };
 
