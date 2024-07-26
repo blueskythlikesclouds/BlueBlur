@@ -57,6 +57,8 @@ namespace Sonic
 
         CParamTypeList* CreateParamTypeList(uint32_t* pValue, const Hedgehog::Base::CSharedString& in_rName,
             const Hedgehog::Base::CSharedString& in_rDescription, const std::vector<SParamEnumValue>& in_rValues);
+
+        void CreateParamBase(CParamBase* param, const Hedgehog::Base::CSharedString& name);
     };
 
     BB_ASSERT_OFFSETOF(CEditParam, m_ParamList, 0x8);

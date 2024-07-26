@@ -11,6 +11,17 @@ namespace Sonic
         AddProperty(id, (uint64_t*)&data);
     }
 
+    inline void CPhysicsUnit::EditProperty(int id, int value)
+    {
+        struct
+        {
+            int value;
+            int buffer;
+        } data;
+        data.value = value;
+        EditProperty(id, (uint64_t*)&data);
+    }
+
     inline void CPhysicsUnit::AddBoolProperty(int hashedName, int id)
     {
         if (!HasProperty(hashedName))

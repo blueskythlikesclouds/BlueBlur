@@ -23,32 +23,53 @@ namespace Hedgehog::Universe
     }
 
     inline uint32_t pCStateBaseHoldPropertyFloatFuncAddr = 0x50DFB0;
-
-    inline void CStateMachineBase::CStateBase::HoldPropertyFloat(const hh::Base::CSharedString& in_rName,
-        const float* in_pValue) volatile
+    inline void fCStateBaseHoldPropertyFloat(const CStateMachineBase::CStateBase* This, const hh::Base::CSharedString& in_rName, const float* in_pValue)
     {
         __asm
         {
-            mov eax, this
+            mov eax, This
             mov edi, in_rName
             push in_pValue
-            call pCStateBaseHoldPropertyFloatFuncAddr
+            call[pCStateBaseHoldPropertyFloatFuncAddr]
         }
     }
 
-    inline uint32_t ppCStateBaseHoldPropertyBoolFuncAddr = 0x50DD40;
+    inline void CStateMachineBase::CStateBase::HoldPropertyFloat(const hh::Base::CSharedString& in_rName, const float* in_pValue)
+    {
+        fCStateBaseHoldPropertyFloat(this, in_rName, in_pValue);
+    }
 
-    inline void CStateMachineBase::CStateBase::HoldPropertyBool(const hh::Base::CSharedString& in_rName,
-        const bool* in_pValue) volatile
+
+    inline void CStateMachineBase::CStateBase::HoldPropertyFloat(const hh::Base::CSharedString& in_rName, float in_Value)
+    {
+        HoldPropertyFloat(in_rName, &in_Value);
+    }
+
+
+    inline uint32_t pCStateBaseHoldPropertyBoolFuncAddr = 0x50DD40;
+
+    inline void fCStateBaseHoldPropertyBool(const CStateMachineBase::CStateBase* This, const hh::Base::CSharedString& in_rName, const bool* in_pValue)
     {
         __asm
         {
-            mov eax, this
+            mov eax, This
             mov edi, in_rName
             push in_pValue
-            call ppCStateBaseHoldPropertyBoolFuncAddr
+            call pCStateBaseHoldPropertyBoolFuncAddr
         }
     }
+
+    inline void CStateMachineBase::CStateBase::HoldPropertyBool(const hh::Base::CSharedString& in_rName, const bool* in_pValue)
+    {
+        fCStateBaseHoldPropertyBool(this, in_rName, in_pValue);
+    }
+
+
+    inline void CStateMachineBase::CStateBase::HoldPropertyBool(const hh::Base::CSharedString& in_rName, bool in_Value)
+    {
+        HoldPropertyBool(in_rName, &in_Value);
+    }
+
 
     inline BB_FUNCTION_PTR(void, __thiscall, fpCStateMachineBaseCtor, 0x76E3C0,
         CStateMachineBase* This);

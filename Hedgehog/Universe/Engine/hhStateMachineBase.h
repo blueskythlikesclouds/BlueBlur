@@ -49,8 +49,10 @@ namespace Hedgehog::Universe
 
             float GetDeltaTime() const;
 
-            __declspec(noinline) void HoldPropertyFloat(const hh::Base::CSharedString& in_rName, const float* in_pValue) volatile;
-            __declspec(noinline) void HoldPropertyBool(const hh::Base::CSharedString& in_rName, const bool* in_pValue) volatile;
+            void HoldPropertyFloat(const hh::Base::CSharedString& in_rName, const float* in_pValue);
+            void HoldPropertyBool(const hh::Base::CSharedString& in_rName, const bool* in_pValue);
+            void HoldPropertyFloat(const hh::Base::CSharedString& in_rName, float in_Value);
+            void HoldPropertyBool(const hh::Base::CSharedString& in_rName, bool in_Value);
         };
 
         class CInterpolateStrategy;

@@ -14,6 +14,17 @@ namespace Hedgehog::Mirage
 {
     class CRenderingInfrastructure;
 }
+
+// TODO: Migrate
+namespace Hedgehog::Universe
+{
+    class CService
+    {
+    public:
+        virtual ~CService() = default;
+    };
+};
+
 namespace Sonic::Sequence
 {
     class CSequenceMainImpl;
@@ -23,6 +34,13 @@ namespace Sonic
     class CApplication;
     class CParameterEditor;
     class CGameParameter;
+
+    // Todo: Migrate
+    class CServiceGamePlay : public Hedgehog::Universe::CService
+    {
+    public:
+        int m_PlayerID;
+    };
 
     class CApplicationDocument : public Hedgehog::Base::CSynchronizedObject
     {
@@ -64,6 +82,7 @@ namespace Sonic
         BB_INSERT_PADDING(0x38);
 
         void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor);
+        CServiceGamePlay* GetServiceGamePlay();
     };
 
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_pApplication, 0x14);

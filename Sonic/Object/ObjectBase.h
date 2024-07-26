@@ -4,14 +4,25 @@
 
 namespace Sonic
 {
+    class CGlitterPlayer;
+
     class CObjectBase : public CGameObject3D
     {
     public:
+        struct SElementInfo
+        {
+            boost::shared_ptr<Hedgehog::Mirage::CSingleElement> spElement;
+            bool IsValid = false;
+            size_t Flag = 0;
+
+            SElementInfo(boost::shared_ptr<Hedgehog::Mirage::CSingleElement>& in_spElement) : spElement(in_spElement) {}
+        };
+
         size_t m_FieldF4;
-        size_t m_FieldF8;
+        Sonic::CGlitterPlayer* m_pGlitterPlayer;
         size_t m_FieldFC;
 
-        CObjectBase() : CGameObject3D(), m_FieldF4(0), m_FieldF8(0), m_FieldFC(0) {}
+        CObjectBase() : CGameObject3D(), m_FieldF4(0), m_pGlitterPlayer(nullptr), m_FieldFC(0) {}
         CObjectBase(const bb_null_ctor& nil) : CGameObject3D(nil) {}
 
         BB_OVERRIDE_FUNCTION_PTR(bool, CMessageActor, ProcessMessage, 0x1058D00, 
@@ -26,7 +37,7 @@ namespace Sonic
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0x1058B00, (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder),
             (Sonic::CGameDocument*, in_pGameDocument), (const boost::shared_ptr<Hedgehog::Database::CDatabase>&, in_spDatabase))
 
-        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, CGameObject24, 0x1058960, (void*, A1))
+        BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, DeathCallback, 0x1058960, (Sonic::CGameDocument*, in_pGameDocument))
 
         virtual void CObjectBase5C() {}
 
@@ -47,12 +58,12 @@ namespace Sonic
 
         virtual void CObjectBase8C() {}
 
-        bool AddRenderable(const char* in_pModelName, const boost::shared_ptr<Hedgehog::Mirage::CSingleElement>& out_spSingleElement,
+        bool AddRenderable(const char* in_pModelName, SElementInfo& out_spElementInfo,
             const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& in_rMatrixNode, const boost::shared_ptr<Hedgehog::Database::CDatabase>& in_spDatabase);
     };
 
     BB_ASSERT_OFFSETOF(CObjectBase, m_FieldF4, 0xF4);
-    BB_ASSERT_OFFSETOF(CObjectBase, m_FieldF8, 0xF8);
+    BB_ASSERT_OFFSETOF(CObjectBase, m_pGlitterPlayer, 0xF8);
     BB_ASSERT_OFFSETOF(CObjectBase, m_FieldFC, 0xFC);
     BB_ASSERT_SIZEOF(CObjectBase, 0x100);
 }

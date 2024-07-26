@@ -19,7 +19,7 @@ namespace Sonic::Player
 
     inline uint32_t pCPlayerSpeedContextHandleVelocityChanged = 0xE4F100;
 
-    inline void fpCPlayerSpeedContextHandleVelocityChanged(CPlayerSpeedContext* This)
+    static void __declspec(noinline) fpCPlayerSpeedContextHandleVelocityChanged(CPlayerSpeedContext* This)
     {
         __asm
         {
@@ -126,81 +126,85 @@ namespace Sonic::Player
         return horizontalVelocity.normalized();
     }
 
-    inline uint32_t pCPlayerSpeedContextGetUpDirectionFuncAddr = 0xE71FB0;
-
-    inline Hedgehog::Math::CVector CPlayerSpeedContext::GetUpDirection() volatile
+    inline uint32_t pCPlayerSpeedContextGetUpDirection = 0xE71FB0;
+    static void __declspec(noinline) fCPlayerSpeedContextGetUpDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
     {
-        volatile Hedgehog::Math::CVector result;
-        volatile uint32_t pResult = reinterpret_cast<uint32_t>(&result);
-
         __asm
         {
-            mov eax, this
-            mov esi, result
-            call [pCPlayerSpeedContextGetUpDirectionFuncAddr]
-            mov result, eax
+            mov eax, This
+            mov esi, in_pVector
+            call[pCPlayerSpeedContextGetUpDirection]
+            mov in_pVector, eax
         }
-
-        return *(Hedgehog::Math::CVector*)pResult;
     }
 
-    inline uint32_t pCPlayerSpeedContextGetRightDirectionFuncAddr = 0xE72070;
-
-    inline Hedgehog::Math::CVector CPlayerSpeedContext::GetRightDirection() volatile
+    inline Hedgehog::Math::CVector CPlayerSpeedContext::GetUpDirection()
     {
-        volatile Hedgehog::Math::CVector result;
-        volatile uint32_t pResult = reinterpret_cast<uint32_t>(&result);
+        Hedgehog::Math::CVector result = Hedgehog::Math::CVector::Zero();
+        fCPlayerSpeedContextGetUpDirection(this, &result);
+        return result;
+    }
 
+    inline uint32_t pCPlayerSpeedContextGetRightDirection = 0xE72070;
+    static void __declspec(noinline) fCPlayerSpeedContextGetRightDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
+    {
         __asm
         {
-            mov eax, this
-            mov esi, result
-            call [pCPlayerSpeedContextGetRightDirectionFuncAddr]
-            mov result, eax
+            mov eax, This
+            mov esi, in_pVector
+            call[pCPlayerSpeedContextGetRightDirection]
+            mov in_pVector, eax
         }
-
-        return *(Hedgehog::Math::CVector*)pResult;
     }
 
-    inline uint32_t pCPlayerSpeedContextGetFrontDirectionFuncAddr = 0xE72010;
-
-    inline Hedgehog::Math::CVector CPlayerSpeedContext::GetFrontDirection() volatile
+    inline Hedgehog::Math::CVector CPlayerSpeedContext::GetRightDirection()
     {
-        volatile Hedgehog::Math::CVector result;
-        volatile uint32_t pResult = reinterpret_cast<uint32_t>(&result);
+        Hedgehog::Math::CVector result = Hedgehog::Math::CVector::Zero();
+        fCPlayerSpeedContextGetRightDirection(this, &result);
+        return result;
+    }
 
+    inline uint32_t pCPlayerSpeedContextGetFrontDirection = 0xE72010;
+    static void __declspec(noinline) fCPlayerSpeedContextGetFrontDirection(const CPlayerSpeedContext* This, Hedgehog::Math::CVector* in_pVector)
+    {
         __asm
         {
-            mov eax, this
-            mov esi, result
-            call [pCPlayerSpeedContextGetFrontDirectionFuncAddr]
-            mov result, eax
+            mov eax, This
+            mov esi, in_pVector
+            call[pCPlayerSpeedContextGetFrontDirection]
+            mov in_pVector, eax
         }
-
-        return *(Hedgehog::Math::CVector*)pResult;
     }
 
-    inline uint32_t pCPlayerSpeedContextGetRotationSpeedFuncAddr = 0xE547F0;
-
-    inline float CPlayerSpeedContext::GetRotationSpeed() volatile
+    inline Hedgehog::Math::CVector CPlayerSpeedContext::GetFrontDirection()
     {
-        static uint32_t func = 0x00E547F0;
+        Hedgehog::Math::CVector result = Hedgehog::Math::CVector::Zero();
+        fCPlayerSpeedContextGetFrontDirection(this, &result);
+        return result;
+    }
+
+    inline uint32_t pCPlayerSpeedContextGetRotationSpeed = 0xE547F0;
+    static float fCPlayerSpeedContextGetRotationSpeed(const CPlayerSpeedContext* This)
+    {
         volatile float result = 0.0f;
-
         __asm
         {
-            mov esi, this
-            call [pCPlayerSpeedContextGetRotationSpeedFuncAddr]
+            mov esi, This
+            call[pCPlayerSpeedContextGetRotationSpeed]
             movss dword ptr[result], xmm0
         }
 
         return result;
     }
 
-    inline uint32_t pCPlayerSpeedContextGetRotationForceFuncAddr = 0xE53490;
+    inline float CPlayerSpeedContext::GetRotationSpeed()
+    {
+        return fCPlayerSpeedContextGetRotationSpeed(this);
+    }
 
-    inline float CPlayerSpeedContext::GetRotationForce(const Hedgehog::Math::CVector& in_rFrontDirection,
-        const Hedgehog::Math::CVector& in_rTargetDirection) volatile
+    inline uint32_t pCPlayerSpeedContextGetRotationForce = 0xE53490;
+    static float fCPlayerSpeedContextGetRotationForce(const CPlayerSpeedContext* This, const Hedgehog::Math::CVector& in_rFrontDirection,
+        const Hedgehog::Math::CVector& in_rTargetDirection)
     {
         volatile float result = 0.0f;
 
@@ -208,27 +212,39 @@ namespace Sonic::Player
         {
             push in_rTargetDirection
             mov edi, in_rFrontDirection
-            mov eax, this
-            call[pCPlayerSpeedContextGetRotationForceFuncAddr]
+            mov eax, This
+            call[pCPlayerSpeedContextGetRotationForce]
             movss dword ptr[result], xmm0
         }
 
         return result;
     }
 
-    inline uint32_t pCPlayerSpeedContextSetYawRotationFuncAddr = 0xE51800;
+    inline float CPlayerSpeedContext::GetRotationForce(const Hedgehog::Math::CVector& in_rFrontDirection,
+        const Hedgehog::Math::CVector& in_rTargetDirection)
+    {
+        fCPlayerSpeedContextGetRotationForce(this, in_rFrontDirection, in_rTargetDirection);
+    }
 
-    inline void CPlayerSpeedContext::SetYawRotation(const Hedgehog::Math::CQuaternion& in_rRotation,
-        bool in_UpdateMatrix) volatile
+    inline uint32_t pCPlayerSpeedContextSetYawRotation = 0xE51800;
+
+    static void __declspec(noinline) fCPlayerSpeedContextSetYawRotation(const CPlayerSpeedContext* This, const Hedgehog::Math::CQuaternion& in_rRotation,
+        bool in_UpdateMatrix)
     {
         __asm
         {
             movzx eax, in_UpdateMatrix
             push eax
             mov ecx, in_rRotation
-            mov eax, this
-            call [pCPlayerSpeedContextSetYawRotationFuncAddr]
+            mov eax, This
+            call [pCPlayerSpeedContextSetYawRotation]
         }
+    }
+
+    inline void CPlayerSpeedContext::SetYawRotation(const Hedgehog::Math::CQuaternion& in_rRotation,
+        bool in_UpdateMatrix)
+    {
+        fCPlayerSpeedContextSetYawRotation(this, in_rRotation, in_UpdateMatrix);
     }
 
     inline void CPlayerSpeedContext::SetYawRotation(float in_Angle, bool in_UpdateMatrix)

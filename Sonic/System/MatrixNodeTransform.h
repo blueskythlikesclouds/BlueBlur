@@ -13,9 +13,6 @@ namespace Sonic
 
         CMatrixNodeTransform();
 
-        void SetParent(CMatrixNode* in_pParentNode);
-        void SetChild(CMatrixNode* in_pChildNode);
-
         void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) override;
 
         const Hedgehog::Math::CMatrix& GetLocalMatrix() const override;

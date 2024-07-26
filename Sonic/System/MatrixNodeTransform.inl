@@ -16,19 +16,6 @@ namespace Sonic
         fCMatrixNodeTransformCtor(this);
     }
 
-    inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeTransformSetChild, 0x6F46B0,
-        Hedgehog::Mirage::CMatrixNode* This, Hedgehog::Mirage::CMatrixNode* in_pChildMatrixNode);
-
-    inline void CMatrixNodeTransform::SetParent(CMatrixNode* in_pParentNode)
-    {
-        fpCMatrixNodeTransformSetChild(in_pParentNode, this);
-    }
-
-    inline void CMatrixNodeTransform::SetChild(CMatrixNode* in_pChildNode)
-    {
-        fpCMatrixNodeTransformSetChild(this, in_pChildNode);
-    }
-
     inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeTransformUpdateMatrix, 0xD17170,
         Hedgehog::Mirage::CMatrixNode* This, Hedgehog::Mirage::CMatrixNode* in_pParentMatrixNode);
 
