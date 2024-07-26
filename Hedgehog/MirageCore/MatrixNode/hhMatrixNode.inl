@@ -27,11 +27,11 @@ namespace Hedgehog::Mirage
         fpCMatrixNodeSetChild(this, in_pChildNode);
     }
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeBindToNodeListener, 0x6F4310,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeAddListener, 0x6F4310,
         Hedgehog::Mirage::CMatrixNode* This, Hedgehog::Mirage::CMatrixNodeListener* in_pListener);
 
-    inline void CMatrixNode::BindListener(CMatrixNodeListener* in_pListener)
+    inline void CMatrixNode::AddListener(CMatrixNodeListener* in_pListener)
     {
-        fpCMatrixNodeBindToNodeListener(this, in_pListener);
+        fpCMatrixNodeAddListener(this, in_pListener);
     }
 }

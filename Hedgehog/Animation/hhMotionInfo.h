@@ -12,8 +12,8 @@ namespace Hedgehog::Animation
 
     struct SMotionInfo
     {
-        const char* Name;
-        const char* FileName;
+        const char* pName;
+        const char* pFileName;
         float Speed = 1.0f;
         int32_t RepeatType = eMotionRepeatType_Loop;
         float StartFrame = 0.0f;
@@ -28,21 +28,21 @@ namespace Hedgehog::Animation
         int32_t Field2C = -1;
 
 
-        SMotionInfo(const char* in_pName, const char* in_pFileName, float in_playbackSpeed, int32_t in_playbackType)
-            : Name(in_pName), FileName(in_pFileName), Speed(in_playbackSpeed), RepeatType(in_playbackType)
+        SMotionInfo(const char* in_pName, const char* in_pFileName, float in_Speed, int32_t in_RepeatType)
+            : pName(in_pName), pFileName(in_pFileName), Speed(in_Speed), RepeatType(in_RepeatType)
         {}
 
-        SMotionInfo(const char* in_pName, const char* in_pFileName, int32_t in_playbackType)
-            : Name(in_pName), FileName(in_pFileName), Speed(1.0f), RepeatType(in_playbackType)
+        SMotionInfo(const char* in_pName, const char* in_pFileName, int32_t in_RepeatType)
+            : pName(in_pName), pFileName(in_pFileName), RepeatType(in_RepeatType)
         {}
 
         SMotionInfo(const char* in_pName, const char* in_pFileName)
-            : Name(in_pName), FileName(in_pFileName), Speed(1.0f), RepeatType(eMotionRepeatType_Loop)
+            : pName(in_pName), pFileName(in_pFileName)
         {}
     };
 
-    BB_ASSERT_OFFSETOF(SMotionInfo, Name, 0x00);
-    BB_ASSERT_OFFSETOF(SMotionInfo, FileName, 0x04);
+    BB_ASSERT_OFFSETOF(SMotionInfo, pName, 0x00);
+    BB_ASSERT_OFFSETOF(SMotionInfo, pFileName, 0x04);
     BB_ASSERT_OFFSETOF(SMotionInfo, Speed, 0x08);
     BB_ASSERT_OFFSETOF(SMotionInfo, RepeatType, 0x0C);
     BB_ASSERT_OFFSETOF(SMotionInfo, StartFrame, 0x10);

@@ -43,22 +43,6 @@ namespace Hedgehog::Universe
     inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorProcessMessage, 0x767D20,
         CMessageActor* This, Message& in_rMsg);
 
-    // Messages carry the actor ID of their sender meaning even if the message is discarded, it gets mutated and cannot be const.
-    // Maintainer wants to avoid const_cast, so here's a workaround.
-    // Note that the version of SendMessageImm that takes in a shared ptr takes in a *const* shared pointer,
-    // so... we're really not doing anything different here...
-
-    inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageActorProcessConstMessage, 0x767D20,
-        CMessageActor* This, const Message& in_rMsg);
-
-    static void __fastcall MessageSetActorID(Message& in_rMsg, const size_t in_ActorID)
-    {
-        in_rMsg.m_SenderActorID = in_ActorID;
-    }
-    static BB_FUNCTION_PTR(void, __fastcall, ConstMessageSetActorID, MessageSetActorID, const Message& in_rMsg, const size_t in_ActorID);
-
-    // ---------------------------------------------------------------------------------------------------------------------------------
-
     inline bool CMessageActor::SendMessageImm(CMessageActor* in_pActor, Message& in_rMsg) const
     {
         if (!m_pMessageManager)
@@ -72,19 +56,12 @@ namespace Hedgehog::Universe
 
         return fpCMessageActorProcessMessage(in_pActor, in_rMsg);
     }
+
     inline bool CMessageActor::SendMessageImm(CMessageActor* in_pActor, const Message& in_rMsg) const
     {
-        if (!m_pMessageManager)
-            return false;
-
-        if (!in_pActor)
-            return false;
-
-        if (!m_ActorIDCondition)
-            ConstMessageSetActorID(in_rMsg, m_ActorID);
-
-        return fpCMessageActorProcessConstMessage(in_pActor, in_rMsg);
+        return SendMessageImm(in_pActor, const_cast<Message&>(in_rMsg));
     }
+
     inline bool CMessageActor::SendMessageImm(const uint32_t in_ActorID, Message& in_rMsg) const
     {
         if (!m_pMessageManager)
@@ -99,19 +76,10 @@ namespace Hedgehog::Universe
 
         return SendMessageImm(pActor, in_rMsg);
     }
+
     inline bool CMessageActor::SendMessageImm(const uint32_t in_ActorID, const Message& in_rMsg) const
     {
-        if (!m_pMessageManager)
-            return false;
-
-        if (!in_ActorID)
-            return false;
-
-        CMessageActor* pActor = m_pMessageManager->GetMessageActor(in_ActorID);
-        if (!pActor)
-            return false;
-
-        return SendMessageImm(pActor, in_rMsg);
+        return SendMessageImm(in_ActorID, const_cast<Message&>(in_rMsg));
     }
 
     inline bool CMessageActor::SendMessageSelfImm(Message& in_rMsg)
@@ -121,16 +89,11 @@ namespace Hedgehog::Universe
 
         return fpCMessageActorProcessMessage(this, in_rMsg);
     }
+
     inline bool CMessageActor::SendMessageSelfImm(const Message& in_rMsg)
     {
-        if (!m_ActorIDCondition)
-            ConstMessageSetActorID(in_rMsg, m_ActorID);
-
-        return fpCMessageActorProcessConstMessage(this, in_rMsg);
+        return SendMessageSelfImm(const_cast<Message&>(in_rMsg));
     }
-
-    // Templated methods that might not work...
-    // ----------------------------------------
 
     template <typename T>
     bool CMessageActor::SendMessageSelfImm()

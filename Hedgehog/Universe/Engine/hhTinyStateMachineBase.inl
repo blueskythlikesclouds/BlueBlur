@@ -1,13 +1,14 @@
 namespace Hedgehog::Universe
 {
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCTinyStateMachineBaseCtor, 0x773410,
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCTinyStateMachineBaseCtor, 0x773410,
         CTinyStateMachineBase* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, ffpCTinyStateMachineBaseCStateBaseCtor, 0x772BA0, CTinyStateMachineBase::CStateBase* This);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpRegisterStateFactory, 0x773280,
+    inline BB_FUNCTION_PTR(void, __thiscall, ffpCTinyStateMachineBaseCStateBaseCtor, 0x772BA0, CTinyStateMachineBase::CStateBase* This);
+
+    inline BB_FUNCTION_PTR(void, __thiscall, fpRegisterStateFactory, 0x773280,
         CTinyStateMachineBase* This, Base::CSharedString in_Name, boost::function<boost::shared_ptr<CTinyStateMachineBase::CStateBase>()> in_Factory);
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpChangeState, 0x7731D0,
+    inline BB_FUNCTION_PTR(void, __thiscall, fpChangeState, 0x7731D0,
         CTinyStateMachineBase* This, boost::shared_ptr<CTinyStateMachineBase::CStateBase>& out_spState, Base::CSharedString in_Name);
 
     inline CTinyStateMachineBase::CStateBase::CStateBase() : CStateBase(bb_null_ctor{})
@@ -15,7 +16,7 @@ namespace Hedgehog::Universe
         ffpCTinyStateMachineBaseCStateBaseCtor(this);
     }
 
-    inline bool CTinyStateMachineBase::CStateBase::ProcessMessage(Message& message, bool flag)
+    inline bool CTinyStateMachineBase::CStateBase::ProcessMessage(Message& in_rMsg, bool in_Flag)
     {
         return false;
     }

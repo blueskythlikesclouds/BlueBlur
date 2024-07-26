@@ -5,7 +5,6 @@
 namespace Sonic
 {
     class CPhysicsWorld;
-    struct SCollisionHitPointInfo;
 
     class CRayCastCollision
     {
@@ -14,8 +13,6 @@ namespace Sonic
         void* m_pHkpAabbPhantom{};
 
         CRayCastCollision(const Hedgehog::Base::THolder<CWorld>& in_pWorldHolder);
-        bool CheckLineCollisionClosest(const size_t in_CollisionMask, const Hedgehog::Math::CVector& in_rRayStart,
-            const Hedgehog::Math::CVector& in_rRayEnd, SCollisionHitPointInfo* out_pHitInfo);
     };
 
     BB_ASSERT_OFFSETOF(CRayCastCollision, m_pPhysicsWorld, 0x0);

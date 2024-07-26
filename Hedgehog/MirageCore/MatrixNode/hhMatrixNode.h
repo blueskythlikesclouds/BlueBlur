@@ -21,7 +21,7 @@ namespace Hedgehog::Mirage
 
         void SetParent(CMatrixNode* in_pParentNode);
         void SetChild(CMatrixNode* in_pChildNode);
-        void BindListener(CMatrixNodeListener* in_pListener);
+        void AddListener(CMatrixNodeListener* in_pListener);
         void NotifyChanged();
     };
 

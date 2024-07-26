@@ -15,32 +15,21 @@ namespace Hedgehog::Mirage
     class CRenderingInfrastructure;
 }
 
-// TODO: Migrate
 namespace Hedgehog::Universe
 {
-    class CService
-    {
-    public:
-        virtual ~CService() = default;
-    };
-};
+    class CService;
+}
 
 namespace Sonic::Sequence
 {
     class CSequenceMainImpl;
 }
+
 namespace Sonic
 {
     class CApplication;
     class CParameterEditor;
     class CGameParameter;
-
-    // Todo: Migrate
-    class CServiceGamePlay : public Hedgehog::Universe::CService
-    {
-    public:
-        int m_PlayerID;
-    };
 
     class CApplicationDocument : public Hedgehog::Base::CSynchronizedObject
     {
@@ -79,10 +68,13 @@ namespace Sonic
         static Hedgehog::Base::TSynchronizedPtr<CApplicationDocument> GetInstance();
 
         CMember* m_pMember;
-        BB_INSERT_PADDING(0x38);
+        BB_INSERT_PADDING(0x2C);
+        hh::map<uint32_t, boost::shared_ptr<Hedgehog::Universe::CService>> m_ServiceMap;
 
         void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor);
-        CServiceGamePlay* GetServiceGamePlay();
+
+        template<typename T>
+        T* GetService() const;
     };
 
     BB_ASSERT_OFFSETOF(CApplicationDocument::CMember, m_pApplication, 0x14);
@@ -99,6 +91,7 @@ namespace Sonic
     BB_ASSERT_SIZEOF(CApplicationDocument::CMember, 0x230);
 
     BB_ASSERT_OFFSETOF(CApplicationDocument, m_pMember, 0x4);
+    BB_ASSERT_OFFSETOF(CApplicationDocument, m_ServiceMap, 0x34);
     BB_ASSERT_SIZEOF(CApplicationDocument, 0x40);
 }
 

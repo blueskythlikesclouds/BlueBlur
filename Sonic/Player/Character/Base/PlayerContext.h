@@ -76,16 +76,9 @@ namespace Sonic::Player
 
         size_t m_SuperRenderableActorID; // 0x1A0
 
-        // HACK: unaligned keyword doesn't work & this is basically a 64bit int at 0x1A4 for some reason.
-        // We can just make these private I guess, use a member function to access them.
-    private:
-        uint32_t m_SkillsP1; // 0x1A4
-        uint32_t m_SkillsP2; // 0x1A8
-    public:
-        uint64_t Skills()
-        {
-            return *(uint64_t*)&m_SkillsP1;
-        }
+#pragma pack(push, 1)
+        std::bitset<64> m_Skills;
+#pragma pack(pop)
 
         uint8_t m_Field1AC[172];
 

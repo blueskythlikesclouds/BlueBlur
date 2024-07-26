@@ -11,18 +11,10 @@ namespace Sonic
         m_pMember->m_pMessageManager->AddMessageActor(in_rCategory, in_pMessageActor);
     }
 
-    static constexpr int pCApplicationDocumentGetServiceGamePlay = 0x0040EBD0;
-    static CServiceGamePlay* fCApplicationDocumentGetServiceGamePlay(void* serviceMap)
+    template<typename T>
+    inline T* Sonic::CApplicationDocument::GetService() const
     {
-        __asm
-        {
-            mov edi, serviceMap
-            call[pCApplicationDocumentGetServiceGamePlay]
-        }
-    }
-
-    inline CServiceGamePlay* CApplicationDocument::GetServiceGamePlay()
-    {
-        return fCApplicationDocumentGetServiceGamePlay((char*)this + 0x34);
+        auto findResult = m_ServiceMap.find(T::ms_ID);
+        return findResult != m_ServiceMap.end() && findResult->second->Is<T>() ? static_cast<T*>(findResult->second.get()) : nullptr;
     }
 }

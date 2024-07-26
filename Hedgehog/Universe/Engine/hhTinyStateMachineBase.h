@@ -15,22 +15,23 @@ namespace Hedgehog::Universe
     class CTinyStateMachineBase : public IStateMachineMessageReceiver, public Base::CObject
     {
     public:
-        class CStateBase : public IMessageProcess, public CObject
+        class CStateBase : public IMessageProcess
         {
         public:
+            BB_INSERT_PADDING(0x4);
             void* m_pContext;
             CTinyStateMachineBase* m_pStateMachine;
             float m_Time;
-            char m_Halt;
+            uint8_t m_Halt;
             Base::CSharedString m_Name;
-            int m_Frame;
-            int m_Field020;
+            int32_t m_Frame;
+            int32_t m_Field20;
 
-            CStateBase(const bb_null_ctor& nil) : IMessageProcess(nil), CObject(nil) {}
+            CStateBase(const bb_null_ctor& nil) : IMessageProcess(nil) {}
 
             CStateBase();
 
-            virtual bool ProcessMessage(Message& message, bool flag);
+            virtual bool ProcessMessage(Message& in_rMsg, bool in_Flag);
 
             virtual ~CStateBase() = default;
 
@@ -41,14 +42,14 @@ namespace Hedgehog::Universe
             virtual const Base::CSharedString& GetName();
         };
 
-        int m_Field04;
-        int m_Field08;
-        int m_Field0C;
+        int32_t m_Field4;
+        int32_t m_Field8;
+        int32_t m_FieldC;
         void* m_pContext;
-        float m_CurrentTime;
+        float m_Time;
         SUpdateInfo m_UpdateInfo;
         boost::shared_ptr<CStateBase> m_spCurrentState;
-        char m_Field2C;
+        uint8_t m_Field2C;
 
         CTinyStateMachineBase(const bb_null_ctor& nil) : IStateMachineMessageReceiver(nil), CObject(nil) {}
 
@@ -72,11 +73,20 @@ namespace Hedgehog::Universe
     BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_pContext, 0x8);
     BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_pStateMachine, 0xC);
     BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_Time, 0x10);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_Halt, 0x14);
     BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_Name, 0x18);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_Frame, 0x1C);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase::CStateBase, m_Field20, 0x20);
     BB_ASSERT_SIZEOF(CTinyStateMachineBase::CStateBase, 0x24);
 
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_Field4, 0x4);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_Field8, 0x8);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_FieldC, 0xC);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_pContext, 0x10);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_Time, 0x14);
     BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_UpdateInfo, 0x18);
     BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_spCurrentState, 0x24);
+    BB_ASSERT_OFFSETOF(CTinyStateMachineBase, m_Field2C, 0x2C);
     BB_ASSERT_SIZEOF(CTinyStateMachineBase, 0x30);
 }
 

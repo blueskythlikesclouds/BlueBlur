@@ -108,6 +108,7 @@
 #include <Hedgehog/Universe/Engine/hhMessageActor.h>
 #include <Hedgehog/Universe/Engine/hhMessageManager.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
+#include <Hedgehog/Universe/Engine/hhService.h>
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineBase.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineMessageReceiver.h>
@@ -242,6 +243,7 @@
 #include <Sonic/System/InputState.h>
 #include <Sonic/System/MatrixNodeTransform.h>
 #include <Sonic/System/PadState.h>
+#include <Sonic/System/ServiceGamePlay.h>
 #include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>
 #include <Sonic/System/GameplayFlow/GameActParameter.h>
