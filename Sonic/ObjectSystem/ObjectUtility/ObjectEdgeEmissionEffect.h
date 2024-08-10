@@ -25,4 +25,4 @@ namespace Sonic
     BB_ASSERT_SIZEOF(CObjectEdgeEmissionEffect, 0x50);
 }
 
-#include <Sonic/ObjectSystem/ObjectUtility/CObjectEdgeEmissionEffect.inl>
+#include <Sonic/ObjectSystem/ObjectUtility/ObjectEdgeEmissionEffect.inl>
