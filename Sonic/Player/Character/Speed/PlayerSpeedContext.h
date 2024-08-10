@@ -330,6 +330,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ChaosEnergyGaugeSize, 0x680);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_ChaosEnergySetting, 0x684);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_FloorNormal, 0x6E0);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_CameraOnlyUseGroundTarget, 0x7D8);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spReactionJumpQTE_HUDPtr, 0x7F4);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spTrickJumpSequence, 0x800);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_aGroundSearch, 0x810);
