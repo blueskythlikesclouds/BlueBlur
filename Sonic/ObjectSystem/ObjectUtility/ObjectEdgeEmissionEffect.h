@@ -13,10 +13,10 @@ namespace Sonic
         float m_RateOfChange;
         float m_CurrentValue;
         float m_MaxValue;
-    };
 
-    CObjectEdgeEmissionEffect();
-    CObjectEdgeEmissionEffect(float in_RateOfChange);
+        CObjectEdgeEmissionEffect();
+        CObjectEdgeEmissionEffect(float in_RateOfChange);
+    };
 
     BB_ASSERT_OFFSETOF(CObjectEdgeEmissionEffect, m_EdgeEmissionParam, 0x40);
     BB_ASSERT_OFFSETOF(CObjectEdgeEmissionEffect, m_RateOfChange, 0x44);
@@ -25,4 +25,4 @@ namespace Sonic
     BB_ASSERT_SIZEOF(CObjectEdgeEmissionEffect, 0x50);
 }
 
-#include <Sonic/ObjectSystem/ObjectUtility/CObjectEdgeEmissionEffect.inl>
+#include <Sonic/ObjectSystem/ObjectUtility/ObjectEdgeEmissionEffect.inl>
