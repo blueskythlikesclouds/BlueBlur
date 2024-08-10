@@ -14,8 +14,8 @@ namespace Sonic
         float m_CurrentValue;
         float m_MaxValue;
 
-		CObjectEdgeEmissionEffect();
-		CObjectEdgeEmissionEffect(float in_RateOfChange);
+        CObjectEdgeEmissionEffect();
+        CObjectEdgeEmissionEffect(float in_RateOfChange);
     };
 
     BB_ASSERT_OFFSETOF(CObjectEdgeEmissionEffect, m_EdgeEmissionParam, 0x40);
