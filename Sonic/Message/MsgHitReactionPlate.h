@@ -16,7 +16,9 @@ namespace Sonic::Message
         BB_INSERT_PADDING(0x4);
         float m_JumpMinVelocity;
         float m_JumpMaxVelocity;
-        BB_INSERT_PADDING(0x10);
+        BB_INSERT_PADDING(0x4);
+        int32_t m_Score;
+        BB_INSERT_PADDING(0x8);
     };
 
     BB_ASSERT_OFFSETOF(MsgHitReactionPlate, m_Type, 0x10);
@@ -25,5 +27,6 @@ namespace Sonic::Message
     BB_ASSERT_OFFSETOF(MsgHitReactionPlate, m_TargetActorID, 0x40);
     BB_ASSERT_OFFSETOF(MsgHitReactionPlate, m_JumpMinVelocity, 0x48);
     BB_ASSERT_OFFSETOF(MsgHitReactionPlate, m_JumpMaxVelocity, 0x4C);
+    BB_ASSERT_OFFSETOF(MsgHitReactionPlate, m_Score, 0x54);
     BB_ASSERT_SIZEOF(MsgHitReactionPlate, 0x60);
 }

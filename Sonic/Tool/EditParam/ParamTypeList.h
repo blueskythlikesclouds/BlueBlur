@@ -6,40 +6,9 @@
 
 namespace Sonic
 {
-    class CParamTypeList;
-
-    static void* const pCParamTypeListConstructor = (void*)0xCEBF90;
-    static void* const pCParamTypeListAddValue = (void*)0xCEBD70;
-
-    static CParamTypeList* fCParamTypeListConstructor(
-        CParamTypeList* pParamTypeList, const Hedgehog::Base::CSharedString* pDescription, uint32_t* pValue, uint32_t unknown)
-    {
-        __asm
-        {
-            mov esi, pParamTypeList
-            push unknown
-            push pValue
-            push pDescription
-            call[pCParamTypeListConstructor]
-        }
-    }
-
-    static void fCParamTypeListAddValue(CParamTypeList* pParamTypeList, const Hedgehog::Base::CSharedString* pName, uint32_t value)
-    {
-        __asm
-        {
-            mov eax, pName
-            mov edi, pParamTypeList
-            mov esi, value
-            call[pCParamTypeListAddValue]
-        }
-    }
-
     class CParamTypeList : public CParamBase
     {
     public:
-        static constexpr void* ms_pVfTable = (void*)0x016E5C74;
-
         class CMember
         {
         public:
@@ -47,11 +16,14 @@ namespace Sonic
             {
             public:
                 hh::map<uint32_t, Hedgehog::Base::CSharedString> m_ValueMap;
-                BB_INSERT_PADDING(0x44);
+                boost::function1<void, uint32_t> m_ChangedCallbackA;
+                boost::function<void()> m_ChangedCallbackB;
                 uint32_t* m_pValue;
-                uint32_t m_DefaultValue;
+                uint32_t m_Value;
                 Hedgehog::Base::CSharedString m_Description;
-                BB_INSERT_PADDING(0xC);
+                BB_INSERT_PADDING(0x4);
+                uint32_t m_ValueMax;
+                BB_INSERT_PADDING(0x4);
             };
 
             FuncData* m_pFuncData;
@@ -63,25 +35,18 @@ namespace Sonic
 
         CMember* m_pMember;
 
-        void AddValue(const Hedgehog::Base::CSharedString& name, uint32_t value)
-        {
-            fCParamTypeListAddValue(this, &name, value);
-        }
+        void AddValue(const Hedgehog::Base::CSharedString& in_rName, uint32_t in_Value);
 
-        static CParamTypeList* Create(uint32_t* pValue, const Hedgehog::Base::CSharedString& description)
-        {
-            CParamTypeList* pParamTypeList = (CParamTypeList*)__HH_ALLOC(sizeof(CParamTypeList));
-            fCParamTypeListConstructor(pParamTypeList, &description, pValue, 0);
-
-            pParamTypeList->AddRef();
-            return pParamTypeList;
-        }
+        static CParamTypeList* Create(uint32_t* in_pValue, const Hedgehog::Base::CSharedString& in_rDescription);
     };
 
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ValueMap, 0x8);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ChangedCallbackA, 0x18);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ChangedCallbackB, 0x38);
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_pValue, 0x58);
-    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_DefaultValue, 0x5C);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_Value, 0x5C);
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_Description, 0x60);
+    BB_ASSERT_OFFSETOF(CParamTypeList::CMember::FuncData, m_ValueMax, 0x68);
     BB_ASSERT_SIZEOF(CParamTypeList::CMember::FuncData, 0x70);
 
     BB_ASSERT_OFFSETOF(CParamTypeList::CMember, m_pFuncData, 0x0);
@@ -93,3 +58,6 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CParamTypeList, m_pMember, 0x14);
     BB_ASSERT_SIZEOF(CParamTypeList, 0x18);
 }
+
+
+#include <Sonic/Tool/EditParam/ParamTypeList.inl>

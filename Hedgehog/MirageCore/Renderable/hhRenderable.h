@@ -4,24 +4,36 @@
 
 namespace Hedgehog::Mirage
 {
-    class CRenderable;
+    class CRenderInfo;
+    class CUpdateForRenderInfo;
+    class CRenderContextModifier;
 
-    static inline BB_FUNCTION_PTR(CRenderable*, __thiscall, fpCRenderableCtor, 0x6F49C0, CRenderable* This);
+    enum ERenderableEvent : uint32_t
+    {
+        eRenderableEvent_RemoveFromBundle,
+        eRenderableEvent_AddToBundle
+    };
 
     class CRenderable : public Base::CObject
     {
     public:
-        BB_INSERT_PADDING(0x8);
+        bool m_Enabled;
+        float m_SortDepth;
 
-        CRenderable(const bb_null_ctor&) : CObject(bb_null_ctor{}) {}
-
-        CRenderable() : CRenderable(bb_null_ctor{})
-        {
-            fpCRenderableCtor(this);
-        }
-
+        CRenderable(const bb_null_ctor& nil) : CObject(nil) {}
+        CRenderable();
         virtual ~CRenderable() = default;
+
+        virtual void Render(const CRenderInfo& in_rRenderInfo, Base::CStringSymbol in_RenderLevel, uint32_t in_Unknown) {}
+        virtual void UpdateForRender(const CUpdateForRenderInfo& in_rUpdateForRenderInfo) {}
+        virtual void ProcEvent(CRenderContextModifier& in_rRenderContextModifier, ERenderableEvent in_Event) {}
+        virtual void Update(CRenderContextModifier& in_rRenderContextModifier) {}
     };
 
+    BB_ASSERT_OFFSETOF(CRenderable, m_Enabled, 0x4);
+    BB_ASSERT_OFFSETOF(CRenderable, m_SortDepth, 0x8);
     BB_ASSERT_SIZEOF(CRenderable, 0xC);
 }
+
+
+#include <Hedgehog/MirageCore/Renderable/hhRenderable.inl>

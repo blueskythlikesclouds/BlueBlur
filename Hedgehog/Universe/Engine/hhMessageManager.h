@@ -1,6 +1,7 @@
 #pragma once
 
-#include <BlueBlur.inl>
+#include <Hedgehog/Base/Container/hhMap.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedObject.h>
 
 namespace Hedgehog::Base
 {
@@ -10,17 +11,17 @@ namespace Hedgehog::Base
 namespace Hedgehog::Universe
 {
     class CMessageActor;
-    class CMessageManager;
-    
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCMessageManagerAdd, 0x777B10,
-        CMessageManager* This, const Hedgehog::Base::CSharedString& category, CMessageActor* pMessageActor);
 
-    class CMessageManager
+    class CMessageManager : public Hedgehog::Base::CSynchronizedObject
     {
     public:
-        bool Add(const Hedgehog::Base::CSharedString& category, CMessageActor* pMessageActor)
-        {
-            return fpCMessageManagerAdd(this, category, pMessageActor);
-        }
+        hh::map<size_t, CMessageActor*> m_MessageActorMap;
+
+        CMessageActor* GetMessageActor(size_t in_ActorID) const;
+        bool AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, CMessageActor* in_pMessageActor);
     };
+
+    BB_ASSERT_OFFSETOF(CMessageManager, m_MessageActorMap, 0x4);
 }
+
+#include <Hedgehog/Universe/Engine/hhMessageManager.inl>

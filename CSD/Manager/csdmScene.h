@@ -11,13 +11,6 @@ namespace Chao::CSD
     class CScene;
     class CNode;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneGetNode, 0x67AFE0, const CScene* This, RCPtr<CNode>& out_rcNode, const char* in_pName);
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCSceneSetMotion, 0x679710, CScene* This, const char* in_pName);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetPosition, 0x679B50, CScene* This, float in_X, float in_Y);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetHideFlag, 0x679B20, CScene* This, size_t in_Hidden);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetRotation, 0x679D50, CScene* This, float in_Rotation);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneSetScale, 0x679DD0, CScene* This, float in_X, float in_Y);
-
     enum EMotionRepeatType : size_t
     {
         eMotionRepeatType_PlayOnce = 0,
@@ -58,43 +51,14 @@ namespace Chao::CSD
         virtual void Update(float in_DeltaTime = 0.0f);
         virtual void Render(void*);
 
-        RCPtr<CNode> GetNode(const char* in_pName) const
-        {
-            RCPtr<CNode> rcNode;
-            fpCSceneGetNode(this, rcNode, in_pName);
-            return rcNode;
-        }
+        RCPtr<CNode> GetNode(const char* in_pName) const;
 
-        bool SetMotion(const char* in_pName)
-        {
-            return fpCSceneSetMotion(this, in_pName);
-        }
-
-        void SetMotionFrame(float in_MotionFrame)
-        {
-            m_PrevMotionFrame = in_MotionFrame;
-            m_MotionFrame = in_MotionFrame;
-        }
-
-        void SetPosition(float in_X, float in_Y)
-        {
-            fpCSceneSetPosition(this, in_X, in_Y);
-        }
-
-        void SetHideFlag(size_t in_HideFlag)
-        {
-            fpCSceneSetHideFlag(this, in_HideFlag);
-        }
-
-        void SetRotation(float in_Angle)
-        {
-            fpCSceneSetRotation(this, in_Angle);
-        }
-
-        void SetScale(float in_X, float in_Y)
-        {
-            fpCSceneSetScale(this, in_X, in_Y);
-        }
+        bool SetMotion(const char* in_pName);
+        void SetMotionFrame(float in_MotionFrame);
+        void SetPosition(float in_X, float in_Y);
+        void SetHideFlag(size_t in_HideFlag);
+        void SetRotation(float in_Angle);
+        void SetScale(float in_X, float in_Y);
     };
 
     BB_ASSERT_OFFSETOF(CScene, m_PrevMotionFrame, 0x7C);
@@ -106,3 +70,5 @@ namespace Chao::CSD
     BB_ASSERT_OFFSETOF(CScene, m_MotionRepeatType, 0xB0);
     BB_ASSERT_SIZEOF(CScene, 0xE0);
 }
+
+#include <CSD/Manager/csdmScene.inl>

@@ -5,10 +5,6 @@
 
 namespace Hedgehog::Database
 {
-    class CDatabaseData;
-
-    static inline BB_FUNCTION_PTR(bool, __thiscall, fpCDatabaseDataIsMadeAllInternal, 0x6993E0, CDatabaseData* This);
-
     enum EDatabaseDataFlags : uint8_t
     {
         eDatabaseDataFlags_IsMadeOne = 0x1,
@@ -24,29 +20,18 @@ namespace Hedgehog::Database
         Base::CSharedString m_TypeAndName;
 
         virtual ~CDatabaseData() = default;
+        virtual bool CheckMadeAll();
 
-        virtual bool CheckMadeAll()
-        {
-            return true;
-        }
+        bool IsMadeOne() const;
+        void SetMadeOne();
 
-        bool IsMadeAllInternal()
-        {
-            // Alternatively can call fpCDatabaseDataIsMadeAllInternal
-            if ((m_Flags & eDatabaseDataFlags_IsMadeOne) == 0 || !CheckMadeAll())
-                return false;
-
-            m_Flags |= eDatabaseDataFlags_IsMadeAll;
-            return true;
-        }
-
-        bool IsMadeAll()
-        {
-            return (m_Flags & eDatabaseDataFlags_IsMadeAll) != 0 || IsMadeAllInternal();
-        }
+        bool IsMadeAllInternal();
+        bool IsMadeAll();
     };
 
     BB_ASSERT_OFFSETOF(CDatabaseData, m_Flags, 0x4);
     BB_ASSERT_OFFSETOF(CDatabaseData, m_TypeAndName, 0x8);
     BB_ASSERT_SIZEOF(CDatabaseData, 0xC);
 }
+
+#include <Hedgehog/Database/System/hhDatabaseData.inl>

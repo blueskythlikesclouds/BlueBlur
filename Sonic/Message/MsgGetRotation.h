@@ -11,8 +11,8 @@ namespace Sonic::Message
 
         Hedgehog::Math::CQuaternion* m_pRotation;
 
-        MsgGetRotation(Hedgehog::Math::CQuaternion* rotation) : m_pRotation(rotation) {}
-        MsgGetRotation(Hedgehog::Math::CQuaternion& rotation) : m_pRotation(&rotation) {}
+        MsgGetRotation(Hedgehog::Math::CQuaternion* in_pRotation) : m_pRotation(in_pRotation) {}
+        MsgGetRotation(Hedgehog::Math::CQuaternion& in_rRotation) : m_pRotation(&in_rRotation) {}
     };
 
     BB_ASSERT_OFFSETOF(MsgGetRotation, m_pRotation, 0x10);

@@ -10,11 +10,10 @@ namespace Sonic::Player
     public:
         BB_INSERT_PADDING(0x40);
 
-        CPlayerSpeedContext* GetContext() const
-        {
-            return static_cast<CPlayerSpeedContext*>(m_spContext.get());
-        }
+        CPlayerSpeedContext* GetContext() const;
     };
 
     BB_ASSERT_SIZEOF(CPlayerSpeed, 0x2D0);
 }
+
+#include <Sonic/Player/Character/Speed/PlayerSpeed.inl>

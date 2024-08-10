@@ -12,23 +12,19 @@ namespace Sonic
     public:
         static constexpr Hedgehog::Base::TSynchronizedPtr<CInputState>* ms_pInstance = (Hedgehog::Base::TSynchronizedPtr<CInputState>*)0x1E79048;
 
-        static Hedgehog::Base::TSynchronizedPtr<CInputState> GetInstance()
-        {
-            return *ms_pInstance;
-        }
+        static Hedgehog::Base::TSynchronizedPtr<CInputState> GetInstance();
 
         SPadState m_PadStates[40];
         BB_INSERT_PADDING(0x50);
         uint32_t m_CurrentPadStateIndex;
         BB_INSERT_PADDING(0x4);
 
-        const SPadState& GetPadState() const
-        {
-            return m_PadStates[m_CurrentPadStateIndex];
-        }
+        const SPadState& GetPadState() const;
     };
 
     BB_ASSERT_OFFSETOF(CInputState, m_PadStates, 0x4);
     BB_ASSERT_OFFSETOF(CInputState, m_CurrentPadStateIndex, 0xD74);
     BB_ASSERT_SIZEOF(CInputState, 0xD7C);
 }
+
+#include <Sonic/System/InputState.inl>

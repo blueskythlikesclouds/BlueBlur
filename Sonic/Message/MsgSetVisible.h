@@ -11,7 +11,7 @@ namespace Sonic::Message
 
         bool m_Visible;
         
-        MsgSetVisible(bool visible) : m_Visible(visible) {}
+        MsgSetVisible(bool in_Visible) : m_Visible(in_Visible) {}
     };
 
     BB_ASSERT_OFFSETOF(MsgSetVisible, m_Visible, 0x10);

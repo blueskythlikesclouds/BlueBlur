@@ -1,79 +1,70 @@
 ﻿#pragma once
 
 #include <Hedgehog/Base/Type/hhSharedString.h>
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
 #include <Hedgehog/Universe/Thread/hhParallelJob.h>
+#include <Hedgehog/Universe/Engine/hhMessageManager.h>
 
 namespace Hedgehog::Universe
 {
     class Message;
-    class CMessageActor;
+    class CMessageManager;
     class IStateMachineMessageReceiver;
 
-    static inline BB_FUNCTION_PTR(CMessageActor*, __thiscall, fpCMessageActorCtor, 0x768A00, CMessageActor* This);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorExecuteParallelJob, 0x7680C0, CMessageActor* This, const SUpdateInfo& updateInfo);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageByID, 0x768340,
-        CMessageActor* This, const char* path, size_t line, size_t actorID, const boost::shared_ptr<Message>& spMessage, float time);   
-    
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageByCategory, 0x7684E0,
-        CMessageActor* This, const char* path, size_t line, const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage, float time);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMessageActorSendMessageImmByID, 0x767EE0,
-        CMessageActor* This, const char* path, size_t line, size_t actorID, const boost::shared_ptr<Message>& spMessage);
-
-    class CMessageActor : public IMessageProcess, public Base::CObject, public IParallelJob
+    class CMessageActor : public IMessageProcess, public IParallelJob
     {
     public:
-        BB_INSERT_PADDING(0x24);
+        BB_INSERT_PADDING(0x28);
         uint32_t m_ActorID;
-        BB_INSERT_PADDING(0x4C);
+        BB_INSERT_PADDING(0x0A);
+        bool m_ActorIDCondition;
+        bool m_ActorIDCondition2;
+        BB_INSERT_PADDING(0x24);
+        Base::TSynchronizedPtr<CMessageManager> m_pMessageManager;
+        BB_INSERT_PADDING(0x18);
 
-        CMessageActor(const bb_null_ctor&) : IMessageProcess(bb_null_ctor{}), CObject(bb_null_ctor{}), IParallelJob(bb_null_ctor{}) {}
-
-        CMessageActor() : CMessageActor(bb_null_ctor{})
-        {
-            fpCMessageActorCtor(this);
-        }
-
+        CMessageActor(const bb_null_ctor& nil) : IMessageProcess(nil), IParallelJob(nil) {}
+        CMessageActor();
         virtual ~CMessageActor();
 
-        virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) override
-        {
-            fpCMessageActorExecuteParallelJob(this, updateInfo);
-        }
-
-        virtual bool ProcessMessage(Message& message, bool flag)
-        {
-            return false;
-        }
-
-        virtual IStateMachineMessageReceiver* GetStateMachineMessageReceiver(bool flag)
-        {
-            return nullptr;
-        }
+        virtual void ExecuteParallelJob(const SUpdateInfo& in_rUpdateInfo) override;
+        virtual bool ProcessMessage(Message& in_rMsg, bool in_Flag) { return false; }
+        virtual IStateMachineMessageReceiver* GetStateMachineMessageReceiver(bool in_Flag) { return nullptr; }
 
 #undef SendMessage
 
-        void SendMessage(const size_t actorID, const boost::shared_ptr<Message>& spMessage, float time = 0.0f)
-        {
-            fpCMessageActorSendMessageByID(this, nullptr, 0, actorID, spMessage, time);
-        }      
-        
-        void SendMessage(const Hedgehog::Base::CSharedString& actorCategory, const boost::shared_ptr<Message>& spMessage, float time = 0.0f)
-        {
-            fpCMessageActorSendMessageByCategory(this, nullptr, 0, actorCategory, spMessage, time);
-        }      
-        
-        void SendMessageImm(const size_t actorID, const boost::shared_ptr<Message>& spMessage)
-        {
-            fpCMessageActorSendMessageImmByID(this, nullptr, 0, actorID, spMessage);
-        }
+        bool SendMessage(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMsg, float in_Time = 0.0f);
+        bool SendMessage(const Hedgehog::Base::CSharedString& in_rActorCategory, const boost::shared_ptr<Message>& in_spMsg, float in_Time = 0.0f);
+
+        bool SendMessageImm(const size_t in_ActorID, const boost::shared_ptr<Message>& in_spMsg);
+
+        // Custom implementation that passes in a message on the *stack* if it's immediate. Much faster.
+        bool SendMessageImm(CMessageActor* in_pActor, Message& in_rMsg) const;
+        bool SendMessageImm(CMessageActor* in_pActor, const Message& in_rMsg) const;
+
+        bool SendMessageImm(const uint32_t in_ActorID, Message& in_rMsg) const;
+        bool SendMessageImm(const uint32_t in_ActorID, const Message& in_rMsg) const;
+
+        bool SendMessageSelfImm(Message& in_rMsg);
+        bool SendMessageSelfImm(const Message& in_rMsg);
+
+        template<typename T>
+        bool SendMessageSelfImm();
+
+        template<typename T, typename... Args>
+        bool SendMessageSelfImm(Args&... args);
+
+        template<typename T>
+        bool SendMessageImm(const size_t in_ActorID);
+
+        template<typename T, typename... Args>
+        void SendMessageImm(const size_t in_ActorID, Args&... args);
     };
 
-    //BB_ASSERT_OFFSETOF(CMessageActor, m_Category, 0x14);
     BB_ASSERT_OFFSETOF(CMessageActor, m_ActorID, 0x2C);
+    BB_ASSERT_OFFSETOF(CMessageActor, m_pMessageManager, 0x60);
     BB_ASSERT_SIZEOF(CMessageActor, 0x7C);
 }
 
+#include <Hedgehog/Universe/Engine/hhMessageActor.inl>

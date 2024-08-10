@@ -10,149 +10,41 @@ namespace Hedgehog::Base
         uint32_t m_refCount;
 
     public:
-        CRefCountObject() : m_refCount(1) {}
+        CRefCountObject();
+        virtual ~CRefCountObject();
 
-        virtual ~CRefCountObject() = default;
-
-        LONG AddRef()
-        {
-            return InterlockedIncrement(&m_refCount);
-        }
-
-        LONG Release()
-        {
-            const LONG result = InterlockedDecrement(&m_refCount);
-            
-            if (result == 0)
-                delete this;
-
-            return result;
-        }
+        LONG AddRef();
+        LONG Release();
     };
 
     template<typename T>
     class CRefPtr
     {
     public:
-        CRefPtr()
-            : m_pObject(nullptr)
-        {
-        }
+        CRefPtr();
+        CRefPtr(T* in_pObj);
+        CRefPtr(const CRefPtr& in_rOther);
+        CRefPtr(CRefPtr&& in_rOther);
+        ~CRefPtr();
 
-        CRefPtr(T* obj)
-            : m_pObject(obj)
-        {
-            if (m_pObject)
-                m_pObject->AddRef();
-        }
+        CRefPtr& operator=(T* in_rObj);
+        CRefPtr& operator=(const CRefPtr& in_rOther);
+        CRefPtr& operator=(CRefPtr&& io_rOther);
 
-        CRefPtr(const CRefPtr& other)
-            : m_pObject(other.m_pObject)
-        {
-            if (m_pObject)
-                m_pObject->AddRef();
-        }
+        T* operator->();
+        T& operator*();
+        operator T*();
 
-        CRefPtr(CRefPtr&& other)
-            : m_pObject(other.m_pObject)
-        {
-            other.m_pObject = nullptr;
-        }
+        operator bool() const;
 
-        ~CRefPtr()
-        {
-            if (m_pObject)
-                m_pObject->Release();
-        }
+        T* Get();
+        const T* Get() const;
 
-        CRefPtr& operator=(T* obj)
-        {
-            if (m_pObject)
-                m_pObject->Release();
+        T* Detach();
 
-            m_pObject = obj;
+        void Reset();
 
-            if (m_pObject)
-                m_pObject->AddRef();
-
-            return *this;
-        }
-
-        CRefPtr& operator=(const CRefPtr& other)
-        {
-            if (m_pObject)
-                m_pObject->Release();
-
-            m_pObject = other.m_pObject;
-
-            if (m_pObject)
-                m_pObject->AddRef();
-
-            return *this;
-        }
-
-        CRefPtr& operator=(CRefPtr&& other)
-        {
-            if (m_pObject)
-                m_pObject->Release();
-
-            m_pObject = other.m_pObject;
-            other.m_pObject = nullptr;
-
-            return *this;
-        }
-
-        T* operator->()
-        {
-            return m_pObject;
-        }
-
-        T& operator*()
-        {
-            return *m_pObject;
-        }
-
-        operator T*()
-        {
-            return m_pObject;
-        }
-
-        operator bool() const
-        {
-            return m_pObject != nullptr;
-        }
-
-        T* Get()
-        {
-            return m_pObject;
-        }
-
-        const T* Get() const
-        {
-            return m_pObject;
-        }
-
-        T* Detach()
-        {
-            T* obj = m_pObject;
-            m_pObject = nullptr;
-            return obj;
-        }
-
-        void Reset()
-        {
-            if (m_pObject)
-                m_pObject->Release();
-
-            m_pObject = nullptr;
-        }
-
-        void Swap(CRefPtr& other)
-        {
-            T* obj = m_pObject;
-            m_pObject = other.m_pObject;
-            other.m_pObject = obj;
-        }
+        void Swap(CRefPtr& io_rOther);
 
     private:
         T* m_pObject;
@@ -160,3 +52,5 @@ namespace Hedgehog::Base
 
     BB_ASSERT_SIZEOF(CRefCountObject, 0x8);
 }
+
+#include <Hedgehog/Base/hhRefCountObject.inl>

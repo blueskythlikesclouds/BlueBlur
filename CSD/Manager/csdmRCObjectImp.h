@@ -7,15 +7,8 @@ namespace Chao::CSD
     template<typename T>
     class RCPtr<T>::RCObjectImp : public RCObject
     {
-        void Deallocate(void* in_pMemory) override
-        {
-            // delete static_cast<T*>(in_pMemory);
-        }
+        void Deallocate(void* in_pMemory) override;
     };
-
-    template<typename T>
-    RCPtrAbs::RCObject* RCPtr<T>::CreateRCObject()
-    {
-        return new RCObjectImp();
-    }
 }
+
+#include <CSD/Manager/csdmRCObjectImp.inl>

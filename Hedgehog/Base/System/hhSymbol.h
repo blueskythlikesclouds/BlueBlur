@@ -4,25 +4,32 @@
 
 namespace Hedgehog::Base
 {
-    struct SSymbolNode;
+    struct SSymbolNode
+    {
+        SSymbolNode* pPrev;
+        SSymbolNode* pNext;
+        size_t Hash;
 
-    static inline BB_FUNCTION_PTR(SSymbolNode*, __cdecl, MakeStringSymbol, 0x6643D0, const char* pName);
+        const char* GetValue() const;
+    };
 
     class CStringSymbol
     {
     public:
         SSymbolNode* m_pSymbolNode;
 
-        CStringSymbol(const char* pName) : m_pSymbolNode(MakeStringSymbol(pName))
-        {
-        }
+        CStringSymbol();
+        CStringSymbol(const char* in_pName);
 
-        bool operator<(const CStringSymbol& other) const
-        {
-            return m_pSymbolNode < other.m_pSymbolNode;
-        }
+        const char* GetValue() const;
+
+        bool operator==(const CStringSymbol& in_rOther) const;
+        bool operator!=(const CStringSymbol& in_rOther) const;
+        bool operator<(const CStringSymbol& in_rOther) const;
     };
 
     BB_ASSERT_OFFSETOF(CStringSymbol, m_pSymbolNode, 0);
     BB_ASSERT_SIZEOF(CStringSymbol, 4);
 }
+
+#include <Hedgehog/Base/System/hhSymbol.inl>

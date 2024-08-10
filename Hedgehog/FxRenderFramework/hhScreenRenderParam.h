@@ -6,9 +6,9 @@ namespace Hedgehog::FxRenderFramework
 {
     struct SScreenRenderParam
     {
-        const char* m_pName;
-        void* m_pCallback; // SceneTraverse or SceneRender
-        int32_t m_ShaderIndex;
+        const char* pName;
+        void* pCallback; // SceneTraverse or SceneRender
+        int32_t ShaderIndex;
         BB_INSERT_PADDING(0x18);
     };
 

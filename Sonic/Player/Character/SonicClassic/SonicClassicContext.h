@@ -9,13 +9,12 @@ namespace Sonic::Player
     public:
         static constexpr CSonicClassicContext** ms_pInstance = (CSonicClassicContext**)0x1E5E304;
 
-        static CSonicClassicContext* GetInstance()
-        {
-            return *ms_pInstance;
-        }
+        static CSonicClassicContext* GetInstance();
 
         BB_INSERT_PADDING(0x200);
     };
 
     BB_ASSERT_SIZEOF(CSonicClassicContext, 0x1430);
 }
+
+#include <Sonic/Player/Character/SonicClassic/SonicClassicContext.inl>

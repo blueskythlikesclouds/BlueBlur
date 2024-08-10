@@ -4,11 +4,7 @@
 
 namespace Hedgehog::Base
 {
-    class CHolderBase;
     class CSynchronizedObject;
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCHolderBaseCtor, 0x65FBE0, CHolderBase* This, CSynchronizedObject* pSynchronizedObject, bool forceSync);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCHolderBaseDtor, 0x65FC40, CHolderBase* This);
 
     class CHolderBase
     {
@@ -17,47 +13,20 @@ namespace Hedgehog::Base
         bool m_Locked;
 
     public:
-        CHolderBase() : m_pSynchronizedObject(nullptr), m_Locked(false)
-        {
-            
-        }
+        CHolderBase() : m_pSynchronizedObject(nullptr), m_Locked(false) {}
+        CHolderBase(CSynchronizedObject* in_pSynchronizedObject, bool in_ForceSync = false);
+        CHolderBase(CHolderBase&& io_rOther);
+        CHolderBase(const CHolderBase& in_rOther);
+        ~CHolderBase();
 
-        CHolderBase(CSynchronizedObject* pSynchronizedObject, bool forceSync = false)
-        {
-            fpCHolderBaseCtor(this, pSynchronizedObject, forceSync);
-        }
+        CSynchronizedObject* get() const;
+        CSynchronizedObject* operator->() const;
+        CSynchronizedObject* operator*() const;
 
-        CHolderBase(CHolderBase&& other)
-        {
-            m_pSynchronizedObject = other.m_pSynchronizedObject;
-            m_Locked = other.m_Locked;
-
-            other.m_pSynchronizedObject = nullptr;
-            other.m_Locked = false;
-        }
-
-        CHolderBase(const CHolderBase& other) = delete;
-
-        ~CHolderBase()
-        {
-            fpCHolderBaseDtor(this);
-        }
-
-        CSynchronizedObject* get() const
-        {
-            return m_pSynchronizedObject;
-        }
-
-        CSynchronizedObject* operator->() const
-        {
-            return get();
-        }
-
-        CSynchronizedObject* operator*() const
-        {
-            return get();
-        }
+        explicit operator bool() const;
     };
 
     BB_ASSERT_SIZEOF(CHolderBase, 0x8);
 }
+
+#include <Hedgehog/Base/Thread/hhHolderBase.inl>

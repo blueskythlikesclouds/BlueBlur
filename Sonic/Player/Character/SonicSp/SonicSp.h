@@ -10,11 +10,10 @@ namespace Sonic::Player
     public:
         BB_INSERT_PADDING(0x70);
 
-        CSonicSpContext* GetContext() const
-        {
-            return static_cast<CSonicSpContext*>(m_spContext.get());
-        }
+        CSonicSpContext* GetContext() const;
     };
 
     BB_ASSERT_SIZEOF(CSonicSp, 0x340);
 }
+
+#include <Sonic/Player/Character/SonicSp/SonicSp.inl>

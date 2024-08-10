@@ -12,7 +12,7 @@ namespace Hedgehog::Universe
 
         virtual ~IParallelJob() = default;
 
-        virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) = 0;
+        virtual void ExecuteParallelJob(const SUpdateInfo& in_rUpdateInfo) = 0;
     };
 
     BB_ASSERT_SIZEOF(IParallelJob, 0x4);

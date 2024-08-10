@@ -6,8 +6,8 @@ namespace Sonic
 {
     class CFxCrossFade;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeInitialize, 0x10C21A0, CFxCrossFade* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeExecute, 0x10C22D0, CFxCrossFade* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeInitialize, 0x10C21A0, CFxCrossFade* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxCrossFadeExecute, 0x10C22D0, CFxCrossFade* This);
 
     class CFxCrossFade : public CFxJob
     {

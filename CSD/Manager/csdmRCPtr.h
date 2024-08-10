@@ -17,40 +17,18 @@ namespace Chao::CSD
 
         RCObject* CreateRCObject() override;
 
-        void Attach(T* in_pObject)
-        {
-            RCPtrAbs::AttachAbs(in_pObject);
-        }
+        void Attach(T* in_pObject);
 
-        T* Get() const
-        {
-            return static_cast<T*>(RCPtrAbs::GetAbs());
-        }
-        
-        void Set(const RCPtr& in_rOther)
-        {
-            RCPtrAbs::SetAbs(in_rOther);
-        }
+        T* Get() const;
+        void Set(const RCPtr& in_rOther);
 
-        T* operator*() const
-        {
-            return Get();
-        }
+        T* operator*() const;
+        T* operator->() const;
 
-        T* operator->() const
-        {
-            return Get();
-        }
+        RCPtr& operator=(const RCPtr& in_rOther);
 
-        RCPtr& operator=(const RCPtr& in_rOther)
-        {
-            Set(in_rOther);
-            return *this;
-        }
-
-        operator bool() const
-        {
-            return m_pObject != nullptr;
-        }
+        operator bool() const;
     };
 }
+
+#include <CSD/Manager/csdmRCPtr.inl>

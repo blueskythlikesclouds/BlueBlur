@@ -4,25 +4,28 @@
 
 namespace Hedgehog::Mirage
 {
-    class CMatrixNode;
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCMatrixNodeNotifyChanged, 0x6F3CB0, CMatrixNode* This);
+    class CMatrixNodeListener;
 
     class CMatrixNode : public Base::CObject
     {
     public:
         BB_INSERT_PADDING(0x5C);
 
-        virtual ~CMatrixNode() = default;
-        virtual void UpdateMatrix(CMatrixNode* pParentMatrixNode) = 0;
-        virtual Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
-        virtual Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
+        CMatrixNode(const bb_null_ctor& nil) : CObject(nil) {}
+        CMatrixNode();
 
-        void NotifyChanged()
-        {
-            fpCMatrixNodeNotifyChanged(this);
-        }
+        virtual ~CMatrixNode() = default;
+        virtual void UpdateMatrix(CMatrixNode* in_pParentMatrixNode) = 0;
+        virtual const Hedgehog::Math::CMatrix& GetLocalMatrix() const = 0;
+        virtual const Hedgehog::Math::CMatrix& GetWorldMatrix() const = 0;
+
+        void SetParent(CMatrixNode* in_pParentNode);
+        void SetChild(CMatrixNode* in_pChildNode);
+        void AddListener(CMatrixNodeListener* in_pListener);
+        void NotifyChanged();
     };
 
     BB_ASSERT_SIZEOF(CMatrixNode, 0x60);
 }
+
+#include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.inl>

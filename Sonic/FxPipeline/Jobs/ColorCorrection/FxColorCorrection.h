@@ -6,8 +6,8 @@ namespace Sonic
 {
     class CFxColorCorrection;
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxColorCorrectionInitialize, 0x10C2CD0, CFxColorCorrection* This);
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCFxColorCorrectionExecute, 0x10C2E90, CFxColorCorrection* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxColorCorrectionInitialize, 0x10C2CD0, CFxColorCorrection* This);
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCFxColorCorrectionExecute, 0x10C2E90, CFxColorCorrection* This);
 
     class CFxColorCorrection : public CFxJob
     {

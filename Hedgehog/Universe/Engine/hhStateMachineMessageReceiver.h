@@ -11,7 +11,7 @@ namespace Hedgehog::Universe
     public:
         IStateMachineMessageReceiver(const bb_null_ctor&) {}
 
-        virtual bool ProcessMessageInStateMachine(Message& message, bool flag) = 0;
+        virtual bool ProcessMessageInStateMachine(Message& in_rMsg, bool in_Flag) = 0;
     };
 
     BB_ASSERT_SIZEOF(IStateMachineMessageReceiver, 4);

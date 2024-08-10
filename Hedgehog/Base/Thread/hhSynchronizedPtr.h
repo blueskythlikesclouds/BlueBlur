@@ -10,33 +10,19 @@ namespace Hedgehog::Base
         T* m_pObject;
 
     public:
-        TSynchronizedPtr(T* pObject) : m_pObject(pObject) {}
+        TSynchronizedPtr(T* in_pObject);
+        TSynchronizedPtr();
+        TSynchronizedPtr(const TSynchronizedPtr& in_rOther);
+        TSynchronizedPtr(TSynchronizedPtr&& io_rOther);
 
-        TSynchronizedPtr(const TSynchronizedPtr& other) = default;
-        TSynchronizedPtr(TSynchronizedPtr&& other) : m_pObject(other.m_pObject)
-        {
-            other.m_pObject = nullptr;
-        }
+        TSynchronizedPtr<T, ForceSync>& operator=(T* const in_pObject);
 
-        TSynchronizedPtr<T, ForceSync>& operator=(T* const pObject)
-        {
-            m_pObject = pObject;
-            return *this;
-        }
+        THolder<T, ForceSync> get() const;
+        THolder<T, ForceSync> operator->() const;
+        THolder<T, ForceSync> operator*() const;
 
-        THolder<T, ForceSync> get() const
-        {
-            return THolder<T, ForceSync>(m_pObject);
-        }
-
-        THolder<T, ForceSync> operator->() const
-        {
-            return get();
-        }
-
-        THolder<T, ForceSync> operator*() const
-        {
-            return get();
-        }
+        explicit operator bool() const;
     };
 }
+
+#include <Hedgehog/Base/Thread/hhSynchronizedPtr.inl>

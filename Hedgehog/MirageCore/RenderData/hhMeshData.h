@@ -26,7 +26,7 @@ namespace Hedgehog::Mirage
         CVertexDeclarationPtr m_VertexDeclarationPtr;
         CPrimitive m_Primitive;
         Base::CSharedString m_MaterialName;
-        map<void*, void*> m_Field94;
+        hh::map<void*, void*> m_Field94;
     };
     
     BB_ASSERT_OFFSETOF(CMeshData, m_IndexNum, 0xC);

@@ -11,7 +11,7 @@ namespace Sonic::Message
 
         Hedgehog::Math::CVector m_Impulse;
 
-        MsgAddImpulse(const Hedgehog::Math::CVector& impulse) : m_Impulse(impulse) {}
+        MsgAddImpulse(const Hedgehog::Math::CVector& in_rImpulse) : m_Impulse(in_rImpulse) {}
     };
 
     BB_ASSERT_OFFSETOF(MsgAddImpulse, m_Impulse, 0x10);

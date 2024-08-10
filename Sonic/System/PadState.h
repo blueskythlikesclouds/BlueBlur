@@ -58,28 +58,20 @@ namespace Sonic
         float RightStickHorizontal;
         float RightStickVertical;
 
-        BB_INSERT_PADDING(0x2C);
+        BB_INSERT_PADDING(0x4);
 
-        bool IsDown(const EKeyState keys) const
-        {
-            return (DownState & keys) == keys;
-        }
+        float LeftTrigger;
+        float RightTrigger;
 
-        bool IsUp(const EKeyState keys) const
-        {
-            return (UpState & keys) == keys;
-        }
+        BB_INSERT_PADDING(0x20);
 
-        bool IsTapped(const EKeyState keys) const
-        {
-            return (TappedState & keys) == keys;
-        }
-
-        bool IsReleased(const EKeyState keys) const
-        {
-            return (ReleasedState & keys) == keys;
-        }
+        bool IsDown(const EKeyState in_Keys) const;
+        bool IsUp(const EKeyState in_Keys) const;
+        bool IsTapped(const EKeyState in_Keys) const;
+        bool IsReleased(const EKeyState in_Keys) const;
     };
 
     BB_ASSERT_SIZEOF(SPadState, 0x54);
 }
+
+#include <Sonic/System/PadState.inl>

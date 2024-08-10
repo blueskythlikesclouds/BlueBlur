@@ -4,6 +4,8 @@
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
 
+#include "Sonic/Player/Character/Speed/State/PlayerSpeedState.h"
+
 #undef PlaySound
 
 namespace Hedgehog::Mirage
@@ -28,29 +30,7 @@ namespace Sonic::Player
 {
     class CParameter;
     class CPlayer;
-    class CPlayerContext;
     class CInputPad;
-
-    static inline BB_FUNCTION_PTR(const Hedgehog::Base::CSharedString&, __stdcall,
-        fpCPlayerContextGetCurrentAnimationName, 0xE72CB0, CPlayerContext* This);
-
-    static uint32_t pCPlayerContextChangeState = 0xE4FF30;
-
-    static Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextChangeState(
-        CPlayerContext* This, const Hedgehog::Base::CSharedString* pType)
-    {
-        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* pResult;
-
-        __asm
-        {
-            mov eax, pType
-            mov ecx, This
-            call[pCPlayerContextChangeState]
-            mov pResult, eax
-        }
-
-        return pResult;
-    }
 
     class CPlayerContext : public Hedgehog::Base::CObject
     {
@@ -79,7 +59,7 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_PathInput2D; //0x150
 
         uint8_t m_Field160;
-        size_t m_Field164;
+        size_t m_GroundAttribute;
         uint8_t m_Field168;
         size_t m_RestartCount; // 0x16C
 
@@ -94,9 +74,12 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_Field180;
         Hedgehog::Math::CVector m_Field190;
 
-        size_t m_Field1A0;
-        size_t m_Field1A4;
-        void* m_pSkills; //0x1A8
+        size_t m_SuperRenderableActorID; // 0x1A0
+
+#pragma pack(push, 1)
+        std::bitset<64> m_Skills;
+#pragma pack(pop)
+
         uint8_t m_Field1AC[172];
 
         float m_Field258;
@@ -134,7 +117,7 @@ namespace Sonic::Player
         virtual void CPlayerContext54() {}
         virtual void CPlayerContext58() {}
 
-        virtual void ChangeAnimation(const Hedgehog::Base::CSharedString& name) = 0;
+        virtual void ChangeAnimation(const Hedgehog::Base::CSharedString& in_rName) = 0;
 
         virtual void CPlayerContext60() {}
         virtual void CPlayerContext64() {}
@@ -142,7 +125,7 @@ namespace Sonic::Player
         virtual void CPlayerContext6C() {}
         virtual void CPlayerContext70() {}
 
-        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t cueId, size_t flags) = 0;
+        virtual boost::shared_ptr<Hedgehog::Sound::CSoundHandle> PlaySound(size_t in_CueId, bool in_Loop) = 0;
 
         virtual void CPlayerContext78() {}
         virtual void CPlayerContext7C() {}
@@ -152,21 +135,13 @@ namespace Sonic::Player
         virtual void CPlayerContext8C() {}
         virtual void CPlayerContext90() {}
 
-        const Hedgehog::Base::CSharedString& GetCurrentAnimationName()
-        {
-            return fpCPlayerContextGetCurrentAnimationName(this);
-        }
+        const Hedgehog::Base::CSharedString& GetCurrentAnimationName();
 
-        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(const Hedgehog::Base::CSharedString& type)
-        {
-            return fCPlayerContextChangeState(this, &type);
-        }
+        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(const Hedgehog::Base::CSharedString& in_rType);
+        Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* ChangeState(EPlayerSpeedState in_PlayerSpeedState);
 
         template<typename T>
-        T* ChangeState()
-        {
-            return static_cast<T*>(ChangeState(T::ms_StateName));
-        }
+        T* ChangeState();
     };
 
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spMatrixNode, 0x10);
@@ -185,7 +160,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field140, 0x140);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_PathInput2D, 0x150);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field160, 0x160);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field164, 0x164);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_GroundAttribute, 0x164);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field168, 0x168);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_RestartCount, 0x16C);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field170, 0x170);
@@ -196,9 +171,13 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field178, 0x178);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field180, 0x180);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field190, 0x190);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1A0, 0x1A0);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1A4, 0x1A4);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_pSkills,  0x1A8);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_SuperRenderableActorID, 0x1A0);
+
+    // Because they're private, these assertions don't work.
+    // Set them to public & uncomment these if you want to verify these specifically work.
+    //BB_ASSERT_OFFSETOF(CPlayerContext, m_SkillsP1, 0x1A4);
+    //BB_ASSERT_OFFSETOF(CPlayerContext, m_SkillsP2, 0x1A8);
+
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field1AC, 0x1AC);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field258, 0x258);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field25C, 0x25C);
@@ -207,3 +186,5 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_spParameter, 0x27C);
     BB_ASSERT_SIZEOF(CPlayerContext, 0x290);
 }
+
+#include <Sonic/Player/Character/Base/PlayerContext.inl>

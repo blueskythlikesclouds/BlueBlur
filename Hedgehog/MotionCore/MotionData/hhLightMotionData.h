@@ -29,11 +29,6 @@ namespace Hedgehog::Motion
     BB_ASSERT_OFFSETOF(CLightSubMotionData, m_DefaultValueData, 0x30);
     BB_ASSERT_SIZEOF(CLightSubMotionData, 0xA8);
 
-    class CLightMotionData;
-
-    static inline BB_FUNCTION_PTR(void, __cdecl, fpCLightMotionDataStep, 0x758640, 
-        CLightMotionData* This, uint32_t index, float frame, CLightSubMotionValueData& valueData, const Math::CMatrix& matrix);
-
     class CLightMotionData : public Hedgehog::Database::CDatabaseData
     {
     public:
@@ -41,13 +36,14 @@ namespace Hedgehog::Motion
         CLightSubMotionData* m_SubMotions;
         BB_INSERT_PADDING(0xC);
 
-        void Step(uint32_t index, float frame, CLightSubMotionValueData& valueData, const Math::CMatrix& matrix = Math::CMatrix::Identity())
-        {
-            fpCLightMotionDataStep(this, index, frame, valueData, matrix);
-        }
+        void Step(uint32_t in_Index, float in_Frame, CLightSubMotionValueData& in_rValueData,
+            const Math::CMatrix& in_rMatrix = Math::CMatrix::Identity());
     };
 
     BB_ASSERT_OFFSETOF(CLightMotionData, m_SubMotionCount, 0xC);
     BB_ASSERT_OFFSETOF(CLightMotionData, m_SubMotions, 0x10);
     BB_ASSERT_SIZEOF(CLightMotionData, 0x20);
 }
+
+
+#include <Hedgehog/MotionCore/MotionData/hhLightMotionData.inl>

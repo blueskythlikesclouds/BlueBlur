@@ -2,25 +2,19 @@
 
 #pragma comment(lib, "BlueBlur.lib")
 
-#if (defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL != 0) || defined(_MAP_) || defined(_XTREE_)
-#if defined(_VECTOR_) || defined(_LIST_) || defined(_MAP_) || defined(_XTREE_)
-#error "BlueBlur must be included before STL"
-#endif
-#endif
+#include <hk2010_2_0/hk2010_2_0.h>
 
-#pragma push_macro("_ITERATOR_DEBUG_LEVEL")
-#undef _ITERATOR_DEBUG_LEVEL
-#define _ITERATOR_DEBUG_LEVEL 0
-
-#include <Hedgehog/Base/Container/hhMap.h>
-#include <Hedgehog/Base/Container/hhList.h>
-#include <Hedgehog/Base/Container/hhVector.h>
-
-#undef _ITERATOR_DEBUG_LEVEL
-#pragma pop_macro("_ITERATOR_DEBUG_LEVEL")
-
+#include <Hedgehog/Animation/hhAnimationControl.h>
+#include <Hedgehog/Animation/hhAnimationControlSingle.h>
+#include <Hedgehog/Animation/hhAnimationData.h>
+#include <Hedgehog/Animation/hhAnimationPose.h>
+#include <Hedgehog/Animation/hhAnimationSkeleton.h>
+#include <Hedgehog/Animation/hhMotionInfo.h>
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/hhRefCountObject.h>
+#include <Hedgehog/Base/Container/hhList.h>
+#include <Hedgehog/Base/Container/hhMap.h>
+#include <Hedgehog/Base/Container/hhVector.h>
 #include <Hedgehog/Base/Platform/D3D9/hhCriticalSectionD3D9.h>
 #include <Hedgehog/Base/System/hhAllocator.h>
 #include <Hedgehog/Base/System/hhSymbol.h>
@@ -29,56 +23,102 @@
 #include <Hedgehog/Base/Thread/hhSynchronizedObject.h>
 #include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Base/Thread/hhSynchronizedPtrBase.h>
-#include <Hedgehog/Base/Type/hhCowData.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Hedgehog/Database/System/hhArchiveDatabaseLoader.h>
+#include <Hedgehog/Database/System/hhArchiveList.h>
+#include <Hedgehog/Database/System/hhArchiveListManager.h>
+#include <Hedgehog/Database/System/hhArchiveParam.h>
+#include <Hedgehog/Database/System/hhCallback.h>
+#include <Hedgehog/Database/System/hhCompressor.h>
 #include <Hedgehog/Database/System/hhDatabase.h>
 #include <Hedgehog/Database/System/hhDatabaseData.h>
 #include <Hedgehog/Database/System/hhDatabaseLoader.h>
+#include <Hedgehog/Database/System/hhDecompressCAB.h>
 #include <Hedgehog/Database/System/hhRawData.h>
 #include <Hedgehog/FxRenderFramework/hhDrawInstanceParam.h>
 #include <Hedgehog/FxRenderFramework/hhScreenRenderParam.h>
+#include <Hedgehog/Math/hhSphere.h>
 #include <Hedgehog/MirageCore/Camera/hhCamera.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeListener.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeNormal.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNodeSingleElementNode.h>
 #include <Hedgehog/MirageCore/Misc/hhDirector.h>
+#include <Hedgehog/MirageCore/Misc/hhGlobalParametersData.h>
 #include <Hedgehog/MirageCore/Misc/hhInstanceInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhLightManager.h>
+#include <Hedgehog/MirageCore/Misc/hhPose.h>
 #include <Hedgehog/MirageCore/Misc/hhPrimitive.h>
+#include <Hedgehog/MirageCore/Misc/hhRenderInfo.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingDevice.h>
 #include <Hedgehog/MirageCore/Misc/hhRenderingInfrastructure.h>
+#include <Hedgehog/MirageCore/Misc/hhRenderScene.h>
+#include <Hedgehog/MirageCore/Misc/hhRenderStateInfo.h>
+#include <Hedgehog/MirageCore/Misc/hhSamplerState.h>
 #include <Hedgehog/MirageCore/Misc/hhStaticLightContext.h>
 #include <Hedgehog/MirageCore/Misc/hhTransform.h>
 #include <Hedgehog/MirageCore/Misc/hhVertexDeclarationPtr.h>
+#include <Hedgehog/MirageCore/Renderable/hhBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
+#include <Hedgehog/MirageCore/Renderable/hhOptimalBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
 #include <Hedgehog/MirageCore/Renderable/hhSingleElement.h>
+#include <Hedgehog/MirageCore/Renderable/hhSingleElementEffect.h>
+#include <Hedgehog/MirageCore/Renderable/hhSingleMorphElement.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightData.h>
 #include <Hedgehog/MirageCore/RenderData/hhLightListData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMaterialData.h>
+#include <Hedgehog/MirageCore/RenderData/hhMatrixData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMeshData.h>
 #include <Hedgehog/MirageCore/RenderData/hhMirageDatabaseWrapper.h>
 #include <Hedgehog/MirageCore/RenderData/hhModelData.h>
+#include <Hedgehog/MirageCore/RenderData/hhModelNodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhNodeGroupModelData.h>
+#include <Hedgehog/MirageCore/RenderData/hhParameterElement.h>
 #include <Hedgehog/MirageCore/RenderData/hhPictureData.h>
+#include <Hedgehog/MirageCore/RenderData/hhPixelShaderCodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhPixelShaderData.h>
 #include <Hedgehog/MirageCore/RenderData/hhShaderListData.h>
+#include <Hedgehog/MirageCore/RenderData/hhShareVertexBuffer.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainGroupData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainGroupInfoData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainInstanceInfoData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTerrainModelData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTexsetData.h>
+#include <Hedgehog/MirageCore/RenderData/hhTextureData.h>
+#include <Hedgehog/MirageCore/RenderData/hhVertexShaderCodeData.h>
 #include <Hedgehog/MirageCore/RenderData/hhVertexShaderData.h>
+#include <Hedgehog/MirageCore/Terrain/hhTerrainGroupSubsetInfo.h>
+#include <Hedgehog/MirageCore/Terrain/hhTerrainInitializeInfo.h>
+#include <Hedgehog/MotionCore/Motion/hhMaterialMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhMorphMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhMotionBase.h>
+#include <Hedgehog/MotionCore/Motion/hhSingleElementEffectMatMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhSingleElementEffectMotionAll.h>
+#include <Hedgehog/MotionCore/Motion/hhSingleElementEffectUvMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhTexcoordMotion.h>
+#include <Hedgehog/MotionCore/Motion/hhTexpatternMotion.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
+#include <Hedgehog/Sound/Handle/hhSoundHandle.h>
+#include <Hedgehog/Sound/Handle/hhSoundHandleBgm.h>
+#include <Hedgehog/Sound/Handle/hhSoundHandleCri.h>
 #include <Hedgehog/Universe/Engine/hhMessage.h>
 #include <Hedgehog/Universe/Engine/hhMessageActor.h>
 #include <Hedgehog/Universe/Engine/hhMessageManager.h>
 #include <Hedgehog/Universe/Engine/hhMessageProcess.h>
+#include <Hedgehog/Universe/Engine/hhService.h>
 #include <Hedgehog/Universe/Engine/hhStateMachine.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineBase.h>
 #include <Hedgehog/Universe/Engine/hhStateMachineMessageReceiver.h>
+#include <Hedgehog/Universe/Engine/hhTinyStateMachine.h>
+#include <Hedgehog/Universe/Engine/hhTinyStateMachineBase.h>
 #include <Hedgehog/Universe/Engine/hhUpdateInfo.h>
 #include <Hedgehog/Universe/Engine/hhUpdateManager.h>
 #include <Hedgehog/Universe/Engine/hhUpdateUnit.h>
 #include <Hedgehog/Universe/Thread/hhParallelJob.h>
+#include <Hedgehog/Utility/hhScopedPointerVector.h>
 #include <Hedgehog/Yggdrasill/hhYggAbstractBuffer.h>
 #include <Hedgehog/Yggdrasill/hhYggAllocator.h>
 #include <Hedgehog/Yggdrasill/hhYggDevice.h>
@@ -103,13 +143,21 @@
 #include <CSD/Manager/csdmScene.h>
 #include <CSD/Manager/csdmSceneObserver.h>
 #include <CSD/Manager/csdmSubjectBase.h>
+#include <CSD/Platform/csdTexList.h>
 
 #include <Sonic/DX_PATCH.h>
 #include <Sonic/Animation/AnimationContext.h>
+#include <Sonic/Animation/AnimationState.h>
+#include <Sonic/Animation/AnimationStateMachine.h>
+#include <Sonic/Animation/State/AnimationStateSingle.h>
 #include <Sonic/Camera/Camera.h>
+#include <Sonic/Character/Utility/NPCSingleElementEffectMotionAll.h>
+#include <Sonic/Collision/PhysicsUnit.h>
 #include <Sonic/CSD/CsdDatabaseWrapper.h>
 #include <Sonic/CSD/CsdProject.h>
+#include <Sonic/CSD/CsdTexListMirage.h>
 #include <Sonic/CSD/GameObjectCSD.h>
+#include <Sonic/Debug/DebugStageSelectMenu.h>
 #include <Sonic/FxPipeline/FxSceneRenderer.h>
 #include <Sonic/FxPipeline/FxScheduler.h>
 #include <Sonic/FxPipeline/Jobs/FxJob.h>
@@ -122,8 +170,21 @@
 #include <Sonic/FxPipeline/Jobs/RenderScene/FxRenderScene.h>
 #include <Sonic/FxPipeline/Jobs/ShadowMap/FxShadowMap.h>
 #include <Sonic/FxPipeline/Jobs/ToneMapping/FxToneMapping.h>
+#include <Sonic/Havok/CollisionHitPointInfo.h>
+#include <Sonic/Havok/EntityUnit.h>
+#include <Sonic/Havok/PhysicsWorld.h>
+#include <Sonic/Havok/RaycastCollision.h>
+#include <Sonic/Havok/RigidBody.h>
+#include <Sonic/Instancer/InstanceModelData.h>
+#include <Sonic/Instancer/InstanceRenderObj.h>
+#include <Sonic/Instancer/InstanceRenderObjDX9.h>
+#include <Sonic/Instancer/MetaInstancer.h>
+#include <Sonic/Instancer/ObjGrassInstancer.h>
+#include <Sonic/Instancer/ObjInstancer.h>
+#include <Sonic/Message/MsgActivateLayer.h>
 #include <Sonic/Message/MsgAddImpulse.h>
 #include <Sonic/Message/MsgAddVelocity.h>
+#include <Sonic/Message/MsgDeactivateLayer.h>
 #include <Sonic/Message/MsgDead.h>
 #include <Sonic/Message/MsgGetAnimationInfo.h>
 #include <Sonic/Message/MsgGetHomingAttackPosition.h>
@@ -132,10 +193,24 @@
 #include <Sonic/Message/MsgGetRotation.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
 #include <Sonic/Message/MsgKill.h>
+#include <Sonic/Message/MsgRemakeAllSetObject.h>
 #include <Sonic/Message/MsgSetPosition.h>
 #include <Sonic/Message/MsgSetRotation.h>
 #include <Sonic/Message/MsgSetVisible.h>
+#include <Sonic/Message/MsgStartCommonButtonSign.h>
 #include <Sonic/Message/MsgStartHomingChase.h>
+#include <Sonic/Object/ObjectBase.h>
+#include <Sonic/Object/Common/ObjUpReel/ObjUpReel.h>
+#include <Sonic/Object/Common/ObjWallJumpBlock/ObjWallJumpBlock.h>
+#include <Sonic/ObjectSystem/SetObjectEntry.h>
+#include <Sonic/ObjectSystem/SetObjectFactory.h>
+#include <Sonic/ObjectSystem/SetObjectInfo.h>
+#include <Sonic/ObjectSystem/SetObjectListener.h>
+#include <Sonic/ObjectSystem/Manager/SetObjectManager.h>
+#include <Sonic/ObjectSystem/ObjectUtility/ObjectEdgeEmissionEffect.h>
+#include <Sonic/ObjectSystem/Renderable/RopeRenderable.h>
+#include <Sonic/Platform/D3D9/ApplicationD3D9.h>
+#include <Sonic/Platform/PC/ApplicationPC.h>
 #include <Sonic/Player/Character/Base/Player.h>
 #include <Sonic/Player/Character/Base/PlayerContext.h>
 #include <Sonic/Player/Character/Sonic/Sonic.h>
@@ -146,8 +221,8 @@
 #include <Sonic/Player/Character/SonicSp/SonicSpContext.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeed.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
-#include <Sonic/Player/Character/Speed/PlayerSpeedContext.inl>
 #include <Sonic/Player/Character/Speed/StateFlag.h>
+#include <Sonic/Player/Character/Speed/State/PlayerSpeedState.h>
 #include <Sonic/Player/Character/Speed/State/PlayerSpeedStateBase.h>
 #include <Sonic/Player/Character/Speed/State/PlayerSpeedStateReactionLand.h>
 #include <Sonic/Player/Parameter/PlayerCommonParameter.h>
@@ -156,35 +231,48 @@
 #include <Sonic/Player/Parameter/SonicClassicParameter.h>
 #include <Sonic/Player/Parameter/SonicParameter.h>
 #include <Sonic/Player/Parameter/SonicSpParameter.h>
+#include <Sonic/System/Application.h>
 #include <Sonic/System/ApplicationDocument.h>
+#include <Sonic/System/BGMData.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>
 #include <Sonic/System/GameObject3D.h>
 #include <Sonic/System/GameObjectModel.h>
 #include <Sonic/System/GameObjectRigidBody.h>
+#include <Sonic/System/GameParameter.h>
 #include <Sonic/System/InputState.h>
 #include <Sonic/System/MatrixNodeTransform.h>
 #include <Sonic/System/PadState.h>
+#include <Sonic/System/ServiceGamePlay.h>
+#include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>
+#include <Sonic/System/GameplayFlow/GameActParameter.h>
 #include <Sonic/System/LightManager/LightManager.h>
 #include <Sonic/System/LightManager/LocalLight.h>
 #include <Sonic/System/RenderDirector/RenderDirector.h>
 #include <Sonic/System/RenderDirector/RenderDirectorFxPipeline.h>
 #include <Sonic/Tool/EditParam/EditParam.h>
+#include <Sonic/Tool/EditParam/FuncList.h>
 #include <Sonic/Tool/EditParam/ParamBase.h>
 #include <Sonic/Tool/EditParam/ParamBool.h>
+#include <Sonic/Tool/EditParam/ParamPosition.h>
+#include <Sonic/Tool/EditParam/ParamRotation.h>
 #include <Sonic/Tool/EditParam/ParamTypeList.h>
 #include <Sonic/Tool/EditParam/ParamValue.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameter.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameterNode.h>
+#include <Sonic/Tool/ParameterEditor/GlobalParameterManager.h>
 #include <Sonic/Tool/ParameterEditor/ParameterCategory.h>
+#include <Sonic/Tool/ParameterEditor/ParameterEditor.h>
 #include <Sonic/Tool/ParameterEditor/ParameterFile.h>
 #include <Sonic/Tool/ParameterEditor/ParameterGroup.h>
 
+#ifndef BB_EXCLUDE_NAMESPACE_ALIASES
 // Lost World/Forces style namespace aliases
 namespace hh = Hedgehog;
 namespace Hedgehog
 {
+    namespace anim = Animation;
     namespace base = Base;
     namespace db = Database;
     namespace fx = FxRenderFramework;
@@ -196,3 +284,4 @@ namespace Hedgehog
 }
 
 namespace app = Sonic;
+#endif

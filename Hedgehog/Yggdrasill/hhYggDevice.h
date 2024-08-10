@@ -12,7 +12,6 @@ namespace Hedgehog::Mirage
 namespace Hedgehog::Yggdrasill
 {
     class CYggAllocator;
-    class CYggDevice;
     class CYggScheduler;
     class CYggSurface;
     class CYggTexture;
@@ -25,51 +24,6 @@ namespace Hedgehog::Yggdrasill
         DWORD Stencil;
     };
 
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetSamplerFilter, 0x411CF0, 
-        CYggDevice* This, uint32_t index, D3DTEXTUREFILTERTYPE migFilter, D3DTEXTUREFILTERTYPE magFilter, D3DTEXTUREFILTERTYPE mipFilter);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetShader, 0x415EE0, 
-        CYggDevice* This, const boost::shared_ptr<Hedgehog::Mirage::CVertexShaderData>& spVertexShaderData, const boost::shared_ptr<Hedgehog::Mirage::CPixelShaderData>& spPixelShaderData);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceCreateTexture0, 0x7884C0, 
-        CYggDevice* This, boost::shared_ptr<CYggTexture>& spTexture, float widthRatio, float heightRatio, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceCreateTexture1, 0x788450, 
-        CYggDevice* This, boost::shared_ptr<CYggTexture>& spTexture, uint32_t width, uint32_t height, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceDrawQuad2D, 0x786620, 
-        CYggDevice* This, float* bounds, float x, float y);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceUnsetSampler, 0x412120, 
-        CYggDevice* This, uint32_t index);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetDepthStencil, 0x785D10, 
-        CYggDevice* This, const boost::shared_ptr<CYggSurface>& spSurface);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceGetRenderTarget, 0x786030,
-        CYggDevice* This, boost::shared_ptr<CYggSurface>& spSurface, uint32_t index);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetRenderTarget, 0x785D00, 
-        CYggDevice* This, uint32_t index, const boost::shared_ptr<CYggSurface>& spSurface);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetSamplerAddressMode, 0x411CA0, 
-        CYggDevice* This, uint32_t index, uint32_t value);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceSetTexture, 0x7865A0, 
-        CYggDevice* This, uint32_t index, const boost::shared_ptr<CYggTexture>& spTexture);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceClear0, 0x785EE0, 
-        CYggDevice* This, const SYggClearParams& params);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceClear1, 0x416650,
-        CYggDevice* This, DWORD Flags, D3DCOLOR Color, float Z, DWORD Stencil);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceGetResolution, 0x785A90,
-        CYggDevice* This, float widthRatio, float heightRatio, uint32_t& width, uint32_t& height);
-
-    static inline BB_FUNCTION_PTR(void, __thiscall, fpCYggDeviceFlush, 0x786070,
-        CYggDevice* This);
-
     class CYggDevice
     {
     public:
@@ -81,95 +35,34 @@ namespace Hedgehog::Yggdrasill
         uint32_t m_InternalResolutionWidth;
         uint32_t m_InternalResolutionHeight;
 
-        void SetSamplerFilter(uint32_t index, D3DTEXTUREFILTERTYPE migFilter, D3DTEXTUREFILTERTYPE magFilter, D3DTEXTUREFILTERTYPE mipFilter)
-        {
-            fpCYggDeviceSetSamplerFilter(this, index, migFilter, magFilter, mipFilter);
-        }
+        void SetSamplerFilter(uint32_t in_Index, D3DTEXTUREFILTERTYPE in_MigFilter, D3DTEXTUREFILTERTYPE in_MagFilter, D3DTEXTUREFILTERTYPE in_MipFilter);
 
-        void SetShader(const boost::shared_ptr<Mirage::CVertexShaderData>& spVertexShaderData, const boost::shared_ptr<Mirage::CPixelShaderData>& spPixelShaderData)
-        {
-            fpCYggDeviceSetShader(this, spVertexShaderData, spPixelShaderData);
-        }
+        void SetShader(const boost::shared_ptr<Mirage::CVertexShaderData>& in_spVertexShaderData, const boost::shared_ptr<Mirage::CPixelShaderData>& in_spPixelShaderData);
+        void SetShader(const Mirage::SShaderPair& in_rShader);
 
-        void SetShader(const Mirage::SShaderPair& shader)
-        {
-            SetShader(shader.m_spVertexShader, shader.m_spPixelShader);
-        }
+        boost::shared_ptr<CYggTexture> CreateTexture(float in_WidthRatio, float in_HeightRatio, uint32_t in_Levels, uint32_t in_Usage, D3DFORMAT in_Format, D3DPOOL in_Pool, HANDLE* in_pSharedHandle) const;
+        boost::shared_ptr<CYggTexture> CreateTexture(uint32_t in_Width, uint32_t in_Height, uint32_t in_Levels, uint32_t in_Usage, D3DFORMAT in_Format, D3DPOOL in_Pool, HANDLE* in_pSharedHandle) const;
 
-        void CreateTexture(boost::shared_ptr<CYggTexture>& spTexture, float widthRatio, float heightRatio, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle)
-        {
-            fpCYggDeviceCreateTexture0(this, spTexture, widthRatio, heightRatio, levels, usage, format, pool, pSharedHandle);
-        }
+        void DrawQuad2D(float* in_pBounds, float in_X, float in_Y);
 
-        void CreateTexture(boost::shared_ptr<CYggTexture>& spTexture, uint32_t width, uint32_t height, uint32_t levels, uint32_t usage, D3DFORMAT format, D3DPOOL pool, HANDLE* pSharedHandle)
-        {
-            fpCYggDeviceCreateTexture1(this, spTexture, width, height, levels, usage, format, pool, pSharedHandle);
-        }
+        void UnsetSampler(uint32_t in_Index);
 
-        void DrawQuad2D(float* bounds, float x, float y)
-        {
-            fpCYggDeviceDrawQuad2D(this, bounds, x, y);
-        }
+        void SetDepthStencil(const boost::shared_ptr<CYggSurface>& in_spSurface);
+        void UnsetDepthStencil();
 
-        void UnsetSampler(uint32_t index)
-        {
-            fpCYggDeviceUnsetSampler(this, index);
-        }
+        boost::shared_ptr<CYggSurface> GetRenderTarget(uint32_t in_Index) const;
+        void SetRenderTarget(uint32_t in_Index, const boost::shared_ptr<CYggSurface>& in_spSurface);
+        void UnsetRenderTarget(uint32_t in_Index);
 
-        void SetDepthStencil(const boost::shared_ptr<CYggSurface>& spSurface)
-        {
-            fpCYggDeviceSetDepthStencil(this, spSurface);
-        }
+        void SetSamplerAddressMode(uint32_t in_Index, uint32_t in_Value);
+        void SetTexture(uint32_t in_Index, const boost::shared_ptr<CYggTexture>& in_spTexture);
 
-        void UnsetDepthStencil()
-        {
-            SetDepthStencil(boost::shared_ptr<CYggSurface>());
-        }
+        void Clear(const SYggClearParams& in_rParams);
+        void Clear(DWORD in_Flags, D3DCOLOR in_Color, float in_Z, DWORD in_Stencil);
 
-        void GetRenderTarget(boost::shared_ptr<CYggSurface>& spSurface, uint32_t index)
-        {
-            fpCYggDeviceGetRenderTarget(this, spSurface, index);
-        }
+        void GetResolution(float in_WidthRatio, float in_HeightRatio, uint32_t& out_Width, uint32_t& out_Height);
 
-        void SetRenderTarget(uint32_t index, const boost::shared_ptr<CYggSurface>& spSurface)
-        {
-            fpCYggDeviceSetRenderTarget(this, index, spSurface);
-        }
-
-        void UnsetRenderTarget(uint32_t index)
-        {
-            SetRenderTarget(index, boost::shared_ptr<CYggSurface>());
-        }
-
-        void SetSamplerAddressMode(uint32_t index, uint32_t value)
-        {
-            fpCYggDeviceSetSamplerAddressMode(this, index, value);
-        }
-
-        void SetTexture(uint32_t index, const boost::shared_ptr<CYggTexture>& spTexture)
-        {
-            fpCYggDeviceSetTexture(this, index, spTexture);
-        }
-
-        void Clear(const SYggClearParams& params)
-        {
-            fpCYggDeviceClear0(this, params);
-        }
-
-        void Clear(DWORD Flags, D3DCOLOR Color, float Z, DWORD Stencil)
-        {
-            fpCYggDeviceClear1(this, Flags, Color, Z, Stencil);
-        }
-
-        void GetResolution(float widthRatio, float heightRatio, uint32_t& width, uint32_t& height)
-        {
-            fpCYggDeviceGetResolution(this, widthRatio, heightRatio, width, height);
-        }
-
-        void Flush()
-        {
-            fpCYggDeviceFlush(this);
-        }
+        void Flush();
     };
 
     BB_ASSERT_OFFSETOF(CYggDevice, m_pRenderingInfrastructure, 0x0);
@@ -179,3 +72,6 @@ namespace Hedgehog::Yggdrasill
     BB_ASSERT_OFFSETOF(CYggDevice, m_InternalResolutionWidth, 0xC8);
     BB_ASSERT_OFFSETOF(CYggDevice, m_InternalResolutionHeight, 0xCC);
 }
+
+
+#include <Hedgehog/Yggdrasill/hhYggDevice.inl>
