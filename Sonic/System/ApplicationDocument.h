@@ -108,7 +108,7 @@ namespace Sonic
             boost::shared_ptr<CGameParameter> m_spGameParameter;
             BB_INSERT_PADDING(0x48);
             boost::shared_ptr<CParameterEditor> m_spParameterEditor;
-            int m_Field20C;
+            int32_t m_Field20C;
             CPlayerProperty* m_pPlayerProperty;
             boost::shared_ptr<CPlayerProperty> m_spPlayerProperty;
             BB_INSERT_PADDING(0x14);
