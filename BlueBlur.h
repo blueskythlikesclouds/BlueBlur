@@ -232,7 +232,9 @@
 #include <Sonic/Player/Parameter/SonicParameter.h>
 #include <Sonic/Player/Parameter/SonicSpParameter.h>
 #include <Sonic/System/Application.h>
+#include <Sonic/System/GammaController.h>
 #include <Sonic/System/ApplicationDocument.h>
+#include <Sonic/System/PlayerProperty.h>
 #include <Sonic/System/BGMData.h>
 #include <Sonic/System/GameDocument.h>
 #include <Sonic/System/GameObject.h>
