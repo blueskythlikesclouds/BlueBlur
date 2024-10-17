@@ -253,6 +253,9 @@
 #include <Sonic/System/LightManager/LocalLight.h>
 #include <Sonic/System/RenderDirector/RenderDirector.h>
 #include <Sonic/System/RenderDirector/RenderDirectorFxPipeline.h>
+#include <Sonic/Sequence/SequenceModeBase.h>
+#include <Sonic/Sequence/SequenceMain.h>
+#include <Sonic/Sequence/ModeCreaterList.h>
 #include <Sonic/Tool/EditParam/EditParam.h>
 #include <Sonic/Tool/EditParam/FuncList.h>
 #include <Sonic/Tool/EditParam/ParamBase.h>
