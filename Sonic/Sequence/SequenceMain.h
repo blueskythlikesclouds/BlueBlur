@@ -1,4 +1,8 @@
 #pragma once
+
+#include <Hedgehog/Base/Type/hhSharedString.h>
+#include <Hedgehog/Universe/Engine/hhMessageActor.h>
+
 namespace Sonic::Sequence
 {
 	class CStoryImpl;
