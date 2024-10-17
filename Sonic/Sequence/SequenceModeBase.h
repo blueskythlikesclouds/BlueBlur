@@ -1,14 +1,14 @@
 #pragma once
-namespace Sonic
+
+#include <Hedgehog/Universe/Engine/hhMessageActor.h>
+
+namespace Sonic::Sequence
 {
-	namespace Sequence
+	class CSequenceMode : public Hedgehog::Universe::CMessageActor
 	{
-		class CSequenceMode : public Hedgehog::Universe::CMessageActor
-		{
-		public:
-			virtual void CSequenceMode10();
-			virtual void ChangeModule();
-			virtual void EndModule();
-		};
-	}
+	public:
+		virtual void CSequenceMode10();
+		virtual void ChangeModule();
+		virtual void EndModule();
+	};
 }
