@@ -54,9 +54,17 @@ namespace Sonic
     class CDatabaseTree;
     class CGameplayFlowManager;
     class CPlayerProperty;
-
     class CGammaController;
 
+	enum ELanguage : uint8_t
+	{
+		eLanguage_English,
+		eLanguage_Japanese,
+		eLanguage_French,
+		eLanguage_German,
+		eLanguage_Spanish,
+		eLanguage_Italian
+	};
     class CApplicationDocument : public Hedgehog::Base::CSynchronizedObject
     {
     public:
@@ -121,7 +129,8 @@ namespace Sonic
         static Hedgehog::Base::TSynchronizedPtr<CApplicationDocument> GetInstance();
 
         CMember* m_pMember;
-        BB_INSERT_PADDING(0x2C);
+        ELanguage m_UILanguage;
+        BB_INSERT_PADDING(0x2B);
         hh::map<uint32_t, boost::shared_ptr<Hedgehog::Universe::CService>> m_ServiceMap;
 
         void AddMessageActor(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CMessageActor* in_pMessageActor);
@@ -174,6 +183,7 @@ namespace Sonic
     BB_ASSERT_SIZEOF(CApplicationDocument::CMember, 0x230);
 
     BB_ASSERT_OFFSETOF(CApplicationDocument, m_pMember, 0x4);
+    BB_ASSERT_OFFSETOF(CApplicationDocument, m_UILanguage, 0x8);
     BB_ASSERT_OFFSETOF(CApplicationDocument, m_ServiceMap, 0x34);
     BB_ASSERT_SIZEOF(CApplicationDocument, 0x40);
 }
