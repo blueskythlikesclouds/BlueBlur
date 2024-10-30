@@ -56,15 +56,15 @@ namespace Sonic
     class CPlayerProperty;
     class CGammaController;
 
-	enum ELanguage : uint8_t
-	{
-		eLanguage_English,
-		eLanguage_Japanese,
-		eLanguage_French,
-		eLanguage_German,
-		eLanguage_Spanish,
-		eLanguage_Italian
-	};
+    enum ELanguage : uint8_t
+    {
+    	eLanguage_English,
+    	eLanguage_Japanese,
+    	eLanguage_French,
+    	eLanguage_German,
+    	eLanguage_Spanish,
+    	eLanguage_Italian
+    };
     class CApplicationDocument : public Hedgehog::Base::CSynchronizedObject
     {
     public:
