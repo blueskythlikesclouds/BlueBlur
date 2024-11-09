@@ -29,12 +29,14 @@ namespace Sonic::Player
         BB_INSERT_PADDING(0xB0);
         boost::shared_ptr<Hedgehog::Mirage::CSingleElement>    m_spCharacterModel;
         boost::shared_ptr<Hedgehog::Animation::CAnimationPose> m_spAnimationPose;
-        BB_INSERT_PADDING(0x4C);
+        boost::shared_ptr<CAnimationStateMachine> m_spAnimationStateMachine;
+        BB_INSERT_PADDING(0x44);
     };
 
     BB_ASSERT_OFFSETOF(CPlayer, m_spContext, 0xAC);
     BB_ASSERT_OFFSETOF(CPlayer, m_StateMachine, 0xB4);
     BB_ASSERT_OFFSETOF(CPlayer, m_spCharacterModel, 0x234);
     BB_ASSERT_OFFSETOF(CPlayer, m_spAnimationPose, 0x23C);
+    BB_ASSERT_OFFSETOF(CPlayer, m_spAnimationStateMachine, 0x244);
     BB_ASSERT_SIZEOF(CPlayer, 0x290);
 }
