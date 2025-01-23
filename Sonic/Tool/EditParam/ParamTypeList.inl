@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline void* const pCParamTypeListAddValue = (void*)0xCEBD70;
 
-    inline void fCParamTypeListAddValue(CParamTypeList* in_pParamTypeList, const Hedgehog::Base::CSharedString* in_pName, uint32_t in_Value)
+    inline BB_NOINLINE void fCParamTypeListAddValue(CParamTypeList* in_pParamTypeList, const Hedgehog::Base::CSharedString* in_pName, uint32_t in_Value)
     {
         __asm
         {
@@ -20,7 +20,7 @@ namespace Sonic
 
     inline void* const pCParamTypeListConstructor = (void*)0xCEBF90;
 
-    inline CParamTypeList* fCParamTypeListConstructor(
+    inline BB_NOINLINE CParamTypeList* fCParamTypeListConstructor(
         CParamTypeList* in_pParamTypeList, const Hedgehog::Base::CSharedString* in_pDescription, uint32_t* in_pValue, uint32_t in_Unknown)
     {
         __asm

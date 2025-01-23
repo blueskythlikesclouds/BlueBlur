@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCGameObjectRigidBodyCtor = 0x1106D20;
 
-    inline void fCGameObjectRigidBodyCtor(
+    inline BB_NOINLINE void fCGameObjectRigidBodyCtor(
         CGameObjectRigidBody* This,
         const Hedgehog::Base::CStringSymbol in_Category,
         const Hedgehog::Base::CSharedString* in_pModelName,

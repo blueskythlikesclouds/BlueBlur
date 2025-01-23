@@ -74,6 +74,8 @@
 #define BB_OVERRIDE_FUNCTION_PTR_CONST_NOARG(returnType, baseType, function, location, ...) \
     _BB_VTABLE_FUNCTION_PTR_NOARG(, returnType, const baseType*, function, location, const override)
 
+#define BB_NOINLINE __declspec(noinline)
+
 template<int TActual, int TExpected>
 struct bb_assert_offsetof
 {

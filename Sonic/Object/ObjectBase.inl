@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCObjectBaseAddRenderable = 0xE95DC0;
 
-	static void __declspec(naked) __declspec(noinline) fCObjectBaseAddRenderable()
+	inline BB_NOINLINE void __declspec(naked) fCObjectBaseAddRenderable()
     {
         __asm
         {

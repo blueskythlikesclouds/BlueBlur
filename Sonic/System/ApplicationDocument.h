@@ -4,6 +4,8 @@
 #include <Hedgehog/Base/Thread/hhSynchronizedPtr.h>
 #include <Hedgehog/Universe/Engine/hhMessageManager.h>
 
+#include <Sonic/System/GammaController.h>
+
 namespace Hedgehog::Database
 {
     class CDatabase;
