@@ -68,7 +68,7 @@ namespace Sonic
 
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pWorld, 0x04);
-	BB_ASSERT_OFFSETOF(CGameObject::CMember, m_CastShadow, 0x58);
+    BB_ASSERT_OFFSETOF(CGameObject::CMember, m_CastShadow, 0x58);
     BB_ASSERT_SIZEOF(CGameObject::CMember, 0x80);
 
     BB_ASSERT_OFFSETOF(CGameObject, m_pMember, 0xA4);
