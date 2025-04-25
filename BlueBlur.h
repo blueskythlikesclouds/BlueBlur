@@ -231,6 +231,9 @@
 #include <Sonic/Player/Parameter/SonicClassicParameter.h>
 #include <Sonic/Player/Parameter/SonicParameter.h>
 #include <Sonic/Player/Parameter/SonicSpParameter.h>
+#include <Sonic/Sequence/ModeCreaterList.h>
+#include <Sonic/Sequence/SequenceMain.h>
+#include <Sonic/Sequence/SequenceModeBase.h>
 #include <Sonic/System/Application.h>
 #include <Sonic/System/ApplicationDocument.h>
 #include <Sonic/System/BGMData.h>
@@ -240,9 +243,11 @@
 #include <Sonic/System/GameObjectModel.h>
 #include <Sonic/System/GameObjectRigidBody.h>
 #include <Sonic/System/GameParameter.h>
+#include <Sonic/System/GammaController.h>
 #include <Sonic/System/InputState.h>
 #include <Sonic/System/MatrixNodeTransform.h>
 #include <Sonic/System/PadState.h>
+#include <Sonic/System/PlayerProperty.h>
 #include <Sonic/System/ServiceGamePlay.h>
 #include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>

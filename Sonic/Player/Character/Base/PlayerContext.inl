@@ -10,7 +10,7 @@ namespace Sonic::Player
 
     inline uint32_t pCPlayerContextChangeState = 0xE4FF30;
 
-    inline Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextChangeState(
+    inline BB_NOINLINE Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* fCPlayerContextChangeState(
         CPlayerContext* This, const Hedgehog::Base::CSharedString* in_pType)
     {
         Hedgehog::Universe::TStateMachine<CPlayerContext>::TState* pResult;

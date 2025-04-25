@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCCsdDatabaseWrapperGetCsdProject = 0x10DD920;
 
-    inline void fCCsdDatabaseWrapperGetCsdProject(const Hedgehog::Base::CSharedString* in_pName, CCsdDatabaseWrapper* This, boost::shared_ptr<CCsdProject>* out_spCsdProject)
+    inline BB_NOINLINE void fCCsdDatabaseWrapperGetCsdProject(const Hedgehog::Base::CSharedString* in_pName, CCsdDatabaseWrapper* This, boost::shared_ptr<CCsdProject>* out_spCsdProject)
     {
         __asm
         {

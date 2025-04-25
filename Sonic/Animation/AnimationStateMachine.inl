@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCAnimationStateMachineCtor = 0xCDF720;
 
-    inline void fCAnimationStateMachineCtor(CAnimationStateMachine* This)
+    inline BB_NOINLINE void fCAnimationStateMachineCtor(CAnimationStateMachine* This)
     {
         __asm
         {
@@ -49,7 +49,7 @@ namespace Sonic
 
     inline uint32_t pCAnimationStateMachineUpdate = 0xCE0810;
 
-    inline void fCAnimationStateMachineUpdate(CAnimationStateMachine* This, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
+    inline BB_NOINLINE void fCAnimationStateMachineUpdate(CAnimationStateMachine* This, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
     {
         __asm
         {

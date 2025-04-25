@@ -23,7 +23,7 @@ namespace Hedgehog::Universe
     }
 
     inline uint32_t pCStateBaseHoldPropertyFloatFuncAddr = 0x50DFB0;
-    inline void fCStateBaseHoldPropertyFloat(const CStateMachineBase::CStateBase* This, const hh::Base::CSharedString& in_rName, const float* in_pValue)
+    inline BB_NOINLINE void fCStateBaseHoldPropertyFloat(const CStateMachineBase::CStateBase* This, const hh::Base::CSharedString& in_rName, const float* in_pValue)
     {
         __asm
         {
@@ -48,7 +48,7 @@ namespace Hedgehog::Universe
 
     inline uint32_t pCStateBaseHoldPropertyBoolFuncAddr = 0x50DD40;
 
-    inline void fCStateBaseHoldPropertyBool(const CStateMachineBase::CStateBase* This, const hh::Base::CSharedString& in_rName, const bool* in_pValue)
+    inline BB_NOINLINE void fCStateBaseHoldPropertyBool(const CStateMachineBase::CStateBase* This, const hh::Base::CSharedString& in_rName, const bool* in_pValue)
     {
         __asm
         {

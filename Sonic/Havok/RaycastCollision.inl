@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCRayCastCollisionCtor = 0x01182980;
 
-    inline void fpCRayCastCollisionCtor(CRayCastCollision* This, const Hedgehog::Base::THolder<CWorld>& in_pWorldHolder)
+    inline BB_NOINLINE void fpCRayCastCollisionCtor(CRayCastCollision* This, const Hedgehog::Base::THolder<CWorld>& in_pWorldHolder)
     {
         __asm
         {

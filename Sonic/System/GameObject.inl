@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCGameObjectCtor = 0xD601F0;
 
-    inline void fCGameObjectCtor(CGameObject* This)
+    inline BB_NOINLINE void fCGameObjectCtor(CGameObject* This)
     {
         __asm
         {

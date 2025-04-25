@@ -9,7 +9,7 @@ namespace Sonic
 
     inline void* const pCFxShadowMapSetRenderStates = (void*)0x10C61D0;
 
-    inline void fCFxShadowMapSetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
+    inline BB_NOINLINE void fCFxShadowMapSetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
     {
         __asm
         {
@@ -27,7 +27,7 @@ namespace Sonic
 
     inline void* const pCFxShadowMapUnsetRenderStates = (void*)0x10C6160;
 
-    inline void fCFxShadowMapUnsetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
+    inline BB_NOINLINE void fCFxShadowMapUnsetRenderStates(Hedgehog::Yggdrasill::CYggDevice* in_pDevice, uint32_t in_EnableReverseCull)
     {
         __asm
         {

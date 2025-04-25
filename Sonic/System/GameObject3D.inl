@@ -28,7 +28,7 @@ namespace Sonic
 
     inline constexpr uint32_t pCGameObject3DAddRigidBodyFromDatabase = 0xE98EB0;
 
-    static void __declspec(naked) __declspec(noinline) fCGameObject3DAddRigidBodyFromDatabase()
+    inline BB_NOINLINE void __declspec(naked) fCGameObject3DAddRigidBodyFromDatabase()
     {
         __asm
         {

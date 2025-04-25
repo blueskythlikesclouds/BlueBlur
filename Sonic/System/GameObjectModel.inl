@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCGameObjectModelCtor = 0x11D1790;
 
-    inline void fCGameObjectModelCtor(
+    inline BB_NOINLINE void fCGameObjectModelCtor(
         CGameObjectModel* This,
         const boost::shared_ptr<Hedgehog::Database::CDatabase>* in_spDatabase,
         const Hedgehog::Base::CStringSymbol in_Category,
