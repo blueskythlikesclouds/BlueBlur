@@ -28,7 +28,9 @@ namespace Sonic
         public:
             Hedgehog::Base::TSynchronizedPtr<CGameDocument> m_pGameDocument;
             Hedgehog::Base::TSynchronizedPtr<CWorld> m_pWorld;
-            BB_INSERT_PADDING(0x78);
+            BB_INSERT_PADDING(0x50);
+            bool m_CastShadow;
+            BB_INSERT_PADDING(0x27);
         };
 
         CMember* m_pMember;
@@ -66,6 +68,7 @@ namespace Sonic
 
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pWorld, 0x04);
+    BB_ASSERT_OFFSETOF(CGameObject::CMember, m_CastShadow, 0x58);
     BB_ASSERT_SIZEOF(CGameObject::CMember, 0x80);
 
     BB_ASSERT_OFFSETOF(CGameObject, m_pMember, 0xA4);
