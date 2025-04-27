@@ -1,0 +1,10 @@
+.vs
+__pycache__
+bin
+obj
+BlueBlur.cpp
+BlueBlur.obj
+BlueBlur.sln
+BlueBlur.vcxproj
+BlueBlur.vcxproj.filters
+BlueBlur.vcxproj.user

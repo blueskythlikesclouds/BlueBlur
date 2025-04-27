@@ -1,0 +1,45 @@
+﻿#pragma once
+
+namespace Sonic::Player
+{
+    enum ESonicSpParameter
+    {
+        eSonicSpParameter_VelocityInputVert = 470,
+        eSonicSpParameter_VelocityReflection = 471,
+        eSonicSpParameter_VelocityByABSRay = 472,
+        eSonicSpParameter_VelocityOnDamage = 473,
+        eSonicSpParameter_VelocityUpOnDamage = 474,
+        eSonicSpParameter_VelocityAdjustSpeed = 475,
+        eSonicSpParameter_NoInputTimeInReflection = 476,
+        eSonicSpParameter_InternalScaleInReflection = 477,
+        eSonicSpParameter_DistanceFrom2DPath = 478,
+        eSonicSpParameter_LightAttackChargeTime = 479,
+        eSonicSpParameter_LightAttackVelocity0 = 480,
+        eSonicSpParameter_LightAttackVelocity1 = 481,
+        eSonicSpParameter_LightAttackColRadius0 = 482,
+        eSonicSpParameter_LightAttackColRadius1 = 483,
+        eSonicSpParameter_LightAttackEffScale0 = 484,
+        eSonicSpParameter_LightAttackEffScale1 = 485,
+        eSonicSpParameter_LightAttackDurationTime = 486,
+        eSonicSpParameter_LightAttackVelocityReturn = 487,
+        eSonicSpParameter_LightAttackVelocityKeep = 488,
+        eSonicSpParameter_AtomicSpinVelocity = 489,
+        eSonicSpParameter_AtomicSpinMinTime = 490,
+        eSonicSpParameter_AtomicSpinMaxTime = 491,
+        eSonicSpParameter_AtomicSpinChargeMinTime = 492,
+        eSonicSpParameter_AtomicSpinChargeMaxTime = 493,
+        eSonicSpParameter_AtomicSpinChargeOffsX = 494,
+        eSonicSpParameter_AtomicSpinChargeOffsY = 495,
+        eSonicSpParameter_AtomicSpinChargeOffsZ = 496,
+        eSonicSpParameter_AtomicSpinHomingAngle = 497,
+        eSonicSpParameter_AtomicSpinVelocityKeep = 498,
+        eSonicSpParameter_AtomicSpinVelocityMove = 499,
+        eSonicSpParameter_AtomicSpinStartHomingTime = 500,
+        eSonicSpParameter_AtomicSpinMoveTime = 501,
+        eSonicSpParameter_AtomicSpinVelocityReturn = 502,
+        eSonicSpParameter_RingSubtractTime = 503,
+        eSonicSpParameter_ResultPosOffsetX = 504,
+        eSonicSpParameter_ResultPosOffsetY = 505,
+        eSonicSpParameter_ResultPosOffsetZ = 506,
+    };
+}
