@@ -26,7 +26,9 @@ namespace Sonic
 	{
 	public:
 		static constexpr void* ms_pVfTable = (void*)0x016E5B1C;
-		BB_INSERT_PADDING(0x8C);
+		BB_INSERT_PADDING(0x5C);
+		Hedgehog::Base::CSharedString m_Description;
+		BB_INSERT_PADDING(0x2C);
 
 		static CParamRotation* Create(Hedgehog::Math::CQuaternion* pValue, const Hedgehog::Base::CSharedString& description = "")
 		{
@@ -37,5 +39,6 @@ namespace Sonic
 			return param;
 		}
 	};
+	BB_ASSERT_OFFSETOF(CParamRotation, m_Description, 0x70);
 	BB_ASSERT_SIZEOF(CParamRotation, 0xA0);
 }
