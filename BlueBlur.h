@@ -262,6 +262,7 @@
 #include <Sonic/Tool/EditParam/ParamBool.h>
 #include <Sonic/Tool/EditParam/ParamPosition.h>
 #include <Sonic/Tool/EditParam/ParamRotation.h>
+#include <Sonic/Tool/EditParam/ParamTargetList.h>
 #include <Sonic/Tool/EditParam/ParamTypeList.h>
 #include <Sonic/Tool/EditParam/ParamValue.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameter.h>
