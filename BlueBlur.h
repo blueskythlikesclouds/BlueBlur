@@ -189,6 +189,7 @@
 #include <Sonic/Message/MsgGetAnimationInfo.h>
 #include <Sonic/Message/MsgGetHomingAttackPosition.h>
 #include <Sonic/Message/MsgGetHomingAttackPriority.h>
+#include <Sonic/Message/MsgGetObjectTriggerType.h>
 #include <Sonic/Message/MsgGetPosition.h>
 #include <Sonic/Message/MsgGetRotation.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
@@ -265,6 +266,7 @@
 #include <Sonic/Tool/EditParam/ParamTargetList.h>
 #include <Sonic/Tool/EditParam/ParamTypeList.h>
 #include <Sonic/Tool/EditParam/ParamValue.h>
+#include <Sonic/Tool/ParameterBank/ParameterBank.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameter.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameterNode.h>
 #include <Sonic/Tool/ParameterEditor/GlobalParameterManager.h>

@@ -18,6 +18,7 @@ namespace Hedgehog::Mirage
 namespace Sonic
 {
     class CGameDocument;
+    class CParameterBank;
     class CWorld;
 
     class CGameObject : public Hedgehog::Universe::CUpdateUnit, public Hedgehog::Universe::CMessageActor
@@ -55,8 +56,8 @@ namespace Sonic
 
         virtual void DeathCallback(Sonic::CGameDocument* in_pGameDocument) {}
         virtual void KillCallback() {}
-        virtual void CGameObject2C(void*) {}
-        virtual void CGameObject30(void*) {}
+        virtual void GetObjectTriggerType(Hedgehog::vector<uint32_t>& in_rTriggerTypeList) {}
+        virtual void AddParameterBank(Hedgehog::Base::CRefPtr<CParameterBank>& in_rParameterBank) {}
 
         Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetGameDocument() const;
 
