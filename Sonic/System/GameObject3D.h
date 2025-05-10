@@ -67,6 +67,8 @@ namespace Sonic
 
         void AddEventCollision(const Hedgehog::Base::CStringSymbol& in_rSymbol, hk2010_2_0::hkpShape* in_pShape, int in_CollisionMask,
             bool in_IsContactPhantom, const boost::shared_ptr<Hedgehog::Mirage::CMatrixNode>& in_spMatrixNode);
+
+        void SetCullingRange(float in_Range);
     };
 
     BB_ASSERT_OFFSETOF(CGameObject3D, m_spMatrixNodeTransform, 0xB8);

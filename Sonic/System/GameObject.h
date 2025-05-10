@@ -65,6 +65,8 @@ namespace Sonic
             const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow = true);
 
         void RemoveRenderables();
+		
+        void Kill();
     };
 
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
