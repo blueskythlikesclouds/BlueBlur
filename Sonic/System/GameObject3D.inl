@@ -69,4 +69,21 @@ namespace Sonic
     {
         fpCGameObject3DAddEventCollisionGivenNode(this, in_rSymbol, &in_pShape, in_CollisionMask, in_IsContactPhantom, in_spMatrixNode);
     }
+
+    inline constexpr uint32_t pCGameObject3DSetCullingRange = 0xD5CED0;
+
+    inline BB_NOINLINE void fCCGameObject3DSetCullingRange(CGameObject3D* This, float in_Range)
+    {
+        __asm
+        {
+            mov	eax, This
+            push in_Range
+            call [pCGameObject3DSetCullingRange]
+        }
+    }
+
+    inline void CGameObject3D::SetCullingRange(float in_Range)
+    {
+        fCCGameObject3DSetCullingRange(this, in_Range);
+    }
 }
