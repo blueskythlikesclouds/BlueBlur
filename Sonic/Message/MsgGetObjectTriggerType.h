@@ -12,8 +12,8 @@ namespace Sonic::Message
 
 		hh::vector<uint32_t>* m_pTriggerTypeList;
 
-		MsgGetObjectTriggerType(Hedgehog::vector<uint32_t>* in_pTriggerTypeList) : m_pTriggerTypeList(in_pTriggerTypeList) {}
-		MsgGetObjectTriggerType(Hedgehog::vector<uint32_t>& in_rTriggerTypeList) : m_pTriggerTypeList(&in_rTriggerTypeList) {}
+		MsgGetObjectTriggerType(hh::vector<uint32_t>* in_pTriggerTypeList) : m_pTriggerTypeList(in_pTriggerTypeList) {}
+		MsgGetObjectTriggerType(hh::vector<uint32_t>& in_rTriggerTypeList) : m_pTriggerTypeList(&in_rTriggerTypeList) {}
 	};
 
 	BB_ASSERT_OFFSETOF(MsgGetObjectTriggerType, m_pTriggerTypeList, 0x10);
