@@ -47,6 +47,31 @@ namespace Sonic
         return spAnimationState;
     }
 
+    inline uint32_t pCAnimationStateMachineSetAnimationBlend = 0xCE0720;
+
+    inline BB_NOINLINE void* fCAnimationStateMachineSetAnimationBlend
+    (
+        CAnimationStateMachine* This,
+        const Hedgehog::Base::CSharedString& in_rBaseAnim,
+        const Hedgehog::Base::CSharedString& in_rTargetAnim,
+        float in_BlendTime
+    )
+    {
+        __asm
+        {
+            push in_BlendTime
+            mov edi, in_rBaseAnim
+            mov eax, in_rTargetAnim
+            mov ecx, This
+            call [pCAnimationStateMachineSetAnimationBlend]
+        }
+    }
+
+    inline void CAnimationStateMachine::SetAnimationBlend(const Hedgehog::Base::CSharedString& in_rBaseAnim, const Hedgehog::Base::CSharedString& in_rTargetAnim, float in_BlendTime)
+    {
+        fCAnimationStateMachineSetAnimationBlend(this, in_rBaseAnim, in_rTargetAnim, in_BlendTime);
+    }
+
     inline uint32_t pCAnimationStateMachineUpdate = 0xCE0810;
 
     inline BB_NOINLINE void fCAnimationStateMachineUpdate(CAnimationStateMachine* This, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
