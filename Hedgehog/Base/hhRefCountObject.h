@@ -31,9 +31,9 @@ namespace Hedgehog::Base
         CRefPtr& operator=(const CRefPtr& in_rOther);
         CRefPtr& operator=(CRefPtr&& io_rOther);
 
-        T* operator->();
-        T& operator*();
-        operator T*();
+        T* operator->() const;
+        T& operator*() const;
+        operator T*() const;
 
         operator bool() const;
 

@@ -93,19 +93,19 @@ namespace Hedgehog::Base
     }
 
     template <typename T>
-    T* CRefPtr<T>::operator->()
+    T* CRefPtr<T>::operator->() const
     {
         return m_pObject;
     }
 
     template <typename T>
-    T& CRefPtr<T>::operator*()
+    T& CRefPtr<T>::operator*() const
     {
         return *m_pObject;
     }
 
     template <typename T>
-    CRefPtr<T>::operator T* ()
+    CRefPtr<T>::operator T* () const
     {
         return m_pObject;
     }

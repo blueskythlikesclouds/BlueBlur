@@ -56,7 +56,7 @@ namespace Sonic
 
         virtual void DeathCallback(Sonic::CGameDocument* in_pGameDocument) {}
         virtual void KillCallback() {}
-        virtual void GetObjectTriggerType(Hedgehog::vector<uint32_t>& in_rTriggerTypeList) {}
+        virtual void GetObjectTriggerType(hh::vector<uint32_t>& in_rTriggerTypeList) {}
         virtual void AddParameterBank(Hedgehog::Base::CRefPtr<CParameterBank>& in_rParameterBank) {}
 
         Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetGameDocument() const;

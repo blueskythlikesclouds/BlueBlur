@@ -10,7 +10,7 @@ namespace Sonic::Message
 	public:
 		HH_FND_MSG_MAKE_TYPE(0x1681190);
 
-		Hedgehog::vector<uint32_t>* m_pTriggerTypeList;
+		hh::vector<uint32_t>* m_pTriggerTypeList;
 
 		MsgGetObjectTriggerType(Hedgehog::vector<uint32_t>* in_pTriggerTypeList) : m_pTriggerTypeList(in_pTriggerTypeList) {}
 		MsgGetObjectTriggerType(Hedgehog::vector<uint32_t>& in_rTriggerTypeList) : m_pTriggerTypeList(&in_rTriggerTypeList) {}
