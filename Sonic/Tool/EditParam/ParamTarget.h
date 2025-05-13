@@ -7,16 +7,15 @@ namespace Sonic
 {
 	class CParamTarget;
 
-	static inline uint32_t pCParamTargetCtor = 0xCECDE0;
+	inline uint32_t pCParamTargetCtor = 0xCECDE0;
 
-	static __declspec(noinline) CParamTarget* fCParamTargetCtor
+	inline BB_NOINLINE CParamTarget* fCParamTargetCtor
 	(
 		CParamTarget* This,
 		const Hedgehog::Base::CSharedString* in_pDescription,
 		uint32_t* in_pValue, 
 		uint32_t in_Unknown
 	)
-	
 	{
 		__asm
 		{
@@ -36,10 +35,10 @@ namespace Sonic
 		Hedgehog::Base::CSharedString m_Description;
 		BB_INSERT_PADDING(0x2C);
 
-		static CParamTarget* Create(uint32_t* pValue, const Hedgehog::Base::CSharedString& description = "")
+		static CParamTarget* Create(uint32_t* in_pValue, const Hedgehog::Base::CSharedString& in_rDescription = "")
 		{
 			CParamTarget* param = static_cast<CParamTarget*>(__HH_ALLOC(sizeof(CParamTarget)));
-			fCParamTargetCtor(param, &description, pValue, 2);
+			fCParamTargetCtor(param, &in_rDescription, in_pValue, 2);
 
 			param->AddRef();
 			return param;
