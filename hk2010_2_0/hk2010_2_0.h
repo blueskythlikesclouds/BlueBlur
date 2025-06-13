@@ -596,6 +596,26 @@ namespace hk2010_2_0
     };
     BB_ASSERT_SIZEOF(hkpSphereShape, 0x20);
 
+    class hkpCylinderShape : public hkpShape
+    {
+    public:
+        float m_ConvexShapeRadius = 0.050000001f;
+        float m_Radius = 1.0f;
+        float m_Field18 = 0.80000001f;
+        int m_Field1C{};
+        Hedgehog::Math::CVector m_VertexA;
+        Hedgehog::Math::CVector m_VertexB;
+        Hedgehog::Math::CVector m_Field40;
+        Hedgehog::Math::CVector m_Field50;
+
+        hkpCylinderShape(const Hedgehog::Math::CVector& in_rVertexA, const Hedgehog::Math::CVector& in_rVertexB, float in_Radius)
+        {
+            BB_FUNCTION_PTR(void*, __thiscall, ctor, 0x008CE9B0, hkpCylinderShape * This, const Hedgehog::Math::CVector &, const Hedgehog::Math::CVector &, float, float _convexShapeRadius);
+            ctor(this, in_rVertexA, in_rVertexB, in_Radius, 0.050000001f);
+        }
+    };
+    BB_ASSERT_SIZEOF(hkpCylinderShape, 0x60);
+
     class hkpCapsuleShape : public hkpShape
     {
     public:
