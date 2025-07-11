@@ -59,6 +59,7 @@
 #include <Hedgehog/MirageCore/Misc/hhTransform.h>
 #include <Hedgehog/MirageCore/Misc/hhVertexDeclarationPtr.h>
 #include <Hedgehog/MirageCore/Renderable/hhBundle.h>
+#include <Hedgehog/MirageCore/Renderable/hhBundlePair.h>
 #include <Hedgehog/MirageCore/Renderable/hhElement.h>
 #include <Hedgehog/MirageCore/Renderable/hhOptimalBundle.h>
 #include <Hedgehog/MirageCore/Renderable/hhRenderable.h>
