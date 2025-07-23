@@ -132,6 +132,8 @@
 #include <Hedgehog/Yggdrasill/hhYggTexture.h>
 
 #include <CSD/Manager/csdmBase.h>
+#include <CSD/Manager/csdmColor.h>
+#include <CSD/Manager/csdmMotionPattern.h>
 #include <CSD/Manager/csdmNode.h>
 #include <CSD/Manager/csdmNodeObserver.h>
 #include <CSD/Manager/csdmObserverBase.h>

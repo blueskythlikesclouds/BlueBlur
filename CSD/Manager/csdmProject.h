@@ -2,6 +2,7 @@
 
 #include <CSD/Manager/csdmBase.h>
 #include <CSD/Manager/csdmResourceBase.h>
+#include <Hedgehog/Base/Type/hhSharedString.h>
 
 namespace Chao::CSD
 {
@@ -13,9 +14,12 @@ namespace Chao::CSD
     class CProject : public CResourceBase<Project>, CBase
     {
     public:
-        BB_INSERT_PADDING(0x1C);
+        uint32_t m_Field10;
+        hh::map<const char*, RCPtr<CScene>> m_SpawnedScenes;
+        hh::map<float, RCPtr<CScene>> m_Field20;
         RCPtr<CTexList> m_rcTexList;
-        BB_INSERT_PADDING(0x1C);
+        CFontList* m_rcFontList;
+        BB_INSERT_PADDING(0x18);
 
         RCPtr<CScene> CreateScene(const char* in_pName) const;
         RCPtr<CScene> CreateScene(const char* in_pName, const char* in_pMotionName) const;
@@ -26,7 +30,11 @@ namespace Chao::CSD
         static void DestroyScene(CProject* in_pProject, RCPtr<CScene>& inout_rcScene);
     };
 
+    BB_ASSERT_OFFSETOF(CProject, m_Field10, 0x10);
+    BB_ASSERT_OFFSETOF(CProject, m_SpawnedScenes, 0x14);
+    BB_ASSERT_OFFSETOF(CProject, m_Field20, 0x20);
     BB_ASSERT_OFFSETOF(CProject, m_rcTexList, 0x2C);
+    BB_ASSERT_OFFSETOF(CProject, m_rcFontList, 0x34);
     BB_ASSERT_SIZEOF(CProject, 0x50);
 }
 
