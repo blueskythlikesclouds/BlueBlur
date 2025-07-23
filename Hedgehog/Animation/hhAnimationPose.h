@@ -58,8 +58,11 @@ namespace Hedgehog::Animation
         float m_Scale = 0;
         BB_INSERT_PADDING(0x10) {};
         boost::shared_ptr<CIkRaycastInterface> m_spFootIK; // 0x90
+        BB_INSERT_PADDING(0x4);
+        float m_Field9C;
+        float m_FieldA0;
 
-        BB_INSERT_PADDING(0x78) {};
+        BB_INSERT_PADDING(0x6C) {};
 
         boost::shared_ptr<Database::CDatabase> m_spDatabase; // 0x110
         BB_INSERT_PADDING(0x18) {};
@@ -88,6 +91,8 @@ namespace Hedgehog::Animation
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spModelData, 0x40);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_Scale, 0x7C);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spFootIK, 0x90);
+    BB_ASSERT_OFFSETOF(CAnimationPose, m_Field9C, 0x9C);
+    BB_ASSERT_OFFSETOF(CAnimationPose, m_FieldA0, 0xA0);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spDatabase, 0x110);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spAnimationCache, 0x130);
     BB_ASSERT_SIZEOF(CAnimationPose, 0x150);
