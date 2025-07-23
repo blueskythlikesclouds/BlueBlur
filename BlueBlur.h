@@ -193,6 +193,8 @@
 #include <Sonic/Message/MsgGetHomingAttackPosition.h>
 #include <Sonic/Message/MsgGetHomingAttackPriority.h>
 #include <Sonic/Message/MsgGetObjectTriggerType.h>
+#include <Sonic/Message/MsgGetStageGuidePathController.h>
+#include <Sonic/Message/MsgGetRatioOnStageGuidePath.h>
 #include <Sonic/Message/MsgGetPosition.h>
 #include <Sonic/Message/MsgGetRotation.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
