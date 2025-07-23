@@ -153,6 +153,7 @@
 #include <Sonic/Animation/AnimationState.h>
 #include <Sonic/Animation/AnimationStateMachine.h>
 #include <Sonic/Animation/State/AnimationStateSingle.h>
+#include <Sonic/Animation/State/AnimationStateVelocityLink.h>
 #include <Sonic/Camera/Camera.h>
 #include <Sonic/Character/Utility/NPCSingleElementEffectMotionAll.h>
 #include <Sonic/Collision/PhysicsUnit.h>
