@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline void* const pCEditParamCreateParamBool = (void*)0xCEF4F0;
 
-    inline CParamBool* fCEditParamCreateParamBool(
+    inline BB_NOINLINE CParamBool* fCEditParamCreateParamBool(
         const SParamValueCreationParams<bool>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
@@ -27,7 +27,7 @@ namespace Sonic
 
     inline void* const pCEditParamCreateParamUnsignedLong = (void*)0x591300;
 
-    inline CParamValue<unsigned long>* fCEditParamCreateParamUnsignedLong(
+    inline BB_NOINLINE CParamValue<unsigned long>* fCEditParamCreateParamUnsignedLong(
         const SParamValueCreationParams<unsigned long>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
@@ -54,7 +54,7 @@ namespace Sonic
 
     inline void* const pCEditParamCreateParamLong = (void*)0x590FB0;
 
-    inline CParamValue<long>* fCEditParamCreateParamLong(
+    inline BB_NOINLINE CParamValue<long>* fCEditParamCreateParamLong(
         const SParamValueCreationParams<long>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
@@ -79,7 +79,7 @@ namespace Sonic
 
     inline void* const pCEditParamCreateParamInt = (void*)0x590DA0;
 
-    inline CParamValue<int>* fCEditParamCreateParamInt(
+    inline BB_NOINLINE CParamValue<int>* fCEditParamCreateParamInt(
         const SParamValueCreationParams<int>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
@@ -104,7 +104,7 @@ namespace Sonic
 
     inline void* const pCEditParamCreateParamFloat = (void*)0x590770;
 
-    inline CParamValue<float>* fCEditParamCreateParamFloat(
+    inline BB_NOINLINE CParamValue<float>* fCEditParamCreateParamFloat(
         const SParamValueCreationParams<float>* in_pCreationParams, CEditParam* in_pEditParam, const Hedgehog::Base::CSharedString* in_pName)
     {
         __asm
@@ -130,7 +130,7 @@ namespace Sonic
 
     inline void* const pCEditParamAddParamTypeList = (void*)0xCEF700;
 
-    inline void fCEditParamAddParamTypeList(const Hedgehog::Base::CSharedString* in_pName, CEditParam* in_pEditParam, CParamTypeList* in_pParamTypeList)
+    inline BB_NOINLINE void fCEditParamAddParamTypeList(const Hedgehog::Base::CSharedString* in_pName, CEditParam* in_pEditParam, CParamTypeList* in_pParamTypeList)
     {
         __asm
         {
@@ -171,7 +171,7 @@ namespace Sonic
     }
 
     inline void* pCEditParamAddParamBase = (void*)0xCEF700;
-    inline void fCEditParamAddParamBase(CEditParam* in_pEditParam, Sonic::CParamBase* param, const Hedgehog::Base::CSharedString& name)
+    inline BB_NOINLINE void fCEditParamAddParamBase(CEditParam* in_pEditParam, Sonic::CParamBase* param, const Hedgehog::Base::CSharedString& name)
     {
         __asm
         {

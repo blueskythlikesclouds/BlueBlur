@@ -4,6 +4,8 @@
 
 namespace Sonic::Sequence
 {
+	class CSequenceMode;
+
 	class CModeCreaterListImpl
 	{
 	public:

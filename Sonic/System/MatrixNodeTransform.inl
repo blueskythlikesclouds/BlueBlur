@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCMatrixNodeTransformCtor = 0xD172B0;
 
-    inline void fCMatrixNodeTransformCtor(CMatrixNodeTransform* This)
+    inline BB_NOINLINE void fCMatrixNodeTransformCtor(CMatrixNodeTransform* This)
     {
         __asm
         {

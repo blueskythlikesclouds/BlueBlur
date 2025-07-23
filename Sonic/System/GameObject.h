@@ -18,6 +18,7 @@ namespace Hedgehog::Mirage
 namespace Sonic
 {
     class CGameDocument;
+    class CParameterBank;
     class CWorld;
 
     class CGameObject : public Hedgehog::Universe::CUpdateUnit, public Hedgehog::Universe::CMessageActor
@@ -28,7 +29,9 @@ namespace Sonic
         public:
             Hedgehog::Base::TSynchronizedPtr<CGameDocument> m_pGameDocument;
             Hedgehog::Base::TSynchronizedPtr<CWorld> m_pWorld;
-            BB_INSERT_PADDING(0x78);
+            BB_INSERT_PADDING(0x50);
+            bool m_CastShadow;
+            BB_INSERT_PADDING(0x27);
         };
 
         CMember* m_pMember;
@@ -53,8 +56,8 @@ namespace Sonic
 
         virtual void DeathCallback(Sonic::CGameDocument* in_pGameDocument) {}
         virtual void KillCallback() {}
-        virtual void CGameObject2C(void*) {}
-        virtual void CGameObject30(void*) {}
+        virtual void GetObjectTriggerType(hh::vector<uint32_t>& in_rTriggerTypeList) {}
+        virtual void AddParameterBank(const Hedgehog::Base::CRefPtr<CParameterBank>& in_rParameterBank) {}
 
         Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetGameDocument() const;
 
@@ -62,10 +65,13 @@ namespace Sonic
             const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow = true);
 
         void RemoveRenderables();
+		
+        void Kill();
     };
 
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pGameDocument, 0x0);
     BB_ASSERT_OFFSETOF(CGameObject::CMember, m_pWorld, 0x04);
+    BB_ASSERT_OFFSETOF(CGameObject::CMember, m_CastShadow, 0x58);
     BB_ASSERT_SIZEOF(CGameObject::CMember, 0x80);
 
     BB_ASSERT_OFFSETOF(CGameObject, m_pMember, 0xA4);

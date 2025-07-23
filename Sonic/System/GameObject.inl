@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCGameObjectCtor = 0xD601F0;
 
-    inline void fCGameObjectCtor(CGameObject* This)
+    inline BB_NOINLINE void fCGameObjectCtor(CGameObject* This)
     {
         __asm
         {
@@ -51,5 +51,21 @@ namespace Sonic
     inline void CGameObject::RemoveRenderables()
     {
         fpCGameObjectRemoveRenderables(this);
+    }
+
+    inline uint32_t pCGameObjectKill = 0xD5FD10;
+
+    inline BB_NOINLINE void fCGameObjectKill(CGameObject* This)
+    {
+        __asm
+        {
+            mov edi, This
+            call [pCGameObjectKill]
+        }
+    }
+
+    inline void CGameObject::Kill()
+    {
+        fCGameObjectKill(this);
     }
 }

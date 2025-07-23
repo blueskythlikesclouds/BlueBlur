@@ -6,6 +6,7 @@
 
 namespace Hedgehog::Mirage
 {
+    class CBundlePair;
     class CRenderScene;
 }
 
@@ -24,7 +25,8 @@ namespace Sonic
             Hedgehog::Base::CSharedString m_Name;
             boost::shared_ptr<CCamera> m_spCamera;
             boost::shared_ptr<CCamera> m_spOverrideCamera;
-            BB_INSERT_PADDING(0x50);
+            BB_INSERT_PADDING(0x44);
+            hh::map<Hedgehog::Base::CStringSymbol, boost::shared_ptr<Hedgehog::Mirage::CBundlePair>> m_BundlePairMap;
             boost::shared_ptr<CPhysicsWorld> m_spPhysicsWorld;
             BB_INSERT_PADDING(0xC);
         };
@@ -38,6 +40,7 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CWorld::CMember, m_Name, 0x8);
     BB_ASSERT_OFFSETOF(CWorld::CMember, m_spCamera, 0xC);
     BB_ASSERT_OFFSETOF(CWorld::CMember, m_spOverrideCamera, 0x14);
+    BB_ASSERT_OFFSETOF(CWorld::CMember, m_BundlePairMap, 0x60);
     BB_ASSERT_OFFSETOF(CWorld::CMember, m_spPhysicsWorld, 0x6C);
     BB_ASSERT_SIZEOF(CWorld::CMember, 0x80);
 

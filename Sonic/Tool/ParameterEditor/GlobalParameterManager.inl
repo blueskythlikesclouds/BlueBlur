@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCGlobalParameterManagerCreateParameterFile = 0xCE9A40;
 
-    inline void fCGlobalParameterManagerCreateParameterFile(CGlobalParameterManager* in_pGlobalParameterManager, boost::shared_ptr<CParameterFile>* out_spParameterFile,
+    inline BB_NOINLINE void fCGlobalParameterManagerCreateParameterFile(CGlobalParameterManager* in_pGlobalParameterManager, boost::shared_ptr<CParameterFile>* out_spParameterFile,
         const Hedgehog::Base::CSharedString* in_pName, const Hedgehog::Base::CSharedString* in_pDescription)
     {
         __asm

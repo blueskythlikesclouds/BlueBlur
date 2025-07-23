@@ -2,7 +2,7 @@ namespace Sonic::Player
 {
     inline uint32_t pCStateSpeedBaseCtor = 0xE497E0;
 
-    inline void fCStateSpeedBaseCtor(CPlayerSpeedContext::CStateSpeedBase* This)
+    inline BB_NOINLINE void fCStateSpeedBaseCtor(CPlayerSpeedContext::CStateSpeedBase* This)
     {
         __asm
         {
@@ -18,7 +18,7 @@ namespace Sonic::Player
 
     inline uint32_t pCStateSpeedBaseSetBool = 0x50DD40;
 
-    inline void fCStateSpeedBaseSetBool(CPlayerSpeedContext::CStateSpeedBase* This, const Hedgehog::Base::CSharedString& in_rName, const bool& in_rValue)
+    inline BB_NOINLINE void fCStateSpeedBaseSetBool(CPlayerSpeedContext::CStateSpeedBase* This, const Hedgehog::Base::CSharedString& in_rName, const bool& in_rValue)
     {
         __asm
         {

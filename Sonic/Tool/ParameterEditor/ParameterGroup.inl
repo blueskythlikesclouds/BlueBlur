@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline void* const pCParameterGroupCreateParameterCategory = (void*)0xCE90B0;
 
-    inline CEditParam* fCParameterGroupCreateParameterCategory(
+    inline BB_NOINLINE CEditParam* fCParameterGroupCreateParameterCategory(
         const Hedgehog::Base::CSharedString* in_pName, CParameterGroup* in_pParameterGroup, const Hedgehog::Base::CSharedString* in_pDescription, uint32_t in_Unknown)
     {
         __asm

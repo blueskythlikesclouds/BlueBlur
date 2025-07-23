@@ -2,7 +2,7 @@ namespace Sonic
 {
     inline uint32_t pCPhysicsWorldCheckLineCollisionClosest = 0x10BE270;
 
-    inline bool fPhysicsWorldCheckLineCollisionClosest(
+    inline BB_NOINLINE bool fPhysicsWorldCheckLineCollisionClosest(
         CPhysicsWorld* This,
         SCollisionHitPointInfo* out_pCollisionHitPointInfo,
         const Hedgehog::Math::CVector& in_rStart,
