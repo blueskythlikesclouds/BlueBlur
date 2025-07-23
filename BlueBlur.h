@@ -102,6 +102,7 @@
 #include <Hedgehog/MotionCore/Motion/hhTexpatternMotion.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
+#include <Hedgehog/Sound/hhSoundSystem.h>
 #include <Hedgehog/Sound/Handle/hhSoundHandle.h>
 #include <Hedgehog/Sound/Handle/hhSoundHandleBgm.h>
 #include <Hedgehog/Sound/Handle/hhSoundHandleCri.h>
@@ -259,6 +260,8 @@
 #include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>
 #include <Sonic/System/GameplayFlow/GameActParameter.h>
+#include <Sonic/System/GameplayFlow/UpdateCoordinator.h>
+#include <Sonic/System/GameplayFlow/UpdateDirectorNormal.h>
 #include <Sonic/System/LightManager/LightManager.h>
 #include <Sonic/System/LightManager/LocalLight.h>
 #include <Sonic/System/RenderDirector/RenderDirector.h>
