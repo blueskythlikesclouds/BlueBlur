@@ -15,7 +15,7 @@ namespace Hedgehog::Animation
         float m_PlaybackSpeed;
         BB_INSERT_PADDING(0x18);
         bool m_Field34;
-        BB_INSERT_PADDING(0x37); // 3 extra bytes of padding due to the bool above here
+        BB_INSERT_PADDING(0x37);
         bool m_Field6C;
         BB_INSERT_PADDING(0x78);
 
@@ -34,7 +34,7 @@ namespace Hedgehog::Animation
         virtual int   CAnimationControl30(int a2);
         virtual void  CAnimationControl34();
         virtual int   CAnimationControl38(int a2, float a3);
-        virtual int   MysteryFunc();
+        virtual int   CAnimationControl3C();
         virtual int   CAnimationControl40();
         virtual void  CAnimationControl44();
         virtual void  CAnimationControl48();

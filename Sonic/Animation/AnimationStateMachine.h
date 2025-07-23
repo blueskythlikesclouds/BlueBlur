@@ -12,7 +12,7 @@ namespace Sonic
     {
     public:
         hh::map<Hedgehog::Base::CSharedString, boost::shared_ptr<Sonic::CAnimationStateSingle>> m_Animations;
-        BB_INSERT_PADDING(28) {};
+        BB_INSERT_PADDING(0x1C) {};
 
         CAnimationStateMachine(const bb_null_ctor&) : TStateMachine(bb_null_ctor{}) {}
         CAnimationStateMachine();
@@ -25,6 +25,7 @@ namespace Sonic
         void Update(const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo);
     };
 
+    BB_ASSERT_OFFSETOF(CAnimationStateMachine, m_Animations, 0x60);
     BB_ASSERT_SIZEOF(CAnimationStateMachine, 0x88);
 }
 

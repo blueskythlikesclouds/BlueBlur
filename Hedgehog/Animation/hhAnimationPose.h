@@ -91,6 +91,8 @@ namespace Hedgehog::Animation
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spModelData, 0x40);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_Scale, 0x7C);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spFootIK, 0x90);
+    BB_ASSERT_OFFSETOF(CAnimationPose, m_Field9C, 0x9C);
+    BB_ASSERT_OFFSETOF(CAnimationPose, m_FieldA0, 0xA0);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spDatabase, 0x110);
     BB_ASSERT_OFFSETOF(CAnimationPose, m_spAnimationCache, 0x130);
     BB_ASSERT_SIZEOF(CAnimationPose, 0x150);
