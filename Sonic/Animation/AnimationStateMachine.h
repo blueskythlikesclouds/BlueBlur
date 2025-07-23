@@ -5,12 +5,14 @@
 namespace Sonic
 {
     class CAnimationState;
+    class CAnimationStateSingle;
     class IAnimationContext;
 
     class CAnimationStateMachine : public Hedgehog::Universe::TStateMachine<IAnimationContext>
     {
     public:
-        BB_INSERT_PADDING(0x28) {};
+        hh::map<Hedgehog::Base::CSharedString, boost::shared_ptr<Sonic::CAnimationStateSingle>> m_Animations;
+        BB_INSERT_PADDING(28) {};
 
         CAnimationStateMachine(const bb_null_ctor&) : TStateMachine(bb_null_ctor{}) {}
         CAnimationStateMachine();

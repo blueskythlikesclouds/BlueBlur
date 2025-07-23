@@ -58,8 +58,11 @@ namespace Hedgehog::Animation
         float m_Scale = 0;
         BB_INSERT_PADDING(0x10) {};
         boost::shared_ptr<CIkRaycastInterface> m_spFootIK; // 0x90
+        BB_INSERT_PADDING(0x4);
+        float m_Field9C;
+        float m_FieldA0;
 
-        BB_INSERT_PADDING(0x78) {};
+        BB_INSERT_PADDING(0x6C) {};
 
         boost::shared_ptr<Database::CDatabase> m_spDatabase; // 0x110
         BB_INSERT_PADDING(0x18) {};

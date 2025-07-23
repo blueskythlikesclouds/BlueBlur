@@ -1,7 +1,10 @@
 #pragma once
 
 #include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
-
+namespace Hedgehog::Glitter
+{
+    class CHandle;
+};
 namespace Sonic::Player
 {
     class CSonicContext : public CPlayerSpeedContext
@@ -13,9 +16,13 @@ namespace Sonic::Player
 
         BB_INSERT_PADDING(0x48);
         boost::shared_ptr<void> m_spForwardPathController;
-        BB_INSERT_PADDING(0x250);
+        BB_INSERT_PADDING(0x214);
+        boost::shared_ptr<Hedgehog::Glitter::CHandle> m_spBoostParticle;
+        boost::shared_ptr<Hedgehog::Glitter::CHandle> m_spBoostParticle2;
+        BB_INSERT_PADDING(0x20);
     };
 
+    BB_ASSERT_OFFSETOF(CSonicContext, m_spBoostParticle2, 0x149C);
     BB_ASSERT_SIZEOF(CSonicContext, 0x14D0);
 }
 
