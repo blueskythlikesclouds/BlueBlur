@@ -49,8 +49,8 @@ namespace Sonic
     inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectRemoveRenderable, 0xD5F140,
         CGameObject* This, const Hedgehog::Base::CStringSymbol in_Category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_Unk);
     
-    inline void RemoveRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
-        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_Unk = true);
+    inline void CGameObject::RemoveRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
+        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_Unk)
     {
         fpCGameObjectRemoveRenderable(this, in_Category, in_rspRenderable, in_Unk);
     }
