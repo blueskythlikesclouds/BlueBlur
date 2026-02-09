@@ -63,7 +63,8 @@ namespace Sonic
 
         void AddRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
             const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow = true);
-
+        void RemoveRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
+            const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow = true);
         void RemoveRenderables();
 		
         void Kill();
