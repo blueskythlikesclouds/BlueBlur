@@ -38,12 +38,21 @@ namespace Sonic
     }
 
     inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectAddRenderable, 0xD5F620,
-        CGameObject* This, const Hedgehog::Base::CStringSymbol in_Category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow);
+        CGameObject* This, const Hedgehog::Base::CStringSymbol in_Category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_CastShadow);
 
     inline void CGameObject::AddRenderable(const Hedgehog::Base::CStringSymbol in_Category,
-        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow)
+        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_CastShadow)
     {
-        fpCGameObjectAddRenderable(this, in_Category, in_spRenderable, in_CastShadow);
+        fpCGameObjectAddRenderable(this, in_Category, in_rspRenderable, in_CastShadow);
+    }
+
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectRemoveRenderable, 0xD5F140,
+        CGameObject* This, const Hedgehog::Base::CStringSymbol in_Category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_Unk);
+    
+    inline void RemoveRenderable(const Hedgehog::Base::CStringSymbol in_Category, 
+        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_rspRenderable, const bool in_Unk = true);
+    {
+        fpCGameObjectRemoveRenderable(this, in_Category, in_rspRenderable, in_Unk);
     }
 
     inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObjectRemoveRenderables, 0xD5EE50, CGameObject* This);
