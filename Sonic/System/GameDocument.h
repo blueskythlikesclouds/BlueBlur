@@ -57,7 +57,9 @@ namespace Sonic
             Hedgehog::Base::CSharedString m_Name01;
             BB_INSERT_PADDING(0x48);
             CParameterBank* m_pParamaterBank;
-            BB_INSERT_PADDING(0x28);
+            BB_INSERT_PADDING(0x14);
+            int m_StageManagerActorID;
+            BB_INSERT_PADDING(0x10);
             boost::shared_ptr<CNextStagePreloadingManager> m_spNextStagePreloadingManager;
             BB_INSERT_PADDING(0x04);
             boost::shared_ptr<CParticleManager> m_spParticleManager;
@@ -95,6 +97,7 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_Field9C, 0x9C);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_Name01, 0xA8);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_pParamaterBank, 0xF4);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_StageManagerActorID, 0x10C);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spNextStagePreloadingManager, 0x120);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spParticleManager, 0x12C);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_pParticleManager, 0x134);
