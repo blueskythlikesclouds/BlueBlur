@@ -20,7 +20,7 @@ There currently aren't any samples associated with this project. However, you ca
 * [blueskythlikesclouds/DllMods](https://github.com/blueskythlikesclouds/DllMods)
 * [brianuuu/DllMods](https://github.com/brianuuu/DllMods)
 * [GenerationsSM64/GenerationsSM64](https://github.com/GenerationsSM64/GenerationsSM64)
-* [HyperBE32/App-Extension-Mods](https://github.com/HyperBE32/App-Extension-Mods)
+* [hyperbx/Code-Mods](https://github.com/hyperbx/Code-Mods)
 * [LadyLunanova/DllMods](https://github.com/LadyLunanova/DllMods)
 * [PTKay/ModUpdates](https://github.com/PTKay/ModUpdates)
 

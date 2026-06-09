@@ -26,6 +26,9 @@ namespace Sonic
         CGameObject3D();
         virtual ~CGameObject3D();
 
+        BB_OVERRIDE_FUNCTION_PTR(bool, CMessageActor, ProcessMessage, 0xD5E4D0,
+            (Hedgehog::Universe::Message&, in_rMessage), (bool, in_Flag))
+
         BB_OVERRIDE_FUNCTION_PTR(void, CGameObject, AddCallback, 0xD5CB80, (const Hedgehog::Base::THolder<CWorld>&, in_rWorldHolder),
             (Sonic::CGameDocument*, in_pGameDocument), (const boost::shared_ptr<Hedgehog::Database::CDatabase>&, in_spDatabase))
 
