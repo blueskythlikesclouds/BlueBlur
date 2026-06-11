@@ -105,6 +105,7 @@ namespace Hedgehog::Math
     using CVector = Eigen::AlignedVector3<float>;
     using CVector2 = Eigen::Vector2f;
     using CVector4 = Eigen::Vector4f;
+    using CColor = Eigen::Array<uint8_t, 4, 1>;
 }
 #else
 #include "hhMath.h"

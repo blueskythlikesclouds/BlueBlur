@@ -35,6 +35,7 @@
 #include <Hedgehog/Database/System/hhDatabaseLoader.h>
 #include <Hedgehog/Database/System/hhDecompressCAB.h>
 #include <Hedgehog/Database/System/hhRawData.h>
+#include <Hedgehog/Font/hhFontDatabaseWrapper.h>
 #include <Hedgehog/FxRenderFramework/hhDrawInstanceParam.h>
 #include <Hedgehog/FxRenderFramework/hhScreenRenderParam.h>
 #include <Hedgehog/Glitter/hhGlitterDataCreator.h>
