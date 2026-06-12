@@ -106,6 +106,11 @@ namespace Hedgehog::Math
     using CVector2 = Eigen::Vector2f;
     using CVector4 = Eigen::Vector4f;
 }
+
+namespace Hedgehog::Base
+{
+    using CColor = Eigen::Array<uint8_t, 4, 1>;
+}
 #else
 #include "hhMath.h"
 #endif
