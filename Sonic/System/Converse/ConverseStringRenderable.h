@@ -19,7 +19,7 @@ namespace Sonic
             int Field10;
             bool HasOutline;
             float Field18;
-            Hedgehog::Math::CColor Color;
+            Hedgehog::Base::CColor Color;
         };
         int m_MessageLength;
         const char* m_Message;
@@ -28,7 +28,7 @@ namespace Sonic
         Hedgehog::Math::CVector2 m_Position;
         int m_FieldC8;
         float m_FieldCC;
-        Hedgehog::Math::CColor m_Color;
+        Hedgehog::Base::CColor m_Color;
         float m_FieldD4;
         bool m_HasOutline;
         bool m_FieldD9;

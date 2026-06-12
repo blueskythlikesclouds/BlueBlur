@@ -33,7 +33,7 @@ namespace Sonic
             EAlignment Alignment;
             bool HasOutline;
             int Field90;
-            Hedgehog::Math::CColor Color;
+            Hedgehog::Base::CColor Color;
         };
         boost::shared_ptr<Hedgehog::Font::CTextBox> m_spTextBox;
         EAlignment m_Alignment;
@@ -42,7 +42,7 @@ namespace Sonic
         Hedgehog::Math::CVector2 m_Position;
         int m_Field28;
         float m_Field2C;
-        Hedgehog::Math::CColor m_Color;
+        Hedgehog::Base::CColor m_Color;
         float m_Opacity;
         uint8_t m_HasOutline;
         uint8_t m_Field39;
