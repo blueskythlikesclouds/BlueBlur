@@ -261,6 +261,8 @@
 #include <Sonic/System/ServiceGamePlay.h>
 #include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>
+#include <Sonic/System/Converse/ConverseRenderable.h>
+#include <Sonic/System/Converse/ConverseStringRenderable.h>
 #include <Sonic/System/GameplayFlow/GameActParameter.h>
 #include <Sonic/System/GameplayFlow/UpdateCoordinator.h>
 #include <Sonic/System/GameplayFlow/UpdateDirectorNormal.h>
