@@ -57,4 +57,13 @@ namespace Chao::CSD
     {
         fpCNodeSetPatternIndex(this, in_PatternIndex);
     }
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetColor, 0x679E20, CNode* This, const Color& in_Color);
+
+    inline void CNode::SetColor(const Color& in_HexColorABGR)
+    {
+        m_pMotionPattern->m_pResource->Color = in_HexColorABGR;
+        m_pMotionPattern->m_pResource->m_RenderFlags &= ~0x80u;
+        auto result = m_pMotionPattern->m_pResource;
+        result->m_RenderFlags &= ~0x80000u;
+    }
 }
