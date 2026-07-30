@@ -74,7 +74,7 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_Field180;
         Hedgehog::Math::CVector m_Field190;
 
-        size_t m_SonicSpRenderableSsnActorID; // 0x1A0
+        uint32_t m_SonicSpRenderableSsnActorID; // 0x1A0
 
 #pragma pack(push, 1)
         std::bitset<64> m_Skills;
