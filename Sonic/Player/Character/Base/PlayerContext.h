@@ -74,7 +74,7 @@ namespace Sonic::Player
         Hedgehog::Math::CVector m_Field180;
         Hedgehog::Math::CVector m_Field190;
 
-        size_t m_SuperRenderableActorID; // 0x1A0
+        size_t m_SonicSpRenderableSsnActorID; // 0x1A0
 
 #pragma pack(push, 1)
         std::bitset<64> m_Skills;
@@ -171,7 +171,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field178, 0x178);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field180, 0x180);
     BB_ASSERT_OFFSETOF(CPlayerContext, m_Field190, 0x190);
-    BB_ASSERT_OFFSETOF(CPlayerContext, m_SuperRenderableActorID, 0x1A0);
+    BB_ASSERT_OFFSETOF(CPlayerContext, m_SonicSpRenderableSsnActorID, 0x1A0);
 
     // Because they're private, these assertions don't work.
     // Set them to public & uncomment these if you want to verify these specifically work.
