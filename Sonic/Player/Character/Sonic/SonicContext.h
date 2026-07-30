@@ -16,6 +16,7 @@ namespace Sonic::Player
         BB_INSERT_PADDING(0x250);
     };
 
+    BB_ASSERT_OFFSETOF(CSonicContext, m_spForwardPathController, 0x1278);
     BB_ASSERT_SIZEOF(CSonicContext, 0x14D0);
 }
 
