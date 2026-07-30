@@ -194,6 +194,7 @@
 #include <Sonic/Message/MsgGetPosition.h>
 #include <Sonic/Message/MsgGetRotation.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
+#include <Sonic/Message/MsgIsVisible.h>
 #include <Sonic/Message/MsgKill.h>
 #include <Sonic/Message/MsgRemakeAllSetObject.h>
 #include <Sonic/Message/MsgSetPosition.h>
