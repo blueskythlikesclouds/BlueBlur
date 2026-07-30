@@ -194,6 +194,7 @@
 #include <Sonic/Message/MsgGetPosition.h>
 #include <Sonic/Message/MsgGetRotation.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
+#include <Sonic/Message/MsgIsVisible.h>
 #include <Sonic/Message/MsgKill.h>
 #include <Sonic/Message/MsgRemakeAllSetObject.h>
 #include <Sonic/Message/MsgSetPosition.h>
@@ -215,12 +216,16 @@
 #include <Sonic/Platform/PC/ApplicationPC.h>
 #include <Sonic/Player/Character/Base/Player.h>
 #include <Sonic/Player/Character/Base/PlayerContext.h>
+#include <Sonic/Player/Character/Base/PlayerRenderable.h>
+#include <Sonic/Player/Character/Base/SpinObject.h>
 #include <Sonic/Player/Character/Sonic/Sonic.h>
 #include <Sonic/Player/Character/Sonic/SonicContext.h>
+#include <Sonic/Player/Character/Sonic/SonicSpin.h>
 #include <Sonic/Player/Character/SonicClassic/SonicClassic.h>
 #include <Sonic/Player/Character/SonicClassic/SonicClassicContext.h>
 #include <Sonic/Player/Character/SonicSp/SonicSp.h>
 #include <Sonic/Player/Character/SonicSp/SonicSpContext.h>
+#include <Sonic/Player/Character/SonicSp/SonicSpRenderableSsn.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeed.h>
 #include <Sonic/Player/Character/Speed/PlayerSpeedContext.h>
 #include <Sonic/Player/Character/Speed/StateFlag.h>

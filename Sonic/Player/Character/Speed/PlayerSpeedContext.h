@@ -243,7 +243,7 @@ namespace Sonic::Player
         float m_TurningLeanAmount; //0x1150
         float m_Field1154;
         BB_INSERT_PADDING(0x30);
-        uint32_t m_Field1188;
+        uint32_t m_SonicSpinActorID;
         BB_INSERT_PADDING(0x08);
 
         boost::shared_ptr<Hedgehog::Sound::CSoundHandleCri> m_spHomingAttackSoundHandle; // 0x1194 - May be used for other things i.e. tricks
@@ -348,7 +348,7 @@ namespace Sonic::Player
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_HomingAttackPosition, 0xEA0);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_pSparkEffectManager, 0x1138);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_TurningLeanAmount, 0x1150);
-    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_Field1188, 0x1188);
+    BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_SonicSpinActorID, 0x1188);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spShapeCastCollision_10, 0x11C4);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spShapeCastCollision_11, 0x11CC);
     BB_ASSERT_OFFSETOF(CPlayerSpeedContext, m_spSoundHandleCri, 0x11D4);
