@@ -38,7 +38,7 @@ namespace Hedgehog::Sound
         uint32_t m_Field5C;
         uint8_t m_Field60;
         uint32_t m_Field64;
-        uint8_t m_Field68;
+        bool m_VolumeChanged;
         uint8_t m_Field69;
         uint8_t m_Field6A;
         uint32_t m_Field6C;
