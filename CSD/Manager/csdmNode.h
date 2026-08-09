@@ -25,6 +25,7 @@ namespace Chao::CSD
         void SetText(const wchar_t* in_pText);
 
         Hedgehog::Math::CVector2 GetPosition() const;
+        Hedgehog::Math::CVector2 GetCornerPosition(int in_Index) const;
         void SetPosition(float in_X, float in_Y);
         void SetHideFlag(size_t in_HideFlag);
         void SetRotation(float in_Rotation);
