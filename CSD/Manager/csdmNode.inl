@@ -23,6 +23,15 @@ namespace Chao::CSD
         return position;
     }
 
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeGetCornerPosition, 0x67D900, const CNode* This, Hedgehog::Math::CVector2& out_Position, int in_CornerIdx);
+
+    inline Hedgehog::Math::CVector2 CNode::GetCornerPosition(int in_Index) const
+    {
+        Hedgehog::Math::CVector2 position;
+        fpCNodeGetCornerPosition(this, position, in_Index);
+        return position;
+    }
+
     inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetPosition, 0x67D550, CNode* This, float in_X, float in_Y);
 
     inline void CNode::SetPosition(float in_X, float in_Y)
@@ -56,5 +65,14 @@ namespace Chao::CSD
     inline void CNode::SetPatternIndex(size_t in_PatternIndex)
     {
         fpCNodeSetPatternIndex(this, in_PatternIndex);
+    }
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetColor, 0x679E20, CNode* This, const Color& in_Color);
+
+    inline void CNode::SetColor(const Color& in_HexColorABGR)
+    {
+        m_pMotionPattern->m_pResource->Color = in_HexColorABGR;
+        m_pMotionPattern->m_pResource->m_RenderFlags &= ~0x80u;
+        auto result = m_pMotionPattern->m_pResource;
+        result->m_RenderFlags &= ~0x80000u;
     }
 }
