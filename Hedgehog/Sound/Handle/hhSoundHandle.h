@@ -25,11 +25,11 @@ namespace Hedgehog::Sound
         uint32_t m_Field24;
         uint32_t m_Field28;
         uint32_t m_Field2C;
-        uint32_t m_Field30;
+        uint32_t m_MixerID;
         uint32_t m_Field34;
-        float m_Field38;
-        uint32_t m_Field3C;
-        uint32_t m_Field40;
+        float m_Reverb;
+        float m_Echo;
+        float m_Pitch;
         boost::shared_ptr<CSoundCommandProcessor> m_spSoundCommandProcessor;
         uint32_t m_Field4C;
         uint32_t m_Field50;
