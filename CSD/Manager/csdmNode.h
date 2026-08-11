@@ -26,6 +26,8 @@ namespace Chao::CSD
 
         Hedgehog::Math::CVector2 GetPosition() const;
         Hedgehog::Math::CVector2 GetCornerPosition(int in_Index) const;
+        float GetMaxWidth() const;
+        float GetMaxHeight() const;
         void SetPosition(float in_X, float in_Y);
         void SetHideFlag(size_t in_HideFlag);
         void SetRotation(float in_Rotation);

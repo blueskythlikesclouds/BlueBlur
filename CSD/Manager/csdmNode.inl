@@ -32,6 +32,20 @@ namespace Chao::CSD
         return position;
     }
 
+    inline BB_FUNCTION_PTR(float, __thiscall, fpCNodeGetMaxWidth, 0x67DCE0, const CNode* This);
+
+    inline float CNode::GetMaxWidth() const
+    {        
+        return fpCNodeGetMaxWidth(this);
+    }
+
+    inline BB_FUNCTION_PTR(float, __thiscall, fpCNodeGetMaxHeight, 0x67DD50, const CNode* This);
+
+    inline float CNode::GetMaxHeight() const
+    {
+        return fpCNodeGetMaxHeight(this);
+    }
+
     inline BB_FUNCTION_PTR(void, __thiscall, fpCNodeSetPosition, 0x67D550, CNode* This, float in_X, float in_Y);
 
     inline void CNode::SetPosition(float in_X, float in_Y)
