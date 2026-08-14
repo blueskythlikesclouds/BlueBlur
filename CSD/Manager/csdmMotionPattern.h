@@ -11,6 +11,8 @@ namespace Chao::CSD
 		struct SField7C
 		{
 			Hedgehog::Math::CVector2 m_Position;
+			Hedgehog::Math::CVector2 m_Field08;
+			Hedgehog::Math::CVector2 m_Scale;
 		};
 		BB_INSERT_PADDING(0x28);
 		int HideFlag;
@@ -31,6 +33,7 @@ namespace Chao::CSD
 	class CMotionPattern : public CResourceBase<MotionPattern>, CBase
 	{
 	};
+	BB_ASSERT_OFFSETOF(MotionPattern::SField7C, m_Scale, 0x10);
 	BB_ASSERT_OFFSETOF(MotionPattern, HideFlag, 0x28);
 	BB_ASSERT_OFFSETOF(MotionPattern, Position, 0x2C);
 	BB_ASSERT_OFFSETOF(MotionPattern, Rotation, 0x34);

@@ -14,7 +14,10 @@ namespace Sonic
     {
     public:
         Chao::CSD::RCPtr<Chao::CSD::CProject> m_rcProject;
-        BB_INSERT_PADDING(0x38);
+        BB_INSERT_PADDING(0x2C);
+        int m_FieldDC;
+        int m_FieldD8;
+        BB_INSERT_PADDING(0x4);
 
         CGameObjectCSD(float in_Unknown, Hedgehog::Base::CStringSymbol in_RenderableCategory); // 0x10DBBC0
         CGameObjectCSD(Chao::CSD::RCPtr<Chao::CSD::CProject> in_rcProject, float in_Unknown, Hedgehog::Base::CStringSymbol in_RenderableCategory, bool in_Flag); // 0x10DBB20
@@ -24,6 +27,7 @@ namespace Sonic
     };
 
     BB_ASSERT_OFFSETOF(CGameObjectCSD, m_rcProject, 0xA8);
+    BB_ASSERT_OFFSETOF(CGameObjectCSD, m_FieldDC, 0xDC);
     BB_ASSERT_SIZEOF(CGameObjectCSD, 0xE8);
 }
 
