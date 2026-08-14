@@ -55,7 +55,9 @@ namespace Sonic
             float m_Field9C;
             BB_INSERT_PADDING(0x08);
             Hedgehog::Base::CSharedString m_Name01;
-            BB_INSERT_PADDING(0x48);
+            BB_INSERT_PADDING(0x24);
+            bool m_FieldD0;
+            BB_INSERT_PADDING(0x23);
             CParameterBank* m_pParamaterBank;
             BB_INSERT_PADDING(0x14);
             int m_StageManagerActorID;
@@ -96,6 +98,7 @@ namespace Sonic
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_AudioData, 0x8C);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_Field9C, 0x9C);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_Name01, 0xA8);
+    BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_FieldD0, 0xD0);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_pParamaterBank, 0xF4);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_StageManagerActorID, 0x10C);
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spNextStagePreloadingManager, 0x120);
