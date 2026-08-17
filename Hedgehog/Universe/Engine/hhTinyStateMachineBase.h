@@ -67,6 +67,8 @@ namespace Hedgehog::Universe
         template<typename TState>
         boost::shared_ptr<TState> ChangeState();
 
+        void Update(const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo);
+        
         bool ProcessMessageInStateMachine(Message& in_rMsg, bool in_Flag) override;
     };
 

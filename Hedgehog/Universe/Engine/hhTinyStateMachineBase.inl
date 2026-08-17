@@ -11,6 +11,9 @@ namespace Hedgehog::Universe
     inline BB_FUNCTION_PTR(void, __thiscall, fpChangeState, 0x7731D0,
         CTinyStateMachineBase* This, boost::shared_ptr<CTinyStateMachineBase::CStateBase>& out_spState, Base::CSharedString in_Name);
 
+    inline BB_FUNCTION_PTR(void, __thiscall, fpUpdateState, 0x772D70,
+        CTinyStateMachineBase* This, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo);
+
     inline CTinyStateMachineBase::CStateBase::CStateBase() : CStateBase(bb_null_ctor{})
     {
         ffpCTinyStateMachineBaseCStateBaseCtor(this);
@@ -53,6 +56,11 @@ namespace Hedgehog::Universe
     boost::shared_ptr<TState> CTinyStateMachineBase::ChangeState()
     {
         return boost::static_pointer_cast<TState>(ChangeState(std::move(Base::CSharedString(TState::ms_pStateName))));
+    }
+
+    inline void CTinyStateMachineBase::Update(const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
+    {
+        fpUpdateState(this, in_rUpdateInfo);
     }
 
     inline bool CTinyStateMachineBase::ProcessMessageInStateMachine(Message& in_rMsg, bool in_Flag)
