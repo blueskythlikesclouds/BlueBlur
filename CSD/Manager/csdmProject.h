@@ -16,10 +16,13 @@ namespace Chao::CSD
     public:
         uint32_t m_Field10;
         hh::map<const char*, RCPtr<CScene>> m_SpawnedScenes;
-        hh::map<float, RCPtr<CScene>> m_Field20;
+        hh::map<float, RCPtr<CScene>> m_RenderSortOrder; // float here is Z index
         RCPtr<CTexList> m_rcTexList;
         CFontList* m_rcFontList;
-        BB_INSERT_PADDING(0x18);
+        hh::list<RCPtr<CScene>> m_DestroyQueue;
+        hh::list<RCPtr<CScene>> m_Field44; //used in 0x676AC0
+        
+        void Render(float in_Time = 0.0f) const;
 
         RCPtr<CScene> CreateScene(const char* in_pName) const;
         RCPtr<CScene> CreateScene(const char* in_pName, const char* in_pMotionName) const;
@@ -32,9 +35,11 @@ namespace Chao::CSD
 
     BB_ASSERT_OFFSETOF(CProject, m_Field10, 0x10);
     BB_ASSERT_OFFSETOF(CProject, m_SpawnedScenes, 0x14);
-    BB_ASSERT_OFFSETOF(CProject, m_Field20, 0x20);
+    BB_ASSERT_OFFSETOF(CProject, m_RenderSortOrder, 0x20);
     BB_ASSERT_OFFSETOF(CProject, m_rcTexList, 0x2C);
     BB_ASSERT_OFFSETOF(CProject, m_rcFontList, 0x34);
+    BB_ASSERT_OFFSETOF(CProject, m_DestroyQueue, 0x38);
+    BB_ASSERT_OFFSETOF(CProject, m_Field44, 0x44);
     BB_ASSERT_SIZEOF(CProject, 0x50);
 }
 

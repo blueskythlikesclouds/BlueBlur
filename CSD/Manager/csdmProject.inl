@@ -1,5 +1,13 @@
 namespace Chao::CSD
 {
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCProjectRender, 0x676BC0,
+        const CProject* This, float in_DeltaTime);
+
+    inline void CProject::Render(float in_DeltaTime) const
+    {
+        fpCProjectRender(this, in_DeltaTime);
+    }
+
     inline BB_FUNCTION_PTR(void, __thiscall, fpCProjectCreateScene0, 0x677220,
         const CProject* This, RCPtr<CScene>& out_rcScene, const char* in_pName, void* in_pFactory);
 
