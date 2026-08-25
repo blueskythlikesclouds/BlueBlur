@@ -35,8 +35,10 @@
 #include <Hedgehog/Database/System/hhDatabaseLoader.h>
 #include <Hedgehog/Database/System/hhDecompressCAB.h>
 #include <Hedgehog/Database/System/hhRawData.h>
+#include <Hedgehog/Font/hhFontDatabaseWrapper.h>
 #include <Hedgehog/FxRenderFramework/hhDrawInstanceParam.h>
 #include <Hedgehog/FxRenderFramework/hhScreenRenderParam.h>
+#include <Hedgehog/Glitter/hhGlitterDataCreator.h>
 #include <Hedgehog/Math/hhSphere.h>
 #include <Hedgehog/MirageCore/Camera/hhCamera.h>
 #include <Hedgehog/MirageCore/MatrixNode/hhMatrixNode.h>
@@ -102,6 +104,7 @@
 #include <Hedgehog/MotionCore/Motion/hhTexpatternMotion.h>
 #include <Hedgehog/MotionCore/MotionData/hhLightMotionData.h>
 #include <Hedgehog/MotionCore/MotionData/hhMotionDatabaseWrapper.h>
+#include <Hedgehog/Sound/hhSoundSystem.h>
 #include <Hedgehog/Sound/Handle/hhSoundHandle.h>
 #include <Hedgehog/Sound/Handle/hhSoundHandleBgm.h>
 #include <Hedgehog/Sound/Handle/hhSoundHandleCri.h>
@@ -132,6 +135,8 @@
 #include <Hedgehog/Yggdrasill/hhYggTexture.h>
 
 #include <CSD/Manager/csdmBase.h>
+#include <CSD/Manager/csdmColor.h>
+#include <CSD/Manager/csdmMotionPattern.h>
 #include <CSD/Manager/csdmNode.h>
 #include <CSD/Manager/csdmNodeObserver.h>
 #include <CSD/Manager/csdmObserverBase.h>
@@ -151,6 +156,7 @@
 #include <Sonic/Animation/AnimationState.h>
 #include <Sonic/Animation/AnimationStateMachine.h>
 #include <Sonic/Animation/State/AnimationStateSingle.h>
+#include <Sonic/Animation/State/AnimationStateVelocityLink.h>
 #include <Sonic/Camera/Camera.h>
 #include <Sonic/Character/Utility/NPCSingleElementEffectMotionAll.h>
 #include <Sonic/Collision/PhysicsUnit.h>
@@ -192,7 +198,9 @@
 #include <Sonic/Message/MsgGetHomingAttackPriority.h>
 #include <Sonic/Message/MsgGetObjectTriggerType.h>
 #include <Sonic/Message/MsgGetPosition.h>
+#include <Sonic/Message/MsgGetRatioOnStageGuidePath.h>
 #include <Sonic/Message/MsgGetRotation.h>
+#include <Sonic/Message/MsgGetStageGuidePathController.h>
 #include <Sonic/Message/MsgHitReactionPlate.h>
 #include <Sonic/Message/MsgKill.h>
 #include <Sonic/Message/MsgRemakeAllSetObject.h>
@@ -253,7 +261,11 @@
 #include <Sonic/System/ServiceGamePlay.h>
 #include <Sonic/System/TerrainManager2nd.h>
 #include <Sonic/System/World.h>
+#include <Sonic/System/Converse/ConverseRenderable.h>
+#include <Sonic/System/Converse/ConverseStringRenderable.h>
 #include <Sonic/System/GameplayFlow/GameActParameter.h>
+#include <Sonic/System/GameplayFlow/UpdateCoordinator.h>
+#include <Sonic/System/GameplayFlow/UpdateDirectorNormal.h>
 #include <Sonic/System/LightManager/LightManager.h>
 #include <Sonic/System/LightManager/LocalLight.h>
 #include <Sonic/System/RenderDirector/RenderDirector.h>

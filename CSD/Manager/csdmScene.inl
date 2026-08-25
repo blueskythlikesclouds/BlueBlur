@@ -1,5 +1,19 @@
 namespace Chao::CSD
 {
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneMotionRepeatOnMotionEnd, 0x00680CF0, const CSceneMotionRepeat* This, CScene* in_pScene);
+
+    inline void CSceneMotionRepeat::OnMotionEnd(CScene* in_pScene)
+    {
+        fpCSceneMotionRepeatOnMotionEnd(this, in_pScene);
+    }
+
+    inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneMotionRepeatOnMotionStart, 0x00680DB0, const CSceneMotionRepeat* This, CScene* in_pScene);
+
+    inline void CSceneMotionRepeat::OnMotionStart(CScene* in_pScene)
+    {
+        fpCSceneMotionRepeatOnMotionStart(this, in_pScene);
+    }
+
     inline BB_FUNCTION_PTR(void, __thiscall, fpCSceneGetNode, 0x67AFE0, const CScene* This, RCPtr<CNode>& out_rcNode, const char* in_pName);
 
     inline RCPtr<CNode> CScene::GetNode(const char* in_pName) const
@@ -48,5 +62,24 @@ namespace Chao::CSD
     inline void CScene::SetScale(float in_X, float in_Y)
     {
         fpCSceneSetScale(this, in_X, in_Y);
+    }
+
+
+    //NOTE: these two exist in-game, but i don't think its worth making a function ptr for it
+    //since they just do this
+    inline void CScene::SetStartRepeatType(EMotionRepeatType in_Type)
+    {
+        m_MotionObserver.m_MotionStartRepeatType = in_Type;
+    }
+
+    inline void CScene::SetEndRepeatType(EMotionRepeatType in_Type)
+    {
+        m_MotionObserver.m_MotionEndRepeatType = in_Type;
+    }
+
+    inline void CScene::SetRepeatType(EMotionRepeatType in_Type)
+    {
+        SetStartRepeatType(in_Type);
+        SetEndRepeatType(in_Type);
     }
 }

@@ -46,6 +46,12 @@ namespace Sonic
         fpCGameObjectAddRenderable(this, in_Category, in_spRenderable, in_CastShadow);
     }
 
+    inline void CGameObject::AddRenderable(Hedgehog::Mirage::ERenderCategory in_Category,
+        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow)
+    {
+        AddRenderable(Hedgehog::Mirage::g_RenderCategories[in_Category], in_spRenderable, in_CastShadow);
+    }
+
     inline BB_FUNCTION_PTR(void, __thiscall, fpCGameObjectRemoveRenderable, 0xD5F140,
         CGameObject* This, const Hedgehog::Base::CStringSymbol in_Category, const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow);
     
@@ -53,6 +59,12 @@ namespace Sonic
         const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow)
     {
         fpCGameObjectRemoveRenderable(this, in_Category, in_spRenderable, in_CastShadow);
+    }
+
+    inline void CGameObject::RemoveRenderable(Hedgehog::Mirage::ERenderCategory in_Category,
+        const boost::shared_ptr<Hedgehog::Mirage::CRenderable>& in_spRenderable, const bool in_CastShadow)
+    {
+        RemoveRenderable(Hedgehog::Mirage::g_RenderCategories[in_Category], in_spRenderable, in_CastShadow);
     }
 
     inline BB_FUNCTION_PTR(void, __stdcall, fpCGameObjectRemoveRenderables, 0xD5EE50, CGameObject* This);
