@@ -67,10 +67,10 @@ namespace Chao::CSD
         //NOTE: m_MotionRepeatType is EndRepeatType here!
         CSceneMotionRepeat m_MotionObserver;
         int m_MotionIndex;
-        float m_ZIndex;
+        float m_SortOrder;
         hh::map<SNodeCastSearch, RCPtr<CNode>> m_ActiveNodes;
         const char* m_Name;
-        RCPtr<char> m_rcFieldD0;
+        RCPtr<char> m_rcFieldD0; //TitleOption has this set to item0_1User, what is this?
         RCPtr<CProject> m_rcParentProject;
 
         ~CScene() override = default;
@@ -123,7 +123,7 @@ namespace Chao::CSD
     BB_ASSERT_OFFSETOF(CScene, m_MotionDisableFlag, 0x9C);
     BB_ASSERT_OFFSETOF(CScene, m_MotionObserver, 0xA0);
     BB_ASSERT_OFFSETOF(CScene, m_MotionIndex, 0xB8);
-    BB_ASSERT_OFFSETOF(CScene, m_ZIndex, 0xBC);
+    BB_ASSERT_OFFSETOF(CScene, m_SortOrder, 0xBC);
     BB_ASSERT_OFFSETOF(CScene, m_ActiveNodes, 0xC0);
     BB_ASSERT_OFFSETOF(CScene, m_Name, 0xCC);
     BB_ASSERT_OFFSETOF(CScene, m_rcFieldD0, 0xD0);
