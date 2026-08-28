@@ -13,9 +13,9 @@ namespace Sonic
     {
     public:
         boost::shared_ptr<Hedgehog::Mirage::CTexsetData> m_spTexsetData;
-        BB_INSERT_PADDING(0x4);
+        int m_TextureCount;
     };
-
     BB_ASSERT_OFFSETOF(CCsdTexListMirage, m_spTexsetData, 0xC);
+    BB_ASSERT_OFFSETOF(CCsdTexListMirage, m_TextureCount, 0x14);
     BB_ASSERT_SIZEOF(CCsdTexListMirage, 0x18);
 }
