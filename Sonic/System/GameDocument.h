@@ -12,6 +12,11 @@ namespace Hedgehog::Sound
     class CSoundHandleBgm;
 }
 
+namespace Hedgehog::Universe
+{
+    class CService;
+}
+
 namespace Hedgehog::Database
 {
     class CDatabase;
@@ -75,7 +80,7 @@ namespace Sonic
         static Hedgehog::Base::TSynchronizedPtr<CGameDocument> GetInstance();
 
         CMember* m_pMember;
-        BB_INSERT_PADDING(0x0C);
+        hh::map<uint32_t, boost::shared_ptr<Hedgehog::Universe::CService>> m_ServiceMap;
         CGameActParameter* m_pGameActParameter;
         BB_INSERT_PADDING(0x04);
 
@@ -85,6 +90,9 @@ namespace Sonic
 
         void AddGameObject(const boost::shared_ptr<CGameObject>& in_spGameObject, const char* in_pWorldName = "main", CGameObject* in_pParentGameObject = nullptr);
         void AddUpdateUnit(const Hedgehog::Base::CSharedString& in_rCategory, Hedgehog::Universe::CUpdateUnit* in_pUpdateUnit);
+
+        template<typename T>
+        T* GetService() const;
     };
 
     BB_ASSERT_OFFSETOF(CGameDocument::CMember, m_spUpdateManager, 0x0);

@@ -28,4 +28,11 @@ namespace Sonic
     {
         m_pMember->m_spUpdateManager->AddUpdateUnit(in_rCategory, in_pUpdateUnit);
     }
+
+    template<typename T>
+    inline T* CGameDocument::GetService() const
+    {
+        auto findResult = m_ServiceMap.find(T::ms_ID);
+        return findResult != m_ServiceMap.end() && findResult->second->Is<T>() ? static_cast<T*>(findResult->second.get()) : nullptr;
+    }
 }
